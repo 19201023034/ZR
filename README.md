@@ -54,8 +54,13 @@ wymaga przepisania.
 
 ## Deploy na Vercel
 
-Aplikacja jest w katalogu głównym repo, więc **Root Directory zostaw puste** —
-Vercel wykryje Next.js sam.
+Aplikacja jest w katalogu głównym repo, a `vercel.json` wymusza framework
+`nextjs`, więc **Root Directory zostaw puste**.
+
+Uwaga: jeśli projekt na Vercelu powstał, zanim aplikacja trafiła do korzenia,
+mógł zapamiętać Framework Preset „Other". Objaw to build ze statusem *Ready*,
+ale każda ścieżka zwraca `404: NOT_FOUND` typu `text/plain` — Vercel wdraża
+wtedy pustkę zamiast aplikacji. `vercel.json` to nadpisuje.
 
 1. **Settings → Environment Variables**:
 

@@ -46,6 +46,25 @@ Przed wdrożeniem na Vercel trzeba przepiąć store na bazę (Supabase / Neon / 
 Cała logika dostępu do danych jest w jednym pliku — `lib/store.js` — i tylko on
 wymaga przepisania.
 
-## Deploy
+## Deploy na Vercel
 
-Katalog główny aplikacji to `zr-next/` — przy Vercel ustaw **Root Directory** na `zr-next`.
+Aplikacja **nie leży w katalogu głównym repo**, więc bez poniższego ustawienia
+Vercel zbuduje pustkę i każda ścieżka zwróci `404: NOT_FOUND`.
+
+1. Vercel → projekt → **Settings → Build and Deployment → Root Directory** → wpisz `zr-next` → Save.
+2. **Settings → Environment Variables**:
+
+   | Zmienna | Wartość na podglądzie | Wartość na produkcji |
+   |---|---|---|
+   | `NEXT_PUBLIC_NOINDEX` | `1` | *(nie ustawiaj)* |
+   | `NEXT_PUBLIC_SITE_URL` | adres z Vercela | `https://zakleterewiry.pl` |
+   | `MAILERLITE_API_KEY` | — | token z MailerLite |
+
+3. **Deployments → Redeploy** (zmiana Root Directory nie przebudowuje automatycznie).
+
+### Czego nie będzie działać na podglądzie
+
+Panel `/panel` **nie zapisze zmian** — Vercel montuje system plików tylko do odczytu.
+Wyświetli komunikat o trybie demo zamiast błędu. Cała publiczna część strony,
+łącznie z wydarzeniami z `data/events.json`, działa normalnie, bo odczyt jest
+bez przeszkód. Trwały zapis wymaga przepięcia `lib/store.js` na bazę danych.

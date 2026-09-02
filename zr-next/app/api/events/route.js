@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getEvents, createEvent } from '@/lib/store';
+import { getEvents, createEvent, StoreReadOnlyError } from '@/lib/store';
 
 export const dynamic = 'force-dynamic';
 
 const REQUIRED = ['artist', 'date', 'venue'];
+
+const DEMO_MESSAGE =
+  'Tryb demo: to środowisko nie zapisuje zmian. Podgląd działa w pełni, edycja wymaga podpięcia bazy danych.';
 
 export async function GET() {
   return NextResponse.json({ events: await getEvents() });
@@ -31,7 +34,9 @@ export async function POST(request) {
 
   const num = v => (v === '' || v == null ? null : Number(v));
 
-  const event = await createEvent({
+  let event;
+  try {
+    event = await createEvent({
     artist: String(body.artist).trim(),
     support: body.support ? String(body.support).trim() : null,
     genre: body.genre || 'Rock',
@@ -47,8 +52,14 @@ export async function POST(request) {
     ticketUrl: body.ticketUrl ? String(body.ticketUrl).trim() : null,
     status: body.status || 'dostepne',
     description: body.description || '',
-    featured: Boolean(body.featured),
-  });
+      featured: Boolean(body.featured),
+    });
+  } catch (err) {
+    if (err instanceof StoreReadOnlyError) {
+      return NextResponse.json({ error: DEMO_MESSAGE }, { status: 503 });
+    }
+    throw err;
+  }
 
   return NextResponse.json({ event }, { status: 201 });
 }

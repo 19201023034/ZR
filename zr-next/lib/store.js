@@ -30,12 +30,29 @@ async function readAll() {
   }
 }
 
+/** Thrown when the host filesystem is read-only (Vercel & friends). */
+export class StoreReadOnlyError extends Error {
+  constructor() {
+    super('Event store is read-only in this environment');
+    this.name = 'StoreReadOnlyError';
+  }
+}
+
+const READ_ONLY_CODES = new Set(['EROFS', 'EACCES', 'EPERM']);
+
 async function writeAll(events) {
-  await fs.mkdir(path.dirname(FILE), { recursive: true });
-  // write-then-rename so a crash mid-write can't leave a truncated file
-  const tmp = FILE + '.tmp';
-  await fs.writeFile(tmp, JSON.stringify({ events }, null, 2), 'utf-8');
-  await fs.rename(tmp, FILE);
+  try {
+    await fs.mkdir(path.dirname(FILE), { recursive: true });
+    // write-then-rename so a crash mid-write can't leave a truncated file
+    const tmp = FILE + '.tmp';
+    await fs.writeFile(tmp, JSON.stringify({ events }, null, 2), 'utf-8');
+    await fs.rename(tmp, FILE);
+  } catch (err) {
+    // Serverless hosts mount the bundle read-only. Reads keep working, so the
+    // public site is fine — only the panel needs to say so plainly.
+    if (READ_ONLY_CODES.has(err.code)) throw new StoreReadOnlyError();
+    throw err;
+  }
 }
 
 function mutate(fn) {

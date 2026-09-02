@@ -1,0 +1,56 @@
+.intro { display: flex; flex-direction: column; gap: 14px; }
+.heading { font-size: clamp(44px, 6vw, 76px); color: var(--zr-text); line-height: 1; }
+.sub { font-family: var(--font-body); font-size: 16px; color: var(--zr-body); line-height: 1.75; max-width: 640px; }
+
+.year { border-bottom: 1px solid var(--zr-line); }
+.yearHead { display: flex; align-items: baseline; gap: 12px; padding: 24px 80px 10px; }
+.yearLabel { font-size: 30px; color: var(--zr-gold); line-height: 1; }
+.yearCount { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.12em; }
+
+.rows { display: flex; flex-direction: column; }
+
+.row {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 15px 80px;
+  border-top: 1px solid var(--zr-line);
+  transition: background 200ms var(--ease-out), padding-left 300ms var(--ease-out);
+}
+.row:hover { background: rgba(255,255,255,0.02); padding-left: 90px; }
+
+.rowDate { font-size: 11.5px; color: var(--zr-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.rowArtist { font-size: 22px; color: var(--zr-text); line-height: 1.05; transition: color 200ms; }
+.row:hover .rowArtist { color: var(--zr-gold); }
+.rowMeta { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.06em; }
+
+.empty { font-size: 13.5px; color: var(--zr-muted); line-height: 1.7; }
+
+.artistsSection { background: var(--zr-surface-alt); }
+.artistsHeading { font-size: 34px; color: var(--zr-text); margin: 8px 0 24px; line-height: 1; }
+.artists { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+
+.artistName {
+  font-size: 26px;
+  color: var(--zr-muted);
+  transition: color 200ms var(--ease-out);
+  cursor: default;
+}
+.artistName:hover { color: var(--zr-gold); }
+
+.ctaInner { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+.ctaHeading { font-size: 34px; color: var(--zr-text); line-height: 1; }
+.ctaActions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 1024px) {
+  .yearHead { padding-left: 40px; padding-right: 40px; }
+  .row { padding-left: 40px; padding-right: 40px; }
+  .row:hover { padding-left: 48px; }
+}
+@media (max-width: 768px) {
+  .yearHead { padding-left: 20px; padding-right: 20px; }
+  .row { padding-left: 20px; padding-right: 20px; grid-template-columns: 1fr; gap: 6px; }
+  .row:hover { padding-left: 26px; }
+  .artistName { font-size: 20px; }
+}

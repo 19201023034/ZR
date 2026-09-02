@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #0C0A08; }
+  * { box-sizing: border-box; }
+  a { color: #FCCC00; text-decoration: none; }
+  a:hover { color: #FFD824; }
+  ::placeholder { color: #6E6858; }
+  input[type="checkbox"] { accent-color: #FCCC00; }
+</style>
+</helmet>
+<div style="background:#0C0A08;color:#F5F1E8;font-family:Inter,sans-serif;width:1600px;margin:0 auto;padding:72px 72px 110px;display:flex;flex-direction:column;gap:56px">
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.22em;text-transform:uppercase">Panel administracyjny · wydarzenia</span>
+    <h1 style="font-family:Anton,sans-serif;font-size:48px;line-height:1;margin:0;text-transform:uppercase;letter-spacing:0.01em">Nowe wydarzenie</h1>
+    <p style="font-family:Inter,sans-serif;font-size:15px;line-height:1.7;color:#D8D2C4;margin:0;max-width:880px;text-wrap:pretty">Formularz i podgląd karty obok siebie: wszystko, co wpiszesz, od razu widać tak, jak wyjdzie na stronie. Mały kalendarz pod wyborem sali pokazuje obłożenie i wyłapuje kolizje terminów.</p>
+  </div>
+
+  <div style="height:2px;background:#FCCC00"></div>
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+    
+    <div style="background:#100D0A;border:1px solid #2C2618;border-radius:8px;overflow:hidden">
+      <div style="padding:22px 30px;border-bottom:1px solid #2C2618;display:flex;align-items:center;justify-content:space-between;gap:24px">
+        <div style="display:flex;align-items:center;gap:18px">
+          <img src="assets/zr-sygnet-gold.png" alt="ZR" style="height:24px;width:auto;display:block;align-self:center" />
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.14em">PANEL / WYDARZENIA / NOWE</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484;letter-spacing:0.1em">SZKIC · ZAPISANO 14:22</span>
+          <button type="button" style="background:transparent;color:#F5F1E8;border:1px solid #453B24;border-radius:4px;padding:11px 18px;font-family:Inter,sans-serif;font-weight:600;font-size:13px;cursor:pointer" style-hover="border-color:#F5F1E8">Zapisz szkic</button>
+          <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:11px 22px;font-family:Anton,sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:#FFD824">Publikuj</button>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 380px">
+        <div style="padding:32px 30px;display:flex;flex-direction:column;gap:26px;border-right:1px solid #2C2618">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C09C18;letter-spacing:0.18em">1 · ARTYSTA I GATUNEK</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">NAZWA ARTYSTY *</span>
+              <input type="text" value="{{ name }}" onChange="{{ setName }}" placeholder="np. Zdrada Pałacu Dożów" style="background:#201A10;border:1px solid #453B24;border-radius:4px;padding:14px 16px;font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;color:#FCCC00;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" />
+              <span style="font-family:Inter,sans-serif;font-size:11.5px;color:#6E6858">Ta nazwa wyjdzie największym krojem na karcie i na stronie wydarzenia.</span>
+            </div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">SUPPORT</span>
+                <input type="text" placeholder="opcjonalnie" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">GATUNEK *</span>
+                <div style="display:flex;flex-wrap:wrap;gap:7px">
+                  <sc-for list="{{ genres }}" as="g" hint-placeholder-count="5">
+                    <button type="button" onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;border-top:1px solid #2C2618;padding-top:24px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C09C18;letter-spacing:0.18em">2 · TERMIN I SALA</span>
+            <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr) minmax(0,0.8fr);gap:14px">
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">DATA *</span><input type="text" value="{{ date }}" onChange="{{ setDate }}" style="background:#201A10;border:1px solid #453B24;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">WEJŚCIE</span><input type="text" value="19:00" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">START *</span><input type="text" value="{{ time }}" onChange="{{ setTime }}" style="background:#201A10;border:1px solid #453B24;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">SALA *</span>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+                <sc-for list="{{ halls }}" as="h" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ h.onClick }}" style="{{ h.style }}">
+                    <span style="{{ h.nameStyle }}">{{ h.name }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.08em">{{ h.meta }}</span>
+                  </button>
+                </sc-for>
+              </div>
+              <span style="{{ conflictStyle }}">{{ conflict }}</span>
+            </div>
+
+            <div style="background:#151109;border:1px solid #2C2618;border-radius:6px;padding:16px 18px;display:flex;gap:24px;align-items:flex-start">
+              <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+                <div style="display:flex;align-items:baseline;gap:12px">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C09C18;letter-spacing:0.14em">LISTOPAD 2026</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#6E6858;letter-spacing:0.08em">KLIKNIJ DZIEŃ</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(7,24px);gap:4px">
+                  <sc-for list="{{ weekdays }}" as="d" hint-placeholder-count="7">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#6E6858;letter-spacing:0.04em;text-align:center">{{ d }}</span>
+                  </sc-for>
+                  <sc-for list="{{ miniDays }}" as="d" hint-placeholder-count="35">
+                    <button type="button" onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.num }}</button>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:9px;border-left:1px solid #2C2618;padding-left:22px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">OBŁOŻENIE</span>
+                <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484"><span style="width:16px;height:16px;border-radius:3px;background:#FCCC00;flex:none"></span>WYBRANY TERMIN</span>
+                <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484"><span style="width:16px;height:16px;border-radius:3px;background:rgba(224,160,32,0.22);border:1px solid #E0A020;flex:none"></span>SALA ZAJĘTA</span>
+                <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484"><span style="width:16px;height:16px;border-radius:3px;background:#201A10;border:1px solid #453B24;flex:none"></span>INNA SALA GRA</span>
+                <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484"><span style="width:16px;height:16px;border-radius:3px;background:#151109;border:1px solid #2C2618;flex:none"></span>WOLNE</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D8D2C4;letter-spacing:0.04em;border-top:1px solid #2C2618;padding-top:9px;margin-top:2px;line-height:1.8;white-space:pre-line">{{ monthLoad }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;border-top:1px solid #2C2618;padding-top:24px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C09C18;letter-spacing:0.18em">3 · BILETY</span>
+            <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px">
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">CENA OD *</span><input type="text" value="{{ price }}" onChange="{{ setPrice }}" style="background:#201A10;border:1px solid #453B24;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">W DNIU KONCERTU</span><input type="text" value="110" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">PULA</span><input type="text" value="480" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">WIEK</span><input type="text" value="16+" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%" style-focus="border-color:#FCCC00" /></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.12em">STATUS SPRZEDAŻY</span>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <sc-for list="{{ statuses }}" as="s" hint-placeholder-count="4">
+                  <button type="button" onClick="{{ s.onClick }}" style="{{ s.style }}">{{ s.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;border-top:1px solid #2C2618;padding-top:24px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C09C18;letter-spacing:0.18em">4 · PLAKAT I OPIS</span>
+            <div style="display:grid;grid-template-columns:200px 1fr;gap:16px">
+              <div style="height:130px;background:#151109;border:1px dashed #453B24;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C09C18;letter-spacing:0.1em">UPUŚĆ PLAKAT</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858">JPG / PNG · MIN 1600 × 900</span>
+              </div>
+              <textarea placeholder="Dwa, trzy zdania o koncercie. Pojawi się na stronie wydarzenia pod nazwą artysty." rows="5" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:13px 15px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none;min-width:0;width:100%;resize:vertical" style-focus="border-color:#FCCC00"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:32px 26px;display:flex;flex-direction:column;gap:18px;background:#0C0A08">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">PODGLĄD KARTY</span>
+          <article style="background:#151109;border:1px solid #2C2618;border-radius:6px;display:flex;flex-direction:column;overflow:hidden">
+            <div style="height:130px;position:relative;background:#201A10;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(252,204,0,0.08) 1px, transparent 1px),linear-gradient(90deg, rgba(252,204,0,0.08) 1px, transparent 1px);background-size:4px 4px"></div>
+              <span style="position:relative;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#57503C;letter-spacing:0.14em">BRAK PLAKATU</span>
+            </div>
+            <div style="padding:18px 20px;display:flex;flex-direction:column;gap:9px">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F5F1E8">{{ previewDate }}</span>
+                <span style="{{ previewStatusStyle }}">{{ previewStatus }}</span>
+              </div>
+              <span style="font-family:Anton,sans-serif;font-size:26px;line-height:1;text-transform:uppercase;color:#FCCC00">{{ previewName }}</span>
+              <span style="font-family:Inter,sans-serif;font-size:12.5px;color:#9A9484">{{ previewMeta }}</span>
+            </div>
+            <div style="position:relative;border-top:1px dashed #453B24;margin-top:auto">
+              <span style="position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+              <span style="position:absolute;right:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+              <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5F1E8">{{ previewPrice }}</span>
+                <span style="background:#FCCC00;color:#0C0A08;border-radius:4px;padding:10px 16px;font-family:Anton,sans-serif;font-size:13px;letter-spacing:0.06em;text-transform:uppercase">Bilet</span>
+              </div>
+            </div>
+          </article>
+
+          <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #2C2618;padding-top:18px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">CHECKLISTA PUBLIKACJI</span>
+            <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="5">
+              <span style="{{ c.style }}">{{ c.label }}</span>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #2C2618;padding-top:18px;margin-top:auto">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">GDZIE SIĘ POJAWI</span>
+            <span style="font-family:Inter,sans-serif;font-size:12.5px;line-height:1.75;color:#D8D2C4">Strona główna (kafel), kalendarz, strona wydarzenia, newsletter miesięczny, kanał RSS.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600}}">
+class Component extends DCLogic {
+  state = {
+    name: "Zdrada Pałacu Dożów",
+    date: "14.11.2026",
+    time: "20:00",
+    price: "89",
+    genre: 1,
+    hall: 0,
+    status: 0,
+    step: 0,
+    picked: 17,
+    genre2: 0,
+    hall2: 0
+  };
+
+  chip(active, gold) {
+    return active
+      ? "background:rgba(252,204,0,0.12);color:#FCCC00;border:1px solid " + (gold || "#FCCC00") + ";border-radius:999px;padding:8px 14px;font-family:Inter,sans-serif;font-weight:700;font-size:12px;cursor:pointer"
+      : "background:transparent;color:#9A9484;border:1px solid #2C2618;border-radius:999px;padding:8px 14px;font-family:Inter,sans-serif;font-weight:500;font-size:12px;cursor:pointer";
+  }
+
+  renderVals() {
+    const s = this.state;
+    const genreNames = ["Rock", "Metal", "Rap", "Elektronika", "Stand-up"];
+    const hallData = [
+      { name: "Sala Duża", meta: "550 m² · 1000 OS." },
+      { name: "Sala Klubowa", meta: "210 m² · 400 OS." },
+      { name: "Sala Kameralna", meta: "90 m² · 150 OS." }
+    ];
+    const statusData = [
+      { label: "Dostępne", color: "#6BBF59" },
+      { label: "Ostatnie bilety", color: "#E0A020" },
+      { label: "Wyprzedane", color: "#C05555" },
+      { label: "Przedsprzedaż", color: "#C09C18" }
+    ];
+
+    const stepData = [
+      {
+        label: "Artysta", hint: "NAZWA I GATUNEK",
+        title: "Kto gra?",
+        help: "Nazwa artysty jest najważniejszym elementem karty — wychodzi największym krojem. Wpisz ją dokładnie tak, jak ma się pojawić na plakacie.",
+        tip: "Jeśli wieczór ma kilka zespołów, główna nazwa idzie w pole artysty, pozostałe w support. Nie dopisuj słowa koncert — układ już to komunikuje.",
+        fields: [
+          { label: "NAZWA ARTYSTY *", placeholder: "np. Siwy Dym", gold: true },
+          { label: "SUPPORT", placeholder: "opcjonalnie", gold: false },
+          { label: "GATUNEK *", placeholder: "metal", gold: false }
+        ]
+      },
+      {
+        label: "Termin", hint: "DATA, GODZINY, SALA",
+        title: "Kiedy i gdzie?",
+        help: "Data i godzina startu są wymagane, wejście domyślnie ustawiamy na godzinę wcześniej. Po wybraniu sali system sprawdzi kolizje w kalendarzu.",
+        tip: "Sala Duża jest zablokowana w dniach 14 i 29 listopada. W razie kolizji zobaczysz ostrzeżenie zamiast możliwości publikacji.",
+        fields: [
+          { label: "DATA *", placeholder: "14.11.2026", gold: true },
+          { label: "WEJŚCIE / START *", placeholder: "19:00 / 20:00", gold: true },
+          { label: "SALA *", placeholder: "Sala Duża", gold: false }
+        ]
+      },
+      {
+        label: "Bilety", hint: "CENY I PULA",
+        title: "Ile kosztuje wejście?",
+        help: "Cena od pojawia się na karcie i w kalendarzu. Pula biletów napędza automatyczne statusy: poniżej dwudziestu procent karta sama przechodzi na status ostatnich biletów.",
+        tip: "Podaj też cenę w dniu koncertu — pokazujemy ją drobnym drukiem pod ceną główną, co przyspiesza decyzję o zakupie w przedsprzedaży.",
+        fields: [
+          { label: "CENA OD *", placeholder: "89", gold: true },
+          { label: "W DNIU KONCERTU", placeholder: "110", gold: false },
+          { label: "PULA BILETÓW", placeholder: "480", gold: false }
+        ]
+      },
+      {
+        label: "Materiały", hint: "PLAKAT I OPIS",
+        title: "Plakat i opis",
+        help: "Bez plakatu wydarzenie też się opublikuje — dostanie grafikę zastępczą ze złotą siatką. Opis to dwa, trzy zdania: co się stanie tego wieczoru.",
+        tip: "Minimalna szerokość plakatu to 1600 px. Kadr poziomy 16:9 działa na karcie i w hero, pionowy 3:4 tylko na stronie wydarzenia.",
+        fields: [
+          { label: "PLAKAT", placeholder: "przeciągnij plik lub kliknij", gold: false },
+          { label: "OPIS", placeholder: "Dwa, trzy zdania o koncercie…", gold: false }
+        ]
+      }
+    ];
+
+    const st = stepData[s.step];
+    const evs = { 6: 1, 8: 2, 14: 0, 15: 2, 21: 1, 23: 1, 29: 0, 30: 1 };
+    const conflictHall = evs[parseInt(s.date.slice(0, 2), 10)] === s.hall;
+    const hallColors = ["#FCCC00", "#8A6E08", "#453B24"];
+    const gridDays = [];
+    for (let i = 0; i < 35; i++) {
+      const num = i - 5;
+      const inMonth = num >= 1 && num <= 30;
+      const hasEv = inMonth && evs[num] !== undefined;
+      const isPicked = inMonth && num === s.picked;
+      gridDays.push({
+        num: inMonth ? String(num) : "",
+        onClick: inMonth ? () => this.setState({ picked: num }) : () => {},
+        cell:
+          "border-radius:4px;min-height:70px;padding:7px 9px;display:flex;flex-direction:column;gap:5px;align-items:flex-start;text-align:left;cursor:" +
+          (inMonth ? "pointer;" : "default;") +
+          "background:" + (isPicked ? "rgba(252,204,0,0.10);" : inMonth ? "#151109;" : "#100D0A;") +
+          "border:1px solid " + (isPicked ? "#FCCC00;" : hasEv ? "#453B24;" : inMonth ? "#2C2618;" : "#1E1913;"),
+        numStyle:
+          "font-family:'JetBrains Mono',monospace;font-size:11.5px;color:" +
+          (isPicked ? "#FCCC00" : hasEv ? "#F5F1E8" : inMonth ? "#6E6858" : "#3A342A"),
+        ev: hasEv ? hallData[evs[num]].name.replace("Sala ", "") : "",
+        evStyle: hasEv
+          ? "font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.06em;border-left:2px solid " + hallColors[evs[num]] + ";padding-left:5px;color:#D8D2C4"
+          : "display:none",
+        plusStyle:
+          !hasEv && inMonth && isPicked
+            ? "font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#FCCC00;letter-spacing:0.08em"
+            : "display:none"
+      });
+    }
+    const pickedBusy = evs[s.picked] !== undefined;
+
+    const dayNum = parseInt(s.date.slice(0, 2), 10);
+    const miniDays = [];
+    for (let i = 0; i < 35; i++) {
+      const num = i - 5;
+      const inMonth = num >= 1 && num <= 30;
+      const evHall = inMonth ? evs[num] : undefined;
+      const busySame = evHall === s.hall;
+      const busyOther = evHall !== undefined && evHall !== s.hall;
+      const sel = inMonth && num === dayNum;
+      miniDays.push({
+        num: inMonth ? String(num) : "",
+        onClick: inMonth
+          ? () => this.setState({ date: String(num).padStart(2, "0") + ".11.2026" })
+          : () => {},
+        style:
+          "width:24px;height:24px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:9.5px;display:flex;align-items:center;justify-content:center;cursor:" +
+          (inMonth ? "pointer;" : "default;") +
+          (sel
+            ? "background:#FCCC00;border:1px solid #FCCC00;color:#0C0A08;"
+            : busySame
+            ? "background:rgba(224,160,32,0.22);border:1px solid #E0A020;color:#E0A020;"
+            : busyOther
+            ? "background:#201A10;border:1px solid #453B24;color:#9A9484;"
+            : inMonth
+            ? "background:#151109;border:1px solid #2C2618;color:#9A9484;"
+            : "background:transparent;border:1px solid transparent;color:#3A342A;")
+      });
+    }
+    const taken = Object.keys(evs).length;
+
+    return {
+      miniDays,
+      monthLoad: taken + " Z 30 DNI ZAJĘTYCH\nWOLNYCH TERMINÓW: " + (30 - taken),
+      name: s.name,
+      date: s.date,
+      time: s.time,
+      price: s.price,
+      setName: e => this.setState({ name: e.target.value }),
+      setDate: e => this.setState({ date: e.target.value }),
+      setTime: e => this.setState({ time: e.target.value }),
+      setPrice: e => this.setState({ price: e.target.value }),
+
+      genres: genreNames.map((label, n) => ({
+        label,
+        onClick: () => this.setState({ genre: n }),
+        style: this.chip(s.genre === n)
+      })),
+      halls: hallData.map((h, n) => ({
+        name: h.name,
+        meta: h.meta,
+        onClick: () => this.setState({ hall: n }),
+        style:
+          "background:" + (s.hall === n ? "rgba(252,204,0,0.08);" : "transparent;") +
+          "border:1px solid " + (s.hall === n ? "#FCCC00;" : "#2C2618;") +
+          "border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;align-items:flex-start;cursor:pointer;text-align:left",
+        nameStyle:
+          "font-family:Anton,sans-serif;font-size:17px;text-transform:uppercase;letter-spacing:0.02em;color:" +
+          (s.hall === n ? "#FCCC00" : "#F5F1E8")
+      })),
+      conflict: conflictHall
+        ? "⚠ KOLIZJA: SALA DUŻA JEST ZAJĘTA " + s.date + " — WYBIERZ INNĄ SALĘ ALBO DATĘ"
+        : "✓ TERMIN WOLNY — SALA DOSTĘPNA W TYM DNIU",
+      conflictStyle:
+        "font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.06em;padding-top:2px;color:" +
+        (conflictHall ? "#E0A020" : "#6BBF59"),
+      statuses: statusData.map((x, n) => ({
+        label: x.label,
+        onClick: () => this.setState({ status: n }),
+        style:
+          s.status === n
+            ? "background:rgba(252,204,0,0.10);color:" + x.color + ";border:1px solid " + x.color + ";border-radius:4px;padding:9px 15px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;cursor:pointer"
+            : "background:transparent;color:#9A9484;border:1px solid #2C2618;border-radius:4px;padding:9px 15px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;cursor:pointer"
+      })),
+
+      previewName: s.name || "NAZWA ARTYSTY",
+      previewDate: (s.date || "DATA") + " · " + (s.time || "--:--"),
+      previewMeta: genreNames[s.genre].toLowerCase() + " · " + hallData[s.hall].name,
+      previewPrice: (s.price || "—") + " ZŁ",
+      previewStatus: statusData[s.status].label.toUpperCase(),
+      previewStatusStyle:
+        "font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:" + statusData[s.status].color,
+
+      checklist: [
+        { label: (s.name ? "✓" : "○") + "  Nazwa artysty", ok: !!s.name },
+        { label: (s.date && s.time ? "✓" : "○") + "  Data i godzina startu", ok: !!(s.date && s.time) },
+        { label: (conflictHall ? "○" : "✓") + "  Sala bez kolizji", ok: !conflictHall },
+        { label: (s.price ? "✓" : "○") + "  Cena od", ok: !!s.price },
+        { label: "○  Plakat 1600 × 900", ok: false }
+      ].map(c => ({
+        label: c.label,
+        style:
+          "font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:" +
+          (c.ok ? "#6BBF59" : "#6E6858")
+      })),
+
+      steps: stepData.map((x, n) => ({
+        num: String(n + 1),
+        label: x.label,
+        hint: x.hint,
+        onClick: () => this.setState({ step: n }),
+        style:
+          "background:transparent;border:none;border-bottom:2px solid " +
+          (n === s.step ? "#FCCC00;" : "transparent;") +
+          "cursor:pointer;padding:18px 26px 16px;display:flex;align-items:center;gap:12px",
+        numStyle:
+          "font-family:'JetBrains Mono',monospace;font-size:11px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;" +
+          (n < s.step
+            ? "background:#6BBF59;color:#0C0A08;"
+            : n === s.step
+            ? "background:#FCCC00;color:#0C0A08;"
+            : "background:transparent;border:1px solid #453B24;color:#9A9484;"),
+        labelStyle:
+          "font-family:Anton,sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:0.02em;color:" +
+          (n === s.step ? "#FCCC00" : "#F5F1E8")
+      })),
+      stepTitle: st.title,
+      stepHelp: st.help,
+      stepTip: st.tip,
+      stepProgress: "KROK " + (s.step + 1) + " Z 4",
+      stepFields: st.fields.map(f => ({
+        label: f.label,
+        placeholder: f.placeholder,
+        style:
+          "background:#201A10;border:1px solid " + (f.gold ? "#453B24" : "#2C2618") +
+          ";border-radius:4px;padding:13px 15px;font-family:" +
+          (f.gold ? "Anton,sans-serif;font-size:19px;text-transform:uppercase;color:#FCCC00" : "Inter,sans-serif;font-size:14px;color:#F5F1E8") +
+          ";outline:none"
+      })),
+      prevStep: () => this.setState(x => ({ step: Math.max(0, x.step - 1) })),
+      nextStep: () => this.setState(x => ({ step: Math.min(3, x.step + 1) })),
+      nextLabel: s.step === 3 ? "Publikuj" : "Dalej →",
+
+      weekdays: ["PN", "WT", "ŚR", "CZW", "PT", "SOB", "ND"],
+      gridDays,
+      pickedDate: String(s.picked).padStart(2, "0") + ".11.2026",
+      pickedInfo: pickedBusy
+        ? "⚠ TEGO DNIA GRA JUŻ " + hallData[evs[s.picked]].name.toUpperCase() + " — MOŻESZ DODAĆ DRUGIE WYDARZENIE W INNEJ SALI"
+        : "✓ WSZYSTKIE TRZY SALE WOLNE W TYM TERMINIE",
+      pickedInfoStyle:
+        "font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.7;letter-spacing:0.04em;color:" +
+        (pickedBusy ? "#E0A020" : "#6BBF59"),
+      halls2: hallData.map((h, n) => ({
+        label: h.name.replace("Sala ", ""),
+        onClick: () => this.setState({ hall2: n }),
+        style: this.chip(s.hall2 === n)
+      })),
+      genres2: genreNames.map((label, n) => ({
+        label,
+        onClick: () => this.setState({ genre2: n }),
+        style: this.chip(s.genre2 === n)
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

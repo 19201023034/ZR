@@ -1,0 +1,89 @@
+.headRow { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+.title { font-size: clamp(36px, 4.5vw, 58px); color: var(--zr-text); line-height: 1; margin: 8px 0 16px; }
+.lead { font-family: var(--font-body); font-size: 16px; color: var(--zr-body); line-height: 1.75; max-width: 600px; }
+.headActions { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+
+.sectionHeading { font-size: 30px; color: var(--zr-text); margin-bottom: 22px; line-height: 1; }
+
+/* ─── Table ─── */
+.tableWrap { overflow-x: auto; }
+
+.table { width: 100%; border-collapse: collapse; min-width: 720px; }
+
+.table th {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--zr-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: right;
+  padding: 0 12px 12px;
+  border-bottom: 1px solid var(--zr-line-hi);
+}
+.thName { text-align: left; padding-left: 0; }
+.thPrice { color: var(--zr-gold-dim); }
+
+.table td {
+  font-size: 13px;
+  color: var(--zr-body);
+  text-align: right;
+  padding: 15px 12px;
+  border-bottom: 1px solid var(--zr-line);
+}
+
+.tdName { text-align: left; padding-left: 0; font-size: 20px; color: var(--zr-text); text-transform: uppercase; }
+.tdPrice { color: var(--zr-gold); font-weight: 500; }
+
+.note { font-family: var(--font-body); font-size: 12.5px; color: var(--zr-muted); margin-top: 14px; line-height: 1.6; }
+
+/* ─── Specs ─── */
+.specGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.specCard {
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.specName { font-size: 22px; color: var(--zr-gold); line-height: 1; }
+.specDims { font-size: 10.5px; color: var(--zr-muted); letter-spacing: 0.08em; margin-bottom: 8px; }
+
+.specList { display: flex; flex-direction: column; }
+.specRow { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--zr-line); }
+.specRow:last-child { border-bottom: none; }
+.specLabel { font-size: 9px; color: var(--zr-faint); letter-spacing: 0.14em; }
+.specValue { font-size: 11.5px; color: var(--zr-body); }
+
+/* ─── Included ─── */
+.included { background: var(--zr-surface-alt); }
+.inclGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+
+.list { margin: 0; padding-left: 18px; }
+.listItem { font-family: var(--font-body); font-size: 14.5px; color: var(--zr-body); line-height: 1.7; margin-bottom: 9px; }
+
+.extras { display: flex; flex-direction: column; }
+.extraRow { padding: 11px 0; border-bottom: 1px solid var(--zr-line); }
+.extraRow:last-child { border-bottom: none; }
+.extraTerm { font-family: var(--font-body); font-size: 14.5px; font-weight: 600; color: var(--zr-text); }
+.extraDesc { font-family: var(--font-body); font-size: 13px; color: var(--zr-muted); margin-top: 2px; line-height: 1.55; }
+
+/* ─── Contact ─── */
+.contactInner { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+.contactHeading { font-size: 30px; color: var(--zr-text); line-height: 1; margin-bottom: 8px; }
+.contactText { font-family: var(--font-mono); font-size: 12.5px; color: var(--zr-muted); letter-spacing: 0.04em; }
+
+@media (max-width: 1024px) {
+  .specGrid { grid-template-columns: 1fr; }
+  .inclGrid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ─── Print: this page doubles as the PDF ─── */
+@media print {
+  .headActions { display: none; }
+  .specGrid { grid-template-columns: repeat(3, 1fr); }
+  .table { min-width: 0; }
+}

@@ -1,0 +1,146 @@
+/* ─── Hero ─── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.heroLeft { display: flex; flex-direction: column; gap: 16px; }
+
+.crumbs { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
+.crumb { color: var(--zr-gold-dim); transition: color 160ms; }
+.crumb:hover { color: var(--zr-gold); }
+
+.statusRow { display: flex; align-items: center; gap: 8px; }
+.statusText { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.title {
+  font-size: clamp(42px, 6.5vw, 92px);
+  color: var(--zr-gold);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+}
+
+.support { font-family: var(--font-body); font-size: 17px; color: var(--zr-body); }
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--zr-line);
+  border-bottom: 1px solid var(--zr-line);
+  margin-top: 8px;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 26px 14px 0;
+  margin-right: 26px;
+  border-right: 1px solid var(--zr-line);
+}
+.fact:last-child { border-right: none; margin-right: 0; }
+
+.factLabel { font-size: 9.5px; color: var(--zr-faint); letter-spacing: 0.16em; }
+.factValue { font-size: 14px; color: var(--zr-text); font-weight: 500; }
+
+.ctaRow { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.ctaNote { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
+
+.poster {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--zr-raised);
+}
+
+.posterImg { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
+
+.posterEmpty {
+  font-size: 10px;
+  color: var(--zr-gold-dim);
+  border: 1px solid rgba(252, 204, 0, 0.4);
+  border-radius: 3px;
+  padding: 5px 10px;
+  letter-spacing: 0.14em;
+}
+
+/* ─── Body ─── */
+.bodyGrid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
+.bodyLeft, .bodyRight { display: flex; flex-direction: column; gap: 14px; }
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--zr-body);
+  line-height: 1.8;
+  white-space: pre-line;
+}
+.descEmpty { color: var(--zr-faint); font-style: italic; }
+
+.practical { display: flex; flex-direction: column; }
+
+.practicalRow {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--zr-line);
+}
+.practicalRow:last-child { border-bottom: none; }
+
+.practicalTerm { font-size: 10px; color: var(--zr-gold-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+.practicalDesc { font-family: var(--font-body); font-size: 14px; color: var(--zr-body); line-height: 1.6; }
+
+/* ─── Others ─── */
+.othersHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.othersTitle { font-size: 30px; color: var(--zr-text); line-height: 1; }
+.othersLink { font-size: 11.5px; color: var(--zr-gold-dim); letter-spacing: 0.08em; }
+.othersLink:hover { color: var(--zr-gold); }
+
+.othersGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.otherCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 22px;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  transition: border-color 240ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.otherCard:hover { border-color: var(--zr-gold-dim); transform: translateY(-3px); }
+
+.otherDate { font-size: 10px; color: var(--zr-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+.otherArtist { font-size: 22px; color: var(--zr-text); line-height: 1.05; }
+.otherCard:hover .otherArtist { color: var(--zr-gold); }
+.otherMeta { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.06em; }
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .poster { max-width: 320px; }
+  .bodyGrid { grid-template-columns: 1fr; gap: 36px; }
+  .othersGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .othersGrid { grid-template-columns: 1fr; }
+  .fact { padding-right: 18px; margin-right: 18px; }
+  .practicalRow { grid-template-columns: 1fr; gap: 4px; }
+}

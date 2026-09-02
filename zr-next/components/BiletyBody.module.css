@@ -1,0 +1,92 @@
+.intro { display: flex; flex-direction: column; gap: 14px; }
+
+.heading { font-size: clamp(44px, 6vw, 76px); color: var(--zr-text); line-height: 1; }
+
+.sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--zr-body);
+  line-height: 1.75;
+  max-width: 640px;
+}
+.sub strong { color: var(--zr-gold); font-weight: 600; }
+
+/* ─── Groups ─── */
+.group { border-bottom: 1px solid var(--zr-line); }
+
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 26px 80px 12px;
+}
+
+.groupTitle { font-size: 24px; color: var(--zr-text); line-height: 1; }
+.groupCount { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.12em; }
+
+.rows { display: flex; flex-direction: column; }
+
+.row {
+  display: grid;
+  grid-template-columns: 120px 1fr 150px 100px auto;
+  gap: 24px;
+  align-items: center;
+  padding: 18px 80px;
+  border-top: 1px solid var(--zr-line);
+  transition: background 200ms var(--ease-out);
+}
+.row:hover { background: rgba(255, 255, 255, 0.02); }
+
+.dateCol { font-size: 12px; color: var(--zr-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+.mainCol { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.artist { font-size: 26px; color: var(--zr-text); line-height: 1.05; }
+.meta { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.06em; }
+
+.statusCol { display: flex; align-items: center; gap: 7px; }
+.statusText { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.priceCol { font-size: 14px; color: var(--zr-text); text-align: right; }
+
+.empty { font-size: 13px; color: var(--zr-muted); }
+
+/* ─── Help ─── */
+.help { background: var(--zr-surface-alt); }
+
+.helpGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.helpHeading { font-size: 30px; color: var(--zr-text); margin-bottom: 10px; line-height: 1; }
+
+.helpText {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--zr-body);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.helpActions { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+@media (max-width: 1024px) {
+  .groupHead { padding-left: 40px; padding-right: 40px; }
+  .row { padding-left: 40px; padding-right: 40px; grid-template-columns: 110px 1fr auto; row-gap: 12px; }
+  .statusCol, .priceCol { grid-row: 2; }
+  .priceCol { text-align: left; }
+}
+
+@media (max-width: 768px) {
+  .groupHead { padding-left: 20px; padding-right: 20px; }
+  .row { padding-left: 20px; padding-right: 20px; grid-template-columns: 1fr; }
+  .artist { font-size: 22px; }
+  .priceCol { text-align: left; }
+  .helpGrid { flex-direction: column; align-items: flex-start; }
+}
+
+.artistLink { color: inherit; transition: color 200ms var(--ease-out); }
+.artistLink:hover { color: var(--zr-gold); }

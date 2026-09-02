@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #0C0A08; }
+  * { box-sizing: border-box; }
+  a { color: #FCCC00; text-decoration: none; }
+  a:hover { color: #FFD824; text-decoration: underline; }
+  input[type="checkbox"] { accent-color: #FCCC00; }
+  ::placeholder { color: #6E6858; }
+</style>
+</helmet>
+<div style="position:relative;background:#0C0A08;color:#F5F1E8;font-family:Inter,sans-serif;width:1600px;margin:0 auto;overflow:hidden">
+<div style="position:absolute;inset:0;pointer-events:none;opacity:0.45;background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.3'/></svg>&quot;);background-size:140px 140px;mix-blend-mode:overlay"></div>
+
+<div style="position:relative;padding:80px 80px 120px;display:flex;flex-direction:column">
+
+  <header style="display:flex;justify-content:space-between;align-items:flex-end;gap:48px;padding-bottom:36px">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <img src="assets/logo-zaklete-rewiry.webp" alt="Zaklęte Rewiry" style="height:66px;width:auto;display:block" />
+      <div style="font-family:Anton,sans-serif;font-size:60px;line-height:0.94;text-transform:uppercase;letter-spacing:0.005em;color:#F5F1E8;max-width:900px">System wizualny — <span style="color:#FCCC00">klub i wynajem sal</span></div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;color:#9A9484;text-align:right;text-transform:uppercase;letter-spacing:0.08em">
+      CKR ZAKLĘTE REWIRY<br />UL. KRAKOWSKA 100, WROCŁAW<br />v 1.0 · 09.2026<br /><span style="color:#C09C18">rock · metal · rap · elektronika · stand-up</span>
+    </div>
+  </header>
+
+  <div style="height:2px;background:#FCCC00;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:28px;padding-bottom:60px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">01</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Paleta i tokeny CSS</h2>
+      <span style="font-family:Inter,sans-serif;font-size:14px;color:#9A9484;margin-left:auto;max-width:480px;text-align:right;text-wrap:pretty">Zasada 90/10: jeden dominujący złoty element na widok — przycisk biletu albo nazwa najbliższego artysty. Resztę robią drobne akcenty i linie.</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px">
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#0C0A08"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-bg</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#0C0A08</span><span style="font-size:11px;color:#9A9484">tło bazowe + grain</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#151109"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-surface</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#151109</span><span style="font-size:11px;color:#9A9484">karty</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#201A10"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-raised</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#201A10</span><span style="font-size:11px;color:#9A9484">pola, hover</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#FCCC00"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FCCC00">--zr-gold</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#FCCC00</span><span style="font-size:11px;color:#9A9484">akcent z logo, CTA</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#FFD824"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FFD824">--zr-gold-hi</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#FFD824</span><span style="font-size:11px;color:#9A9484">hover</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#C09C18"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18">--zr-gold-dim</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#C09C18</span><span style="font-size:11px;color:#9A9484">rejestr wynajmu</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#F5F1E8"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-text</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#F5F1E8</span><span style="font-size:11px;color:#9A9484">nagłówki</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#D8D2C4"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-body</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#D8D2C4</span><span style="font-size:11px;color:#9A9484">tekst ciągły</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#9A9484"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-muted</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#9A9484</span><span style="font-size:11px;color:#9A9484">tekst wyciszony</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#2C2618"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-line</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#2C2618</span><span style="font-size:11px;color:#9A9484">obrys podstawowy</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109">
+        <div style="height:92px;background:#453B24"></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-line-hi</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">#453B24</span><span style="font-size:11px;color:#9A9484">obrys wyróżniony</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;border-radius:6px;overflow:hidden;background:#151109;display:flex;flex-direction:column">
+        <div style="height:92px;background:#0C0A08;display:flex;align-items:center;justify-content:center;gap:8px"><span style="width:11px;height:11px;border-radius:50%;background:#6BBF59"></span><span style="width:11px;height:11px;border-radius:50%;background:#E0A020"></span><span style="width:11px;height:11px;border-radius:50%;background:#A03838"></span></div>
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2C2618"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#F5F1E8">--zr-ok / warn / sold</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">6BBF59 · E0A020 · A03838</span><span style="font-size:11px;color:#9A9484">statusy biletów</span></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px">
+      <div style="border:1px solid #2C2618;background:#151109;border-radius:6px;padding:18px 20px;display:flex;align-items:center;gap:14px">
+        <span style="width:12px;height:12px;border-radius:50%;background:#6BBF59;flex:none;box-shadow:0 0 0 4px rgba(107,191,89,0.16)"></span>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#F5F1E8">DOSTĘPNE</span><span style="font-size:12px;color:#9A9484">pula otwarta, powyżej 20% miejsc</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;background:#151109;border-radius:6px;padding:18px 20px;display:flex;align-items:center;gap:14px">
+        <span style="width:12px;height:12px;border-radius:50%;background:#E0A020;flex:none;box-shadow:0 0 0 4px rgba(224,160,32,0.16)"></span>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#F5F1E8">OSTATNIE BILETY</span><span style="font-size:12px;color:#9A9484">poniżej 20% — podaj liczbę</span></div>
+      </div>
+      <div style="border:1px solid #2C2618;background:#151109;border-radius:6px;padding:18px 20px;display:flex;align-items:center;gap:14px">
+        <span style="width:12px;height:12px;border-radius:50%;background:#A03838;flex:none;box-shadow:0 0 0 4px rgba(160,56,56,0.16)"></span>
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#F5F1E8">WYPRZEDANE</span><span style="font-size:12px;color:#9A9484">karta wyciszona, CTA ghost</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:34px;padding-bottom:60px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">02</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Skala typograficzna</h2>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;margin-left:auto">SIATKA 8 PX · KONTENER 1200–1440 PX</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:230px 1fr;gap:30px 40px;align-items:baseline">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">Anton 104 / 0.9<br />display · biel</div>
+      <div style="font-family:Anton,sans-serif;font-size:104px;line-height:0.9;text-transform:uppercase;color:#F5F1E8">Zażółć gęślą jaźń</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">Anton 52 / 1.0<br />nazwa artysty · złoto</div>
+      <div style="font-family:Anton,sans-serif;font-size:52px;line-height:1;text-transform:uppercase;color:#FCCC00">Zdrada Pałacu Dożów</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">Anton 30 / 1.1<br />nagłówek sekcji</div>
+      <div style="font-family:Anton,sans-serif;font-size:30px;line-height:1.1;text-transform:uppercase;letter-spacing:0.03em;color:#F5F1E8">Dziś na scenie — nadchodzące wydarzenia</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">Inter 700 / 15<br />interfejs, etykiety</div>
+      <div style="font-family:Inter,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.01em;color:#F5F1E8">Kup bilet · Zobacz repertuar · Zapytaj o wynajem sali</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">Inter 400 / 17 / 1.7<br />tekst ciągły</div>
+      <div style="font-family:Inter,sans-serif;font-size:17px;line-height:1.7;max-width:780px;color:#D8D2C4;text-wrap:pretty">Zaklęte Rewiry to Centrum Kulturalno-Rozrywkowe przy ulicy Krakowskiej 100 we Wrocławiu. Trzy sale, własny system nagłośnieniowy i oświetleniowy, bar czynny do trzeciej. Wieczorem klub, w ciągu dnia przestrzeń na gale, konferencje i imprezy firmowe.</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">Inter 400 / 14<br />tekst wyciszony</div>
+      <div style="font-family:Inter,sans-serif;font-size:14px;line-height:1.6;max-width:780px;color:#9A9484;text-wrap:pretty">Bilety wyłącznie elektroniczne. Wejście od 19:00, koncert zaczyna się punktualnie. Obowiązuje szatnia (8 zł), wstęp od 16 lat, płatność kartą i BLIK.</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">JetBrains Mono 15<br />daty, ceny, dane</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:0.02em;line-height:1.9;color:#F5F1E8">CZW 14.11.2026 · WEJŚCIE 19:00 · START 20:00 · SALA DUŻA<br /><span style="color:#9A9484">CENA OD 89 ZŁ · 480 OS. · SCENA 50 m² · PA: d&amp;b V-SERIES</span></div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;line-height:1.7;text-transform:uppercase;letter-spacing:0.08em">UnifrakturCook 700<br />tylko logo i akcent</div>
+      <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap"><span style="font-family:'UnifrakturCook',cursive;font-size:42px;color:#FCCC00">Zaklete Rewiry</span><span style="font-size:13px;color:#9A9484;max-width:340px;text-wrap:pretty">Blackletter nie ma pełnych polskich diakrytyków — używamy wyłącznie w sygnaturze marki, nigdy w tekście ani w UI.</span></div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:26px;padding-bottom:60px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">03</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Nawigacja i filtry</h2>
+      <span style="font-size:14px;color:#9A9484;margin-left:auto">Przełącznik PL/EN i pill-buttony są aktywne — kliknij.</span>
+    </div>
+
+    <div style="background:#151109;border:1px solid #2C2618;border-top:2px solid #FCCC00;border-radius:6px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:40px;height:80px">
+      <div style="display:flex;align-items:center;gap:44px">
+        <span style="font-family:'UnifrakturCook',cursive;font-size:26px;color:#FCCC00;line-height:1">Zaklete Rewiry</span>
+        <nav style="display:flex;gap:30px;align-items:center">
+          <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+            <a href="#" style="{{ item.style }}">{{ item.label }}</a>
+          </sc-for>
+        </nav>
+      </div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <div style="display:flex;border:1px solid #453B24;border-radius:4px;overflow:hidden">
+          <button type="button" onClick="{{ setPL }}" style="{{ plStyle }}">PL</button>
+          <button type="button" onClick="{{ setEN }}" style="{{ enStyle }}">EN</button>
+        </div>
+        <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:13px 24px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:#FFD824">{{ ctaLabel }}</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:10px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;text-transform:uppercase;letter-spacing:0.1em">Filtry gatunków — pill-buttony</span>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+          <button type="button" onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;text-transform:uppercase;letter-spacing:0.1em;margin-top:10px">Filtry danych — mono</span>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;border:1px solid #FCCC00;border-radius:4px;padding:10px 15px;background:rgba(252,204,0,0.08)">LISTOPAD 2026</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;border:1px solid #2C2618;border-radius:4px;padding:10px 15px">GRUDZIEŃ 2026</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;border:1px solid #2C2618;border-radius:4px;padding:10px 15px">SALA DUŻA</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;border:1px solid #2C2618;border-radius:4px;padding:10px 15px">SALA KLUBOWA</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;border:1px solid #2C2618;border-radius:4px;padding:10px 15px">SALA KAMERALNA</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;border:1px solid #2C2618;border-radius:4px;padding:10px 15px">TYLKO DOSTĘPNE</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:26px;padding-bottom:60px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">04</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Karty wydarzeń — bento grid</h2>
+      <span style="font-size:14px;color:#9A9484;margin-left:auto;max-width:470px;text-align:right;text-wrap:pretty">Karta podwójna dla najważniejszego koncertu, pojedyncze dla reszty. Kadry zdjęć ze złotą siatką LED, stopka oddzielona perforacją biletu.</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+
+      <article style="grid-column:span 2;background:#151109;border:1px solid #2C2618;border-radius:6px;display:flex;flex-direction:column;overflow:hidden">
+        <div style="height:280px;position:relative;background:#201A10;display:flex;align-items:center;justify-content:center">
+          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(252,204,0,0.10) 1px, transparent 1px),linear-gradient(90deg, rgba(252,204,0,0.10) 1px, transparent 1px);background-size:4px 4px"></div>
+          <span style="position:relative;font-family:'JetBrains Mono',monospace;font-size:11px;color:#57503C;letter-spacing:0.14em">PLAKAT 16:9 · SIATKA LED</span>
+          <span style="position:absolute;top:16px;left:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#FCCC00;border:1px solid rgba(252,204,0,0.5);border-radius:4px;padding:5px 9px;letter-spacing:0.12em;background:rgba(12,10,8,0.7)">POLECAMY</span>
+        </div>
+        <div style="padding:26px 28px 22px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#F5F1E8;letter-spacing:0.04em">CZW 14.11.2026 · WEJŚCIE 19:00 · START 20:00</span>
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6BBF59;letter-spacing:0.08em"><span style="width:8px;height:8px;border-radius:50%;background:#6BBF59;box-shadow:0 0 0 3px rgba(107,191,89,0.18)"></span>DOSTĘPNE</span>
+          </div>
+          <h3 style="font-family:Anton,sans-serif;font-size:54px;line-height:0.98;margin:0;text-transform:uppercase;color:#FCCC00">Zdrada Pałacu Dożów</h3>
+          <span style="font-family:Inter,sans-serif;font-size:14px;color:#9A9484">metal / support: Kruk Południa · Sala Duża · 480 os.</span>
+        </div>
+        <div style="position:relative;border-top:1px dashed #453B24;margin-top:auto">
+          <span style="position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+          <span style="position:absolute;right:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+          <div style="padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'JetBrains Mono',monospace;font-size:20px;color:#F5F1E8">OD 89 ZŁ</span><span style="font-family:Inter,sans-serif;font-size:12px;color:#9A9484">w dniu koncertu 110 zł</span></div>
+            <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:15px 28px;font-family:Anton,sans-serif;font-size:16px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:#FFD824">Kup bilet</button>
+          </div>
+        </div>
+      </article>
+
+      <article style="background:#151109;border:1px solid #2C2618;border-radius:6px;display:flex;flex-direction:column;overflow:hidden">
+        <div style="height:170px;position:relative;background:#201A10;display:flex;align-items:center;justify-content:center">
+          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(252,204,0,0.08) 1px, transparent 1px),linear-gradient(90deg, rgba(252,204,0,0.08) 1px, transparent 1px);background-size:4px 4px"></div>
+          <span style="position:relative;font-family:'JetBrains Mono',monospace;font-size:10px;color:#57503C;letter-spacing:0.14em">FOTO 3:2</span>
+        </div>
+        <div style="padding:20px 22px 18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#F5F1E8">SOB 23.11 · 19:30</span>
+            <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#E0A020;letter-spacing:0.08em"><span style="width:7px;height:7px;border-radius:50%;background:#E0A020"></span>OSTATNIE 12</span>
+          </div>
+          <h3 style="font-family:Anton,sans-serif;font-size:30px;line-height:1;margin:0;text-transform:uppercase;color:#F5F1E8">Beton Osiedlowy</h3>
+          <span style="font-family:Inter,sans-serif;font-size:13px;color:#9A9484">rap · Sala Klubowa</span>
+        </div>
+        <div style="position:relative;border-top:1px dashed #453B24;margin-top:auto">
+          <span style="position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+          <span style="position:absolute;right:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+          <div style="padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:16px;color:#F5F1E8">120 ZŁ</span>
+            <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:12px 20px;font-family:Anton,sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:#FFD824">Kup bilet</button>
+          </div>
+        </div>
+      </article>
+
+      <article style="background:#151109;border:1px solid #2C2618;border-radius:6px;display:flex;flex-direction:column;overflow:hidden;opacity:0.78">
+        <div style="height:170px;position:relative;background:#1A160E;display:flex;align-items:center;justify-content:center;filter:grayscale(1)">
+          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(252,204,0,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(252,204,0,0.06) 1px, transparent 1px);background-size:4px 4px"></div>
+          <span style="position:relative;font-family:'JetBrains Mono',monospace;font-size:10px;color:#57503C;letter-spacing:0.14em">FOTO 3:2</span>
+        </div>
+        <div style="padding:20px 22px 18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484">PT 29.11 · 21:00</span>
+            <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#C05555;letter-spacing:0.08em"><span style="width:7px;height:7px;border-radius:50%;background:#A03838"></span>WYPRZEDANE</span>
+          </div>
+          <h3 style="font-family:Anton,sans-serif;font-size:30px;line-height:1;margin:0;text-transform:uppercase;color:#9A9484">Nocna Zmiana Techno</h3>
+          <span style="font-family:Inter,sans-serif;font-size:13px;color:#6E6858">elektronika · Sala Kameralna</span>
+        </div>
+        <div style="position:relative;border-top:1px dashed #2C2618;margin-top:auto">
+          <span style="position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+          <span style="position:absolute;right:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#0C0A08;border:1px solid #2C2618"></span>
+          <div style="padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:16px;color:#9A9484">75 ZŁ</span>
+            <button type="button" disabled="" style="background:transparent;color:#6E6858;border:1px solid #2C2618;border-radius:4px;padding:12px 16px;font-family:Anton,sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;cursor:not-allowed">Lista rezerwowa</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:28px;padding-bottom:60px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">05</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Przycisk biletu — stany</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:20px">
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:15px 26px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer">Kup bilet</button>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">SPOCZYNEK</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <button type="button" style="background:#FFD824;color:#0C0A08;border:none;border-radius:4px;padding:15px 26px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 24px rgba(252,204,0,0.25)">Kup bilet</button>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">HOVER</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <button type="button" style="background:#C09C18;color:#0C0A08;border:none;border-radius:4px;padding:15px 26px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transform:translateY(1px)">Kup bilet</button>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">PRESSED</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:15px 26px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;outline:2px solid #F5F1E8;outline-offset:3px">Kup bilet</button>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">FOCUS</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <button type="button" style="background:rgba(252,204,0,0.5);color:#0C0A08;border:none;border-radius:4px;padding:15px 26px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:progress">Przetwarzam…</button>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">LOADING</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <button type="button" disabled="" style="background:transparent;color:#6E6858;border:1px solid #2C2618;border-radius:4px;padding:15px 26px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:not-allowed">Wyprzedane</button>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">WYPRZEDANE</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:6px">
+      <button type="button" style="background:transparent;color:#FCCC00;border:1px solid #FCCC00;border-radius:4px;padding:14px 24px;font-family:Anton,sans-serif;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:rgba(252,204,0,0.12)">Zobacz repertuar</button>
+      <button type="button" style="background:transparent;color:#F5F1E8;border:1px solid #453B24;border-radius:4px;padding:14px 24px;font-family:Inter,sans-serif;font-weight:600;font-size:14px;cursor:pointer" style-hover="border-color:#9A9484">Przycisk drugorzędny</button>
+      <a href="#" style="font-family:Inter,sans-serif;font-weight:600;font-size:14px;color:#FCCC00;border-bottom:1px solid rgba(252,204,0,0.4);padding-bottom:2px">Link tekstowy →</a>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:28px;padding-bottom:60px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">06</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Drugi rejestr — wynajem sal</h2>
+      <span style="font-size:14px;color:#9A9484;margin-left:auto;max-width:470px;text-align:right;text-wrap:pretty">Ten sam kolor, spokojniejszy ton: więcej powietrza, Anton tylko w nagłówku, złoto przygaszone do #C09C18 i jedno CTA.</span>
+    </div>
+
+    <div style="background:#100D0A;border:1px solid #2C2618;border-radius:8px;padding:64px 72px;display:grid;grid-template-columns:1.1fr 1fr;gap:72px">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.2em;text-transform:uppercase">Wynajem przestrzeni · B2B</span>
+        <h3 style="font-family:Anton,sans-serif;font-size:44px;line-height:1.08;margin:0;text-transform:uppercase;color:#F5F1E8;letter-spacing:0.01em">Trzy sale przy Krakowskiej 100</h3>
+        <div style="width:88px;height:1px;background:#C09C18"></div>
+        <p style="font-family:Inter,sans-serif;font-size:16px;line-height:1.8;color:#D8D2C4;margin:0;max-width:520px;text-wrap:pretty">Gale, konferencje, premiery produktów i imprezy firmowe. Zapewniamy technikę, obsługę baru i koordynatora wydarzenia. Termin potwierdzamy w ciągu 24 godzin.</p>
+        <div style="display:flex;gap:20px;align-items:center;margin-top:8px">
+          <button type="button" style="background:#C09C18;color:#0C0A08;border:none;border-radius:4px;padding:15px 26px;font-family:Inter,sans-serif;font-weight:700;font-size:15px;cursor:pointer" style-hover="background:#FCCC00">Zapytaj o wynajem</button>
+          <a href="#" style="font-family:Inter,sans-serif;font-size:15px;color:#D8D2C4;border-bottom:1px solid #453B24;padding-bottom:2px">Specyfikacja techniczna (PDF)</a>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;border-left:1px solid #2C2618;padding-left:56px">
+        <div style="display:flex;justify-content:space-between;padding:20px 0;border-bottom:1px solid #2C2618;font-family:'JetBrains Mono',monospace;font-size:13px"><span style="color:#9A9484">SALA DUŻA</span><span style="color:#F5F1E8">550 m² · 1000 OS. · SCENA 50 m²</span></div>
+        <div style="display:flex;justify-content:space-between;padding:20px 0;border-bottom:1px solid #2C2618;font-family:'JetBrains Mono',monospace;font-size:13px"><span style="color:#9A9484">SALA KLUBOWA</span><span style="color:#F5F1E8">210 m² · 400 OS.</span></div>
+        <div style="display:flex;justify-content:space-between;padding:20px 0;border-bottom:1px solid #2C2618;font-family:'JetBrains Mono',monospace;font-size:13px"><span style="color:#9A9484">SALA KAMERALNA</span><span style="color:#F5F1E8">90 m² · 150 OS.</span></div>
+        <div style="display:flex;justify-content:space-between;padding:20px 0;border-bottom:1px solid #2C2618;font-family:'JetBrains Mono',monospace;font-size:13px"><span style="color:#9A9484">UKŁADY</span><span style="color:#F5F1E8">TEATRALNY · BANKIET · KOKTAJL</span></div>
+        <div style="display:flex;justify-content:space-between;padding:20px 0;font-family:'JetBrains Mono',monospace;font-size:13px"><span style="color:#9A9484">DOSTĘPNOŚĆ</span><span style="color:#C09C18">PN–CZW, TERMINY DZIENNE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin-bottom:60px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">07</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Newsletter i cookies</h2>
+    </div>
+
+    <div style="background:#151109;border:1px solid #2C2618;border-radius:6px;padding:30px 32px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:4px;min-width:250px">
+          <span style="font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:0.03em">Terminarz na maila</span>
+          <span style="font-family:Inter,sans-serif;font-size:13px;color:#9A9484">Raz w miesiącu: lista koncertów i przedsprzedaże.</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex:1;min-width:380px">
+          <input type="email" placeholder="adres@email.pl" style="flex:1;background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:14px 16px;color:#F5F1E8;font-family:Inter,sans-serif;font-size:14px;outline:none" style-focus="border-color:#FCCC00" />
+          <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:14px 26px;font-family:Inter,sans-serif;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#FFD824">Zapisz się</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;text-transform:uppercase;letter-spacing:0.1em">Interesują mnie (opcjonalnie)</span>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-for list="{{ genres }}" as="g" hint-placeholder-count="5">
+            <button type="button" onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <label style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;max-width:860px">
+        <input type="checkbox" checked="{{ consent }}" onChange="{{ toggleConsent }}" style="width:17px;height:17px;margin-top:1px;flex:none;cursor:pointer" />
+        <span style="font-family:Inter,sans-serif;font-size:12px;line-height:1.6;color:#9A9484">Wyrażam zgodę na otrzymywanie informacji handlowych o wydarzeniach w CKR Zaklęte Rewiry na podany adres e-mail. Zgodę mogę wycofać w każdej chwili. <a href="#" style="color:#9A9484;border-bottom:1px solid #453B24">Polityka prywatności</a></span>
+      </label>
+    </div>
+
+    <sc-if value="{{ cookiesOpen }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#151109;border:1px solid #2C2618;border-left:3px solid #FCCC00;border-radius:6px;padding:26px 30px;display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:440px">
+          <span style="font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;letter-spacing:0.04em">Cookies</span>
+          <span style="font-family:Inter,sans-serif;font-size:13px;line-height:1.6;color:#9A9484;max-width:760px;text-wrap:pretty">Używamy plików cookies do obsługi sprzedaży biletów oraz statystyk odwiedzin. Możesz zaakceptować wszystkie, odrzucić opcjonalne albo wybrać zakres w ustawieniach — strona działa w każdym przypadku.</span>
+          <a href="#" style="font-family:Inter,sans-serif;font-size:13px;color:#C09C18;border-bottom:1px solid #453B24;align-self:flex-start;padding-bottom:1px;margin-top:4px">Ustawienia: niezbędne / analityczne / marketingowe</a>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button type="button" onClick="{{ closeCookies }}" style="background:transparent;color:#F5F1E8;border:1px solid #453B24;border-radius:4px;padding:14px 28px;font-family:Inter,sans-serif;font-weight:700;font-size:14px;cursor:pointer;min-width:160px" style-hover="border-color:#F5F1E8">Odrzucam</button>
+          <button type="button" onClick="{{ closeCookies }}" style="background:transparent;color:#FCCC00;border:1px solid #FCCC00;border-radius:4px;padding:14px 28px;font-family:Inter,sans-serif;font-weight:700;font-size:14px;cursor:pointer;min-width:160px" style-hover="background:rgba(252,204,0,0.12)">Akceptuję</button>
+        </div>
+      </div>
+    </sc-if>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.06em">ZASADA: „AKCEPTUJĘ" I „ODRZUCAM" MAJĄ IDENTYCZNĄ WAGĘ WIZUALNĄ — TA SAMA SZEROKOŚĆ, TEN SAM WARIANT OBRYSOWY.</span>
+  </section>
+
+  <div style="height:1px;background:#C09C18;margin:60px 0"></div>
+
+  <section style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#FCCC00;letter-spacing:0.16em">08</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Rzut sali — wzór schematu</h2>
+      <span style="font-size:14px;color:#9A9484;margin-left:auto;max-width:520px;text-align:right;text-wrap:pretty">Wzorzec dla wszystkich trzech sal: widok z góry, scena zawsze u dołu kadru, opisy w JetBrains Mono, wymiary na osiach, złoto tylko dla scen i przyłączy technicznych.</span>
+    </div>
+
+    <div style="background:#151109;border:1px solid #2C2618;border-radius:8px;padding:40px 44px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.2em;text-transform:uppercase">Rzut 1:200 · widok z góry</span>
+          <span style="font-family:Anton,sans-serif;font-size:28px;text-transform:uppercase;letter-spacing:0.02em">Sala Duża — układ koncertowy stojący</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9A9484;text-align:right;line-height:1.9;text-transform:uppercase">550 m² · 1000 OS. · WYS. 7,4 m<br />SCENA 50 m² (10,0 × 5,0 m) · WYS. 1,1 m</div>
+      </div>
+
+      <div style="display:flex;gap:16px">
+        <div style="width:34px;display:flex;align-items:center;justify-content:center">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.14em;transform:rotate(-90deg);white-space:nowrap">18,0 m</span>
+        </div>
+
+        <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+          <div style="position:relative;height:600px;background:#100D0A;border:1px solid #453B24;border-radius:4px;overflow:hidden">
+            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(252,204,0,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(252,204,0,0.05) 1px, transparent 1px);background-size:34px 34px"></div>
+
+            <div style="position:absolute;left:24%;right:24%;bottom:26px;height:118px;background:rgba(252,204,0,0.14);border:1px solid #FCCC00;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+              <span style="font-family:Anton,sans-serif;font-size:22px;color:#FCCC00;letter-spacing:0.08em;text-transform:uppercase">Scena</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.1em">10,0 × 5,0 m · H 1,1 m</span>
+            </div>
+            <div style="position:absolute;left:24%;right:24%;bottom:150px;height:22px;border-top:1px dashed #453B24;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858;letter-spacing:0.14em;background:#100D0A;padding:0 8px">LINIA KURTYNY / BACKLINE</span>
+            </div>
+
+            <div style="position:absolute;left:14%;bottom:26px;width:9%;height:118px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D8D2C4;letter-spacing:0.08em">PA L</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858">LINE ARRAY</span>
+            </div>
+            <div style="position:absolute;right:14%;bottom:26px;width:9%;height:118px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D8D2C4;letter-spacing:0.08em">PA R</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858">LINE ARRAY</span>
+            </div>
+
+            <div style="position:absolute;left:24%;right:24%;bottom:196px;top:186px;border:1px dashed #2C2618;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#D8D2C4;letter-spacing:0.14em">PŁYTA WIDOWNI</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484">STOJĄCA · 720 OS.</span>
+            </div>
+
+            <div style="position:absolute;left:50%;top:120px;transform:translateX(-50%);width:132px;height:56px;background:#201A10;border:1px solid #453B24;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#FCCC00;letter-spacing:0.1em">FOH</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9A9484">REALIZACJA 4 × 3 m</span>
+            </div>
+
+            <div style="position:absolute;left:20px;top:20px;width:26%;height:78px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#D8D2C4;letter-spacing:0.08em">BAR GŁÓWNY</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858">DŁ. 12 m · 6 STANOWISK</span>
+            </div>
+            <div style="position:absolute;left:20px;top:112px;width:26%;height:62px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.08em">SZATNIA · 900 MIEJSC</span>
+            </div>
+            <div style="position:absolute;left:20px;top:200px;width:13%;height:150px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D8D2C4;letter-spacing:0.08em">GARDEROBY 1–3</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858">PRYSZNICE · CATERING</span>
+            </div>
+
+            <div style="position:absolute;right:20px;top:20px;width:22%;height:78px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.08em">TOALETY<br />+ POK. OBSŁUGI</span>
+            </div>
+            <div style="position:absolute;right:20px;top:112px;width:22%;height:62px;background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.08em">MAGAZYN TECHNIKI</span>
+            </div>
+            <div style="position:absolute;right:20px;top:200px;width:13%;height:150px;background:#201A10;border:1px dashed #453B24;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D8D2C4;letter-spacing:0.08em">STREFA LOADING</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E6858">BRAMA 3,2 × 2,8 m<br />DOJAZD TIR</span>
+            </div>
+
+            <div style="position:absolute;left:24%;bottom:170px;display:flex;align-items:center;gap:7px">
+              <span style="width:13px;height:13px;border-radius:2px;background:#FCCC00;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#0C0A08">1</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#C09C18;letter-spacing:0.06em">PRZYŁĄCZE SCENA L</span>
+            </div>
+            <div style="position:absolute;right:24%;bottom:170px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#C09C18;letter-spacing:0.06em">PRZYŁĄCZE SCENA P</span>
+              <span style="width:13px;height:13px;border-radius:2px;background:#FCCC00;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#0C0A08">2</span>
+            </div>
+            <div style="position:absolute;left:50%;top:174px;transform:translateX(-50%);display:flex;align-items:center;gap:7px">
+              <span style="width:13px;height:13px;border-radius:2px;background:#FCCC00;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#0C0A08">3</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#C09C18;letter-spacing:0.06em">PRZYŁĄCZE FOH</span>
+            </div>
+
+            <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:150px;height:26px;background:#6BBF59;border-radius:0 0 4px 4px;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#0C0A08;letter-spacing:0.1em">WEJŚCIE GŁÓWNE</span>
+            </div>
+            <div style="position:absolute;left:0;top:52%;width:26px;height:120px;background:#6BBF59;border-radius:0 4px 4px 0;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#0C0A08;letter-spacing:0.1em;transform:rotate(-90deg);white-space:nowrap">WEJ. ARTYSTÓW</span>
+            </div>
+            <div style="position:absolute;right:0;top:52%;width:26px;height:120px;background:#A03838;border-radius:4px 0 0 4px;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#F5F1E8;letter-spacing:0.1em;transform:rotate(-90deg);white-space:nowrap">EWAKUACJA</span>
+            </div>
+            <div style="position:absolute;left:6%;bottom:0;width:120px;height:26px;background:#A03838;border-radius:4px 4px 0 0;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#F5F1E8;letter-spacing:0.1em">EWAKUACJA</span>
+            </div>
+            <div style="position:absolute;right:6%;bottom:0;width:120px;height:26px;background:#A03838;border-radius:4px 4px 0 0;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#F5F1E8;letter-spacing:0.1em">EWAKUACJA</span>
+            </div>
+
+            <span style="position:absolute;right:24px;bottom:38px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#57503C;letter-spacing:0.16em">N ↑ · SKALA 1:200</span>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="flex:1;height:1px;background:#453B24"></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.14em">30,5 m</span>
+            <span style="flex:1;height:1px;background:#453B24"></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;border-top:1px solid #2C2618;padding-top:24px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.12em;text-transform:uppercase">Legenda</span>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:14px;height:14px;border-radius:2px;background:rgba(252,204,0,0.14);border:1px solid #FCCC00;flex:none"></span><span style="font-family:Inter,sans-serif;font-size:12px;color:#D8D2C4">scena i przyłącza</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:14px;height:14px;border-radius:2px;background:#201A10;border:1px solid #2C2618;flex:none"></span><span style="font-family:Inter,sans-serif;font-size:12px;color:#D8D2C4">zaplecze i funkcje stałe</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:14px;height:14px;border-radius:2px;background:#6BBF59;flex:none"></span><span style="font-family:Inter,sans-serif;font-size:12px;color:#D8D2C4">wejścia</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:14px;height:14px;border-radius:2px;background:#A03838;flex:none"></span><span style="font-family:Inter,sans-serif;font-size:12px;color:#D8D2C4">wyjścia ewakuacyjne</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.12em;text-transform:uppercase">Przyłącze 1 · scena L</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#D8D2C4;line-height:1.9">ZASILANIE 3 × 63 A (5P)<br />2 × 32 A · 4 × 230 V<br />DMX 2 × XLR5 · LAN 2 × RJ45<br />MULTICORE 32/8</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.12em;text-transform:uppercase">Przyłącze 2 · scena P</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#D8D2C4;line-height:1.9">ZASILANIE 3 × 63 A (5P)<br />2 × 32 A · 4 × 230 V<br />DMX 2 × XLR5 · LAN 2 × RJ45<br />BACKLINE 8 × 230 V</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.12em;text-transform:uppercase">Przyłącze 3 · FOH</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#D8D2C4;line-height:1.9">ZASILANIE 1 × 32 A · 6 × 230 V<br />DANTE / LAN 4 × RJ45<br />DMX 1 × XLR5<br />SYGNAŁ VIDEO SDI 2×</span>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid #2C2618;padding-top:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">KONCERT STOJĄCY</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#F5F1E8">1000 OS.</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">TEATRALNY</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#F5F1E8">520 OS.</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">BANKIET</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#F5F1E8">380 OS.</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">KOKTAJL</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#F5F1E8">700 OS.</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">KONFERENCJA</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#F5F1E8">450 OS.</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;PL&quot;,&quot;EN&quot;],&quot;default&quot;:&quot;PL&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;activeGenre&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Wszystkie&quot;,&quot;Rock&quot;,&quot;Metal&quot;,&quot;Rap&quot;,&quot;Elektronika&quot;,&quot;Stand-up&quot;],&quot;default&quot;:&quot;Wszystkie&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showCookieBanner&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  state = { lang: null, filter: null, genres: null, consent: false, cookiesOpen: null };
+
+  pill(active) {
+    return active
+      ? "background:rgba(252,204,0,0.12);color:#FCCC00;border:1px solid #FCCC00;border-radius:999px;padding:10px 20px;font-family:Inter,sans-serif;font-weight:700;font-size:13px;cursor:pointer"
+      : "background:transparent;color:#9A9484;border:1px solid #2C2618;border-radius:999px;padding:10px 20px;font-family:Inter,sans-serif;font-weight:500;font-size:13px;cursor:pointer";
+  }
+
+  renderVals() {
+    const lang = this.state.lang ?? this.props.defaultLang ?? "PL";
+    const filter = this.state.filter ?? this.props.activeGenre ?? "Wszystkie";
+    const cookiesOpen = this.state.cookiesOpen ?? this.props.showCookieBanner ?? true;
+    const picked = this.state.genres ?? ["Metal"];
+
+    const labels = lang === "PL"
+      ? ["Koncerty", "Wynajem sal", "Klub", "Kontakt"]
+      : ["Events", "Venue hire", "About", "Contact"];
+    const navItems = labels.map((label, i) => ({
+      label,
+      style:
+        (i === 0
+          ? "color:#FCCC00;border-bottom:2px solid #FCCC00;"
+          : "color:#F5F1E8;border-bottom:2px solid transparent;") +
+        "font-family:Inter,sans-serif;font-weight:600;font-size:14px;padding-bottom:4px;text-decoration:none"
+    }));
+
+    const on = "background:#FCCC00;color:#0C0A08;border:none;padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;letter-spacing:0.06em";
+    const off = "background:transparent;color:#9A9484;border:none;padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;letter-spacing:0.06em";
+
+    const filters = ["Wszystkie", "Rock", "Metal", "Rap", "Elektronika", "Stand-up"].map(label => ({
+      label,
+      style: this.pill(filter === label),
+      onClick: () => this.setState({ filter: label })
+    }));
+
+    const genres = ["Rock", "Metal", "Rap", "Elektronika", "Stand-up"].map(label => ({
+      label,
+      style: this.pill(picked.indexOf(label) !== -1),
+      onClick: () => this.setState(s => {
+        const cur = s.genres ?? ["Metal"];
+        return { genres: cur.indexOf(label) !== -1 ? cur.filter(g => g !== label) : cur.concat([label]) };
+      })
+    }));
+
+    return {
+      navItems, filters, genres,
+      plStyle: lang === "PL" ? on : off,
+      enStyle: lang === "EN" ? on : off,
+      setPL: () => this.setState({ lang: "PL" }),
+      setEN: () => this.setState({ lang: "EN" }),
+      ctaLabel: lang === "PL" ? "Bilety" : "Tickets",
+      consent: this.state.consent,
+      toggleConsent: () => this.setState(s => ({ consent: !s.consent })),
+      cookiesOpen,
+      closeCookies: () => this.setState({ cookiesOpen: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

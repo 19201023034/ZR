@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #0C0A08; }
+  * { box-sizing: border-box; }
+  a { color: #C09C18; text-decoration: none; }
+  a:hover { color: #FCCC00; }
+  ::placeholder { color: #6E6858; }
+  input[type="checkbox"] { accent-color: #C09C18; }
+</style>
+</helmet>
+<div style="position:relative;background:#0C0A08;color:#F5F1E8;font-family:Inter,sans-serif;width:1600px;margin:0 auto;overflow:hidden">
+<div style="position:absolute;inset:0;pointer-events:none;opacity:0.4;background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.28'/></svg>&quot;);background-size:140px 140px;mix-blend-mode:overlay"></div>
+
+<div style="position:relative;display:flex;flex-direction:column">
+
+  <header style="border-bottom:1px solid #2C2618;border-top:2px solid #FCCC00;padding:0 80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:32px;height:96px">
+    <nav style="display:flex;gap:32px;align-items:center">
+      <a href="Strona glowna.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Repertuar</a>
+      <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Bilety</a>
+      <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Klub</a>
+    </nav>
+    <img src="assets/zr-sygnet.png" alt="Zaklęte Rewiry" style="height:56px;width:auto;display:block;align-self:center" />
+    <nav style="display:flex;gap:28px;align-items:center;justify-content:flex-end">
+      <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#C09C18;padding-bottom:3px;border-bottom:1px solid #C09C18">Wynajem sal</a>
+      <a href="Kontakt.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Kontakt</a>
+      <div style="display:flex;border:1px solid #453B24;border-radius:4px;overflow:hidden">
+        <span style="background:#FCCC00;color:#0C0A08;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px">PL</span>
+        <span style="color:#9A9484;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px">EN</span>
+      </div>
+      <button type="button" style="background:#C09C18;color:#0C0A08;border:none;border-radius:4px;padding:12px 22px;font-family:Inter,sans-serif;font-weight:700;font-size:13.5px;cursor:pointer" style-hover="background:#FCCC00">Zapytaj o termin</button>
+    </nav>
+  </header>
+
+  <section style="padding:56px 80px 34px;display:flex;flex-direction:column;gap:22px;border-bottom:1px solid #2C2618">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.22em;text-transform:uppercase">Wynajem przestrzeni · CKR Zaklęte Rewiry</span>
+    <h1 style="font-family:Anton,sans-serif;font-size:58px;line-height:1.02;margin:0;text-transform:uppercase;letter-spacing:0.01em;max-width:900px;text-wrap:balance">Trzy sale przy Krakowskiej 100</h1>
+    <p style="font-family:Inter,sans-serif;font-size:16px;line-height:1.8;color:#D8D2C4;margin:0;max-width:700px;text-wrap:pretty">Od spotkania zarządu na osiemdziesiąt osób do gali na tysiąc. Własne nagłośnienie i oświetlenie, bar, catering, koordynator wydarzenia. Termin potwierdzamy w ciągu 24 godzin.</p>
+  </section>
+
+  <div style="padding:0 80px;border-bottom:1px solid #2C2618;display:flex;gap:0;align-items:stretch">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+      <button type="button" onClick="{{ t.onClick }}" style="{{ t.style }}">
+        <span style="{{ t.nameStyle }}">{{ t.name }}</span>
+        <span style="{{ t.metaStyle }}">{{ t.meta }}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <section style="padding:52px 80px 60px;display:grid;grid-template-columns:1fr 0.85fr;gap:56px;align-items:start;border-bottom:1px solid #2C2618">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.2em">{{ hallTag }}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.12em">{{ hallDims }}</span>
+      </div>
+      <h2 style="font-family:Anton,sans-serif;font-size:52px;line-height:1.02;margin:0;text-transform:uppercase;color:#F5F1E8;text-wrap:balance">{{ hallHeadline }}</h2>
+      <div style="width:80px;height:1px;background:#C09C18"></div>
+      <p style="font-family:Inter,sans-serif;font-size:16px;line-height:1.8;color:#D8D2C4;margin:0;max-width:560px;text-wrap:pretty">{{ hallBody }}</p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px">
+        <sc-for list="{{ hallStats }}" as="s" hint-placeholder-count="3">
+          <div style="background:#151109;border:1px solid #2C2618;border-radius:6px;padding:18px 16px;display:flex;flex-direction:column;gap:5px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9A9484;letter-spacing:0.14em">{{ s.label }}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:19px;color:#F5F1E8">{{ s.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:6px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">POJEMNOŚĆ W UKŁADACH</span>
+        <div style="display:flex;flex-direction:column;font-family:'JetBrains Mono',monospace;font-size:12.5px">
+          <sc-for list="{{ hallLayouts }}" as="l" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #2C2618">
+              <span style="color:#9A9484">{{ l.name }}</span>
+              <span style="color:#F5F1E8">{{ l.cap }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:20px;align-items:center;margin-top:8px">
+        <button type="button" style="background:#C09C18;color:#0C0A08;border:none;border-radius:4px;padding:16px 28px;font-family:Inter,sans-serif;font-weight:700;font-size:15px;cursor:pointer" style-hover="background:#FCCC00">Zapytaj o tę salę</button>
+        <a href="Oferta wynajmu.dc.html" style="font-family:Inter,sans-serif;font-size:15px;color:#D8D2C4;border-bottom:1px solid #453B24;padding-bottom:2px">Oferta PDF</a>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="position:relative;height:420px;background:#100D0A;border:1px solid #453B24;border-radius:6px;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(252,204,0,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(252,204,0,0.05) 1px, transparent 1px);background-size:28px 28px"></div>
+        <span style="position:absolute;top:52px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#C09C18;letter-spacing:0.16em">{{ planScale }}</span>
+
+        <div style="{{ stageStyle }}">
+          <span style="font-family:Anton,sans-serif;font-size:16px;color:#FCCC00;letter-spacing:0.08em;text-transform:uppercase">{{ stageLabel }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#C09C18;letter-spacing:0.1em">{{ stageDims }}</span>
+        </div>
+
+        <div style="position:absolute;left:24%;right:24%;top:112px;bottom:120px;border:1px dashed #2C2618;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#D8D2C4;letter-spacing:0.14em">{{ zoneLabel }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484">{{ zoneCap }}</span>
+        </div>
+
+        <sc-for list="{{ planRooms }}" as="r" hint-placeholder-count="4">
+          <div style="{{ r.style }}"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#D8D2C4;letter-spacing:0.06em;text-align:center;line-height:1.4;white-space:pre-line">{{ r.label }}</span></div>
+        </sc-for>
+
+        <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:118px;height:20px;background:#6BBF59;border-radius:0 0 4px 4px;display:flex;align-items:center;justify-content:center"><span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#0C0A08;letter-spacing:0.1em">WEJŚCIE</span></div>
+        <div style="position:absolute;left:25%;bottom:0;width:92px;height:20px;background:#A03838;border-radius:4px 4px 0 0;display:flex;align-items:center;justify-content:center"><span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#F5F1E8;letter-spacing:0.1em">EWAKUACJA</span></div>
+        <div style="position:absolute;right:7%;bottom:0;width:92px;height:20px;background:#A03838;border-radius:4px 4px 0 0;display:flex;align-items:center;justify-content:center"><span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#F5F1E8;letter-spacing:0.1em">EWAKUACJA</span></div>
+        <span style="position:absolute;right:16px;bottom:28px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#57503C;letter-spacing:0.16em">N ↑</span>
+      </div>
+
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484"><span style="width:12px;height:12px;border-radius:2px;background:rgba(252,204,0,0.14);border:1px solid #C09C18"></span>SCENA</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484"><span style="width:12px;height:12px;border-radius:2px;background:#201A10;border:1px solid #2C2618"></span>ZAPLECZE</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484"><span style="width:12px;height:12px;border-radius:2px;background:#6BBF59"></span>WEJŚCIA</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484"><span style="width:12px;height:12px;border-radius:2px;background:#A03838"></span>EWAKUACJA</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #2C2618;padding-top:20px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">TECHNIKA I PRZYŁĄCZA</span>
+        <div style="display:flex;flex-direction:column;font-family:'JetBrains Mono',monospace;font-size:12px">
+          <sc-for list="{{ hallTech }}" as="t" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #2C2618">
+              <span style="color:#9A9484">{{ t.name }}</span>
+              <span style="color:#F5F1E8">{{ t.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:48px 80px 56px;display:flex;flex-direction:column;gap:24px;border-bottom:1px solid #2C2618">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <h2 style="font-family:Anton,sans-serif;font-size:34px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Porównanie sal</h2>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">CENY NETTO ZA DOBĘ TECHNICZNĄ 8:00–2:00</span>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:1.2fr repeat(5,1fr);gap:16px;padding:12px 0;border-bottom:1px solid #453B24;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9A9484;letter-spacing:0.14em">
+        <span>SALA</span><span>POWIERZCHNIA</span><span>KONCERT</span><span>TEATRALNY</span><span>BANKIET</span><span>OD / DOBA</span>
+      </div>
+      <sc-for list="{{ compare }}" as="c" hint-placeholder-count="3">
+        <div style="{{ c.row }}">
+          <span style="{{ c.nameStyle }}">{{ c.name }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#D8D2C4">{{ c.area }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#D8D2C4">{{ c.concert }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#D8D2C4">{{ c.theatre }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#D8D2C4">{{ c.banquet }}</span>
+          <span style="{{ c.priceStyle }}">{{ c.price }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:52px 80px 64px;display:grid;grid-template-columns:1fr 400px;gap:56px;background:#100D0A">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.2em;text-transform:uppercase">Zakres obsługi</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:38px;line-height:1.06;margin:0;text-transform:uppercase;color:#F5F1E8">Trzy pakiety</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px">
+        <div style="background:#151109;border:1px solid #2C2618;border-radius:6px;padding:20px 18px;display:flex;flex-direction:column;gap:9px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9A9484;letter-spacing:0.16em">PAKIET I</span>
+          <span style="font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;color:#F5F1E8">Sama sala</span>
+          <span style="font-family:Inter,sans-serif;font-size:12.5px;line-height:1.7;color:#9A9484">Przestrzeń, szatnia, ochrona, sprzątanie, koordynator obiektu.</span>
+        </div>
+        <div style="background:#151109;border:1px solid #453B24;border-radius:6px;padding:20px 18px;display:flex;flex-direction:column;gap:9px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#C09C18;letter-spacing:0.16em">PAKIET II · NAJCZĘŚCIEJ</span>
+          <span style="font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;color:#FCCC00">Sala z techniką</span>
+          <span style="font-family:Inter,sans-serif;font-size:12.5px;line-height:1.7;color:#9A9484">Pakiet I oraz nagłośnienie, światło, projekcja i dwóch techników.</span>
+        </div>
+        <div style="background:#151109;border:1px solid #2C2618;border-radius:6px;padding:20px 18px;display:flex;flex-direction:column;gap:9px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9A9484;letter-spacing:0.16em">PAKIET III</span>
+          <span style="font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;color:#F5F1E8">Pełna obsługa</span>
+          <span style="font-family:Inter,sans-serif;font-size:12.5px;line-height:1.7;color:#9A9484">Pakiet II oraz catering, bar, obsługa kelnerska, rejestracja wideo.</span>
+        </div>
+      </div>
+      <span style="font-family:Inter,sans-serif;font-size:12.5px;line-height:1.75;color:#9A9484;max-width:640px;margin-top:6px;text-wrap:pretty">Rezerwacja terminu po wpłacie 30% zadatku, rozliczenie 14 dni po wydarzeniu. Montaż w dniu poprzedzającym: 40% stawki dobowej. Wydarzenia komercyjne pn–czw, terminy dzienne.</span>
+    </div>
+
+    <div style="background:#151109;border:1px solid #453B24;border-top:2px solid #C09C18;border-radius:6px;padding:28px 26px;display:flex;flex-direction:column;gap:16px;height:fit-content">
+      <span style="font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:0.03em">Zapytanie o wynajem</span>
+      <div style="display:flex;flex-direction:column;gap:5px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">SALA</span><span style="background:#201A10;border:1px solid #453B24;border-radius:4px;padding:12px 14px;font-family:Inter,sans-serif;font-size:14px;color:#FCCC00">{{ hallName }}</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:5px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">DATA</span><span style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#D8D2C4">12.03.2027</span></div>
+        <div style="display:flex;flex-direction:column;gap:5px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">GOŚCIE</span><span style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#D8D2C4">{{ hallGuests }}</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">FIRMA I KONTAKT</span>
+        <input type="text" placeholder="nazwa firmy" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none" style-focus="border-color:#C09C18" />
+        <input type="email" placeholder="adres@email.pl" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none" style-focus="border-color:#C09C18" />
+      </div>
+      <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer">
+        <input type="checkbox" checked="{{ rodo }}" onChange="{{ toggleRodo }}" style="width:16px;height:16px;margin-top:2px;flex:none;cursor:pointer" />
+        <span style="font-family:Inter,sans-serif;font-size:11.5px;line-height:1.6;color:#9A9484">Zgadzam się na przetwarzanie danych w celu przygotowania oferty wynajmu. <a href="#">Polityka prywatności</a></span>
+      </label>
+      <button type="button" style="background:#C09C18;color:#0C0A08;border:none;border-radius:4px;padding:15px 24px;font-family:Inter,sans-serif;font-weight:700;font-size:15px;cursor:pointer" style-hover="background:#FCCC00">Wyślij zapytanie</button>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484;letter-spacing:0.06em;line-height:1.8">ODPOWIEDŹ W 24 H · PN–PT 9:00–17:00<br />wynajem@zakleterewiry.pl · +48 71 000 00 00</span>
+    </div>
+  </section>
+
+  <footer style="padding:44px 80px 56px;border-top:1px solid #2C2618;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:28px">
+      <img src="assets/zr-sygnet-gold.png" alt="Zaklęte Rewiry" style="height:30px;width:auto;display:block;align-self:center" />
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#9A9484;letter-spacing:0.06em;line-height:1.9">UL. KRAKOWSKA 100, 50-079 WROCŁAW<br />TRAM 3, 5 · BUS 114, 243 · PARKING 80 MIEJSC</span>
+    </div>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6E6858;letter-spacing:0.06em">© 2026 CKR ZAKLĘTE REWIRY</span>
+  </footer>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600}}">
+class Component extends DCLogic {
+  state = { hall: 0, rodo: false };
+
+  renderVals() {
+    const halls = [
+      {
+        name: "Sala Duża",
+        meta: "550 m² · DO 1000 OS.",
+        tag: "SALA DUŻA · NAJWIĘKSZA",
+        dims: "30,5 × 18,0 m · WYS. 7,4 m",
+        headline: "Gale, koncerty i duże konferencje",
+        body: "Największa przestrzeń obiektu z pełnowymiarową sceną i dojazdem dla TIR-a bezpośrednio na jej poziom. Sprawdza się przy galach branżowych, konferencjach z projekcją i koncertach na tysiąc osób.",
+        stats: [["POWIERZCHNIA", "550 m²"], ["MAKS. GOŚCI", "1000"], ["OD / DOBA", "9 800 zł"]],
+        layouts: [["KONCERT STOJĄCY", "1000 OS."], ["TEATRALNY", "520 OS."], ["BANKIET", "380 OS."], ["KOKTAJL", "700 OS."], ["KONFERENCJA", "450 OS."]],
+        tech: [["NAGŁOŚNIENIE", "d&b V-SERIES · 24 kW"], ["OŚWIETLENIE", "48 × LED · 8 × MOVING"], ["PROJEKCJA", "LED 6 × 3 m · 12 000 ANSI"], ["PRZYŁĄCZA", "2 × 63 A · DMX · DANTE"], ["LOADING", "BRAMA 3,2 × 2,8 m · TIR"]],
+        stage: { label: "Scena", dims: "10,0 × 5,0 m · H 1,1 m", left: "24%", right: "24%", height: "88px" },
+        zone: ["PŁYTA WIDOWNI", "STOJĄCA · 720 OS."],
+        scale: "RZUT 1:200 · WIDOK Z GÓRY",
+        rooms: [
+          ["BAR 12 m", "left:14px;top:14px;width:17%;height:62px"],
+          ["SZATNIA\n900 MIEJSC", "left:14px;top:88px;width:17%;height:58px"],
+          ["GARDEROBY 1–3", "left:14px;top:160px;width:17%;height:92px"],
+          ["TOALETY", "right:14px;top:14px;width:17%;height:62px"],
+          ["MAGAZYN\nTECHNIKI", "right:14px;top:88px;width:17%;height:58px"],
+          ["LOADING\n3,2 × 2,8 m", "right:14px;top:160px;width:17%;height:92px"]
+        ],
+        guests: "300–1000"
+      },
+      {
+        name: "Sala Klubowa",
+        meta: "210 m² · DO 400 OS.",
+        tag: "SALA KLUBOWA · ŚREDNIA",
+        dims: "21,0 × 10,0 m · WYS. 5,2 m",
+        headline: "Imprezy firmowe i premiery produktów",
+        body: "Sala o klubowym charakterze z własnym barem i niską sceną. Najczęściej wybierana na wieczory firmowe, premiery, pokazy i koncerty klubowe do czterystu osób.",
+        stats: [["POWIERZCHNIA", "210 m²"], ["MAKS. GOŚCI", "400"], ["OD / DOBA", "5 400 zł"]],
+        layouts: [["KONCERT STOJĄCY", "400 OS."], ["TEATRALNY", "220 OS."], ["BANKIET", "160 OS."], ["KOKTAJL", "280 OS."], ["KONFERENCJA", "180 OS."]],
+        tech: [["NAGŁOŚNIENIE", "d&b Y-SERIES · 12 kW"], ["OŚWIETLENIE", "24 × LED · 4 × MOVING"], ["PROJEKCJA", "EKRAN 4 × 2,5 m"], ["PRZYŁĄCZA", "1 × 63 A · DMX · LAN"], ["LOADING", "WEJŚCIE TECHNICZNE 2,4 m"]],
+        stage: { label: "Scena", dims: "24 m² · H 0,6 m", left: "30%", right: "30%", height: "74px" },
+        zone: ["PARKIET", "STOJĄCA · 280 OS."],
+        scale: "RZUT 1:150 · WIDOK Z GÓRY",
+        rooms: [
+          ["BAR 7 m", "left:14px;top:14px;width:19%;height:70px"],
+          ["SZATNIA\n400 MIEJSC", "left:14px;top:96px;width:19%;height:64px"],
+          ["GARDEROBY 1–2", "left:14px;top:172px;width:19%;height:80px"],
+          ["TOALETY", "right:14px;top:14px;width:19%;height:70px"],
+          ["ZAPLECZE", "right:14px;top:96px;width:19%;height:64px"],
+          ["WEJŚCIE\nTECHNICZNE", "right:14px;top:172px;width:19%;height:80px"]
+        ],
+        guests: "150–400"
+      },
+      {
+        name: "Sala Kameralna",
+        meta: "90 m² · DO 150 OS.",
+        tag: "SALA KAMERALNA · NAJMNIEJSZA",
+        dims: "12,0 × 7,5 m · WYS. 3,8 m",
+        headline: "Szkolenia, spotkania zarządu i stand-up",
+        body: "Najbardziej intymna z trzech przestrzeni. Szkolenia, warsztaty, spotkania zarządu, stand-up i nagrania. Osobne wejście z podwórza pozwala prowadzić wydarzenie niezależnie od reszty obiektu.",
+        stats: [["POWIERZCHNIA", "90 m²"], ["MAKS. GOŚCI", "150"], ["OD / DOBA", "2 600 zł"]],
+        layouts: [["STOJĄCA", "150 OS."], ["TEATRALNY", "110 OS."], ["BANKIET", "60 OS."], ["KOKTAJL", "100 OS."], ["KONFERENCJA / SZKOLNY", "80 OS."]],
+        tech: [["NAGŁOŚNIENIE", "d&b E-SERIES · 4 kW"], ["OŚWIETLENIE", "12 × LED · REFLEKTOR PROWADZĄCY"], ["PROJEKCJA", "EKRAN 3 × 2 m · 6 000 ANSI"], ["PRZYŁĄCZA", "1 × 32 A · LAN · DMX"], ["DOSTĘP", "OSOBNE WEJŚCIE Z PODWÓRZA"]],
+        stage: { label: "Podest", dims: "12 m² · H 0,4 m", left: "34%", right: "34%", height: "64px" },
+        zone: ["STREFA GOŚCI", "UKŁAD SZKOLNY · 80 OS."],
+        scale: "RZUT 1:100 · WIDOK Z GÓRY",
+        rooms: [
+          ["BUFET", "left:14px;top:14px;width:21%;height:74px"],
+          ["SZATNIA", "left:14px;top:100px;width:21%;height:64px"],
+          ["POK. PRELEGENTA", "left:14px;top:176px;width:21%;height:76px"],
+          ["TOALETY", "right:14px;top:14px;width:21%;height:74px"],
+          ["MAGAZYNEK", "right:14px;top:100px;width:21%;height:64px"],
+          ["WEJŚCIE\nZ PODWÓRZA", "right:14px;top:176px;width:21%;height:76px"]
+        ],
+        guests: "40–150"
+      }
+    ];
+
+    const i = this.state.hall;
+    const h = halls[i];
+
+    return {
+      tabs: halls.map((x, n) => ({
+        name: x.name,
+        meta: x.meta,
+        onClick: () => this.setState({ hall: n }),
+        style:
+          "background:transparent;border:none;border-bottom:2px solid " +
+          (n === i ? "#C09C18;" : "transparent;") +
+          "cursor:pointer;padding:20px 30px 18px;display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left",
+        nameStyle:
+          "font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:0.02em;color:" +
+          (n === i ? "#FCCC00" : "#F5F1E8"),
+        metaStyle:
+          "font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:" +
+          (n === i ? "#C09C18" : "#9A9484")
+      })),
+      hallName: h.name,
+      hallTag: h.tag,
+      hallDims: h.dims,
+      hallHeadline: h.headline,
+      hallBody: h.body,
+      hallGuests: h.guests,
+      hallStats: h.stats.map(s => ({ label: s[0], value: s[1] })),
+      hallLayouts: h.layouts.map(l => ({ name: l[0], cap: l[1] })),
+      hallTech: h.tech.map(t => ({ name: t[0], value: t[1] })),
+      planScale: h.scale,
+      stageLabel: h.stage.label,
+      stageDims: h.stage.dims,
+      stageStyle:
+        "position:absolute;bottom:18px;left:" + h.stage.left + ";right:" + h.stage.right +
+        ";height:" + h.stage.height +
+        ";background:rgba(252,204,0,0.13);border:1px solid #C09C18;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px",
+      zoneLabel: h.zone[0],
+      zoneCap: h.zone[1],
+      planRooms: h.rooms.map(r => ({
+        label: r[0],
+        style:
+          "position:absolute;" + r[1] +
+          ";background:#201A10;border:1px solid #2C2618;border-radius:4px;display:flex;align-items:center;justify-content:center;padding:6px"
+      })),
+      compare: halls.map((x, n) => ({
+        name: x.name,
+        area: x.stats[0][1],
+        concert: x.layouts[0][1],
+        theatre: x.layouts[1][1],
+        banquet: x.layouts[2][1],
+        price: x.stats[2][1] + " netto",
+        row:
+          "display:grid;grid-template-columns:1.2fr repeat(5,1fr);gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid #2C2618;" +
+          (n === i ? "background:rgba(252,204,0,0.04);" : ""),
+        nameStyle:
+          "font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:0.02em;color:" +
+          (n === i ? "#FCCC00" : "#F5F1E8"),
+        priceStyle:
+          "font-family:'JetBrains Mono',monospace;font-size:12.5px;color:" + (n === i ? "#FCCC00" : "#D8D2C4")
+      })),
+      rodo: this.state.rodo,
+      toggleRodo: () => this.setState(s => ({ rodo: !s.rodo }))
+    };
+  }
+}
+</script>
+</body>
+</html>

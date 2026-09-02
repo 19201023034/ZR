@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #0C0A08; }
+  * { box-sizing: border-box; }
+  a { color: #FCCC00; text-decoration: none; }
+  a:hover { color: #FFD824; }
+  ::placeholder { color: #6E6858; }
+  input[type="checkbox"] { accent-color: #FCCC00; }
+</style>
+</helmet>
+<div style="position:relative;background:#0C0A08;color:#F5F1E8;font-family:Inter,sans-serif;width:1600px;margin:0 auto;overflow:hidden">
+<div style="position:absolute;inset:0;pointer-events:none;opacity:0.4;background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.28'/></svg>&quot;);background-size:140px 140px;mix-blend-mode:overlay"></div>
+
+<div style="position:relative;display:flex;flex-direction:column">
+
+  <header style="border-bottom:1px solid #2C2618;border-top:2px solid #FCCC00;padding:0 80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:32px;height:96px">
+    <nav style="display:flex;gap:32px;align-items:center">
+      <a href="Strona glowna.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Repertuar</a>
+      <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Bilety</a>
+      <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Klub</a>
+    </nav>
+    <img src="assets/zr-sygnet.png" alt="Zaklęte Rewiry" style="height:56px;width:auto;display:block;align-self:center" />
+    <nav style="display:flex;gap:28px;align-items:center;justify-content:flex-end">
+      <a href="Sale.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F5F1E8;padding-bottom:3px;border-bottom:1px solid transparent">Wynajem sal</a>
+      <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#FCCC00;padding-bottom:3px;border-bottom:1px solid #FCCC00">Kontakt</a>
+      <div style="display:flex;border:1px solid #453B24;border-radius:4px;overflow:hidden">
+        <span style="background:#FCCC00;color:#0C0A08;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px">PL</span>
+        <span style="color:#9A9484;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px">EN</span>
+      </div>
+      <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:12px 22px;font-family:Anton,sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:#FFD824">Bilety</button>
+    </nav>
+  </header>
+
+  <section style="padding:56px 80px 40px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:end;border-bottom:1px solid #2C2618">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.22em;text-transform:uppercase">Kontakt · CKR Zaklęte Rewiry</span>
+      <h1 style="font-family:Anton,sans-serif;font-size:72px;line-height:0.96;margin:0;text-transform:uppercase;letter-spacing:0.01em;max-width:820px;text-wrap:balance">Krakowska 100,<br />Wrocław</h1>
+      <p style="font-family:Inter,sans-serif;font-size:16px;line-height:1.8;color:#D8D2C4;margin:0;max-width:600px;text-wrap:pretty">Wejście od strony ulicy, kasy i szatnia po lewej. W sprawach biletowych odpowiadamy tego samego dnia, zapytania o wynajem w ciągu 24 godzin.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;text-align:right">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.14em">CENTRALA</span>
+      <span style="font-family:Anton,sans-serif;font-size:34px;color:#FCCC00;letter-spacing:0.02em">+48 71 000 00 00</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#9A9484;line-height:1.9;letter-spacing:0.04em">PN–PT 9:00–17:00<br />W DNI KONCERTÓW DO 22:00</span>
+    </div>
+  </section>
+
+  <section style="border-bottom:1px solid #2C2618">
+    <div style="display:grid;grid-template-columns:1fr 440px;align-items:stretch">
+      <div style="position:relative;min-height:520px;background:#151109">
+        <iframe src="https://www.google.com/maps?q=Krakowska+100,+Wroc%C5%82aw&amp;z=15&amp;output=embed" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(0.92) hue-rotate(180deg) saturate(0.5) brightness(0.95) contrast(0.95)" title="Mapa — Krakowska 100, Wrocław" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px #2C2618, inset 0 60px 90px -60px rgba(12,10,8,0.9)"></div>
+        <div style="position:absolute;left:24px;top:24px;background:rgba(12,10,8,0.88);border:1px solid #453B24;border-left:3px solid #FCCC00;border-radius:4px;padding:14px 18px;display:flex;flex-direction:column;gap:4px;pointer-events:none">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#C09C18;letter-spacing:0.16em">CKR ZAKLĘTE REWIRY</span>
+          <span style="font-family:Inter,sans-serif;font-weight:700;font-size:15px;color:#F5F1E8">ul. Krakowska 100, 50-079 Wrocław</span>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Krakowska+100,+Wroc%C5%82aw" target="_blank" rel="noopener" style="position:absolute;right:24px;bottom:24px;background:#FCCC00;color:#0C0A08;border-radius:4px;padding:13px 22px;font-family:Anton,sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none" style-hover="background:#FFD824">Wyznacz trasę</a>
+      </div>
+
+      <div style="background:#100D0A;border-left:1px solid #2C2618;padding:36px 34px;display:flex;flex-direction:column;gap:26px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">JAK DOTRZEĆ</span>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#0C0A08;background:#FCCC00;border-radius:3px;padding:5px 8px;letter-spacing:0.08em;flex:none">TRAM</span>
+            <span style="font-family:Inter,sans-serif;font-size:14px;line-height:1.65;color:#D8D2C4">Linie 3 i 5, przystanek Krakowska — dwie minuty pieszo od wejścia.</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#F5F1E8;border:1px solid #453B24;border-radius:3px;padding:5px 8px;letter-spacing:0.08em;flex:none">BUS</span>
+            <span style="font-family:Inter,sans-serif;font-size:14px;line-height:1.65;color:#D8D2C4">Linie 114 i 243, przystanek Krakowska / Kamienna.</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#F5F1E8;border:1px solid #453B24;border-radius:3px;padding:5px 8px;letter-spacing:0.08em;flex:none">AUTO</span>
+            <span style="font-family:Inter,sans-serif;font-size:14px;line-height:1.65;color:#D8D2C4">Parking obiektu, 80 miejsc. W dni koncertowe po 19:00 zwykle pełny.</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#F5F1E8;border:1px solid #453B24;border-radius:3px;padding:5px 8px;letter-spacing:0.08em;flex:none">ROWER</span>
+            <span style="font-family:Inter,sans-serif;font-size:14px;line-height:1.65;color:#D8D2C4">Stojaki od strony podwórza, przy wejściu technicznym.</span>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#F5F1E8;border:1px solid #453B24;border-radius:3px;padding:5px 8px;letter-spacing:0.08em;flex:none">TIR</span>
+            <span style="font-family:Inter,sans-serif;font-size:14px;line-height:1.65;color:#D8D2C4">Brama załadunkowa 3,2 × 2,8 m od podwórza, dojazd na poziom sceny.</span>
+          </div>
+        </div>
+        <div style="border-top:1px solid #2C2618;padding-top:20px;display:flex;flex-direction:column;gap:10px;margin-top:auto">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">DOSTĘPNOŚĆ</span>
+          <span style="font-family:Inter,sans-serif;font-size:13.5px;line-height:1.7;color:#D8D2C4;text-wrap:pretty">Wejście bez progów, winda na poziom sal, wydzielone miejsca dla osób na wózkach. Zgłoś potrzeby przy zakupie biletu — przygotujemy asystę.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:56px 80px 60px;display:flex;flex-direction:column;gap:26px;border-bottom:1px solid #2C2618">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <h2 style="font-family:Anton,sans-serif;font-size:38px;margin:0;text-transform:uppercase;letter-spacing:0.02em">Kto za co odpowiada</h2>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9A9484;letter-spacing:0.1em">PISZ BEZPOŚREDNIO — SZYBSZA ODPOWIEDŹ</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+      <sc-for list="{{ people }}" as="p" hint-placeholder-count="4">
+        <div style="{{ p.wrap }}">
+          <span style="{{ p.tagStyle }}">{{ p.tag }}</span>
+          <span style="font-family:Anton,sans-serif;font-size:23px;line-height:1.06;text-transform:uppercase;color:#F5F1E8">{{ p.role }}</span>
+          <span style="font-family:Inter,sans-serif;font-size:13px;line-height:1.65;color:#9A9484">{{ p.desc }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#D8D2C4;line-height:1.9;margin-top:auto;letter-spacing:0.02em">{{ p.contact }}</span>
+          <span style="{{ p.slaStyle }}">{{ p.sla }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:56px 80px 64px;display:grid;grid-template-columns:1fr 460px;gap:56px;background:#100D0A;border-bottom:1px solid #2C2618">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#C09C18;letter-spacing:0.2em;text-transform:uppercase">Formularz</span>
+      <h2 style="font-family:Anton,sans-serif;font-size:44px;line-height:1.04;margin:0;text-transform:uppercase;color:#F5F1E8;text-wrap:balance">Napisz do nas</h2>
+      <div style="width:80px;height:1px;background:#C09C18"></div>
+      <p style="font-family:Inter,sans-serif;font-size:15.5px;line-height:1.8;color:#D8D2C4;margin:0;max-width:520px;text-wrap:pretty">Wybierz temat, żeby wiadomość trafiła od razu do właściwej osoby. Zapytania o wynajem prowadzą do konfiguratora z terminem i liczbą gości.</p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:10px;border-top:1px solid #2C2618;padding-top:24px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">DANE DO FAKTUR</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#D8D2C4;line-height:2;letter-spacing:0.02em">CKR ZAKLĘTE REWIRY SP. Z O.O.<br />UL. KRAKOWSKA 100, 50-079 WROCŁAW<br />NIP 000-000-00-00 · REGON 000000000<br />ksiegowosc@zakleterewiry.pl</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;border-top:1px solid #2C2618;padding-top:24px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.18em">GODZINY OTWARCIA</span>
+        <div style="display:flex;flex-direction:column;font-family:'JetBrains Mono',monospace;font-size:12.5px;max-width:420px">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid #2C2618"><span style="color:#9A9484">BIURO</span><span style="color:#F5F1E8">PN–PT 9:00–17:00</span></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid #2C2618"><span style="color:#9A9484">KASY</span><span style="color:#F5F1E8">W DNI KONCERTÓW OD 18:30</span></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:9px 0"><span style="color:#9A9484">BAR</span><span style="color:#F5F1E8">DO 3:00</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#151109;border:1px solid #453B24;border-top:2px solid #FCCC00;border-radius:6px;padding:30px 28px;display:flex;flex-direction:column;gap:18px;height:fit-content">
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">TEMAT</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4">
+            <button type="button" onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ isRental }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:5px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">DATA</span><input type="text" placeholder="12.03.2027" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#F5F1E8;outline:none" style-focus="border-color:#FCCC00" /></div>
+          <div style="display:flex;flex-direction:column;gap:5px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A9484;letter-spacing:0.14em">LICZBA GOŚCI</span><input type="text" placeholder="300–500" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#F5F1E8;outline:none" style-focus="border-color:#FCCC00" /></div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <input type="text" placeholder="imię i nazwisko" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:13px 15px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none" style-focus="border-color:#FCCC00" />
+        <input type="email" placeholder="adres@email.pl" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:13px 15px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none" style-focus="border-color:#FCCC00" />
+        <textarea placeholder="{{ msgPlaceholder }}" rows="5" style="background:#201A10;border:1px solid #2C2618;border-radius:4px;padding:13px 15px;font-family:Inter,sans-serif;font-size:14px;color:#F5F1E8;outline:none;resize:vertical" style-focus="border-color:#FCCC00"></textarea>
+      </div>
+
+      <label style="display:flex;gap:11px;align-items:flex-start;cursor:pointer">
+        <input type="checkbox" checked="{{ rodo }}" onChange="{{ toggleRodo }}" style="width:16px;height:16px;margin-top:2px;flex:none;cursor:pointer" />
+        <span style="font-family:Inter,sans-serif;font-size:11.5px;line-height:1.6;color:#9A9484">Zgadzam się na przetwarzanie danych w celu odpowiedzi na zapytanie. <a href="#" style="color:#9A9484;border-bottom:1px solid #453B24">Polityka prywatności</a></span>
+      </label>
+      <button type="button" style="background:#FCCC00;color:#0C0A08;border:none;border-radius:4px;padding:16px 26px;font-family:Anton,sans-serif;font-size:17px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer" style-hover="background:#FFD824">Wyślij wiadomość</button>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9A9484;letter-spacing:0.04em;line-height:1.8">{{ formSla }}</span>
+    </div>
+  </section>
+
+  <footer style="padding:44px 80px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:28px">
+      <img src="assets/zr-sygnet-gold.png" alt="Zaklęte Rewiry" style="height:30px;width:auto;display:block;align-self:center" />
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#9A9484;letter-spacing:0.06em;line-height:1.9">UL. KRAKOWSKA 100, 50-079 WROCŁAW<br />TRAM 3, 5 · BUS 114, 243 · PARKING 80 MIEJSC</span>
+    </div>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6E6858;letter-spacing:0.06em">© 2026 CKR ZAKLĘTE REWIRY · POLITYKA PRYWATNOŚCI</span>
+  </footer>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600}}">
+class Component extends DCLogic {
+  state = { topic: 0, rodo: false };
+
+  renderVals() {
+    const people = [
+      { tag: "BILETY", role: "Kasa i zwroty", desc: "Zamówienia, faktury do biletów, zwroty i przepisanie wejściówki.", contact: "bilety@zakleterewiry.pl\n+48 71 000 00 01", sla: "ODPOWIEDŹ TEGO SAMEGO DNIA", gold: true },
+      { tag: "BOOKING", role: "Repertuar", desc: "Propozycje koncertów, riderzy, terminy dla agencji i zespołów.", contact: "booking@zakleterewiry.pl\n+48 71 000 00 02", sla: "ODPOWIEDŹ DO 5 DNI", gold: false },
+      { tag: "WYNAJEM", role: "Sale i wydarzenia", desc: "Gale, konferencje, imprezy firmowe. Wycena i dostępność terminu.", contact: "wynajem@zakleterewiry.pl\n+48 71 000 00 03", sla: "ODPOWIEDŹ W 24 H", gold: false },
+      { tag: "PRASA", role: "Media i patronaty", desc: "Akredytacje, zdjęcia, materiały prasowe, patronaty medialne.", contact: "media@zakleterewiry.pl\n+48 71 000 00 04", sla: "AKREDYTACJE DO 3 DNI PRZED", gold: false }
+    ];
+
+    const topics = ["Bilety", "Booking", "Wynajem sali", "Prasa"];
+    const i = this.state.topic;
+
+    return {
+      people: people.map(p => ({
+        tag: p.tag,
+        role: p.role,
+        desc: p.desc,
+        contact: p.contact,
+        sla: p.sla,
+        wrap:
+          "background:#151109;border:1px solid " + (p.gold ? "#453B24" : "#2C2618") +
+          ";border-radius:6px;padding:24px 22px;display:flex;flex-direction:column;gap:10px;min-height:250px;white-space:pre-line",
+        tagStyle:
+          "font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.18em;color:" +
+          (p.gold ? "#FCCC00" : "#C09C18"),
+        slaStyle:
+          "font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:" +
+          (p.gold ? "#6BBF59" : "#9A9484")
+      })),
+      topics: topics.map((label, n) => ({
+        label,
+        onClick: () => this.setState({ topic: n }),
+        style:
+          n === i
+            ? "background:rgba(252,204,0,0.12);color:#FCCC00;border:1px solid #FCCC00;border-radius:999px;padding:10px 18px;font-family:Inter,sans-serif;font-weight:700;font-size:13px;cursor:pointer"
+            : "background:transparent;color:#9A9484;border:1px solid #2C2618;border-radius:999px;padding:10px 18px;font-family:Inter,sans-serif;font-weight:500;font-size:13px;cursor:pointer"
+      })),
+      isRental: i === 2,
+      msgPlaceholder: [
+        "Numer zamówienia i czego dotyczy sprawa…",
+        "Zespół, proponowane terminy, link do materiału…",
+        "Typ wydarzenia, wymagania techniczne, catering…",
+        "Redakcja, tytuł materiału, o który koncert chodzi…"
+      ][i],
+      formSla: [
+        "ODPOWIEDŹ TEGO SAMEGO DNIA · bilety@zakleterewiry.pl",
+        "ODPOWIEDŹ DO 5 DNI ROBOCZYCH · booking@zakleterewiry.pl",
+        "ODPOWIEDŹ W 24 H · wynajem@zakleterewiry.pl",
+        "AKREDYTACJE DO 3 DNI PRZED KONCERTEM · media@zakleterewiry.pl"
+      ][i],
+      rodo: this.state.rodo,
+      toggleRodo: () => this.setState(s => ({ rodo: !s.rodo }))
+    };
+  }
+}
+</script>
+</body>
+</html>

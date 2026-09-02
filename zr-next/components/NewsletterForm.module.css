@@ -1,0 +1,31 @@
+.form { display: flex; flex-direction: column; gap: 14px; }
+
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.input {
+  flex: 1;
+  min-width: 240px;
+  background: var(--zr-raised);
+  border: 1px solid var(--zr-line);
+  border-radius: 4px;
+  padding: 15px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--zr-text);
+  outline: none;
+  transition: border-color 180ms var(--ease-out);
+}
+.input:focus { border-color: var(--zr-gold); }
+.input::placeholder { color: var(--zr-faint); }
+.input:disabled { opacity: 0.6; }
+
+.consent { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; max-width: 620px; }
+.check { width: 16px; height: 16px; margin-top: 3px; flex-shrink: 0; accent-color: var(--zr-gold); }
+.consent span { font-family: var(--font-body); font-size: 12.5px; color: var(--zr-muted); line-height: 1.6; }
+
+.link { color: var(--zr-gold-dim); border-bottom: 1px solid rgba(192,156,24,0.4); }
+.link:hover { color: var(--zr-gold); }
+
+.message { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; letter-spacing: 0.02em; }
+.ok { color: var(--zr-ok); }
+.error { color: var(--zr-sold-text); }

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
+import NewsletterForm from '@/components/NewsletterForm';
 import Ticker from '@/components/Ticker';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
@@ -201,23 +202,7 @@ export default async function HomePage() {
           <h2 className={s.newsletterTitle + ' display'}>Terminarz na maila</h2>
           <p className={s.newsletterSub}>Raz w miesiącu: lista koncertów i przedsprzedaże. Bez pop-upów.</p>
         </Reveal>
-        <form className={s.newsletterForm} action="/api/newsletter" method="POST">
-          <input
-            type="email"
-            name="email"
-            placeholder="twoj@email.pl"
-            required
-            className={s.newsletterInput}
-          />
-          <button type="submit" className="btn btn-outline-gold">Zapisuję się</button>
-        </form>
-        <label className={s.newsletterConsent}>
-          <input type="checkbox" required className={s.newsletterCheck} />
-          <span>
-            Zgadzam się na otrzymywanie newslettera. Mogę się wypisać w każdej chwili.{' '}
-            <Link href="/polityka-prywatnosci" className={s.newsletterLink}>Polityka prywatności.</Link>
-          </span>
-        </label>
+        <NewsletterForm />
       </section>
     </>
   );

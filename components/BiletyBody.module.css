@@ -82,9 +82,20 @@
 
 @media (max-width: 768px) {
   .groupHead { padding-left: 20px; padding-right: 20px; }
-  .row { padding-left: 20px; padding-right: 20px; grid-template-columns: 1fr; }
-  .artist { font-size: 22px; }
-  .priceCol { text-align: left; }
+  /* stack cleanly: date, title, meta, then status/price, then a full-width CTA */
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 20px;
+  }
+  .dateCol { order: -1; }
+  .mainCol { gap: 6px; }
+  .artist { font-size: 24px; }
+  .statusCol { margin-top: 8px; }
+  .priceCol { text-align: left; font-size: 15px; }
+  .row > a { width: 100%; justify-content: center; margin-top: 8px; }
   .helpGrid { flex-direction: column; align-items: flex-start; }
 }
 

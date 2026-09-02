@@ -27,9 +27,9 @@
 .support { font-family: var(--font-body); font-size: 17px; color: var(--zr-body); }
 
 .facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
+  display: grid;
+  /* 3-up on mobile (Data/Wejście/Start · Sala/Gatunek/Wiek) */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: 1px solid var(--zr-line);
   border-bottom: 1px solid var(--zr-line);
   margin-top: 8px;
@@ -39,11 +39,11 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 14px 26px 14px 0;
-  margin-right: 26px;
-  border-right: 1px solid var(--zr-line);
+  padding: 14px 0 14px 18px;
+  border-left: 1px solid var(--zr-line);
 }
-.fact:last-child { border-right: none; margin-right: 0; }
+/* first item of every row starts flush, no divider */
+.fact:nth-child(3n + 1) { border-left: none; padding-left: 0; }
 
 .factLabel { font-size: 9.5px; color: var(--zr-faint); letter-spacing: 0.16em; }
 .factValue { font-size: 14px; color: var(--zr-text); font-weight: 500; }
@@ -132,6 +132,13 @@
 .otherCard:hover .otherArtist { color: var(--zr-gold); }
 .otherMeta { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.06em; }
 
+@media (min-width: 720px) {
+  .facts { grid-template-columns: repeat(6, auto); justify-content: start; column-gap: 0; }
+  .fact { padding: 14px 26px; }
+  .fact:nth-child(3n + 1) { border-left: 1px solid var(--zr-line); padding-left: 26px; }
+  .fact:first-child { border-left: none; padding-left: 0; }
+}
+
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr; }
   .poster { max-width: 320px; }
@@ -141,6 +148,5 @@
 
 @media (max-width: 768px) {
   .othersGrid { grid-template-columns: 1fr; }
-  .fact { padding-right: 18px; margin-right: 18px; }
   .practicalRow { grid-template-columns: 1fr; gap: 4px; }
 }

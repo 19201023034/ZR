@@ -4,15 +4,21 @@ CKR Zaklęte Rewiry, ul. Krakowska 100, Wrocław — klub koncertowy + wynajem t
 
 ## Struktura
 
+Aplikacja Next.js leży w katalogu głównym repo, dzięki czemu Vercel wykrywa ją
+bez żadnej konfiguracji.
+
 ```
-zr-next/                        aplikacja Next.js 15 (App Router, React 19, CSS Modules)
-design_handoff_zaklete_rewiry/  źródłowy design handoff — tokeny, layouty, rzuty sal
+app/        trasy (App Router)
+components/ komponenty + CSS Modules
+lib/        store wydarzeń, helpery, adapter newslettera
+data/       events.json — store wydarzeń
+public/     assety statyczne
+design/     źródłowy design handoff — tokeny, layouty, rzuty sal
 ```
 
 ## Uruchomienie
 
 ```bash
-cd zr-next
 npm install
 npm run dev        # http://localhost:3126
 ```
@@ -38,7 +44,7 @@ ma pole `ticketUrl`; o wyglądzie przycisku decyduje wyłącznie
 
 ## ⚠️ Store wydarzeń a produkcja
 
-`lib/store.js` zapisuje do `zr-next/data/events.json` przez `fs`. Działa to lokalnie
+`lib/store.js` zapisuje do `data/events.json` przez `fs`. Działa to lokalnie
 i na zwykłym VPS-ie, ale **nie zadziała na Vercel ani innym hostingu serverless** —
 system plików jest tam tylko do odczytu i efemeryczny, więc panel nie zapisze zmian.
 
@@ -48,11 +54,10 @@ wymaga przepisania.
 
 ## Deploy na Vercel
 
-Aplikacja **nie leży w katalogu głównym repo**, więc bez poniższego ustawienia
-Vercel zbuduje pustkę i każda ścieżka zwróci `404: NOT_FOUND`.
+Aplikacja jest w katalogu głównym repo, więc **Root Directory zostaw puste** —
+Vercel wykryje Next.js sam.
 
-1. Vercel → projekt → **Settings → Build and Deployment → Root Directory** → wpisz `zr-next` → Save.
-2. **Settings → Environment Variables**:
+1. **Settings → Environment Variables**:
 
    | Zmienna | Wartość na podglądzie | Wartość na produkcji |
    |---|---|---|
@@ -60,7 +65,7 @@ Vercel zbuduje pustkę i każda ścieżka zwróci `404: NOT_FOUND`.
    | `NEXT_PUBLIC_SITE_URL` | adres z Vercela | `https://zakleterewiry.pl` |
    | `MAILERLITE_API_KEY` | — | token z MailerLite |
 
-3. **Deployments → Redeploy** (zmiana Root Directory nie przebudowuje automatycznie).
+2. **Deployments → Redeploy** po dodaniu zmiennych.
 
 ### Czego nie będzie działać na podglądzie
 

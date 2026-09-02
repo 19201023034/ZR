@@ -9,7 +9,7 @@ out/
 build/
 
 # production runtime data (see README — panel writes here locally)
-zr-next/data/*.json.tmp
+data/*.json.tmp
 
 # env
 .env

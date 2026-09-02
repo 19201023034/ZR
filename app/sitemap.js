@@ -1,6 +1,5 @@
 import { getEvents } from '@/lib/store';
-
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zakleterewiry.pl';
+import { SITE_ORIGIN as SITE } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 

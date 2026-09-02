@@ -1,11 +1,9 @@
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zakleterewiry.pl';
-
-// Client-preview deployments must never compete with the real site in Google.
-// Set NEXT_PUBLIC_NOINDEX=1 on any environment that is not production.
-const NOINDEX = process.env.NEXT_PUBLIC_NOINDEX === '1';
+import { SITE_ORIGIN, SHOULD_INDEX } from '@/lib/site';
 
 export default function robots() {
-  if (NOINDEX) {
+  // Anything that is not the client's own domain is a preview: keep it out
+  // of the index entirely, and don't advertise a sitemap for it either.
+  if (!SHOULD_INDEX) {
     return { rules: [{ userAgent: '*', disallow: '/' }] };
   }
 
@@ -16,6 +14,6 @@ export default function robots() {
       // the admin panel has no auth yet — keep it out of the index regardless
       disallow: ['/panel', '/api/'],
     }],
-    sitemap: `${SITE}/sitemap.xml`,
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
   };
 }

@@ -3,13 +3,12 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import MotionRoot from '@/components/MotionRoot';
+import { SHOULD_INDEX } from '@/lib/site';
 
 // belt and braces: a meta tag as well as robots.txt, so a preview link
 // shared around can't be indexed even if someone hits a page directly
-const NOINDEX = process.env.NEXT_PUBLIC_NOINDEX === '1';
-
 export const metadata = {
-  ...(NOINDEX ? { robots: { index: false, follow: false } } : {}),
+  ...(SHOULD_INDEX ? {} : { robots: { index: false, follow: false } }),
   title: {
     default: 'Zaklęte Rewiry — Klub koncertowy i wynajem sal, Wrocław',
     template: '%s | Zaklęte Rewiry',

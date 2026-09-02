@@ -3,10 +3,9 @@ import { notFound } from 'next/navigation';
 import EventDetail from '@/components/EventDetail';
 import { getEventBySlug, getUpcoming } from '@/lib/store';
 import { formatDate, warsawIso, VENUE_ADDRESS } from '@/lib/events';
+import { SITE_ORIGIN as SITE } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
-
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zakleterewiry.pl';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

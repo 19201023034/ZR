@@ -27,7 +27,10 @@ export async function generateMetadata({ params }) {
       description,
       type: 'article',
       url: `${SITE}/wydarzenie/${event.slug}`,
-      images: event.poster ? [event.poster] : undefined,
+      // A real poster wins; otherwise leave `images` unset so Next's
+      // file-based opengraph-image.js (the generated card) supplies it.
+      // Setting images:undefined here would instead delete that default.
+      ...(event.poster ? { images: [event.poster] } : {}),
     },
   };
 }

@@ -214,20 +214,26 @@
 }
 
 @media (max-width: 768px) {
+  /* single-column stack: date, title, meta, then status/price/cta */
   .row {
-    grid-template-columns: 60px 1fr;
-    grid-template-rows: auto auto;
-    gap: 12px 16px;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 8px;
     padding: 16px 20px;
   }
   .row:hover { padding-left: 26px; }
   .rowSold:hover { padding-left: 20px; }
   .timeCol { display: none; }
+  /* date on one line so it can't collide with the genre badge */
+  .dateCol { flex-direction: row; align-items: baseline; gap: 8px; }
+  .dateNum { font-size: 14px; }
+  .mainCol { gap: 6px; }
   .ctaCol {
     grid-column: 1 / -1;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 4px;
   }
   .artist { font-size: 22px; }
   .monthLabel { padding: 14px 20px 8px; }

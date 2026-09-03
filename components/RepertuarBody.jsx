@@ -98,6 +98,11 @@ function EventRow({ event }) {
         <span className={s.timeVal}>{event.start}</span>
       </div>
 
+      {/* Thumbnail */}
+      <Link href={`/wydarzenie/${event.slug}`} className={s.thumb + ' led-grid'} aria-hidden="true" tabIndex={-1}>
+        {event.poster && <img src={event.poster} alt="" className={s.thumbImg} />}
+      </Link>
+
       {/* Main info */}
       <div className={s.mainCol}>
         <h3 className={s.artist + ' display'}>

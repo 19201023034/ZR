@@ -179,6 +179,28 @@ export default function WynajemBody() {
         </Reveal>
       </section>
 
+      {/* ─── ROOM GALLERY ─── */}
+      <section className={'section ' + s.gallerySection}>
+        <div className={s.galleryHead}>
+          <div>
+            <span className="section-label">Galeria</span>
+            <h2 className={'display ' + s.galleryTitle}>{roomName} w obiektywie</h2>
+          </div>
+          {!(room.photos && room.photos.length) && (
+            <span className={s.galleryNote + ' mono'}>Zdjęcia sali w przygotowaniu</span>
+          )}
+        </div>
+        <div className={s.galleryGrid}>
+          {(room.photos && room.photos.length ? room.photos : Array.from({ length: 4 })).map((photo, i) => (
+            <div key={i} className={'led-grid ' + s.galleryTile + (i === 0 ? ' ' + s.galleryTileWide : '')}>
+              {photo
+                ? <img src={photo} alt={`${roomName} — zdjęcie ${i + 1}`} className={s.galleryImg} />
+                : <span className={s.galleryPlaceholder + ' mono'}>ZDJĘCIE {i + 1}</span>}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ─── COMPARISON TABLE ─── */}
       <section className={'section ' + s.compareSection}>
         <h2 className={'display ' + s.sectionHeading}>Porównanie sal</h2>

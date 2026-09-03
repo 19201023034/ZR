@@ -60,8 +60,16 @@ export default function MotionRoot() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
-    // ── pointer: spotlight + magnetic ───────────────────
+    // ── pointer: spotlight + magnetic + tilt ────────────
     let magnetized = new Set();
+    let tilted = new Set();
+
+    const releaseTilt = el => {
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+      el.removeAttribute('data-tilting');
+      tilted.delete(el);
+    };
 
     const onPointerMove = e => {
       const spot = e.target.closest?.('[data-spotlight]');
@@ -69,6 +77,24 @@ export default function MotionRoot() {
         const r = spot.getBoundingClientRect();
         spot.style.setProperty('--mx', `${e.clientX - r.left}px`);
         spot.style.setProperty('--my', `${e.clientY - r.top}px`);
+      }
+
+      // 3D tilt toward the cursor (e.g. the hero poster)
+      const tilt = e.target.closest?.('[data-tilt]');
+      if (tilt) {
+        const r = tilt.getBoundingClientRect();
+        const px = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);   // -1..1
+        const py = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        const max = parseFloat(tilt.dataset.tilt) || 6;
+        tilt.style.setProperty('--ry', `${(px * max).toFixed(2)}deg`);
+        tilt.style.setProperty('--rx', `${(-py * max).toFixed(2)}deg`);
+        tilt.style.setProperty('--gx', `${(((px + 1) / 2) * 100).toFixed(1)}%`);
+        tilt.style.setProperty('--gy', `${(((py + 1) / 2) * 100).toFixed(1)}%`);
+        tilt.setAttribute('data-tilting', '');
+        tilted.add(tilt);
+      }
+      for (const el of tilted) {
+        if (el !== tilt && !el.contains(e.target)) releaseTilt(el);
       }
 
       const mag = e.target.closest?.('[data-magnetic]');

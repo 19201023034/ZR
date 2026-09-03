@@ -71,7 +71,7 @@
 .row {
   position: relative;
   display: grid;
-  grid-template-columns: 80px 90px 1fr auto;
+  grid-template-columns: 80px 90px 104px 1fr auto;
   gap: 28px;
   align-items: center;
   padding: 20px 80px;
@@ -236,3 +236,19 @@
 
 .artistLink { color: inherit; transition: color 200ms var(--ease-out); }
 .artistLink:hover { color: var(--zr-gold); }
+
+
+.thumb {
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--zr-line);
+  display: block;
+  transition: border-color 200ms var(--ease-out);
+}
+.thumb:hover { border-color: var(--zr-gold-dim); }
+.thumbImg { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 768px) {
+  .thumb { display: none; }
+}

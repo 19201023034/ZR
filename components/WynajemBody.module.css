@@ -619,3 +619,56 @@
   border-top: 1px solid var(--zr-line);
   padding-top: 20px;
 }
+
+/* ─── Room gallery ───────────────────────────────────── */
+.gallerySection { }
+
+.galleryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.galleryTitle { font-size: 30px; color: var(--zr-text); line-height: 1; margin-top: 6px; }
+.galleryNote { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.galleryTile {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 240ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.galleryTile:hover { border-color: var(--zr-gold-dim); transform: translateY(-3px); }
+
+/* first tile spans two columns for a bit of rhythm */
+.galleryTileWide { grid-column: span 2; aspect-ratio: 8 / 3; }
+
+.galleryImg { width: 100%; height: 100%; object-fit: cover; }
+
+.galleryPlaceholder {
+  font-size: 10px;
+  color: var(--zr-faint);
+  letter-spacing: 0.16em;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 3px;
+  padding: 6px 10px;
+}
+
+@media (max-width: 768px) {
+  .galleryGrid { grid-template-columns: 1fr 1fr; }
+  .galleryTileWide { grid-column: span 2; aspect-ratio: 16 / 9; }
+  .galleryHead { flex-direction: column; align-items: flex-start; }
+}

@@ -234,3 +234,58 @@
 .rowTicketOk:hover { color: var(--zr-gold); }
 
 .rowTicketMissing { color: var(--zr-warn); }
+
+/* ─── Poster upload ──────────────────────────────────── */
+.uploads { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.uploadField { display: flex; flex-direction: column; gap: 7px; }
+
+.uploadRow { display: flex; gap: 14px; align-items: stretch; }
+
+.thumb {
+  width: 120px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--zr-line);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumbImg { width: 100%; height: 100%; object-fit: cover; }
+.thumbEmpty { font-size: 16px; color: var(--zr-faint); }
+
+.uploadCtl { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+
+.uploadBtn {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--zr-gold);
+  color: var(--zr-gold);
+  background: transparent;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 160ms var(--ease-out);
+}
+.uploadBtn:hover { background: rgba(252, 204, 0, 0.12); }
+
+.uploadClear {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--zr-line-hi);
+  color: var(--zr-muted);
+  background: transparent;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.uploadClear:hover { color: var(--zr-sold-text); border-color: var(--zr-sold); }
+
+.uploadHint { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.04em; }
+
+@media (max-width: 1024px) { .uploads { grid-template-columns: 1fr; } }

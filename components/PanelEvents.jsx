@@ -16,7 +16,7 @@ const STATUSES = [
 const EMPTY = {
   artist: '', support: '', genre: 'Rock', date: '', doors: '19:00', start: '20:00',
   venue: 'Sala Duża', priceFrom: '', priceDay: '', pool: '', ageMin: '', ticketUrl: '',
-  status: 'dostepne', description: '',
+  status: 'dostepne', description: '', poster: '', posterPortrait: '',
 };
 
 export default function PanelEvents() {
@@ -26,8 +26,27 @@ export default function PanelEvents() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(null); // which field is uploading
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  async function upload(field, file) {
+    if (!file) return;
+    setUploading(field);
+    setMsg(null);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) { setMsg({ type: 'err', text: json.error ?? 'Nie udało się wgrać zdjęcia.' }); return; }
+      set(field, json.url);
+    } catch {
+      setMsg({ type: 'err', text: 'Brak połączenia przy wgrywaniu.' });
+    } finally {
+      setUploading(null);
+    }
+  }
 
   async function load() {
     try {
@@ -105,6 +124,7 @@ export default function PanelEvents() {
       pool: ev.pool ?? '', ageMin: ev.ageMin ?? '',
       status: ev.status ?? 'dostepne', description: ev.description ?? '',
       ticketUrl: ev.ticketUrl ?? '',
+      poster: ev.poster ?? '', posterPortrait: ev.posterPortrait ?? '',
     });
     setMsg(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -237,6 +257,36 @@ export default function PanelEvents() {
           <textarea className={s.textarea} rows={3} value={form.description}
                     onChange={e => set('description', e.target.value)}
                     placeholder="Krótki opis wydarzenia na stronę biletu." />
+        </div>
+
+        <div className={s.uploads}>
+          {[
+            ['poster', 'Plakat (poziomy 16:9)', 'karty, repertuar, strona wydarzenia'],
+            ['posterPortrait', 'Plakat pionowy (opcjonalny)', 'duży kafel na stronie głównej'],
+          ].map(([field, label, hint]) => (
+            <div key={field} className={s.uploadField}>
+              <label className={s.label + ' mono'}>{label}</label>
+              <div className={s.uploadRow}>
+                <div className={'led-grid ' + s.thumb}>
+                  {form[field]
+                    ? <img src={form[field]} alt="" className={s.thumbImg} />
+                    : <span className={s.thumbEmpty + ' mono'}>—</span>}
+                </div>
+                <div className={s.uploadCtl}>
+                  <label className={s.uploadBtn}>
+                    {uploading === field ? 'Wgrywam…' : form[field] ? 'Zmień zdjęcie' : 'Wgraj zdjęcie'}
+                    <input type="file" accept="image/*" hidden
+                           disabled={uploading === field}
+                           onChange={e => upload(field, e.target.files?.[0])} />
+                  </label>
+                  {form[field] && (
+                    <button type="button" className={s.uploadClear} onClick={() => set(field, '')}>Usuń</button>
+                  )}
+                  <span className={s.uploadHint + ' mono'}>{hint}</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className={s.formFoot}>

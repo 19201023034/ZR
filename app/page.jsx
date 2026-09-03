@@ -103,8 +103,7 @@ export default async function HomePage() {
 
           <div
             className={s.heroPoster + ' led-grid enter-fade d3'}
-            data-parallax="0.14"
-            data-spotlight=""
+            data-tilt="7"
           >
             {(hero.posterPortrait || hero.poster) ? (
               <img src={hero.posterPortrait || hero.poster} alt={hero.artist} className={s.heroPosterImg} />

@@ -50,6 +50,8 @@ export async function POST(request) {
     capacity: num(body.capacity),
     ageMin: num(body.ageMin),
     ticketUrl: body.ticketUrl ? String(body.ticketUrl).trim() : null,
+    poster: body.poster || null,
+    posterPortrait: body.posterPortrait || null,
     status: body.status || 'dostepne',
     description: body.description || '',
       featured: Boolean(body.featured),

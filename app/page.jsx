@@ -106,8 +106,8 @@ export default async function HomePage() {
             data-parallax="0.14"
             data-spotlight=""
           >
-            {hero.poster ? (
-              <img src={hero.poster} alt={hero.artist} className={s.heroPosterImg} />
+            {(hero.posterPortrait || hero.poster) ? (
+              <img src={hero.posterPortrait || hero.poster} alt={hero.artist} className={s.heroPosterImg} />
             ) : (
               <>
                 <div className={s.heroPosterBadge}>

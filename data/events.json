@@ -19,7 +19,8 @@
       "ticketUrl": "https://stage24.pl/wydarzenia/ppw-ewenement-zaklete-rewiry-8518",
       "description": "Hardcore wrestling wraca do Wrocławia — najlepsi polscy wrestlerzy w ekstremalnych starciach na galę PpW: Chaos Na Rewirach.",
       "ageMin": 16,
-      "featured": true
+      "featured": true,
+      "posterPortrait": "/assets/events/chaos-na-rewirach-pion.webp"
     },
     {
       "id": "evt-skolim",

@@ -401,8 +401,11 @@
 }
 
 @media (max-width: 768px) {
-  .tabs { padding: 0 20px; overflow-x: auto; }
-  .tab { padding: 16px 20px 14px; }
+  .tabs { padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 14px 18px 12px; flex-shrink: 0; }
+  .tab .tabName { white-space: nowrap; }
+  .tab .tabMeta { white-space: nowrap; }
   .stats { grid-template-columns: 1fr 1fr; }
   .compareHeader, .compareRow { grid-template-columns: 1.5fr repeat(3, 1fr); }
   .compareHeader span:nth-child(n+5), .compareRow span:nth-child(n+5) { display: none; }

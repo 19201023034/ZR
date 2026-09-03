@@ -1,0 +1,114 @@
+.grid { display: grid; grid-template-columns: 1fr 520px; gap: 0; }
+
+.form {
+  padding: 36px 48px 48px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-right: 1px solid var(--zr-line);
+}
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.label { font-size: 10px; color: var(--zr-muted); letter-spacing: 0.14em; text-transform: uppercase; }
+
+.input, .textarea {
+  background: var(--zr-raised);
+  border: 1px solid var(--zr-line);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--zr-text);
+  outline: none;
+  transition: border-color 180ms var(--ease-out);
+}
+.input:focus, .textarea:focus { border-color: var(--zr-gold); }
+.textarea { resize: vertical; line-height: 1.6; }
+.input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.7); }
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  padding: 9px 16px; border-radius: 999px; border: 1px solid var(--zr-line);
+  background: transparent; color: var(--zr-muted); cursor: pointer;
+  transition: all 160ms var(--ease-out);
+}
+.pill:hover { color: var(--zr-text); border-color: var(--zr-line-hi); }
+.pillOn { background: rgba(252, 204, 0, 0.1); color: var(--zr-gold); border-color: var(--zr-gold); font-weight: 700; }
+
+.actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 6px; }
+.hint { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.04em; }
+
+/* ─── Offer sheet ─── */
+.sheetWrap { padding: 36px 80px 48px 48px; background: var(--zr-surface-alt); }
+
+.sheet {
+  background: var(--zr-bg);
+  border: 1px solid var(--zr-line-hi);
+  border-top: 4px solid var(--zr-gold);
+  border-radius: 6px;
+  padding: 32px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.sheetHead { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.sheetBrand { font-size: 30px; color: var(--zr-gold); line-height: 1; }
+.sheetSub { font-size: 10.5px; color: var(--zr-gold-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+.sheetAddr { font-size: 10.5px; color: var(--zr-muted); line-height: 1.7; text-align: right; }
+
+.sheetMeta { display: flex; flex-direction: column; border-top: 1px solid var(--zr-line); border-bottom: 1px solid var(--zr-line); }
+.metaRow { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--zr-line); }
+.metaRow:last-child { border-bottom: none; }
+.metaK { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
+.metaV { font-family: var(--font-body); font-size: 14px; color: var(--zr-text); }
+
+.sheetRoom { display: flex; flex-direction: column; gap: 12px; }
+.roomName { font-size: 34px; color: var(--zr-text); line-height: 1; }
+.roomSpec { font-size: 11px; color: var(--zr-muted); letter-spacing: 0.06em; }
+
+.pkgBox { display: flex; flex-direction: column; gap: 5px; padding: 14px 16px; background: var(--zr-surface); border: 1px solid var(--zr-line); border-radius: 4px; }
+.pkgName { font-size: 10px; color: var(--zr-gold-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.pkgDesc { font-family: var(--font-body); font-size: 13.5px; color: var(--zr-body); line-height: 1.6; }
+
+.priceRow { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--zr-line); padding-top: 14px; }
+.priceLabel { font-size: 11px; color: var(--zr-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.priceVal { font-size: 32px; color: var(--zr-gold); }
+
+.notes { display: flex; flex-direction: column; gap: 5px; }
+.notesLabel { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
+.notesText { font-family: var(--font-body); font-size: 13.5px; color: var(--zr-body); line-height: 1.65; white-space: pre-line; }
+
+.fine { font-family: var(--font-body); font-size: 11px; color: var(--zr-muted); line-height: 1.7; }
+.sheetFoot { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.06em; border-top: 1px solid var(--zr-line); padding-top: 14px; }
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .form { padding: 32px 40px; border-right: none; border-bottom: 1px solid var(--zr-line); }
+  .sheetWrap { padding: 32px 40px; }
+}
+@media (max-width: 768px) {
+  .form, .sheetWrap { padding: 28px 20px; }
+  .row2 { grid-template-columns: 1fr; }
+  .sheet { padding: 24px 22px; }
+  .roomName { font-size: 26px; }
+}
+
+/* ─── Print: only the offer sheet ─── */
+@media print {
+  .form { display: none !important; }
+  .sheetWrap { padding: 0 !important; background: #fff !important; }
+  .grid { display: block; }
+  .sheet {
+    background: #fff; color: #111; border: none; border-top: 4px solid #FCCC00;
+    box-shadow: none; max-width: 100%;
+  }
+  .sheetBrand, .priceVal, .roomName { color: #111; }
+  .sheetSub, .pkgName { color: #9a7d15; }
+  .metaV, .pkgDesc, .notesText, .fine { color: #222; }
+  .metaK, .roomSpec, .notesLabel, .sheetFoot, .sheetAddr { color: #666; }
+  .pkgBox { background: #f6f4ee; border-color: #ddd; }
+  .sheetMeta, .metaRow, .priceRow, .sheetFoot { border-color: #ccc; }
+}

@@ -1,15 +1,7 @@
 import Link from 'next/link';
 import Reveal, { RevealGroup } from './Reveal';
+import ImprezyAccordion from './ImprezyAccordion';
 import s from './ImprezyBody.module.css';
-
-const OCCASIONS = [
-  ['Urodziny i jubileusze', 'Okrągłe rocznice, osiemnastki, huczne urodziny z oprawą sceniczną.'],
-  ['Wesela i przyjęcia', 'Nietuzinkowa alternatywa dla sali weselnej — parkiet, scena i klimat klubu.'],
-  ['Spotkania rodzinne', 'Komunie, chrzciny, spotkania pokoleniowe w kameralnej lub dużej sali.'],
-  ['Studniówki i bale', 'Przestrzeń na kilkaset osób z profesjonalnym nagłośnieniem i światłem.'],
-  ['Sylwester i andrzejki', 'Imprezy tematyczne z pełną oprawą techniczną i barem.'],
-  ['Wieczory tematyczne', 'Retro show, potańcówki, bankiety z programem artystycznym.'],
-];
 
 const INCLUDED = [
   'Sala dopasowana do liczby gości — od kameralnej po 1000 osób',
@@ -30,10 +22,17 @@ export default function ImprezyBody() {
           <span className="section-label enter-fade d1">Wynajem · imprezy prywatne</span>
           <h1 className={'display ' + s.heading + ' enter-mask d2'}>Imprezy okolicznościowe we Wrocławiu</h1>
           <p className={s.lead + ' enter d3'}>
-            Zaklęte Rewiry to nieoczywiste miejsce na wyjątkowe okazje — urodziny, jubileusze,
-            wesela, studniówki czy sylwestra. Klimat klubu koncertowego zamiast typowej sali,
-            trzy przestrzenie od kameralnej po tysiąc osób, własna kuchnia i pełne zaplecze
-            techniczne przy ul. Krakowskiej 100.
+            Szukasz sali na imprezę okolicznościową we Wrocławiu? Zaklęte Rewiry to klub
+            koncertowy przy ul. Krakowskiej 100, który wynajmujemy również na wydarzenia
+            prywatne — urodziny, jubileusze, wesela, studniówki, komunie, andrzejki i sylwestra.
+            Zamiast typowej sali bankietowej dostajesz prawdziwą scenę, klubowe światło
+            i atmosferę koncertu.
+          </p>
+          <p className={s.lead + ' enter d3'}>
+            Do dyspozycji trzy sale od 90 do 550 m² — od kameralnych spotkań po imprezy na
+            1000 osób — własna kuchnia i bar, profesjonalne nagłośnienie oraz koordynator,
+            który poprowadzi wydarzenie od początku do końca. Dogodny dojazd i parking
+            w centrum Wrocławia.
           </p>
           <div className={s.heroCtas + ' enter d4'}>
             <Link href="/kontakt" className="btn btn-gold">Zapytaj o termin</Link>
@@ -48,14 +47,9 @@ export default function ImprezyBody() {
           <span className="section-label">Na jaką okazję</span>
           <h2 className={'display ' + s.sectionHeading}>Każdy pretekst do świętowania</h2>
         </Reveal>
-        <RevealGroup variant="up" step={80} className={s.occGrid}>
-          {OCCASIONS.map(([title, desc]) => (
-            <div key={title} className={s.occCard}>
-              <h3 className={'display ' + s.occTitle}>{title}</h3>
-              <p className={s.occDesc}>{desc}</p>
-            </div>
-          ))}
-        </RevealGroup>
+        <Reveal variant="up">
+          <ImprezyAccordion />
+        </Reveal>
       </section>
 
       {/* ─── PHOTO + INCLUDED ─── */}

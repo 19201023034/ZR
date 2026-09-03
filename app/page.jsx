@@ -176,9 +176,7 @@ export default async function HomePage() {
             {[
               ['/assets/venue/s1.webp', 'Sala Duża', 'scena i rig świetlny'],
               ['/assets/venue/s3.webp', 'Koncerty', 'pełne światło i dźwięk'],
-              ['/assets/venue/s2.webp', 'Energia', 'show na żywo'],
               ['/assets/venue/s5.webp', 'Bankiety i gale', 'układ przy stołach'],
-              ['/assets/venue/s4.webp', 'Imprezy firmowe', 'parkiet i scena'],
             ].map(([photo, label, hint], i) => (
               <div key={label} className={s.atmoTile + (i === 0 ? ' ' + s.atmoTileWide : '')}>
                 <img src={photo} alt={`${label} — Zaklęte Rewiry`} className={s.atmoImg} />

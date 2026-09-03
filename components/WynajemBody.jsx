@@ -38,6 +38,8 @@ export default function WynajemBody() {
 
   const room = ROOMS[ROOM_NAMES[active]];
   const plan = room.plan;
+  const galleryPhotos = room.photos ?? [];
+  const gallerySlots = Math.max(4, galleryPhotos.length);
   const roomName = ROOM_NAMES[active];
 
   function handleTab(i) {
@@ -186,15 +188,17 @@ export default function WynajemBody() {
             <span className="section-label">Galeria</span>
             <h2 className={'display ' + s.galleryTitle}>{roomName} w obiektywie</h2>
           </div>
-          {!(room.photos && room.photos.length) && (
-            <span className={s.galleryNote + ' mono'}>Zdjęcia sali w przygotowaniu</span>
+          {galleryPhotos.length < gallerySlots && (
+            <span className={s.galleryNote + ' mono'}>
+              {galleryPhotos.length ? 'Więcej zdjęć wkrótce' : 'Zdjęcia sali w przygotowaniu'}
+            </span>
           )}
         </div>
         <div className={s.galleryGrid}>
-          {(room.photos && room.photos.length ? room.photos : Array.from({ length: 4 })).map((photo, i) => (
+          {Array.from({ length: gallerySlots }).map((_, i) => (
             <div key={i} className={'led-grid ' + s.galleryTile + (i === 0 ? ' ' + s.galleryTileWide : '')}>
-              {photo
-                ? <img src={photo} alt={`${roomName} — zdjęcie ${i + 1}`} className={s.galleryImg} />
+              {galleryPhotos[i]
+                ? <img src={galleryPhotos[i]} alt={`${roomName} — zdjęcie ${i + 1}`} className={s.galleryImg} />
                 : <span className={s.galleryPlaceholder + ' mono'}>ZDJĘCIE {i + 1}</span>}
             </div>
           ))}

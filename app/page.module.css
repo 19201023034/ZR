@@ -392,3 +392,99 @@
   .newsletter { padding: 40px 20px; }
   .newsletterInfo { flex-direction: column; gap: 4px; }
 }
+
+/* ─── O klubie + atmosfera ───────────────────────────── */
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.aboutText { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.aboutHeading { font-size: clamp(26px, 2.6vw, 38px); color: var(--zr-text); line-height: 1.05; margin-top: 6px; }
+.aboutLead { font-family: var(--font-body); font-size: 15.5px; color: var(--zr-body); line-height: 1.75; }
+
+.atmoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.atmoTile {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 16px;
+  transition: border-color 240ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.atmoTile:hover { border-color: var(--zr-gold-dim); transform: translateY(-3px); }
+.atmoTileWide { grid-column: span 2; aspect-ratio: 16 / 6; }
+
+.atmoLabel { font-size: 13px; color: var(--zr-text); letter-spacing: 0.06em; text-transform: uppercase; }
+.atmoHint { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.08em; }
+
+/* ─── Dowód społeczny B2B ────────────────────────────── */
+.proofHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.proofNote { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.logoRow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.logoSlot {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--zr-faint);
+  background: var(--zr-surface);
+}
+
+.caseRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+  border-top: 1px solid var(--zr-line);
+  padding-top: 36px;
+}
+.caseHeading { font-size: clamp(24px, 2.4vw, 34px); color: var(--zr-text); line-height: 1.05; margin-bottom: 10px; }
+.caseLead { font-family: var(--font-body); font-size: 14.5px; color: var(--zr-body); line-height: 1.7; max-width: 520px; }
+
+.caseStats { display: flex; gap: 40px; }
+.caseStat { display: flex; flex-direction: column; gap: 4px; }
+.caseStatVal { font-size: 40px; color: var(--zr-gold); line-height: 1; }
+.caseStatLabel { font-size: 10px; color: var(--zr-muted); letter-spacing: 0.1em; text-transform: uppercase; max-width: 130px; }
+
+@media (max-width: 1024px) {
+  .aboutGrid { grid-template-columns: 1fr; gap: 32px; }
+  .logoRow { grid-template-columns: repeat(3, 1fr); }
+  .caseRow { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 768px) {
+  .atmoGrid { grid-template-columns: 1fr 1fr; }
+  .atmoTileWide { grid-column: span 2; aspect-ratio: 16 / 7; }
+  .logoRow { grid-template-columns: repeat(2, 1fr); }
+  .caseStats { flex-wrap: wrap; gap: 24px; }
+  .caseStatVal { font-size: 32px; }
+}

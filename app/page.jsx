@@ -7,9 +7,33 @@ import Ticker from '@/components/Ticker';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
-import { ARTISTS_ARCHIVE, ROOMS, isTodayEvent, getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
+import { ARTISTS_ARCHIVE, ROOMS, VENUE_ADDRESS, isTodayEvent, getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
 import { getEvents, getUpcoming, getHeroEvent } from '@/lib/store';
+import { SITE_ORIGIN } from '@/lib/site';
 import s from './page.module.css';
+
+/* schema.org MusicVenue — feeds Google's local/knowledge panel.
+   NOTE: telephone + geo below are the site-wide placeholders; the client
+   should confirm the real number and exact coordinates. */
+const VENUE_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicVenue',
+  name: 'Centrum Kulturalno-Rozrywkowe Zaklęte Rewiry',
+  alternateName: 'Zaklęte Rewiry',
+  url: SITE_ORIGIN,
+  description:
+    'Klub koncertowy i wynajem trzech sal na gale, konferencje i imprezy firmowe przy ul. Krakowskiej 100 we Wrocławiu.',
+  telephone: '+48713001000',
+  maximumAttendeeCapacity: 1000,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: VENUE_ADDRESS.street,
+    postalCode: VENUE_ADDRESS.postalCode,
+    addressLocality: VENUE_ADDRESS.city,
+    addressCountry: VENUE_ADDRESS.country,
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 51.0876, longitude: 17.0553 },
+};
 
 export const metadata = {
   title: 'Zaklęte Rewiry — Klub koncertowy i wynajem sal, Wrocław',
@@ -28,6 +52,11 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(VENUE_JSONLD) }}
+      />
+
       {/* ─── TODAY BAR ─── */}
       {todayEvent && (
         <div className={s.todayBar}>
@@ -129,6 +158,36 @@ export default async function HomePage() {
       {/* ─── EVENTS GRID ─── */}
       <EventsGrid events={upcoming} />
 
+      {/* ─── O KLUBIE + ATMOSFERA ─── */}
+      <section className={'section ' + s.about}>
+        <div className={s.aboutGrid}>
+          <Reveal variant="left" className={s.aboutText}>
+            <span className="section-label">O miejscu</span>
+            <h2 className={s.aboutHeading + ' display'}>Wielofunkcyjna scena na mapie Wrocławia od ponad dekady</h2>
+            <p className={s.aboutLead}>
+              Koncerty, gale, imprezy firmowe i wydarzenia specjalne — trzy sale, profesjonalne
+              zaplecze techniczne i własna gastronomia przy ul. Krakowskiej 100. Miejsce spotkań
+              ludzi, kultur i idei.
+            </p>
+            <Link href="/klub" className="btn btn-outline">Poznaj klub</Link>
+          </Reveal>
+
+          <RevealGroup variant="up" step={90} className={s.atmoGrid}>
+            {[
+              ['Sala Duża', 'koncert na 1000 osób'],
+              ['Klimat', 'wnętrza i scena'],
+              ['Za kulisami', 'backstage i technika'],
+              ['Publiczność', 'najlepsza w mieście'],
+            ].map(([label, hint], i) => (
+              <div key={label} className={'led-grid ' + s.atmoTile + (i === 0 ? ' ' + s.atmoTileWide : '')}>
+                <span className={s.atmoLabel + ' mono'}>{label}</span>
+                <span className={s.atmoHint + ' mono'}>{hint}</span>
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
       {/* ─── NUMBERS ─── */}
       <section className={'section ' + s.numbers}>
         <span className="glow-below glow-below-dim" aria-hidden="true" />
@@ -185,6 +244,36 @@ export default async function HomePage() {
             </div>
           ))}
         </RevealGroup>
+      </section>
+
+      {/* ─── DOWÓD SPOŁECZNY B2B ─── */}
+      <section className={'section ' + s.proof} style={{ background: 'var(--zr-surface-alt)' }}>
+        <div className={s.proofHead}>
+          <span className="section-label">Zaufali nam</span>
+          <span className={s.proofNote + ' mono'}>Logotypy klientów w przygotowaniu</span>
+        </div>
+        <RevealGroup variant="up" step={70} className={s.logoRow}>
+          {['LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO'].map((l, i) => (
+            <div key={i} className={s.logoSlot + ' mono'}>{l}</div>
+          ))}
+        </RevealGroup>
+        <Reveal variant="up" className={s.caseRow}>
+          <div className={s.caseText}>
+            <h3 className={s.caseHeading + ' display'}>Zrealizowaliśmy setki wydarzeń</h3>
+            <p className={s.caseLead}>
+              Od kameralnych spotkań firmowych po gale na tysiąc osób. Miejsce na realizację
+              z liczbami — zdjęcia i referencje do uzupełnienia.
+            </p>
+          </div>
+          <div className={s.caseStats}>
+            {[['500+', 'wydarzeń firmowych'], ['1000', 'gości na największych galach'], ['24 h', 'odpowiedź na zapytanie']].map(([v, l]) => (
+              <div key={l} className={s.caseStat}>
+                <span className={'display ' + s.caseStatVal}>{v}</span>
+                <span className={s.caseStatLabel + ' mono'}>{l}</span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* ─── ARCHIVE ─── */}

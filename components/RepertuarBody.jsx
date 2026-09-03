@@ -125,7 +125,7 @@ function EventRow({ event }) {
         </div>
 
         <span className={s.price + ' mono'}>
-          {sold ? '—' : `od ${event.priceFrom} zł`}
+          {sold ? '—' : event.priceFrom ? `od ${event.priceFrom} zł` : '—'}
         </span>
 
         <TicketButton event={event} style={{ padding: '11px 22px', fontSize: 14 }} />

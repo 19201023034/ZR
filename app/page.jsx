@@ -37,7 +37,7 @@ export default async function HomePage() {
           </div>
           <div className={s.todayRight}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700, color: getStatusColor(todayEvent.status) }}>
-              {getStatusLabel(todayEvent)} · od {todayEvent.priceFrom} zł
+              {getStatusLabel(todayEvent)}{todayEvent.priceFrom ? ` · od ${todayEvent.priceFrom} zł` : ''}
             </span>
             <TicketButton
               event={todayEvent}
@@ -79,7 +79,7 @@ export default async function HomePage() {
                 { label: 'SALA', value: hero.venue },
                 { label: 'WEJŚCIE', value: hero.doors },
                 { label: 'START', value: hero.start },
-                { label: 'BILETY', value: `od ${hero.priceFrom} zł`, color: getStatusColor(hero.status) },
+                { label: 'BILETY', value: hero.priceFrom ? `od ${hero.priceFrom} zł` : getStatusLabel(hero), color: getStatusColor(hero.status) },
               ].map(({ label, value, color }) => (
                 <div key={label} className={s.heroDataItem}>
                   <span className={s.heroDataLabel + ' mono'}>{label}</span>

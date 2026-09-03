@@ -3,18 +3,18 @@ import TicketButton from './TicketButton';
 import { getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
 import s from './EventCard.module.css';
 
-export default function EventCard({ event, featured = false }) {
+export default function EventCard({ event }) {
   const sold = event.status === 'wyprzedane';
   const statusColor = getStatusColor(event.status);
   const statusLabel = getStatusLabel(event);
 
   return (
     <article
-      className={s.card + (featured ? ' ' + s.featured : '') + (sold ? ' ' + s.sold : '')}
+      className={s.card + (sold ? ' ' + s.sold : '')}
       data-spotlight={sold ? undefined : ''}
     >
-      {/* Poster */}
-      <div className={s.poster + ' led-grid'} style={{ height: featured ? 250 : 150 }}>
+      {/* Poster — uniform 16:9 across every card */}
+      <div className={s.poster + ' led-grid'}>
         {event.poster && <img src={event.poster} alt={event.artist} className={s.posterImg} />}
         {sold && <div className={s.soldOverlay} />}
       </div>
@@ -33,24 +33,21 @@ export default function EventCard({ event, featured = false }) {
           </span>
         </div>
 
-        <h3 className={s.artist} style={{
-          fontSize: featured ? 46 : 27,
-          color: sold ? 'var(--zr-muted)' : featured ? 'var(--zr-gold)' : 'var(--zr-text)',
-        }}>
+        <h3 className={s.artist} style={{ color: sold ? 'var(--zr-muted)' : 'var(--zr-text)' }}>
           <Link href={`/wydarzenie/${event.slug}`} className={s.artistLink}>{event.artist}</Link>
         </h3>
 
         <div className={s.meta}>
           <span>{event.genre}</span>
-          {event.support && <span>+ {event.support}</span>}
+          {event.support && <span className={s.support}>+ {event.support}</span>}
           <span>{event.venue}</span>
         </div>
       </div>
 
-      {/* Ticket footer */}
+      {/* Ticket footer — pinned to the bottom so every card lines up */}
       <div className={'ticket-footer ' + s.footer}>
         <span className={s.price} style={{ color: sold ? 'var(--zr-faint)' : 'var(--zr-text)' }}>
-          {sold ? '—' : `od ${event.priceFrom} zł`}
+          {sold ? '—' : event.priceFrom ? `od ${event.priceFrom} zł` : 'wstęp wkrótce'}
         </span>
         <TicketButton event={event} style={{ padding: '10px 18px', fontSize: 13 }} />
       </div>

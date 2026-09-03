@@ -16,7 +16,6 @@ export default function EventsGrid({ events }) {
     ? events
     : events.filter(e => e.genre === genre);
 
-  const [first, ...rest] = filtered;
 
   return (
     <section className={'section ' + s.section}>
@@ -43,8 +42,7 @@ export default function EventsGrid({ events }) {
         <p className={s.empty}>Brak wydarzeń w tej kategorii.</p>
       ) : (
         <RevealGroup variant="up" step={90} className={s.grid} key={genre}>
-          {first && <EventCard event={first} featured />}
-          {rest.map(e => <EventCard key={e.id} event={e} />)}
+          {filtered.map(e => <EventCard key={e.id} event={e} />)}
           <Link href="/repertuar" className={s.calendarTile}>
             <span className="section-label">KALENDARZ</span>
             <h3 className={s.calendarTitle + ' display'}>Cały repertuar · {events.length} dat</h3>

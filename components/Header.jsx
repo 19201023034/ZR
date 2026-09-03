@@ -11,6 +11,7 @@ const NAV = [
   { href: '/bilety', label: 'Bilety' },
   { href: '/klub', label: 'Klub' },
   { href: '/wynajem', label: 'Wynajem sal' },
+  { href: '/imprezy-okolicznosciowe', label: 'Imprezy' },
   { href: '/kontakt', label: 'Kontakt' },
 ];
 

@@ -110,7 +110,7 @@
 
 .heroPoster {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   background: var(--zr-surface);
   border: 1px solid var(--zr-line-hi);
   border-radius: 6px;

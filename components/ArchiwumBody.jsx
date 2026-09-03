@@ -28,12 +28,17 @@ export default function ArchiwumBody({ past = [] }) {
               <h2 className={'display ' + s.yearLabel}>{year}</h2>
               <span className={s.yearCount + ' mono'}>{byYear[year].length}</span>
             </div>
-            <div className={s.rows}>
+            <div className={s.grid}>
               {byYear[year].map(e => (
-                <Link key={e.id} href={`/wydarzenie/${e.slug}`} className={s.row}>
-                  <span className={s.rowDate + ' mono'}>{formatDate(e.date)}</span>
-                  <span className={'display ' + s.rowArtist}>{e.artist}</span>
-                  <span className={s.rowMeta + ' mono'}>{e.genre} · {e.venue}</span>
+                <Link key={e.id} href={`/wydarzenie/${e.slug}`} className={s.card}>
+                  <div className={'led-grid ' + s.poster}>
+                    {e.poster && <img src={e.poster} alt={e.artist} className={s.posterImg} />}
+                  </div>
+                  <div className={s.cardBody}>
+                    <span className={s.rowDate + ' mono'}>{formatDate(e.date)}</span>
+                    <span className={'display ' + s.rowArtist}>{e.artist}</span>
+                    <span className={s.rowMeta + ' mono'}>{e.genre} · {e.venue}</span>
+                  </div>
                 </Link>
               ))}
             </div>

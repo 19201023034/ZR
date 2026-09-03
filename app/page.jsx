@@ -106,18 +106,23 @@ export default async function HomePage() {
             data-parallax="0.14"
             data-spotlight=""
           >
-            {hero.poster && <img src={hero.poster} alt={hero.artist} className={s.heroPosterImg} />}
-            <div className={s.heroPosterBadge}>
-              <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold)', border: '1px solid rgba(252,204,0,0.5)', padding: '4px 8px', borderRadius: 3 }}>
-                PLAKAT 3:4
-              </span>
-            </div>
-            <div className={s.heroPosterOverlay}>
-              <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold-dim)', letterSpacing: '0.14em' }}>
-                TRASA 2026 · WROCŁAW
-              </span>
-              <span className="display" style={{ fontSize: 22, color: 'var(--zr-text)' }}>{hero.artist}</span>
-            </div>
+            {hero.poster ? (
+              <img src={hero.poster} alt={hero.artist} className={s.heroPosterImg} />
+            ) : (
+              <>
+                <div className={s.heroPosterBadge}>
+                  <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold)', border: '1px solid rgba(252,204,0,0.5)', padding: '4px 8px', borderRadius: 3 }}>
+                    PLAKAT
+                  </span>
+                </div>
+                <div className={s.heroPosterOverlay}>
+                  <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold-dim)', letterSpacing: '0.14em' }}>
+                    WROCŁAW · KRAKOWSKA 100
+                  </span>
+                  <span className="display" style={{ fontSize: 22, color: 'var(--zr-text)' }}>{hero.artist}</span>
+                </div>
+              </>
+            )}
           </div>
         </section>
       )}

@@ -53,7 +53,7 @@
 
 .poster {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 16 / 9;
   border: 1px solid var(--zr-line-hi);
   border-radius: 6px;
   display: flex;
@@ -141,7 +141,7 @@
 
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr; }
-  .poster { max-width: 320px; }
+  .poster { max-width: 100%; }
   .bodyGrid { grid-template-columns: 1fr; gap: 36px; }
   .othersGrid { grid-template-columns: repeat(2, 1fr); }
 }

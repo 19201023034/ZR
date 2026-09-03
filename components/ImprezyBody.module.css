@@ -1,0 +1,48 @@
+.hero { position: relative; overflow: hidden; }
+.heroText { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; max-width: 760px; position: relative; z-index: 1; }
+.heading { font-size: clamp(36px, 5vw, 64px); color: var(--zr-text); line-height: 1.02; }
+.lead { font-family: var(--font-body); font-size: 16.5px; color: var(--zr-body); line-height: 1.75; }
+.heroCtas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+
+.sectionHeading { font-size: clamp(26px, 3vw, 40px); color: var(--zr-text); line-height: 1.05; margin: 6px 0 28px; }
+
+/* occasions */
+.occGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.occCard {
+  padding: 26px 24px;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 240ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.occCard:hover { border-color: var(--zr-gold-dim); transform: translateY(-3px); }
+.occTitle { font-size: 22px; color: var(--zr-gold); line-height: 1.05; }
+.occDesc { font-family: var(--font-body); font-size: 14px; color: var(--zr-body); line-height: 1.65; }
+
+/* details */
+.detailsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.photoWrap { border-radius: 8px; overflow: hidden; border: 1px solid var(--zr-line-hi); }
+.photo { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 3 / 2; }
+.included { display: flex; flex-direction: column; gap: 6px; }
+.list { margin: 0; padding-left: 18px; }
+.listItem { font-family: var(--font-body); font-size: 15px; color: var(--zr-body); line-height: 1.7; margin-bottom: 10px; }
+
+/* cta */
+.ctaSection { background: var(--zr-surface-alt); border-top: 1px solid var(--zr-line); border-bottom: 1px solid var(--zr-line); }
+.ctaInner { display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap; }
+.ctaHeading { font-size: clamp(28px, 3vw, 44px); color: var(--zr-text); line-height: 1; margin-bottom: 12px; }
+.ctaSub { font-family: var(--font-body); font-size: 15px; color: var(--zr-body); line-height: 1.7; max-width: 560px; }
+.ctaActions { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+@media (max-width: 1024px) {
+  .occGrid { grid-template-columns: repeat(2, 1fr); }
+  .detailsGrid { grid-template-columns: 1fr; gap: 28px; }
+  .ctaInner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 768px) {
+  .occGrid { grid-template-columns: 1fr; }
+  .ctaActions { width: 100%; }
+  .ctaActions a { flex: 1; text-align: center; justify-content: center; }
+}

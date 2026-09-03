@@ -174,12 +174,14 @@ export default async function HomePage() {
 
           <RevealGroup variant="up" step={90} className={s.atmoGrid}>
             {[
-              ['Sala Duża', 'koncert na 1000 osób'],
-              ['Klimat', 'wnętrza i scena'],
-              ['Za kulisami', 'backstage i technika'],
-              ['Publiczność', 'najlepsza w mieście'],
-            ].map(([label, hint], i) => (
-              <div key={label} className={'led-grid ' + s.atmoTile + (i === 0 ? ' ' + s.atmoTileWide : '')}>
+              ['/assets/venue/s1.webp', 'Sala Duża', 'scena i rig świetlny'],
+              ['/assets/venue/s3.webp', 'Koncerty', 'pełne światło i dźwięk'],
+              ['/assets/venue/s2.webp', 'Energia', 'show na żywo'],
+              ['/assets/venue/s5.webp', 'Bankiety i gale', 'układ przy stołach'],
+              ['/assets/venue/s4.webp', 'Imprezy firmowe', 'parkiet i scena'],
+            ].map(([photo, label, hint], i) => (
+              <div key={label} className={s.atmoTile + (i === 0 ? ' ' + s.atmoTileWide : '')}>
+                <img src={photo} alt={`${label} — Zaklęte Rewiry`} className={s.atmoImg} />
                 <span className={s.atmoLabel + ' mono'}>{label}</span>
                 <span className={s.atmoHint + ' mono'}>{hint}</span>
               </div>

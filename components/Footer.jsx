@@ -24,6 +24,8 @@ const cols = [
   {
     heading: 'SERWIS',
     items: [
+      { label: 'Wynajem sal', href: '/wynajem' },
+      { label: 'Imprezy okolicznościowe', href: '/imprezy-okolicznosciowe' },
       { label: 'Regulamin klubu', href: '/regulamin' },
       { label: 'Zwroty biletów', href: '/zwroty' },
       { label: 'Dostępność obiektu', href: '/dostepnosc' },

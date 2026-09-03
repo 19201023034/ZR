@@ -11,6 +11,7 @@ export default async function sitemap() {
     ['/repertuar', 0.9, 'daily'],
     ['/bilety', 0.9, 'daily'],
     ['/wynajem', 0.8, 'monthly'],
+    ['/imprezy-okolicznosciowe', 0.7, 'monthly'],
     ['/klub', 0.7, 'monthly'],
     ['/kontakt', 0.6, 'yearly'],
     ['/archiwum', 0.4, 'weekly'],

@@ -70,7 +70,7 @@ export default async function HomePage() {
             </span>
             <TicketButton
               event={todayEvent}
-              style={{ background: '#0C0A08', color: 'var(--zr-gold)', padding: '12px 22px', fontSize: 14 }}
+              style={{ background: 'var(--zr-bg)', color: 'var(--zr-gold)', padding: '12px 22px', fontSize: 14 }}
             />
           </div>
         </div>

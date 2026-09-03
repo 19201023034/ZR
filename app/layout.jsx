@@ -23,6 +23,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
+      <head>
+        {/* apply saved theme before paint — no flash of the wrong theme */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('zr-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}",
+          }}
+        />
+      </head>
       <body>
         <MotionRoot />
         <Header />

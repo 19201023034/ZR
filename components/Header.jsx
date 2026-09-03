@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ThemeToggle from './ThemeToggle';
 import s from './Header.module.css';
 
 const NAV = [
@@ -94,6 +95,8 @@ export default function Header() {
           ))}
         </span>
 
+        <ThemeToggle />
+
         <div className={s.langSwitch}>
           <button className={s.langActive}>PL</button>
           <button className={s.langInactive}>EN</button>
@@ -133,9 +136,12 @@ export default function Header() {
           <Link href="/bilety" className="btn btn-gold" style={{ width: '100%', justifyContent: 'center' }}>
             Kup bilet
           </Link>
-          <div className={s.drawerLang}>
-            <button className={s.langActive}>PL</button>
-            <button className={s.langInactive}>EN</button>
+          <div className={s.drawerBottom}>
+            <div className={s.drawerLang}>
+              <button className={s.langActive}>PL</button>
+              <button className={s.langInactive}>EN</button>
+            </div>
+            <ThemeToggle />
           </div>
         </div>
       </nav>

@@ -3,7 +3,7 @@
   top: 0;
   z-index: 100;
   height: 96px;
-  background: rgba(12, 10, 8, 0.96);
+  background: var(--zr-header-bg);
   border-top: 2px solid var(--zr-gold);
   border-bottom: 1px solid var(--zr-line);
   padding: 0 80px;
@@ -19,7 +19,7 @@
 /* Compacted state once scrolled past the top */
 .scrolled {
   height: 72px;
-  background: rgba(12, 10, 8, 0.86);
+  background: var(--zr-header-bg-sc);
   backdrop-filter: blur(14px) saturate(1.2);
   box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.9);
   border-bottom-color: var(--zr-line-hi);
@@ -277,3 +277,5 @@
 @media (min-width: 1025px) {
   .drawer, .backdrop, .burger { display: none !important; }
 }
+
+.drawerBottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }

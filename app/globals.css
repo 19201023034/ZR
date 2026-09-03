@@ -23,6 +23,10 @@
   --zr-line:        #2C2618;
   --zr-line-hi:     #453B24;
 
+  /* Header surface (own token so the light theme can flip it) */
+  --zr-header-bg:     rgba(12, 10, 8, 0.96);
+  --zr-header-bg-sc:  rgba(12, 10, 8, 0.86);
+
   /* Status */
   --zr-ok:          #6BBF59;
   --zr-warn:        #E0A020;
@@ -33,6 +37,36 @@
   --font-display: 'Anton', sans-serif;
   --font-body:    'Inter', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ═══ LIGHT THEME ══════════════════════════════════════
+   Toggled via <html data-theme="light">. Gold stays the brand accent
+   but darkens so it reads on paper; surfaces and text invert. */
+:root[data-theme="light"] {
+  --zr-bg:          #F6F2E9;
+  --zr-surface:     #FFFFFF;
+  --zr-raised:      #EFEADF;
+  --zr-surface-alt: #F0EBDF;
+
+  --zr-gold:        #B0850A;
+  --zr-gold-hi:     #8F6C05;
+  --zr-gold-dim:    #806413;
+
+  --zr-text:        #1A1712;
+  --zr-body:        #3D372C;
+  --zr-muted:       #6E6858;
+  --zr-faint:       #9A9484;
+
+  --zr-line:        #E4DECF;
+  --zr-line-hi:     #CEC6B2;
+
+  --zr-ok:          #4E9E3E;
+  --zr-warn:        #B07A10;
+  --zr-sold:        #A03838;
+  --zr-sold-text:   #9A2E2E;
+
+  --zr-header-bg:     rgba(246, 242, 233, 0.9);
+  --zr-header-bg-sc:  rgba(246, 242, 233, 0.82);
 }
 
 /* ─── Reset ──────────────────────────────────────────── */
@@ -714,3 +748,11 @@ select:focus-visible {
   [data-tilt] { transform: none !important; }
   [data-tilt]::after { display: none; }
 }
+
+
+/* ─── Light-theme adjustments ────────────────────────── */
+:root[data-theme="light"] body::before { mix-blend-mode: multiply; opacity: 0.05; }
+:root[data-theme="light"] .glow-below { opacity: 0.5; }
+/* the dark map filter only makes sense on the dark theme */
+:root[data-theme="light"] .mapIframe,
+:root[data-theme="light"] [class*="mapIframe"] { filter: none !important; }

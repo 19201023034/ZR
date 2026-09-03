@@ -18,10 +18,12 @@ export default function ImprezyBody() {
       {/* ─── HERO typograficzny (własny charakter, nie kalka głównej) ─── */}
       <section className={'section ' + s.hero}>
         <div className={s.heroInner}>
-          <span className={'section-label ' + s.kicker + ' enter-fade d1'}>Wynajem · imprezy prywatne</span>
-          <h1 className={'display ' + s.heading + ' enter-mask d2'}>
-            Imprezy<br /><em className={s.em}>okolicznościowe</em><br />we Wrocławiu
-          </h1>
+          <div className={s.heroHead}>
+            <span className={'section-label ' + s.kicker + ' enter-fade d1'}>Wynajem · imprezy prywatne</span>
+            <h1 className={'display ' + s.heading + ' enter-mask d2'}>
+              Imprezy<br /><em className={s.em}>okolicznościowe</em><br />we Wrocławiu
+            </h1>
+          </div>
           <div className={s.heroBody + ' enter d3'}>
             <p className={s.lead}>
               Sala na imprezę okolicznościową w klimacie klubu koncertowego — urodziny,

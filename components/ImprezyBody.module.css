@@ -3,12 +3,13 @@
 
 .heroInner {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: 56px;
-  align-items: end;
+  align-items: center;
 }
 
-.kicker { display: block; margin-bottom: 16px; }
+.heroHead { display: flex; flex-direction: column; }
+.kicker { display: block; margin-bottom: 18px; }
 
 .heading {
   font-size: clamp(44px, 6vw, 92px);

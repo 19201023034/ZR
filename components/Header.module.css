@@ -25,7 +25,7 @@
   border-bottom-color: var(--zr-line-hi);
 }
 
-.scrolled .logo img { height: 44px; }
+.scrolled .logoImg { height: 38px; }
 .scrolled .wordmark { font-size: 16px; }
 
 .navLeft,
@@ -50,8 +50,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  white-space: nowrap;
 }
 
 /* "Zaklęte" and "Rewiry" flanking the sygnet */
@@ -66,22 +64,22 @@
 
 .logo:hover .wordmark { color: var(--zr-gold); }
 
-.logo img {
-  height: 56px;
+.logoImg {
+  height: 46px;
   width: auto;
-  align-self: center;
+  display: block;
   transition:
     height    320ms var(--ease-out),
     filter    300ms ease-out,
     transform 300ms var(--ease-spring);
 }
 
-.logo:hover img {
-  transform: scale(1.1) rotate(-3deg);
-  filter: drop-shadow(0 0 14px rgba(252, 204, 0, 0.5));
+.logo:hover .logoImg {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 14px rgba(252, 204, 0, 0.45));
 }
 
-.logo:active img { transform: scale(0.98); }
+.logo:active .logoImg { transform: scale(0.98); }
 
 .navLink {
   position: relative;
@@ -161,14 +159,12 @@
   .navRightLinks { display: none; }
   .langSwitch { display: none; }
   .navRight { gap: 0; }
-  .logo img { height: 40px; }
-  .logo { gap: 9px; }
-  .wordmark { display: none; }
+  .logoImg { height: 36px; }
 }
 
 @media (max-width: 768px) {
   .header { padding: 0 16px; height: 64px; }
-  .logo img { height: 38px; }
+  .logoImg { height: 32px; }
 }
 
 
@@ -202,7 +198,7 @@
 .burgerOpen span:nth-child(2) { opacity: 0; }
 .burgerOpen span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.cta { justify-self: end; }
+.cta { justify-self: end; white-space: nowrap; }
 
 /* ─── Backdrop ───────────────────────────────────────── */
 .backdrop {

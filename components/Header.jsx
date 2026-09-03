@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
@@ -77,9 +76,7 @@ export default function Header() {
       </nav>
 
       <Link href="/" className={s.logo} aria-label="Zaklęte Rewiry — strona główna">
-        <span className={s.wordmark + ' display'} aria-hidden="true">Zaklęte</span>
-        <Image src="/assets/zr-sygnet-gold.png" alt="" width={40} height={45} />
-        <span className={s.wordmark + ' display'} aria-hidden="true">Rewiry</span>
+        <img src="/assets/logo-zr.webp" alt="Zaklęte Rewiry" className={s.logoImg} />
       </Link>
 
       <nav className={s.navRight}>

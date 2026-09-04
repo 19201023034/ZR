@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
-import Ticker from '@/components/Ticker';
 import HeroCarousel from '@/components/HeroCarousel';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
@@ -93,8 +92,6 @@ export default async function HomePage() {
         </div>
       )}
 
-      {/* ─── TICKER ─── */}
-      <Ticker events={upcoming} locale={locale} label={t.home.upcoming} />
 
       {/* ─── HERO — karuzela plakatów ─── */}
       <HeroCarousel events={heroSet} t={t} locale={locale} />
@@ -102,29 +99,66 @@ export default async function HomePage() {
       {/* ─── EVENTS GRID ─── */}
       <EventsGrid events={upcoming} t={t} locale={locale} />
 
-      {/* ─── O KLUBIE + ATMOSFERA ─── */}
-      <section className={'section ' + s.about}>
-        <div className={s.aboutGrid}>
-          <Reveal variant="left" className={s.aboutText}>
-            <span className="section-label">{t.home.aboutLabel}</span>
-            <h2 className={s.aboutHeading + ' display'}>{t.home.aboutHeading}</h2>
-            <p className={s.aboutLead}>{t.home.aboutLead}</p>
-            <Link href="/klub" className="btn btn-outline">{t.home.aboutCta}</Link>
-          </Reveal>
-
-          <RevealGroup variant="up" step={90} className={s.atmoGrid}>
-            {['/assets/venue/s1.webp', '/assets/venue/s3.webp', '/assets/venue/s5.webp'].map((photo, i) => {
-              const [label, hint] = t.home.atmo[i];
-              return (
-              <div key={label} className={s.atmoTile + (i === 0 ? ' ' + s.atmoTileWide : '')}>
-                <img src={photo} alt={`${label} — Zaklęte Rewiry`} className={s.atmoImg} />
-                <span className={s.atmoLabel + ' mono'}>{label}</span>
-                <span className={s.atmoHint + ' mono'}>{hint}</span>
+      {/* ─── SALE ─── */}
+      <section className={'section ' + s.rooms}>
+        <Reveal variant="mask" className={s.blockHead}>
+          <span className="section-label">{t.home.rentalLabel}</span>
+          <h2 className={'display ' + s.blockHeading}>{t.home.roomsHeading}</h2>
+        </Reveal>
+        <RevealGroup variant="up" step={90} className={s.roomGrid}>
+          {Object.keys(ROOMS).map((name, i) => (
+            <article key={name} className={s.roomCard}>
+              <div className={s.roomPhoto + ' led-grid'}>
+                {ROOMS[name].photos?.[0] && (
+                  <img src={ROOMS[name].photos[0]} alt={translateRoom(name, locale)} className={s.roomImg} />
+                )}
               </div>
-              );
-            })}
-          </RevealGroup>
-        </div>
+              <div className={s.roomBody}>
+                <h3 className={'display ' + s.roomName}>{translateRoom(name, locale)}</h3>
+                <p className={s.roomMeta}>
+                  {ROOMS[name].area} m² · {t.home.upTo} {ROOMS[name].capacities.koncert} {t.common.people}
+                  <span className={s.roomPrice}>
+                    {t.ticket.from} {ROOMS[name].priceFrom.toLocaleString(locale === 'en' ? 'en-GB' : 'pl-PL')} {t.home.perDay}
+                  </span>
+                </p>
+                <Link href="/wynajem" className={s.blockBtn}>{t.home.roomsCta}</Link>
+              </div>
+            </article>
+          ))}
+        </RevealGroup>
+      </section>
+
+      {/* ─── TRZY KARTY ─── */}
+      <section className={'section ' + s.cards}>
+        <RevealGroup variant="up" step={90} className={s.cardGrid}>
+          {t.home.cards.map(card => (
+            <article key={card.href} className={s.card}>
+              <div className={s.cardPhoto + ' led-grid'}>
+                <img src={card.photo} alt="" className={s.cardImg} />
+              </div>
+              <div className={s.cardBody}>
+                <h3 className={'display ' + s.cardTitle}>{card.title}</h3>
+                <p className={s.cardText}>{card.text}</p>
+                <Link href={card.href} className={s.blockBtn}>{card.cta}</Link>
+              </div>
+            </article>
+          ))}
+        </RevealGroup>
+      </section>
+
+      {/* ─── W CZYM MOŻEMY POMÓC ─── */}
+      <section className={'section ' + s.help}>
+        <Reveal variant="mask">
+          <h2 className={'display ' + s.blockHeading}>{t.home.helpHeading}</h2>
+        </Reveal>
+        <RevealGroup variant="up" step={40} className={s.helpGrid}>
+          {t.home.help.map(([label, href]) => (
+            <Link key={href + label} href={href} className={s.helpChip}>
+              <span className={s.helpDot} aria-hidden="true" />
+              {label}
+            </Link>
+          ))}
+        </RevealGroup>
       </section>
 
       {/* ─── NUMBERS ─── */}
@@ -142,36 +176,6 @@ export default async function HomePage() {
                 style={{ color: i === 0 ? 'var(--zr-gold)' : 'var(--zr-text)' }}
               />
               <span className={s.statLabel + ' mono'}>{label}</span>
-            </div>
-          ))}
-        </RevealGroup>
-      </section>
-
-      {/* ─── RENTAL BLOCK ─── */}
-      <section className={'section ' + s.rental} style={{ background: 'var(--zr-surface-alt)' }}>
-        <Reveal variant="left" className={s.rentalLeft}>
-          <span className="section-label">{t.home.rentalLabel}</span>
-          <h2 className={s.rentalHeading + ' display'}>{t.home.rentalHeading}</h2>
-          <div className="section-separator" />
-          <p className={s.rentalText}>{t.home.rentalText}</p>
-          <div className={s.rentalCtas}>
-            <Link href="/wynajem" className="btn btn-rental">
-              {t.common.askDate}
-            </Link>
-            <Link href="/wynajem/oferta" className="btn btn-outline-gold">
-              {t.home.rentalPdf}
-            </Link>
-          </div>
-        </Reveal>
-
-        <RevealGroup variant="right" step={100} className={s.rentalRooms}>
-          {Object.entries(ROOMS).map(([name, room], i) => (
-            <div key={name} className={s.rentalRoom + (i === 0 ? ' ' + s.rentalRoomFeatured : '')} data-spotlight="">
-                <h3 className={s.rentalRoomName + ' display'}>{translateRoom(name, locale)}</h3>
-              <div className="mono" style={{ fontSize: 12, lineHeight: 1.9, color: i === 0 ? 'var(--zr-gold-dim)' : 'var(--zr-muted)' }}>
-                {room.area} m² · {t.home.upTo} {room.capacities.koncert} {t.common.people}<br />
-                {t.ticket.from} {room.priceFrom.toLocaleString(locale === 'en' ? 'en-GB' : 'pl-PL')} {t.home.perDay}
-              </div>
             </div>
           ))}
         </RevealGroup>

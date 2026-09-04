@@ -508,3 +508,113 @@
 /* Zdania czyta się szybciej pismem proporcjonalnym — monospace
    zostaje tam, gdzie niesie liczby i etykiety. */
 .proofNote { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }
+
+/* ─── Bloki w układzie MSG: sale, karty, pomoc ─── */
+.blockHead { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+.blockHeading { font-size: clamp(26px, 3.4vw, 40px); color: var(--zr-text); }
+
+/* Przycisk na pełną szerokość karty — u nich zamyka każdy kafel */
+.blockBtn {
+  display: block;
+  margin-top: auto;
+  padding: 13px 18px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--zr-text);
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: border-color 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+
+.blockBtn:hover { border-color: var(--zr-gold); color: var(--zr-gold); }
+
+/* ─── Sale ─── */
+.roomGrid,
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.roomCard,
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--zr-line);
+  background: var(--zr-surface-alt);
+  overflow: hidden;
+}
+
+.roomPhoto,
+.cardPhoto { aspect-ratio: 16 / 9; overflow: hidden; background: var(--zr-raised, var(--zr-surface-alt)); }
+
+.roomImg,
+.cardImg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.roomBody,
+.cardBody { display: flex; flex-direction: column; gap: 10px; padding: 20px; flex: 1; }
+
+.roomName,
+.cardTitle { font-size: 24px; color: var(--zr-text); }
+
+.roomMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--zr-muted);
+  margin: 0 0 6px;
+}
+
+.roomPrice { color: var(--zr-gold-text); font-weight: 600; }
+
+.cardText {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--zr-body);
+  margin: 0 0 8px;
+}
+
+/* ─── W czym możemy pomóc ─── */
+.help { padding-top: 44px; }
+
+.helpGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.helpChip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 1px solid var(--zr-line);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--zr-text);
+  text-decoration: none;
+  transition: border-color 180ms var(--ease-out), background 180ms;
+}
+
+.helpChip:hover { border-color: var(--zr-gold); background: var(--zr-surface-alt); }
+
+.helpDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--zr-gold);
+  flex: none;
+}
+
+@media (max-width: 720px) {
+  .helpChip { padding: 14px 16px; font-size: 14px; }
+}

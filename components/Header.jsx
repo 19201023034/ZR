@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Wordmark from './Wordmark';
+import { IconCalendar } from './EventIcons';
 import ThemeToggle from './ThemeToggle';
 import LangSwitch from './LangSwitch';
 import s from './Header.module.css';
@@ -68,8 +69,14 @@ export default function Header({ locale = 'pl', t }) {
         <span /><span /><span />
       </button>
 
-      <nav className={s.navLeft}>
-        {NAV.slice(0, 3).map(({ href, label }) => (
+      {/* Znak przy lewej krawędzi, nie na środku — cała nawigacja czyta się
+          wtedy jednym ruchem oka od lewej do prawej. */}
+      <Link href="/" className={s.logo} aria-label={t.home}>
+        <Wordmark className={s.logoImg} />
+      </Link>
+
+      <nav className={s.nav}>
+        {NAV.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
@@ -80,31 +87,17 @@ export default function Header({ locale = 'pl', t }) {
         ))}
       </nav>
 
-      <Link href="/" className={s.logo} aria-label={t.home}>
-        <Wordmark className={s.logoImg} />
-      </Link>
-
-      <nav className={s.navRight}>
-        <span className={s.navRightLinks}>
-          {NAV.slice(3).map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={s.navLink + (isActive(pathname, href) ? ' ' + s.active : '')}
-            >
-              {label}
-            </Link>
-          ))}
-        </span>
-
+      <div className={s.tools}>
         <ThemeToggle />
-
         <div className={s.langSwitch}><LangSwitch locale={locale} /></div>
+      </div>
 
-        <Link href="/bilety" className={'btn btn-gold ' + s.cta} style={{ padding: '10px 20px', fontSize: 13 }}>
-          {t.buy}
-        </Link>
-      </nav>
+      {/* Blok biletowy dociśnięty do krawędzi paska — jak przycisk kalendarza
+          u MSG: pełna wysokość, własne tło, nie da się go przeoczyć. */}
+      <Link href="/bilety" className={s.cta}>
+        <IconCalendar className={s.ctaIcon} />
+        <span>{t.buy}</span>
+      </Link>
       </header>
 
       {/* ─── Mobile drawer — kept OUTSIDE <header>, whose backdrop-filter would

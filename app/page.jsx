@@ -3,6 +3,7 @@ import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
 import Ticker from '@/components/Ticker';
+import HeroCarousel from '@/components/HeroCarousel';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
@@ -58,6 +59,13 @@ export default async function HomePage() {
   const t = getDict(locale);
   const todayEvent = all.find(isTodayEvent);
 
+  // Karuzela: wyróżnione wydarzenie idzie na początek, reszta w kolejności dat.
+  // Pięć sztuk — tyle kropek da się jeszcze objąć wzrokiem.
+  const heroSet = [
+    ...(hero ? [hero] : []),
+    ...upcoming.filter(e => e.id !== hero?.id),
+  ].slice(0, 5);
+
   return (
     <>
       <script
@@ -88,89 +96,8 @@ export default async function HomePage() {
       {/* ─── TICKER ─── */}
       <Ticker events={upcoming} locale={locale} label={t.home.upcoming} />
 
-      {/* ─── HERO ─── */}
-      {hero && (
-        <section className={'section ' + s.hero}>
-          {/* The building behind the bill: decorative here, so it carries no alt —
-              the same shot is described properly on /klub.
-              Must sit BEFORE .glow-below, whose sibling rule forces position:relative. */}
-          <div className={s.heroVenue} aria-hidden="true">
-            <img src="/assets/venue/klub.webp" alt="" className={s.heroVenueImg} data-parallax="0.04" />
-            <div className={s.heroVenueScrim} />
-          </div>
-          <span className="glow-below" aria-hidden="true" />
-
-          <div className={s.heroLeft}>
-            <div className={s.heroBadge + ' enter-fade d1'}>
-              <span className={'status-dot status-dot-ok'} />
-              <span className="mono" style={{ fontSize: 12, color: 'var(--zr-ok)', letterSpacing: '0.1em' }}>
-                {hero.featured ? t.home.featured : t.home.nextConcert} · {formatDate(hero.date, locale)}
-              </span>
-            </div>
-
-            <SplitText
-              as="h1"
-              text={hero.artist}
-              immediate
-              delay={180}
-              step={38}
-              className={s.heroArtist + ' display'}
-            />
-
-            <p className={s.heroSub + ' enter d3'}>{translateGenre(hero.genre, locale)}{hero.support ? ` + ${hero.support}` : ''}</p>
-
-            <div className={s.heroData + ' enter d4'}>
-              {[
-                { label: t.common.hall.toUpperCase(), value: translateRoom(hero.venue, locale) },
-                { label: t.common.doors.toUpperCase(), value: hero.doors },
-                { label: t.common.start.toUpperCase(), value: hero.start },
-                { label: t.common.tickets.toUpperCase(), value: hero.priceFrom ? `${t.ticket.from} ${hero.priceFrom} ${t.ticket.currency}` : getStatusLabel(hero, locale), color: getStatusColor(hero.status) },
-              ].map(({ label, value, color }) => (
-                <div key={label} className={s.heroDataItem}>
-                  <span className={s.heroDataLabel + ' mono'}>{label}</span>
-                  <span className={s.heroDataValue + ' mono'} style={color ? { color } : undefined}>{value}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className={s.heroCtas + ' enter d5'}>
-              <TicketButton
-                event={hero}
-                t={t.ticket}
-                magnetic="0.22"
-                label={hero.priceFrom ? `${t.ticket.buy} · ${t.ticket.from} ${hero.priceFrom} ${t.ticket.currency}` : t.ticket.buy}
-                style={{ padding: '18px 34px', fontSize: 18 }}
-              />
-              <Link href="/repertuar" className="btn btn-outline">
-                {t.home.allRepertoire}
-              </Link>
-            </div>
-          </div>
-
-          <div
-            className={s.heroPoster + ' led-grid enter-fade d3'}
-            data-tilt="7"
-          >
-            {(hero.posterPortrait || hero.poster) ? (
-              <img src={hero.posterPortrait || hero.poster} alt={hero.artist} className={s.heroPosterImg} />
-            ) : (
-              <>
-                <div className={s.heroPosterBadge}>
-                  <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold)', border: '1px solid rgba(252,204,0,0.5)', padding: '4px 8px', borderRadius: 3 }}>
-                    {t.home.posterAlt}
-                  </span>
-                </div>
-                <div className={s.heroPosterOverlay}>
-                  <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold-dim)', letterSpacing: '0.14em' }}>
-                    {t.home.posterCity}
-                  </span>
-                  <span className="display" style={{ fontSize: 22, color: 'var(--zr-text)' }}>{hero.artist}</span>
-                </div>
-              </>
-            )}
-          </div>
-        </section>
-      )}
+      {/* ─── HERO — karuzela plakatów ─── */}
+      <HeroCarousel events={heroSet} t={t} locale={locale} />
 
       {/* ─── EVENTS GRID ─── */}
       <EventsGrid events={upcoming} t={t} locale={locale} />

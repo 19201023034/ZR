@@ -1,0 +1,193 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 44px 20px 52px;
+  border-bottom: 1px solid var(--zr-line);
+  background: var(--zr-bg);
+}
+
+/* ─── Plakaty ─── */
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  justify-content: center;
+}
+
+.rail {
+  position: relative;
+  width: min(760px, 100%);
+  aspect-ratio: 16 / 9;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  transition: transform 520ms var(--ease-out), opacity 420ms var(--ease-out);
+  will-change: transform, opacity;
+}
+
+/* Sąsiedzi wystają za krawędź kadru i są przygaszeni — mówią „jest tego
+   więcej", nie odbierając uwagi środkowemu plakatowi. */
+.active { transform: none; opacity: 1; z-index: 2; }
+.prev   { transform: translateX(-72%) scale(.86); opacity: .38; z-index: 1; }
+.next   { transform: translateX(72%)  scale(.86); opacity: .38; z-index: 1; }
+.hidden { transform: scale(.8); opacity: 0; pointer-events: none; z-index: 0; }
+
+.posterLink { display: block; width: 100%; height: 100%; }
+
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--zr-line);
+}
+
+.posterEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--zr-surface-alt);
+  border: 1px solid var(--zr-line);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--zr-faint);
+}
+
+/* ─── Strzałki ─── */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--zr-bg);
+  background: var(--zr-gold);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 180ms var(--ease-out), background 180ms;
+}
+
+.arrow:hover { transform: translateY(-50%) scale(1.08); background: var(--zr-gold-hi); }
+.arrow:focus-visible { outline: 2px solid var(--zr-text); outline-offset: 3px; }
+
+.arrowPrev { left: 0; }
+.arrowNext { right: 0; }
+
+/* ─── Opis ─── */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  max-width: 760px;
+  width: 100%;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--zr-bg);
+  background: var(--zr-gold);
+  padding: 4px 11px;
+  border-radius: 3px;
+}
+
+.title {
+  font-size: clamp(34px, 5.2vw, 62px);
+  line-height: 1;
+  color: var(--zr-text);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.titleLink { color: inherit; text-decoration: none; }
+.titleLink:hover { color: var(--zr-gold); }
+
+.support {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--zr-muted);
+  margin: -4px 0 0;
+}
+
+.when {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--zr-body);
+  margin: 0;
+}
+
+.whenIcon { width: 17px; height: 17px; flex: none; color: var(--zr-gold); }
+.when strong { color: var(--zr-text); font-weight: 600; }
+.whenMuted { color: var(--zr-muted); }
+
+.actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--zr-text);
+  padding: 15px 30px;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 3px;
+  text-decoration: none;
+  transition: border-color 180ms var(--ease-out);
+}
+
+.secondary:hover { border-color: var(--zr-text); }
+
+/* ─── Kropki ─── */
+.dots { display: flex; gap: 9px; margin-top: 8px; }
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--zr-line-hi);
+  cursor: pointer;
+  transition: background 200ms, transform 200ms;
+}
+
+.dot:hover { background: var(--zr-muted); }
+.dotOn { background: var(--zr-gold); transform: scale(1.25); }
+.dot:focus-visible { outline: 2px solid var(--zr-gold); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide { transition: none; }
+}
+
+/* Na wąskim ekranie sąsiedzi tylko zabierają miejsce plakatowi. */
+@media (max-width: 720px) {
+  .hero { padding: 28px 16px 40px; gap: 20px; }
+  .prev, .next { opacity: 0; pointer-events: none; }
+  .arrow { width: 36px; height: 36px; font-size: 22px; }
+  .arrowPrev { left: -4px; }
+  .arrowNext { right: -4px; }
+  .secondary { padding: 13px 22px; }
+}

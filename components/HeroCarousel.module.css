@@ -98,6 +98,26 @@
   width: 100%;
 }
 
+.infoText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  animation: heroTextIn 480ms var(--ease-out) both;
+}
+
+/* Tekst wjeżdża od dołu i się wyłania — remount przez key odpala to przy
+   każdej zmianie plakatu, więc opis „nadąża" za przesuwającym się zdjęciem. */
+@keyframes heroTextIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infoText { animation: none; }
+}
+
 .badge {
   font-family: var(--font-mono);
   font-size: 11.5px;

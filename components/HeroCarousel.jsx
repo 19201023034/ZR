@@ -89,21 +89,23 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
 
       {/* Opis pod plakatem — kolejność jak w bilecie: co, kiedy, gdzie, kup */}
       <div className={s.info} aria-live="polite">
-        {countdown && <span className={s.badge}>{countdown}</span>}
+        <div className={s.infoText} key={ev.id}>
+          {countdown && <span className={s.badge}>{countdown}</span>}
 
-        <h1 className={'display ' + s.title}>
-          <Link href={`/wydarzenie/${ev.slug}`} className={s.titleLink}>{ev.artist}</Link>
-        </h1>
+          <h1 className={'display ' + s.title}>
+            <Link href={`/wydarzenie/${ev.slug}`} className={s.titleLink}>{ev.artist}</Link>
+          </h1>
 
-        {ev.support && <p className={s.support}>+ {ev.support}</p>}
+          {ev.support && <p className={s.support}>+ {ev.support}</p>}
 
-        <p className={s.when}>
-          <IconClock className={s.whenIcon} />
-          <span>
-            <strong>{formatDate(ev.date, locale)}{ev.start ? ` · ${ev.start}` : ''}</strong>
-            <span className={s.whenMuted}> · {translateRoom(ev.venue, locale)}</span>
-          </span>
-        </p>
+          <p className={s.when}>
+            <IconClock className={s.whenIcon} />
+            <span>
+              <strong>{formatDate(ev.date, locale)}{ev.start ? ` · ${ev.start}` : ''}</strong>
+              <span className={s.whenMuted}> · {translateRoom(ev.venue, locale)}</span>
+            </span>
+          </p>
+        </div>
 
         <div className={s.actions}>
           <TicketButton

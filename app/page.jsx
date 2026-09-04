@@ -6,6 +6,7 @@ import HeroCarousel from '@/components/HeroCarousel';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
+import { HELP_ICONS } from '@/components/EventIcons';
 import { ARTISTS_ARCHIVE, ROOMS, VENUE_ADDRESS, isTodayEvent, getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom } from '@/lib/events';
 import { getEvents, getUpcoming, getHeroEvent } from '@/lib/store';
 import { SITE_ORIGIN } from '@/lib/site';
@@ -152,12 +153,17 @@ export default async function HomePage() {
           <h2 className={'display ' + s.blockHeading}>{t.home.helpHeading}</h2>
         </Reveal>
         <RevealGroup variant="up" step={40} className={s.helpGrid}>
-          {t.home.help.map(([label, href]) => (
-            <Link key={href + label} href={href} className={s.helpChip}>
-              <span className={s.helpDot} aria-hidden="true" />
-              {label}
-            </Link>
-          ))}
+          {t.home.help.map(([label, href], i) => {
+            const Icon = HELP_ICONS[i];
+            return (
+              <Link key={href + label} href={href} className={s.helpChip}>
+                <span className={s.helpIcon} aria-hidden="true">
+                  {Icon && <Icon className={s.helpGlyph} />}
+                </span>
+                {label}
+              </Link>
+            );
+          })}
         </RevealGroup>
       </section>
 

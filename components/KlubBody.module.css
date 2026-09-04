@@ -348,3 +348,80 @@
   .ctaActions { width: 100%; }
   .ctaActions a { flex: 1; text-align: center; }
 }
+
+/* ─── Venue photo band ─── */
+/* Sits outside .section on purpose: the shot is a wide night panorama and reads
+   best edge to edge, the way the building actually meets the street. */
+.photoBand {
+  position: relative;
+  border-top: 1px solid var(--zr-line);
+  border-bottom: 1px solid var(--zr-line);
+  overflow: hidden;
+}
+
+.photoFrame {
+  position: relative;
+  aspect-ratio: 21 / 9;
+  max-height: 560px;
+  overflow: hidden;
+  background: var(--zr-surface-alt);
+}
+
+.photoImg {
+  width: 100%;
+  height: 108%;           /* headroom so the parallax shift never bares an edge */
+  object-fit: cover;
+  object-position: center 42%;
+  display: block;
+  will-change: transform;
+}
+
+/* Keeps the caption legible over the bright neon without flattening the shot. */
+.photoScrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(12, 10, 8, 0.85) 0%, rgba(12, 10, 8, 0.15) 32%, transparent 60%),
+    linear-gradient(to bottom, rgba(12, 10, 8, 0.5) 0%, transparent 28%);
+  pointer-events: none;
+}
+
+.photoCaption {
+  position: absolute;
+  left: clamp(20px, 5vw, 64px);
+  bottom: clamp(18px, 3.5vw, 34px);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.photoCaptionMain {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--zr-gold);
+}
+
+.photoCaptionSub {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--zr-muted);
+}
+
+/* A 4:3 crop out of a 2:1 panorama loses the sides, so bias it left — the neon
+   wordmark is the point of the shot. */
+@media (max-width: 720px) {
+  .photoFrame { aspect-ratio: 5 / 4; }
+  .photoImg { object-position: 14% 44%; }
+}
+
+/* The photo stays dark in both themes, so the caption keeps the dark-theme
+   palette — the light theme's darker gold would sink into the bricks. */
+:root[data-theme='light'] .photoCaptionMain { color: #FCCC00; }
+:root[data-theme='light'] .photoCaptionSub { color: rgba(245, 241, 232, 0.7); }
+
+:root[data-theme='light'] .photoScrim {
+  background:
+    linear-gradient(to top, rgba(12, 10, 8, 0.88) 0%, rgba(12, 10, 8, 0.2) 34%, transparent 62%),
+    linear-gradient(to bottom, rgba(12, 10, 8, 0.4) 0%, transparent 28%);
+}

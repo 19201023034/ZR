@@ -30,6 +30,23 @@ export default function KlubBody({ t, locale = 'pl' }) {
         </div>
       </section>
 
+      {/* ─── VENUE PHOTO — full-bleed band between the wordmark and the numbers ─── */}
+      <Reveal variant="fade" className={s.photoBand}>
+        <div className={s.photoFrame}>
+          <img
+            src="/assets/venue/klub.webp"
+            alt={tk.photoAlt}
+            className={s.photoImg}
+            data-parallax="0.06"
+          />
+          <div className={s.photoScrim} aria-hidden="true" />
+          <figcaption className={s.photoCaption}>
+            <span className={'mono ' + s.photoCaptionMain}>{tk.photoCaption}</span>
+            <span className={'mono ' + s.photoCaptionSub}>{tk.photoCaptionSub}</span>
+          </figcaption>
+        </div>
+      </Reveal>
+
       {/* ─── STATS ─── */}
       <RevealGroup as="section" variant="up" step={110} className={s.statsBar}>
         {STAT_VALUES.map((value, i) => (

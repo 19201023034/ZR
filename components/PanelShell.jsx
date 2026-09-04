@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 import PanelEvents from './PanelEvents';
-import PanelNewsletter from './PanelNewsletter';
 import PanelOferta from './PanelOferta';
 import s from './PanelShell.module.css';
 
-const TAB_IDS = ['wydarzenia', 'newsletter', 'oferta'];
+const TAB_IDS = ['wydarzenia', 'oferta'];
 
 export default function PanelShell({ events = [], t, locale = 'pl' }) {
   const [tab, setTab] = useState('wydarzenia');
@@ -36,7 +35,6 @@ export default function PanelShell({ events = [], t, locale = 'pl' }) {
 
       <div className={s.body}>
         {tab === 'wydarzenia' && <PanelEvents />}
-        {tab === 'newsletter' && <PanelNewsletter events={events} locale={locale} />}
         {tab === 'oferta' && <PanelOferta />}
       </div>
     </div>

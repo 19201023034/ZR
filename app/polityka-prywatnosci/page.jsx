@@ -43,13 +43,6 @@ export default async function Page() {
         a przy umowie najmu jej wykonanie (art. 6 ust. 1 lit. b RODO).
       </p>
 
-      <h3>Newsletter</h3>
-      <p>
-        Adres e-mail, na podstawie Twojej zgody (art. 6 ust. 1 lit. a RODO).
-        Zgodę możesz wycofać w każdej chwili — link znajdziesz w każdej wiadomości.
-        Wycofanie nie wpływa na zgodność z prawem przetwarzania sprzed wycofania.
-      </p>
-
       <h3>Bilety</h3>
       <p>
         <strong>Nie sprzedajemy biletów bezpośrednio.</strong> Sprzedaż prowadzi
@@ -69,7 +62,6 @@ export default async function Page() {
       <h2>3. Jak długo przechowujemy dane</h2>
       <ul>
         <li>Korespondencja — do 12 miesięcy od ostatniego kontaktu.</li>
-        <li>Newsletter — do momentu wycofania zgody.</li>
         <li>Dokumentacja umów i księgowa — 5 lat od końca roku podatkowego.</li>
         <li>Monitoring — <TODO>[liczba dni]</TODO> dni.</li>
       </ul>
@@ -78,7 +70,6 @@ export default async function Page() {
       <p>Odbiorcami danych mogą być:</p>
       <ul>
         <li>dostawca hostingu i poczty — <TODO>[nazwa dostawcy]</TODO>,</li>
-        <li>operator systemu newslettera — <TODO>[nazwa dostawcy]</TODO>,</li>
         <li>biuro rachunkowe i kancelaria prawna,</li>
         <li>podmioty uprawnione na podstawie przepisów prawa.</li>
       </ul>
@@ -112,8 +103,7 @@ export default async function Page() {
         możesz zmienić w każdej chwili, czyszcząc dane witryny w przeglądarce.
       </p>
       <p>
-        Podanie danych jest dobrowolne, ale bez nich nie odpowiemy na zapytanie
-        ani nie wyślemy newslettera.
+        Podanie danych jest dobrowolne, ale bez nich nie odpowiemy na zapytanie.
       </p>
     </DocPage>
   );

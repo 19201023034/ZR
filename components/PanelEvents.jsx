@@ -27,8 +27,17 @@ export default function PanelEvents() {
   const [msg, setMsg] = useState(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(null); // which field is uploading
+  const [showMore, setShowMore] = useState(false);
+  // The status normally follows the ticket link, so it only becomes a question
+  // once someone actually overrides it.
+  const [statusTouched, setStatusTouched] = useState(false);
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  // No ticket link means the sale has not opened yet — that is the only thing
+  // the status ever said, so stop asking for it.
+  const autoStatus = form.ticketUrl.trim() ? 'dostepne' : 'przedsprzedaz';
+  const effectiveStatus = statusTouched ? form.status : autoStatus;
 
   async function upload(field, file) {
     if (!file) return;
@@ -75,7 +84,7 @@ export default function PanelEvents() {
       const res = await fetch(editingId ? `/api/events/${editingId}` : '/api/events', {
         method: editingId ? 'PATCH' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, status: effectiveStatus }),
       });
       const json = await res.json();
 
@@ -90,6 +99,8 @@ export default function PanelEvents() {
       });
       setForm(EMPTY);
       setEditingId(null);
+      setStatusTouched(false);
+      setShowMore(false);
       await load();
     } catch {
       setMsg({ type: 'err', text: 'Brak połączenia z serwerem.' });
@@ -110,7 +121,7 @@ export default function PanelEvents() {
   async function remove(id, artist) {
     if (!confirm(`Usunąć „${artist}" z repertuaru? Tej operacji nie można cofnąć.`)) return;
     await fetch(`/api/events/${id}`, { method: 'DELETE' });
-    if (editingId === id) { setEditingId(null); setForm(EMPTY); }
+    if (editingId === id) { setEditingId(null); setForm(EMPTY); setStatusTouched(false); }
     await load();
   }
 
@@ -126,8 +137,37 @@ export default function PanelEvents() {
       ticketUrl: ev.ticketUrl ?? '',
       poster: ev.poster ?? '', posterPortrait: ev.posterPortrait ?? '',
     });
+    setStatusTouched(true);   // an existing entry already has a status worth keeping
+    setShowMore(true);
     setMsg(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function uploadField(field, label, hint) {
+    return (
+      <div className={s.uploadField}>
+        <label className={s.label + ' mono'}>{label}</label>
+        <div className={s.uploadRow}>
+          <div className={'led-grid ' + s.thumb}>
+            {form[field]
+              ? <img src={form[field]} alt="" className={s.thumbImg} />
+              : <span className={s.thumbEmpty + ' mono'}>—</span>}
+          </div>
+          <div className={s.uploadCtl}>
+            <label className={s.uploadBtn}>
+              {uploading === field ? 'Wgrywam…' : form[field] ? 'Zmień zdjęcie' : 'Wgraj zdjęcie'}
+              <input type="file" accept="image/*" hidden
+                     disabled={uploading === field}
+                     onChange={e => upload(field, e.target.files?.[0])} />
+            </label>
+            {form[field] && (
+              <button type="button" className={s.uploadClear} onClick={() => set(field, '')}>Usuń</button>
+            )}
+            <span className={s.uploadHint + ' mono'}>{hint}</span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -145,13 +185,17 @@ export default function PanelEvents() {
             <button
               type="button"
               className={s.ghostBtn}
-              onClick={() => { setEditingId(null); setForm(EMPTY); setMsg(null); }}
+              onClick={() => {
+                setEditingId(null); setForm(EMPTY); setMsg(null);
+                setStatusTouched(false); setShowMore(false);
+              }}
             >
               Anuluj edycję
             </button>
           )}
         </div>
 
+        {/* ─── To, co wpisuje się zawsze ─── */}
         <div className={s.field}>
           <label className={s.label + ' mono'}>Artysta / nazwa *</label>
           <input
@@ -164,130 +208,143 @@ export default function PanelEvents() {
 
         <div className={s.row2}>
           <div className={s.field}>
-            <label className={s.label + ' mono'}>Support</label>
-            <input className={s.input} value={form.support}
-                   onChange={e => set('support', e.target.value)} placeholder="opcjonalnie" />
+            <label className={s.label + ' mono'}>Data *</label>
+            <input type="date" className={s.input} value={form.date}
+                   onChange={e => set('date', e.target.value)} />
+            <span className={s.fieldHint + ' mono'}>
+              Godziny: wejście {form.doors || '—'}, start {form.start || '—'}. Zmienisz je w szczegółach.
+            </span>
           </div>
           <div className={s.field}>
-            <label className={s.label + ' mono'}>Gatunek</label>
+            <label className={s.label + ' mono'}>Sala *</label>
             <div className={s.pills}>
-              {GENRES.map(g => (
-                <button key={g} type="button"
-                  className={s.pill + (form.genre === g ? ' ' + s.pillActive : '')}
-                  onClick={() => set('genre', g)}>{g}</button>
+              {VENUES.map(v => (
+                <button key={v} type="button"
+                  className={s.pill + (form.venue === v ? ' ' + s.pillActive : '')}
+                  onClick={() => set('venue', v)}>{v}</button>
               ))}
             </div>
           </div>
         </div>
 
-        <div className={s.row3}>
-          <div className={s.field}>
-            <label className={s.label + ' mono'}>Data *</label>
-            <input type="date" className={s.input} value={form.date}
-                   onChange={e => set('date', e.target.value)} />
-          </div>
-          <div className={s.field}>
-            <label className={s.label + ' mono'}>Wejście</label>
-            <input type="time" className={s.input} value={form.doors}
-                   onChange={e => set('doors', e.target.value)} />
-          </div>
-          <div className={s.field}>
-            <label className={s.label + ' mono'}>Start</label>
-            <input type="time" className={s.input} value={form.start}
-                   onChange={e => set('start', e.target.value)} />
-          </div>
-        </div>
-
         <div className={s.field}>
-          <label className={s.label + ' mono'}>Sala *</label>
+          <label className={s.label + ' mono'}>Gatunek</label>
           <div className={s.pills}>
-            {VENUES.map(v => (
-              <button key={v} type="button"
-                className={s.pill + (form.venue === v ? ' ' + s.pillActive : '')}
-                onClick={() => set('venue', v)}>{v}</button>
+            {GENRES.map(g => (
+              <button key={g} type="button"
+                className={s.pill + (form.genre === g ? ' ' + s.pillActive : '')}
+                onClick={() => set('genre', g)}>{g}</button>
             ))}
           </div>
         </div>
 
-        <div className={s.row4}>
-          {[
-            ['priceFrom', 'Cena od (zł)'],
-            ['priceDay', 'W dniu (zł)'],
-            ['pool', 'Pula biletów'],
-            ['ageMin', 'Wiek min.'],
-          ].map(([k, label]) => (
-            <div key={k} className={s.field}>
-              <label className={s.label + ' mono'}>{label}</label>
-              <input type="number" min="0" className={s.input} value={form[k]}
-                     onChange={e => set(k, e.target.value)} placeholder="—" />
-            </div>
-          ))}
-        </div>
+        {uploadField('poster', 'Plakat', 'karty na stronie głównej, repertuar, strona wydarzenia')}
 
-        <div className={s.field}>
-          <label className={s.label + ' mono'}>Status biletów</label>
-          <div className={s.pills}>
-            {STATUSES.map(st => (
-              <button key={st.key} type="button"
-                className={s.pill + (form.status === st.key ? ' ' + s.pillActive : '')}
-                style={form.status === st.key
-                  ? { borderColor: getStatusColor(st.key), color: getStatusColor(st.key) }
-                  : undefined}
-                onClick={() => set('status', st.key)}>{st.label}</button>
-            ))}
+        <div className={s.row2wide}>
+          <div className={s.field}>
+            <label className={s.label + ' mono'}>Link do biletów (Stage24)</label>
+            <input
+              type="url"
+              className={s.input}
+              value={form.ticketUrl}
+              onChange={e => set('ticketUrl', e.target.value)}
+              placeholder="https://stage24.pl/wydarzenia/..."
+            />
+            <span className={s.fieldHint + ' mono'}>
+              {statusTouched
+                ? `Status ustawiony ręcznie: ${STATUSES.find(x => x.key === form.status)?.label}.`
+                : form.ticketUrl.trim()
+                  ? 'Status ustawi się sam: dostępne.'
+                  : 'Bez linku przycisk pokaże „Bilety wkrótce”, a status to przedsprzedaż.'}
+            </span>
+          </div>
+          <div className={s.field}>
+            <label className={s.label + ' mono'}>Cena od (zł)</label>
+            <input type="number" min="0" className={s.input} value={form.priceFrom}
+                   onChange={e => set('priceFrom', e.target.value)} placeholder="—" />
           </div>
         </div>
 
-        <div className={s.field}>
-          <label className={s.label + ' mono'}>Link do biletów (Stage24)</label>
-          <input
-            type="url"
-            className={s.input}
-            value={form.ticketUrl}
-            onChange={e => set('ticketUrl', e.target.value)}
-            placeholder="https://stage24.pl/wydarzenia/..."
-          />
-          <span className={s.fieldHint + ' mono'}>
-            Bez linku przycisk pokazuje „Bilety wkrótce" zamiast prowadzić donikąd.
+        {/* ─── Reszta: potrzebna rzadko, więc domyślnie schowana ─── */}
+        <button
+          type="button"
+          className={s.moreToggle + (showMore ? ' ' + s.moreToggleOpen : '')}
+          aria-expanded={showMore}
+          onClick={() => setShowMore(o => !o)}
+        >
+          <span className={s.moreIcon} aria-hidden="true" />
+          {showMore ? 'Ukryj szczegóły' : 'Więcej szczegółów'}
+          <span className={s.moreHint + ' mono'}>
+            support, godziny, status, opis, plakat pionowy
           </span>
-        </div>
+        </button>
 
-        <div className={s.field}>
-          <label className={s.label + ' mono'}>Opis</label>
-          <textarea className={s.textarea} rows={3} value={form.description}
-                    onChange={e => set('description', e.target.value)}
-                    placeholder="Krótki opis wydarzenia na stronę biletu." />
-        </div>
-
-        <div className={s.uploads}>
-          {[
-            ['poster', 'Plakat (poziomy 16:9)', 'karty, repertuar, strona wydarzenia'],
-            ['posterPortrait', 'Plakat pionowy (opcjonalny)', 'duży kafel na stronie głównej'],
-          ].map(([field, label, hint]) => (
-            <div key={field} className={s.uploadField}>
-              <label className={s.label + ' mono'}>{label}</label>
-              <div className={s.uploadRow}>
-                <div className={'led-grid ' + s.thumb}>
-                  {form[field]
-                    ? <img src={form[field]} alt="" className={s.thumbImg} />
-                    : <span className={s.thumbEmpty + ' mono'}>—</span>}
-                </div>
-                <div className={s.uploadCtl}>
-                  <label className={s.uploadBtn}>
-                    {uploading === field ? 'Wgrywam…' : form[field] ? 'Zmień zdjęcie' : 'Wgraj zdjęcie'}
-                    <input type="file" accept="image/*" hidden
-                           disabled={uploading === field}
-                           onChange={e => upload(field, e.target.files?.[0])} />
-                  </label>
-                  {form[field] && (
-                    <button type="button" className={s.uploadClear} onClick={() => set(field, '')}>Usuń</button>
-                  )}
-                  <span className={s.uploadHint + ' mono'}>{hint}</span>
-                </div>
+        {showMore && (
+          <div className={s.more}>
+            <div className={s.row3}>
+              <div className={s.field}>
+                <label className={s.label + ' mono'}>Support</label>
+                <input className={s.input} value={form.support}
+                       onChange={e => set('support', e.target.value)} placeholder="opcjonalnie" />
+              </div>
+              <div className={s.field}>
+                <label className={s.label + ' mono'}>Wejście</label>
+                <input type="time" className={s.input} value={form.doors}
+                       onChange={e => set('doors', e.target.value)} />
+              </div>
+              <div className={s.field}>
+                <label className={s.label + ' mono'}>Start</label>
+                <input type="time" className={s.input} value={form.start}
+                       onChange={e => set('start', e.target.value)} />
               </div>
             </div>
-          ))}
-        </div>
+
+            <div className={s.row3}>
+              {[
+                ['priceDay', 'W dniu (zł)'],
+                ['pool', 'Pula biletów'],
+                ['ageMin', 'Wiek min.'],
+              ].map(([k, label]) => (
+                <div key={k} className={s.field}>
+                  <label className={s.label + ' mono'}>{label}</label>
+                  <input type="number" min="0" className={s.input} value={form[k]}
+                         onChange={e => set(k, e.target.value)} placeholder="—" />
+                </div>
+              ))}
+            </div>
+
+            <div className={s.field}>
+              <label className={s.label + ' mono'}>Status biletów</label>
+              <div className={s.pills}>
+                {STATUSES.map(st => (
+                  <button key={st.key} type="button"
+                    className={s.pill + (effectiveStatus === st.key ? ' ' + s.pillActive : '')}
+                    style={effectiveStatus === st.key
+                      ? { borderColor: getStatusColor(st.key), color: getStatusColor(st.key) }
+                      : undefined}
+                    onClick={() => { setStatusTouched(true); set('status', st.key); }}>{st.label}</button>
+                ))}
+              </div>
+              <span className={s.fieldHint + ' mono'}>
+                {statusTouched
+                  ? 'Ustawiony ręcznie.'
+                  : 'Wynika z linku do biletów — kliknij, żeby nadpisać.'}
+              </span>
+            </div>
+
+            <div className={s.field}>
+              <label className={s.label + ' mono'}>Opis</label>
+              <textarea className={s.textarea} rows={3} value={form.description}
+                        onChange={e => set('description', e.target.value)}
+                        placeholder="Krótki opis wydarzenia na stronę biletu." />
+              <span className={s.fieldHint + ' mono'}>
+                Bez opisu strona wydarzenia jest chuda i słabiej się pozycjonuje.
+              </span>
+            </div>
+
+            {uploadField('posterPortrait', 'Plakat pionowy (opcjonalny)', 'duży kafel na stronie głównej')}
+          </div>
+        )}
 
         <div className={s.formFoot}>
           <button type="submit" className="btn btn-gold" disabled={!canSave}>

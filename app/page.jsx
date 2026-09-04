@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
-import NewsletterForm from '@/components/NewsletterForm';
 import Ticker from '@/components/Ticker';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
@@ -291,14 +290,6 @@ export default async function HomePage() {
         </RevealGroup>
       </section>
 
-      {/* ─── NEWSLETTER ─── */}
-      <section className={'section ' + s.newsletter}>
-        <Reveal variant="mask" className={s.newsletterInfo}>
-          <h2 className={s.newsletterTitle + ' display'}>{t.home.newsletterTitle}</h2>
-          <p className={s.newsletterSub}>{t.home.newsletterSub}</p>
-        </Reveal>
-        <NewsletterForm t={t.newsletter} />
-      </section>
     </>
   );
 }

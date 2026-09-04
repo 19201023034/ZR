@@ -37,8 +37,8 @@
 }
 
 .row2 { display: grid; grid-template-columns: 1fr 1.4fr; gap: 18px; align-items: start; }
+.row2wide { display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; align-items: start; }
 .row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.row4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
 .input, .textarea {
   background: var(--zr-raised);
@@ -207,7 +207,6 @@
 @media (max-width: 1024px) {
   .form, .list { padding-left: 40px; padding-right: 40px; }
   .row2, .row3 { grid-template-columns: 1fr 1fr; }
-  .row4 { grid-template-columns: repeat(2, 1fr); }
   .row { grid-template-columns: 34px 1fr auto; row-gap: 10px; }
   .rowDate { grid-column: 2 / -1; }
   .rowStatus { grid-column: 2 / 3; width: auto; }
@@ -215,7 +214,7 @@
 
 @media (max-width: 768px) {
   .form, .list { padding-left: 20px; padding-right: 20px; }
-  .row2, .row3, .row4 { grid-template-columns: 1fr; }
+  .row2, .row2wide, .row3 { grid-template-columns: 1fr; }
   .artistInput { font-size: 22px; }
   .formTitle { font-size: 26px; }
   .row { grid-template-columns: 30px 1fr; }
@@ -236,7 +235,6 @@
 .rowTicketMissing { color: var(--zr-warn); }
 
 /* ─── Poster upload ──────────────────────────────────── */
-.uploads { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
 .uploadField { display: flex; flex-direction: column; gap: 7px; }
 
@@ -288,4 +286,69 @@
 
 .uploadHint { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.04em; }
 
-@media (max-width: 1024px) { .uploads { grid-template-columns: 1fr; } }
+
+/* ─── Rozwijane szczegóły ─── */
+/* The form asks for three things most of the time; everything else lives
+   behind this toggle so the common path is short. */
+.moreToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 0;
+  margin: 4px 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--zr-line);
+  border-bottom: 1px solid var(--zr-line);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--zr-text);
+  cursor: pointer;
+  text-align: left;
+  transition: color .18s ease;
+}
+
+.moreToggle:hover { color: var(--zr-gold); }
+
+.moreIcon {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  flex: none;
+}
+
+.moreIcon::before,
+.moreIcon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+.moreIcon::before { inset: 5px 0 5px 0; height: 1px; }
+.moreIcon::after { inset: 0 5px 0 5px; width: 1px; }
+
+/* the vertical stroke collapses, so the plus turns into a minus */
+.moreToggleOpen .moreIcon::after { transform: scaleY(0); opacity: 0; }
+
+.moreHint {
+  margin-left: auto;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--zr-faint);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.more {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 4px 0 8px;
+}
+
+@media (max-width: 720px) {
+  .moreHint { display: none; }
+}

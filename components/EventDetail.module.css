@@ -150,3 +150,85 @@
   .othersGrid { grid-template-columns: 1fr; }
   .practicalRow { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* ─── Nagłówek wydarzenia ─── */
+.badgeRow { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+/* Plakietka „jutro" / „za 5 dni" — pierwsza rzecz, którą widać przy tytule */
+.countdownBadge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--zr-bg);
+  background: var(--zr-gold);
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.keyFacts { display: flex; flex-direction: column; gap: 11px; margin-top: 4px; }
+
+.keyLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--zr-body);
+  margin: 0;
+}
+
+.keyIcon { width: 17px; height: 17px; flex: none; margin-top: 2px; color: var(--zr-gold); }
+.keyStrong { color: var(--zr-text); font-weight: 600; }
+.keyMuted { color: var(--zr-muted); }
+
+.calLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--zr-gold-text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.calLink:hover { border-bottom-color: currentColor; }
+
+.tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.tag {
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--zr-muted);
+  border: 1px solid var(--zr-line);
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+
+/* ─── „Zanim przyjdziesz" z ikonami ─── */
+.practicalRow {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 4px 12px;
+  align-items: start;
+  padding: 14px 0;
+}
+
+.practicalIcon { grid-row: span 2; display: flex; align-items: flex-start; justify-content: center; padding-top: 2px; }
+.practicalGlyph { width: 22px; height: 22px; color: var(--zr-gold); }
+
+.practicalTerm {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--zr-text);
+  letter-spacing: 0;
+  text-transform: none;
+}

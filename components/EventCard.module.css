@@ -176,3 +176,28 @@
 }
 
 :root[data-theme='light'] .countdownSoon { border-color: rgba(133, 98, 0, 0.35); }
+
+/* ─── Para przycisków ─── */
+/* Sama nazwa artysty nie mówi, że wydarzenie ma własną stronę. Drugi przycisk
+   robi to jawnym — wzorzec z serwisów biletowych, gdzie każdy wiersz ma
+   „Szczegóły" obok „Kup bilet". */
+.actions { display: inline-flex; align-items: center; gap: 8px; }
+
+.detailsBtn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--zr-text);
+  padding: 10px 16px;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+
+.detailsBtn:hover { border-color: var(--zr-text); }
+
+@media (max-width: 480px) {
+  .detailsBtn { display: none; }   /* na wąskim ekranie liczy się jeden cel */
+}

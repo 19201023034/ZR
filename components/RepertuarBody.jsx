@@ -107,7 +107,15 @@ function EventRow({ event, t, locale }) {
           {event.support && <span className={s.support}>+ {event.support}</span>}
           <span className={s.venue}>{translateRoom(event.venue, locale)}</span>
           {/* godziny schodzą tu z osobnej kolumny — liczą się dopiero po decyzji */}
-          {event.doors && <span className={s.time + ' mono'}>{t.repertuar.doors} {event.doors}</span>}
+          {event.doors && (
+            <span className={s.time + ' mono'}>
+              <svg className={s.clock} viewBox="0 0 14 14" aria-hidden="true">
+                <circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" strokeWidth="1.2" />
+                <path d="M7 3.6V7l2.4 1.6" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              </svg>
+              {event.doors}
+            </span>
+          )}
           {event.ageMin && <span className={s.age + ' mono'}>{event.ageMin}+</span>}
         </div>
       </div>
@@ -129,7 +137,12 @@ function EventRow({ event, t, locale }) {
           {sold ? '—' : event.priceFrom ? `${t.ticket.from} ${event.priceFrom} ${t.ticket.currency}` : '—'}
         </span>
 
-        <TicketButton event={event} t={t.ticket} style={{ padding: '11px 22px', fontSize: 14 }} />
+        <div className={s.actions}>
+          <Link href={`/wydarzenie/${event.slug}`} className={s.detailsBtn}>
+            {t.common.details}
+          </Link>
+          <TicketButton event={event} t={t.ticket} style={{ padding: '11px 22px', fontSize: 14 }} />
+        </div>
       </div>
     </div>
   );

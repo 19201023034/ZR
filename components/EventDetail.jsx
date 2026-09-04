@@ -1,10 +1,40 @@
 import Link from 'next/link';
+import { IconPin, IconClock, IconCalendar, PRACTICAL_ICONS } from './EventIcons';
 import TicketButton from './TicketButton';
-import { getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom } from '@/lib/events';
+import { getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom, countdownLabel, VENUE_ADDRESS } from '@/lib/events';
 import s from './EventDetail.module.css';
+
+/**
+ * Plik .ics składany w locie — kalendarz gościa dostaje gotowy wpis.
+ *
+ * Czas podajemy jako lokalny z TZID zamiast doklejać przesunięcie do DTSTART:
+ * forma „20261212T200000+0100" nie jest poprawna w iCalendar i część klientów
+ * po cichu ją odrzuca. Zamiast DTEND dajemy DURATION, bo końca koncertu
+ * i tak nie znamy.
+ */
+function icsHref(event) {
+  const day = (event.date || '').replace(/-/g, '');
+  const time = (event.start || '20:00').replace(':', '') + '00';
+  const esc = v => String(v).replace(/([,;\\])/g, '\\$1');
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Zaklete Rewiry//PL',
+    'BEGIN:VEVENT',
+    `UID:${event.slug}@zakleterewiry.pl`,
+    `DTSTART;TZID=Europe/Warsaw:${day}T${time}`,
+    'DURATION:PT3H',
+    `SUMMARY:${esc(event.artist)}`,
+    `LOCATION:${esc(`Zaklęte Rewiry, ${VENUE_ADDRESS.street}, ${VENUE_ADDRESS.city}`)}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ];
+  return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n'));
+}
 
 export default function EventDetail({ event, others = [], t, locale = 'pl' }) {
   const sold = event.status === 'wyprzedane';
+  const countdown = sold ? null : countdownLabel(event.daysUntil, locale, 60);
 
   return (
     <>
@@ -19,14 +49,17 @@ export default function EventDetail({ event, others = [], t, locale = 'pl' }) {
             <span>{formatDate(event.date, locale)}</span>
           </nav>
 
-          <div className={s.statusRow + ' enter-fade d1'}>
-            <span className={'status-dot status-dot-' + (
-              event.status === 'dostepne' ? 'ok'
-                : event.status === 'ostatnie' ? 'warn'
-                : event.status === 'wyprzedane' ? 'sold' : 'pre'
-            )} />
-            <span className={'mono ' + s.statusText} style={{ color: getStatusColor(event.status) }}>
-              {getStatusLabel(event, locale)}
+          <div className={s.badgeRow + ' enter-fade d1'}>
+            {countdown && <span className={s.countdownBadge}>{countdown}</span>}
+            <span className={s.statusRow}>
+              <span className={'status-dot status-dot-' + (
+                event.status === 'dostepne' ? 'ok'
+                  : event.status === 'ostatnie' ? 'warn'
+                  : event.status === 'wyprzedane' ? 'sold' : 'pre'
+              )} />
+              <span className={'mono ' + s.statusText} style={{ color: getStatusColor(event.status) }}>
+                {getStatusLabel(event, locale)}
+              </span>
             </span>
           </div>
 
@@ -36,20 +69,28 @@ export default function EventDetail({ event, others = [], t, locale = 'pl' }) {
             <p className={s.support + ' enter d3'}>+ {event.support}</p>
           )}
 
-          <div className={s.facts + ' enter d4'}>
-            {[
-              [t.common.date, formatDate(event.date, locale)],
-              [t.common.doors, event.doors || '—'],
-              [t.common.start, event.start || '—'],
-              [t.common.hall, translateRoom(event.venue, locale)],
-              [t.common.genre, translateGenre(event.genre, locale)],
-              ...(event.ageMin ? [[t.common.age, `${event.ageMin}+`]] : []),
-            ].map(([label, value]) => (
-              <div key={label} className={s.fact}>
-                <span className={s.factLabel + ' mono'}>{label}</span>
-                <span className={s.factValue + ' mono'}>{value}</span>
-              </div>
-            ))}
+          {/* Miejsce i czas jako dwie czytelne linie, nie siatka etykiet */}
+          <div className={s.keyFacts + ' enter d4'}>
+            <p className={s.keyLine}>
+              <IconPin className={s.keyIcon} />
+              <span>{translateRoom(event.venue, locale)} · {VENUE_ADDRESS.street}, {VENUE_ADDRESS.city}</span>
+            </p>
+            <p className={s.keyLine}>
+              <IconClock className={s.keyIcon} />
+              <span>
+                <strong className={s.keyStrong}>{formatDate(event.date, locale)}{event.start ? ` · ${event.start}` : ''}</strong>
+                {event.doors && <span className={s.keyMuted}> · {t.event.doorsShort} {event.doors}</span>}
+              </span>
+            </p>
+            <a href={icsHref(event)} download={`${event.slug}.ics`} className={s.calLink}>
+              <IconCalendar className={s.keyIcon} />
+              {t.event.addToCalendar}
+            </a>
+          </div>
+
+          <div className={s.tags + ' enter d4'}>
+            <span className={s.tag + ' mono'}>{translateGenre(event.genre, locale)}</span>
+            {event.ageMin && <span className={s.tag + ' mono'}>{event.ageMin}+</span>}
           </div>
 
           <div className={s.ctaRow + ' enter d5'}>
@@ -86,12 +127,18 @@ export default function EventDetail({ event, others = [], t, locale = 'pl' }) {
           <div className={s.bodyRight}>
             <span className="section-label">{t.event.before}</span>
             <dl className={s.practical}>
-              {t.event.practical.map(([term, desc]) => (
-                <div key={term} className={s.practicalRow}>
-                  <dt className={s.practicalTerm + ' mono'}>{term}</dt>
-                  <dd className={s.practicalDesc}>{desc}</dd>
-                </div>
-              ))}
+              {t.event.practical.map(([term, desc], i) => {
+                const Icon = PRACTICAL_ICONS[i];
+                return (
+                  <div key={term} className={s.practicalRow}>
+                    <span className={s.practicalIcon} aria-hidden="true">
+                      {Icon && <Icon className={s.practicalGlyph} />}
+                    </span>
+                    <dt className={s.practicalTerm}>{term}</dt>
+                    <dd className={s.practicalDesc}>{desc}</dd>
+                  </div>
+                );
+              })}
             </dl>
           </div>
         </div>

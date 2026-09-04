@@ -267,3 +267,28 @@
 
 /* Godzina wejścia zeszła z osobnej kolumny do metadanych pod nazwą */
 .time { font-size: 12px; color: var(--zr-muted); letter-spacing: 0.04em; }
+
+/* ─── Para przycisków w wierszu ─── */
+.actions { display: flex; align-items: center; gap: 10px; }
+
+.detailsBtn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--zr-text);
+  padding: 11px 18px;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 180ms var(--ease-out);
+}
+
+.detailsBtn:hover { border-color: var(--zr-text); }
+
+@media (max-width: 900px) {
+  .detailsBtn { display: none; }
+}
+
+.time { display: inline-flex; align-items: center; gap: 5px; }
+.clock { width: 13px; height: 13px; flex: none; opacity: 0.75; }

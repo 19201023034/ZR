@@ -2,7 +2,6 @@ import Link from 'next/link';
 import TicketButton from './TicketButton';
 import { getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom, countdownLabel } from '@/lib/events';
 import s from './EventCard.module.css';
-
 export default function EventCard({ event, t, locale = 'pl' }) {
   const sold = event.status === 'wyprzedane';
   const statusColor = getStatusColor(event.status);
@@ -58,7 +57,12 @@ export default function EventCard({ event, t, locale = 'pl' }) {
         <span className={s.price} style={{ color: sold ? 'var(--zr-faint)' : 'var(--zr-text)' }}>
           {sold ? '—' : event.priceFrom ? `${t.ticket.from} ${event.priceFrom} ${t.ticket.currency}` : t.ticket.entrySoon}
         </span>
-        <TicketButton event={event} t={t.ticket} style={{ padding: '10px 18px', fontSize: 13 }} />
+        <span className={s.actions}>
+          <Link href={`/wydarzenie/${event.slug}`} className={s.detailsBtn}>
+            {t.common.details}
+          </Link>
+          <TicketButton event={event} t={t.ticket} style={{ padding: '10px 18px', fontSize: 13 }} />
+        </span>
       </div>
     </article>
   );

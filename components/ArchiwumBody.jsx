@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { ARTISTS_ARCHIVE, formatDate } from '@/lib/events';
+import { ARTISTS_ARCHIVE, formatDate, translateGenre, translateRoom } from '@/lib/events';
 import s from './ArchiwumBody.module.css';
 
-export default function ArchiwumBody({ past = [] }) {
+export default function ArchiwumBody({ past = [], t, locale = 'pl' }) {
+  const ta = t.archiwum;
   const byYear = past.reduce((acc, e) => {
     const y = e.date.slice(0, 4);
     (acc[y] ??= []).push(e);
@@ -13,12 +14,9 @@ export default function ArchiwumBody({ past = [] }) {
   return (
     <>
       <section className={'section ' + s.intro}>
-        <span className="section-label enter-fade d1">Archiwum</span>
-        <h1 className={'display ' + s.heading + ' enter-mask d2'}>Grali u nas</h1>
-        <p className={s.sub + ' enter d3'}>
-          Ponad dekada koncertów przy Krakowskiej 100. Poniżej wydarzenia, które
-          już się odbyły, oraz artyści, którzy przewinęli się przez naszą scenę.
-        </p>
+        <span className="section-label enter-fade d1">{ta.label}</span>
+        <h1 className={'display ' + s.heading + ' enter-mask d2'}>{ta.title}</h1>
+        <p className={s.sub + ' enter d3'}>{ta.sub}</p>
       </section>
 
       {years.length > 0 ? (
@@ -35,9 +33,9 @@ export default function ArchiwumBody({ past = [] }) {
                     {e.poster && <img src={e.poster} alt={e.artist} className={s.posterImg} />}
                   </div>
                   <div className={s.cardBody}>
-                    <span className={s.rowDate + ' mono'}>{formatDate(e.date)}</span>
+                    <span className={s.rowDate + ' mono'}>{formatDate(e.date, locale)}</span>
                     <span className={'display ' + s.rowArtist}>{e.artist}</span>
-                    <span className={s.rowMeta + ' mono'}>{e.genre} · {e.venue}</span>
+                    <span className={s.rowMeta + ' mono'}>{translateGenre(e.genre, locale)} · {translateRoom(e.venue, locale)}</span>
                   </div>
                 </Link>
               ))}
@@ -46,15 +44,13 @@ export default function ArchiwumBody({ past = [] }) {
         ))
       ) : (
         <section className="section">
-          <p className={s.empty + ' mono'}>
-            Archiwum wydarzeń jest w budowie — starsze koncerty dopiero przenosimy do systemu.
-          </p>
+          <p className={s.empty + ' mono'}>{ta.empty}</p>
         </section>
       )}
 
       <section className={'section ' + s.artistsSection}>
-        <span className="section-label">Wybrani artyści</span>
-        <h2 className={'display ' + s.artistsHeading}>Na naszej scenie</h2>
+        <span className="section-label">{ta.artistsLabel}</span>
+        <h2 className={'display ' + s.artistsHeading}>{ta.artistsHeading}</h2>
         <div className={s.artists}>
           {ARTISTS_ARCHIVE.map(name => (
             <span key={name} className={'display ' + s.artistName}>{name}</span>
@@ -64,10 +60,10 @@ export default function ArchiwumBody({ past = [] }) {
 
       <section className={'section ' + s.cta}>
         <div className={s.ctaInner}>
-          <h2 className={'display ' + s.ctaHeading}>Chcesz zagrać u nas?</h2>
+          <h2 className={'display ' + s.ctaHeading}>{ta.ctaHeading}</h2>
           <div className={s.ctaActions}>
-            <Link href="/kontakt" className="btn btn-gold">Wyślij propozycję</Link>
-            <Link href="/repertuar" className="btn btn-outline">Nadchodzące</Link>
+            <Link href="/kontakt" className="btn btn-gold">{ta.ctaSend}</Link>
+            <Link href="/repertuar" className="btn btn-outline">{ta.ctaUpcoming}</Link>
           </div>
         </div>
       </section>

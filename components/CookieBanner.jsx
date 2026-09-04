@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import s from './CookieBanner.module.css';
 
-export default function CookieBanner() {
+export default function CookieBanner({ t }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -27,18 +27,18 @@ export default function CookieBanner() {
   return (
     <div className={s.banner} role="dialog" aria-label="Cookies">
       <div className={s.content}>
-        <p className={s.title}>Cookies</p>
+        <p className={s.title}>{t.title}</p>
         <p className={s.text}>
-          Używamy plików cookies do analizy ruchu i poprawy działania strony.{' '}
-          <a href="/polityka-prywatnosci" className={s.link}>Ustawienia szczegółowe →</a>
+          {t.text}{' '}
+          <a href="/polityka-prywatnosci" className={s.link}>{t.settings}</a>
         </p>
       </div>
       <div className={s.actions}>
         <button className="btn btn-outline" onClick={reject} style={{ minWidth: 160, padding: '14px 28px', fontSize: 14, fontFamily: 'var(--font-body)', fontWeight: 700, textTransform: 'none', letterSpacing: '0.01em' }}>
-          Odrzucam
+          {t.decline}
         </button>
         <button className="btn btn-outline-gold" onClick={accept} style={{ minWidth: 160, padding: '14px 28px', fontSize: 14 }}>
-          Akceptuję
+          {t.accept}
         </button>
       </div>
     </div>

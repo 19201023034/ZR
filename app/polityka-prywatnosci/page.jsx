@@ -1,4 +1,6 @@
 import DocPage from '@/components/DocPage';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 
 export const metadata = {
   title: 'Polityka prywatności',
@@ -7,10 +9,13 @@ export const metadata = {
 
 const TODO = ({ children }) => <span className="todo">{children}</span>;
 
-export default function Page() {
+export default async function Page() {
+  const t = getDict(await getLocale()).docs;
   return (
     <DocPage
-      label="Dokumenty"
+      t={t}
+      plOnly
+      label={t.documents}
       title="Polityka prywatności"
       updated="2 września 2026"
       lead="Jak przetwarzamy Twoje dane osobowe, na jakiej podstawie i jakie masz z tego tytułu prawa."

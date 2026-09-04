@@ -1,4 +1,6 @@
 import DocPage from '@/components/DocPage';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 import Link from 'next/link';
 
 export const metadata = {
@@ -6,10 +8,13 @@ export const metadata = {
   description: 'Zasady uczestnictwa w wydarzeniach w CKR Zaklęte Rewiry, Wrocław.',
 };
 
-export default function Page() {
+export default async function Page() {
+  const t = getDict(await getLocale()).docs;
   return (
     <DocPage
-      label="Dokumenty"
+      t={t}
+      plOnly
+      label={t.documents}
       title="Regulamin obiektu"
       updated="2 września 2026"
       lead="Zasady obowiązujące wszystkich uczestników wydarzeń w Zaklętych Rewirach. Wejście na teren obiektu oznacza ich akceptację."

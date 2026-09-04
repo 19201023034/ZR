@@ -4,63 +4,27 @@ import { useState } from 'react';
 import Reveal, { RevealGroup } from './Reveal';
 import s from './KontaktBody.module.css';
 
-const TOPICS = ['Bilety', 'Booking', 'Wynajem sali', 'Prasa'];
-
-const DEPARTMENTS = [
-  {
-    name: 'BILETY',
-    desc: 'Zamówienia, faktury,\nzwroty, przepisanie wejściówki',
-    email: 'bilety@zakletyrewiry.pl',
-    sla: 'Tego samego dnia',
-    slaOk: true,
-    featured: true,
-  },
-  {
-    name: 'BOOKING',
-    desc: 'Propozycje koncertów,\nriderzy, terminy dla agencji',
-    email: 'booking@zakletyrewiry.pl',
-    sla: 'Do 5 dni roboczych',
-    slaOk: false,
-  },
-  {
-    name: 'WYNAJEM',
-    desc: 'Gale, konferencje,\nwycena, dostępność',
-    email: 'wynajem@zakletyrewiry.pl',
-    sla: 'W 24 godziny',
-    slaOk: false,
-  },
-  {
-    name: 'PRASA',
-    desc: 'Akredytacje, zdjęcia,\nmateriały, patronaty',
-    email: 'prasa@zakletyrewiry.pl',
-    sla: 'Do 3 dni przed wydarzeniem',
-    slaOk: false,
-  },
+// Addresses and styling stay here; every string comes from the dictionary and is
+// paired to a department by position.
+const EMAILS = [
+  'bilety@zakletyrewiry.pl',
+  'booking@zakletyrewiry.pl',
+  'wynajem@zakletyrewiry.pl',
+  'prasa@zakletyrewiry.pl',
 ];
+const DIR_STYLES = [
+  { color: 'var(--zr-gold)', bg: 'rgba(252,204,0,0.15)' },
+  { color: 'var(--zr-muted)', bg: 'transparent' },
+  { color: 'var(--zr-muted)', bg: 'transparent' },
+  { color: 'var(--zr-muted)', bg: 'transparent' },
+  { color: 'var(--zr-muted)', bg: 'transparent' },
+];
+// index 2 is venue hire — the only topic that asks for a date and headcount
+const HIRE_TOPIC = 2;
 
-const TOPICEMAILS = {
-  Bilety: 'bilety@zakletyrewiry.pl',
-  Booking: 'booking@zakletyrewiry.pl',
-  'Wynajem sali': 'wynajem@zakletyrewiry.pl',
-  Prasa: 'prasa@zakletyrewiry.pl',
-};
-
-const TOPICSLA = {
-  Bilety: 'Tego samego dnia',
-  Booking: 'Do 5 dni roboczych',
-  'Wynajem sali': 'W 24 godziny',
-  Prasa: 'Do 3 dni przed wydarzeniem',
-};
-
-const TOPICPLACEHOLDER = {
-  Bilety: 'Numer zamówienia, problem z biletem…',
-  Booking: 'Nazwa artysty, proponowany termin, link do EPK…',
-  'Wynajem sali': 'Rodzaj wydarzenia, liczba gości, preferowany termin…',
-  Prasa: 'Nazwa medium, rodzaj akredytacji, wydarzenie…',
-};
-
-export default function KontaktBody() {
-  const [topic, setTopic] = useState('Bilety');
+export default function KontaktBody({ t }) {
+  const tk = t.kontakt;
+  const [topic, setTopic] = useState(0);
   const [form, setForm] = useState({ email: '', message: '', rodo: false });
 
   return (
@@ -68,20 +32,15 @@ export default function KontaktBody() {
       {/* ─── HERO ─── */}
       <section className={'section ' + s.hero}>
         <div className={s.heroLeft + ' enter d1'}>
-          <span className="section-label">Centrum Kultury Rockowej</span>
-          <h1 className={'display ' + s.heading}>Krakowska 100,<br />Wrocław</h1>
-          <p className={s.sub}>
-            Wejście główne od ul. Krakowskiej. Parking własny od ul. bocznej.
-            Obiekt dostępny dla osób z niepełnosprawnościami.
-          </p>
+          <span className="section-label">{tk.label}</span>
+          <h1 className={'display ' + s.heading}>{tk.h1a}<br />{tk.h1b}</h1>
+          <p className={s.sub}>{tk.sub}</p>
         </div>
         <div className={s.heroRight + ' enter d3'}>
-          <span className="section-label">CENTRALA</span>
+          <span className="section-label">{tk.switchboard}</span>
           <a href="tel:+48713001000" className={s.phone + ' display'}>71 300 10 00</a>
           <span className="mono" style={{ fontSize: 11.5, color: 'var(--zr-muted)', lineHeight: 1.9 }}>
-            Biuro PN–PT 9:00–17:00<br />
-            Kasy PN–SOB 14:00–22:00<br />
-            Bar PN–SOB 16:00–2:00
+            {tk.hours.map((h, i) => <span key={h}>{h}{i < tk.hours.length - 1 && <br />}</span>)}
           </span>
         </div>
       </section>
@@ -90,7 +49,7 @@ export default function KontaktBody() {
       <Reveal variant="fade" className={s.mapSection}>
         <div className={s.mapWrap}>
           <iframe
-            title="Mapa Zaklęte Rewiry"
+            title={tk.mapTitle}
             src="https://www.google.com/maps?q=ul.+Krakowska+100+Wrocław&output=embed"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -110,39 +69,36 @@ export default function KontaktBody() {
             rel="noreferrer"
             className={'btn btn-gold ' + s.mapBtn}
           >
-            Wyznacz trasę
+            {tk.route}
           </a>
         </div>
 
         <div className={s.directions}>
-          <span className="section-label" style={{ marginBottom: 16, display: 'block' }}>JAK DOTRZEĆ</span>
-          {[
-            { badge: 'TRAM', color: 'var(--zr-gold)', bg: 'rgba(252,204,0,0.15)', desc: 'Linie 3, 5 — przystanek Krakowska' },
-            { badge: 'BUS', color: 'var(--zr-muted)', bg: 'transparent', desc: 'Linie 114, 243 — przystanek Krakowska' },
-            { badge: 'AUTO', color: 'var(--zr-muted)', bg: 'transparent', desc: 'Parking 80 miejsc (ul. boczna, bezpłatny)' },
-            { badge: 'ROWER', color: 'var(--zr-muted)', bg: 'transparent', desc: 'Stojaki rowerowe przy wejściu' },
-            { badge: 'A11Y', color: 'var(--zr-muted)', bg: 'transparent', desc: 'Wejście bez progów, winda, miejsca dla wózków, asysta na zgłoszenie' },
-          ].map(({ badge, color, bg, desc }) => (
+          <span className="section-label" style={{ marginBottom: 16, display: 'block' }}>{tk.directionsLabel}</span>
+          {tk.directions.map(([badge, desc], i) => {
+            const { color, bg } = DIR_STYLES[i];
+            return (
             <div key={badge} className={s.dirRow}>
               <span className={s.dirBadge + ' mono'} style={{ color, background: bg, border: `1px solid ${color === 'var(--zr-gold)' ? 'rgba(252,204,0,0.4)' : 'var(--zr-line)'}` }}>
                 {badge}
               </span>
               <span className={s.dirDesc}>{desc}</span>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Reveal>
 
       {/* ─── DEPARTMENTS ─── */}
       <section className={'section ' + s.depts}>
-        <h2 className={'display ' + s.sectionHeading}>Napisz do nas</h2>
+        <h2 className={'display ' + s.sectionHeading}>{tk.deptHeading}</h2>
         <RevealGroup variant="up" step={90} className={s.deptGrid}>
-          {DEPARTMENTS.map(dept => (
-            <div key={dept.name} className={s.deptCard + (dept.featured ? ' ' + s.deptFeatured : '')}>
-              <span className={'section-label ' + (dept.featured ? s.deptTagFeatured : '')}>{dept.name}</span>
+          {tk.depts.map((dept, i) => (
+            <div key={dept.name} className={s.deptCard + (i === 0 ? ' ' + s.deptFeatured : '')}>
+              <span className={'section-label ' + (i === 0 ? s.deptTagFeatured : '')}>{dept.name}</span>
               <p className={s.deptDesc}>{dept.desc}</p>
-              <a href={`mailto:${dept.email}`} className={s.deptEmail + ' mono'}>{dept.email}</a>
-              <span className={s.deptSla + ' mono'} style={{ color: dept.slaOk ? 'var(--zr-ok)' : 'var(--zr-muted)' }}>
+              <a href={`mailto:${EMAILS[i]}`} className={s.deptEmail + ' mono'}>{EMAILS[i]}</a>
+              <span className={s.deptSla + ' mono'} style={{ color: i === 0 ? 'var(--zr-ok)' : 'var(--zr-muted)' }}>
                 {dept.sla}
               </span>
             </div>
@@ -154,9 +110,9 @@ export default function KontaktBody() {
       <section className={'section ' + s.formSection} style={{ background: 'var(--zr-surface-alt)' }}>
         <div className={s.formGrid}>
           <div className={s.formLeft}>
-            <h2 className={'display ' + s.sectionHeading}>Wyślij wiadomość</h2>
+            <h2 className={'display ' + s.sectionHeading}>{tk.formHeading}</h2>
             <div className={s.invoiceData}>
-              <span className="section-label" style={{ marginBottom: 10, display: 'block' }}>DANE DO FAKTUR</span>
+              <span className="section-label" style={{ marginBottom: 10, display: 'block' }}>{tk.invoiceLabel}</span>
               <p className={'mono ' + s.invoiceText}>
                 CKR Zaklęte Rewiry sp. z o.o.<br />
                 ul. Krakowska 100, 50-001 Wrocław<br />
@@ -167,42 +123,42 @@ export default function KontaktBody() {
 
           <Reveal variant="scale" className={s.formCard}>
             <div className={s.topicPicker}>
-              {TOPICS.map(t => (
+              {tk.topics.map((label, i) => (
                 <button
-                  key={t}
-                  className={s.topicBtn + (topic === t ? ' ' + s.topicBtnActive : '')}
-                  onClick={() => setTopic(t)}
+                  key={label}
+                  className={s.topicBtn + (topic === i ? ' ' + s.topicBtnActive : '')}
+                  onClick={() => setTopic(i)}
                 >
-                  {t}
+                  {label}
                 </button>
               ))}
             </div>
 
             <form className={s.form} onSubmit={e => e.preventDefault()}>
               <div className={s.field}>
-                <label className={s.label + ' mono'}>E-MAIL</label>
+                <label className={s.label + ' mono'}>{tk.fEmail}</label>
                 <input type="email" required className={s.input} value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
               </div>
 
-              {(topic === 'Wynajem sali') && (
+              {topic === HIRE_TOPIC && (
                 <div className={s.fieldRow}>
                   <div className={s.field}>
-                    <label className={s.label + ' mono'}>DATA</label>
+                    <label className={s.label + ' mono'}>{tk.fDate}</label>
                     <input type="date" className={s.input} />
                   </div>
                   <div className={s.field}>
-                    <label className={s.label + ' mono'}>LICZBA GOŚCI</label>
-                    <input type="number" className={s.input} placeholder="np. 200" />
+                    <label className={s.label + ' mono'}>{tk.fGuests}</label>
+                    <input type="number" className={s.input} placeholder={tk.guestsPlaceholder} />
                   </div>
                 </div>
               )}
 
               <div className={s.field}>
-                <label className={s.label + ' mono'}>WIADOMOŚĆ</label>
+                <label className={s.label + ' mono'}>{tk.fMessage}</label>
                 <textarea
                   rows={5}
                   className={s.input}
-                  placeholder={TOPICPLACEHOLDER[topic]}
+                  placeholder={tk.placeholders[topic]}
                   value={form.message}
                   onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   style={{ resize: 'vertical' }}
@@ -211,16 +167,16 @@ export default function KontaktBody() {
 
               <label className={s.rodo}>
                 <input type="checkbox" className={s.rodoCheck} checked={form.rodo} onChange={e => setForm(f => ({ ...f, rodo: e.target.checked }))} />
-                <span className={s.rodoText}>Zgadzam się na przetwarzanie danych osobowych w celu udzielenia odpowiedzi.</span>
+                <span className={s.rodoText}>{tk.rodo}</span>
               </label>
 
               <button type="submit" className="btn btn-gold" style={{ width: '100%', justifyContent: 'center' }} disabled={!form.rodo}>
-                Wyślij wiadomość
+                {tk.submit}
               </button>
 
               <div className={s.formFooter + ' mono'}>
-                <span>→ {TOPICEMAILS[topic]}</span>
-                <span style={{ color: 'var(--zr-ok)' }}>{TOPICSLA[topic]}</span>
+                <span>→ {EMAILS[topic]}</span>
+                <span style={{ color: 'var(--zr-ok)' }}>{tk.depts[topic].sla}</span>
               </div>
             </form>
           </Reveal>

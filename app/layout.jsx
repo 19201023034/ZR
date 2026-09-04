@@ -47,7 +47,7 @@ export default async function RootLayout({ children }) {
         <Header locale={locale} t={t.nav} />
         <main>{children}</main>
         <Footer locale={locale} t={t.footer} />
-        <CookieBanner />
+        <CookieBanner t={t.cookies} />
       </body>
     </html>
   );

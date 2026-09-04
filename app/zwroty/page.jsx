@@ -1,4 +1,6 @@
 import DocPage from '@/components/DocPage';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 import Link from 'next/link';
 
 export const metadata = {
@@ -6,10 +8,13 @@ export const metadata = {
   description: 'Zwroty biletów obsługuje Stage24 jako sprzedawca. Sprawy dotyczące wydarzenia — bezpośrednio z nami.',
 };
 
-export default function Page() {
+export default async function Page() {
+  const t = getDict(await getLocale()).docs;
   return (
     <DocPage
-      label="Bilety"
+      t={t}
+      plOnly
+      label={t.tickets}
       title="Zwroty i reklamacje"
       updated="2 września 2026"
       lead="Krótko: sprawy zakupu załatwia Stage24, sprawy samego wydarzenia — my."

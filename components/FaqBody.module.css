@@ -1,0 +1,164 @@
+.head { padding-bottom: 40px; }
+
+.title {
+  font-size: clamp(46px, 6.4vw, 84px);
+  line-height: 0.96;
+  color: var(--zr-text);
+  margin: 10px 0 18px;
+}
+
+.lead {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--zr-body);
+  max-width: 620px;
+}
+
+/* ─── Grupy ─── */
+.group { padding-top: 44px; padding-bottom: 44px; }
+
+.groupName {
+  font-size: clamp(24px, 3vw, 34px);
+  color: var(--zr-gold);
+  margin-bottom: 22px;
+}
+
+.list { display: flex; flex-direction: column; }
+
+/* ─── Pytanie ─── */
+.item {
+  border-top: 1px solid var(--zr-line);
+}
+
+.item:last-child { border-bottom: 1px solid var(--zr-line); }
+
+.q {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 22px 0;
+  cursor: pointer;
+  list-style: none;
+  transition: color .18s ease;
+}
+
+/* the default disclosure triangle would sit beside our own icon */
+.q::-webkit-details-marker { display: none; }
+.q::marker { content: ''; }
+
+.q:hover { color: var(--zr-gold); }
+.q:focus-visible { outline: 2px solid var(--zr-gold); outline-offset: 4px; }
+
+.qNum {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--zr-faint);
+  flex: none;
+  min-width: 22px;
+}
+
+.qText {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: inherit;
+  flex: 1;
+}
+
+/* plus that loses its vertical stroke when the answer opens */
+.qIcon {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  flex: none;
+  align-self: center;
+  color: var(--zr-muted);
+}
+
+.qIcon::before,
+.qIcon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+.qIcon::before { inset: 6px 0 6px 0; height: 1px; }
+.qIcon::after { inset: 0 6px 0 6px; width: 1px; }
+
+.item[open] .qIcon { color: var(--zr-gold); }
+.item[open] .qIcon::after { transform: scaleY(0); opacity: 0; }
+.item[open] .q { color: var(--zr-gold); }
+
+/* ─── Odpowiedź ─── */
+.a {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 40px 26px 40px;
+  max-width: 760px;
+}
+
+.aText {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--zr-body);
+  margin: 0;
+}
+
+.aLink {
+  align-self: flex-start;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--zr-gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(252, 204, 0, 0.35);
+  padding-bottom: 3px;
+  transition: border-color .18s ease;
+}
+
+.aLink:hover { border-bottom-color: var(--zr-gold); }
+
+/* Respect the reduced-motion setting: the icon still changes, it just snaps. */
+@media (prefers-reduced-motion: reduce) {
+  .qIcon::before, .qIcon::after { transition: none; }
+}
+
+@media (max-width: 720px) {
+  .group { padding-top: 32px; padding-bottom: 32px; }
+  .q { gap: 12px; padding: 18px 0; }
+  .qText { font-size: 15.5px; }
+  .a { padding: 0 0 22px 34px; }
+}
+
+/* ─── CTA ─── */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  padding: 34px 36px;
+  background: var(--zr-surface-alt);
+}
+
+.ctaHeading { font-size: clamp(22px, 2.6vw, 30px); color: var(--zr-text); }
+
+.ctaSub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--zr-muted);
+  margin-top: 8px;
+  max-width: 520px;
+}
+
+@media (max-width: 720px) {
+  .cta { padding: 26px 22px; }
+}

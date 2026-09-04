@@ -13,6 +13,8 @@ const MAILS = [
 const SERVICE = [
   { key: 'wynajem', href: '/wynajem' },
   { key: 'imprezy', href: '/imprezy-okolicznosciowe' },
+  { key: 'faq', href: '/faq' },
+  { key: 'archiwum', href: '/archiwum' },
   { key: 'regulamin', href: '/regulamin' },
   { key: 'zwroty', href: '/zwroty' },
   { key: 'dostepnosc', href: '/dostepnosc' },

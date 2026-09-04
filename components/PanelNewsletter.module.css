@@ -116,3 +116,27 @@
   .compose, .previewCol { padding: 28px 20px; }
   .pick { grid-template-columns: 18px 84px 1fr; gap: 10px; }
 }
+
+/* ─── Campaign language picker ─── */
+.langPick { display: flex; gap: 6px; }
+
+.langBtn {
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--zr-muted);
+  background: transparent;
+  border: 1px solid var(--zr-line);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.langBtn:hover { color: var(--zr-text); border-color: var(--zr-line-strong, var(--zr-line)); }
+
+.langBtnOn {
+  color: var(--zr-bg);
+  background: var(--zr-gold);
+  border-color: var(--zr-gold);
+}

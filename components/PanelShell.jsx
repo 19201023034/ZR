@@ -6,23 +6,20 @@ import PanelNewsletter from './PanelNewsletter';
 import PanelOferta from './PanelOferta';
 import s from './PanelShell.module.css';
 
-const TABS = [
-  { id: 'wydarzenia', label: 'Wydarzenia', hint: 'Dodawaj i publikuj koncerty' },
-  { id: 'newsletter', label: 'Newsletter', hint: 'Zapowiedzi na maila' },
-  { id: 'oferta', label: 'Oferta', hint: 'Wyceny wynajmu dla firm' },
-];
+const TAB_IDS = ['wydarzenia', 'newsletter', 'oferta'];
 
-export default function PanelShell({ events = [] }) {
+export default function PanelShell({ events = [], t, locale = 'pl' }) {
   const [tab, setTab] = useState('wydarzenia');
+  const TABS = TAB_IDS.map((id, i) => ({ id, ...t.tabs[i] }));
 
   return (
     <div className={s.wrap}>
       <div className={s.bar}>
         <div className={s.brand}>
-          <span className="section-label">Panel · Zaklęte Rewiry</span>
-          <h1 className={'display ' + s.title}>Zarządzanie</h1>
+          <span className="section-label">{t.brand}</span>
+          <h1 className={'display ' + s.title}>{t.heading}</h1>
         </div>
-        <nav className={s.tabs} aria-label="Sekcje panelu">
+        <nav className={s.tabs} aria-label={t.sections}>
           {TABS.map(t => (
             <button
               key={t.id}
@@ -39,7 +36,7 @@ export default function PanelShell({ events = [] }) {
 
       <div className={s.body}>
         {tab === 'wydarzenia' && <PanelEvents />}
-        {tab === 'newsletter' && <PanelNewsletter events={events} />}
+        {tab === 'newsletter' && <PanelNewsletter events={events} locale={locale} />}
         {tab === 'oferta' && <PanelOferta />}
       </div>
     </div>

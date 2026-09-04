@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import TicketButton from './TicketButton';
-import { getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
+import { getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom } from '@/lib/events';
 import s from './EventCard.module.css';
 
 export default function EventCard({ event, t, locale = 'pl' }) {
@@ -38,9 +38,9 @@ export default function EventCard({ event, t, locale = 'pl' }) {
         </h3>
 
         <div className={s.meta}>
-          <span>{event.genre}</span>
+          <span>{translateGenre(event.genre, locale)}</span>
           {event.support && <span className={s.support}>+ {event.support}</span>}
-          <span>{event.venue}</span>
+          <span>{translateRoom(event.venue, locale)}</span>
         </div>
       </div>
 

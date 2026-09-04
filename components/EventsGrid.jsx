@@ -3,17 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import EventCard from './EventCard';
+import { translateGenre } from '@/lib/events';
 import Reveal, { RevealGroup } from './Reveal';
 import s from './EventsGrid.module.css';
 
 export default function EventsGrid({ events, t, locale = 'pl' }) {
-  const [genre, setGenre] = useState(t.common.all);
+  // 'ALL' is a sentinel so the selection survives a language switch
+  const [genre, setGenre] = useState('ALL');
 
   // only offer filters that would actually return something
   const used = [...new Set(events.map(e => e.genre))].filter(Boolean).sort();
 
-  const ALL = t.common.all;
-  const filtered = genre === ALL
+  const filtered = genre === 'ALL'
     ? events
     : events.filter(e => e.genre === genre);
 
@@ -28,13 +29,13 @@ export default function EventsGrid({ events, t, locale = 'pl' }) {
       </Reveal>
 
       <RevealGroup variant="up" step={45} className={s.filters}>
-        {[t.common.all, ...used].map(g => (
+        {['ALL', ...used].map(g => (
           <button
             key={g}
             className={s.filter + (genre === g ? ' ' + s.filterActive : '')}
             onClick={() => setGenre(g)}
           >
-            {g}
+            {g === 'ALL' ? t.common.all : translateGenre(g, locale)}
           </button>
         ))}
       </RevealGroup>

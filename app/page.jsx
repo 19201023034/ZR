@@ -7,7 +7,7 @@ import Ticker from '@/components/Ticker';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
-import { ARTISTS_ARCHIVE, ROOMS, VENUE_ADDRESS, isTodayEvent, getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
+import { ARTISTS_ARCHIVE, ROOMS, VENUE_ADDRESS, isTodayEvent, getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom } from '@/lib/events';
 import { getEvents, getUpcoming, getHeroEvent } from '@/lib/store';
 import { SITE_ORIGIN } from '@/lib/site';
 import { getLocale } from '@/lib/locale';
@@ -111,11 +111,11 @@ export default async function HomePage() {
               className={s.heroArtist + ' display'}
             />
 
-            <p className={s.heroSub + ' enter d3'}>{hero.genre}{hero.support ? ` + ${hero.support}` : ''}</p>
+            <p className={s.heroSub + ' enter d3'}>{translateGenre(hero.genre, locale)}{hero.support ? ` + ${hero.support}` : ''}</p>
 
             <div className={s.heroData + ' enter d4'}>
               {[
-                { label: t.common.hall.toUpperCase(), value: hero.venue },
+                { label: t.common.hall.toUpperCase(), value: translateRoom(hero.venue, locale) },
                 { label: t.common.doors.toUpperCase(), value: hero.doors },
                 { label: t.common.start.toUpperCase(), value: hero.start },
                 { label: t.common.tickets.toUpperCase(), value: hero.priceFrom ? `${t.ticket.from} ${hero.priceFrom} ${t.ticket.currency}` : getStatusLabel(hero, locale), color: getStatusColor(hero.status) },
@@ -234,7 +234,7 @@ export default async function HomePage() {
         <RevealGroup variant="right" step={100} className={s.rentalRooms}>
           {Object.entries(ROOMS).map(([name, room], i) => (
             <div key={name} className={s.rentalRoom + (i === 0 ? ' ' + s.rentalRoomFeatured : '')} data-spotlight="">
-                <h3 className={s.rentalRoomName + ' display'}>{name}</h3>
+                <h3 className={s.rentalRoomName + ' display'}>{translateRoom(name, locale)}</h3>
               <div className="mono" style={{ fontSize: 12, lineHeight: 1.9, color: i === 0 ? 'var(--zr-gold-dim)' : 'var(--zr-muted)' }}>
                 {room.area} m² · {t.home.upTo} {room.capacities.koncert} {t.common.people}<br />
                 {t.ticket.from} {room.priceFrom.toLocaleString(locale === 'en' ? 'en-GB' : 'pl-PL')} {t.home.perDay}

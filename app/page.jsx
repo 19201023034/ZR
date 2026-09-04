@@ -92,6 +92,13 @@ export default async function HomePage() {
       {/* ─── HERO ─── */}
       {hero && (
         <section className={'section ' + s.hero}>
+          {/* The building behind the bill: decorative here, so it carries no alt —
+              the same shot is described properly on /klub.
+              Must sit BEFORE .glow-below, whose sibling rule forces position:relative. */}
+          <div className={s.heroVenue} aria-hidden="true">
+            <img src="/assets/venue/klub.webp" alt="" className={s.heroVenueImg} data-parallax="0.04" />
+            <div className={s.heroVenueScrim} />
+          </div>
           <span className="glow-below" aria-hidden="true" />
 
           <div className={s.heroLeft}>

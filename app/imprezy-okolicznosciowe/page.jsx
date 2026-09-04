@@ -1,11 +1,17 @@
 import ImprezyBody from '@/components/ImprezyBody';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 
-export const metadata = {
-  title: 'Imprezy okolicznościowe Wrocław — sala na urodziny, jubileusz, wesele',
-  description: 'Organizacja imprez okolicznościowych we Wrocławiu — urodziny, jubileusze, wesela, studniówki, sylwester. Sala na 1000 osób, catering, scena i pełne zaplecze techniczne w klubie Zaklęte Rewiry, ul. Krakowska 100.',
-  alternates: { canonical: '/imprezy-okolicznosciowe' },
-};
+export async function generateMetadata() {
+  const t = getDict(await getLocale());
+  return {
+    title: t.imprezy.metaTitle,
+    description: t.imprezy.metaDesc,
+    alternates: { canonical: '/imprezy-okolicznosciowe' },
+  };
+}
 
-export default function Page() {
-  return <ImprezyBody />;
+export default async function Page() {
+  const locale = await getLocale();
+  return <ImprezyBody t={getDict(locale)} locale={locale} />;
 }

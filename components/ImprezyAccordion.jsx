@@ -3,47 +3,16 @@
 import { useState } from 'react';
 import s from './ImprezyAccordion.module.css';
 
-const OCCASIONS = [
-  {
-    title: 'Urodziny i jubileusze',
-    teaser: 'Okrągłe rocznice, osiemnastki i huczne urodziny z oprawą sceniczną.',
-    body: 'Przyjęcie urodzinowe lub jubileuszowe we Wrocławiu, które zapamiętają goście — od kameralnych spotkań po imprezy na kilkaset osób. Do dyspozycji scena, klubowe oświetlenie, nagłośnienie pod zespół lub DJ-a oraz własny bar i kuchnia. Pomożemy z dekoracją, tortem i programem artystycznym.',
-    photo: '/assets/venue/s2.webp',
-  },
-  {
-    title: 'Wesela i przyjęcia',
-    teaser: 'Nietuzinkowa alternatywa dla sali weselnej — parkiet, scena i klimat klubu.',
-    body: 'Szukasz sali weselnej we Wrocławiu z charakterem? Zaklęte Rewiry to przestrzeń dla par, które chcą wesela w klimacie koncertu. Duży parkiet, profesjonalny dźwięk dla zespołu lub DJ-a, catering i miejsce nawet na 1000 gości. Możliwa organizacja poprawin kolejnego dnia.',
-    photo: '/assets/venue/s5.webp',
-  },
-  {
-    title: 'Spotkania rodzinne',
-    teaser: 'Komunie, chrzciny i spotkania pokoleniowe w kameralnej lub dużej sali.',
-    body: 'Przyjęcia komunijne, chrzciny, rocznice ślubu i spotkania rodzinne w elastycznych salach od 90 do 550 m². Menu dopasujemy do gości w każdym wieku, a osobne wejścia pozwalają prowadzić spotkanie niezależnie od reszty obiektu.',
-    photo: '/assets/venue/s4.webp',
-  },
-  {
-    title: 'Studniówki i bale',
-    teaser: 'Przestrzeń na kilkaset osób z profesjonalnym nagłośnieniem i światłem.',
-    body: 'Sala na studniówkę lub bal maturalny we Wrocławiu z prawdziwą sceną, oświetleniem i parkietem. Pomieścimy kilka klas naraz, zapewnimy obsługę techniczną, ochronę i catering — Wy zajmujecie się tylko zabawą.',
-    photo: '/assets/venue/s3.webp',
-  },
-  {
-    title: 'Sylwester i andrzejki',
-    teaser: 'Imprezy tematyczne z pełną oprawą techniczną i barem.',
-    body: 'Sylwester, andrzejki i bale karnawałowe w klubowych klimatach — DJ, światło sceniczne i bar. Organizujemy zarówno wydarzenia zamknięte dla firm i grup, jak i otwarte imprezy biletowane.',
-    photo: '/assets/venue/s1.webp',
-  },
-  {
-    title: 'Wieczory tematyczne',
-    teaser: 'Retro show, potańcówki i bankiety z programem artystycznym.',
-    body: 'Potańcówki, wieczory retro, bankiety z programem artystycznym i pokazami. Elastyczny układ sali — od rzędów teatralnych po stoły bankietowe — pozwala zrealizować dowolny scenariusz wieczoru.',
-    photo: '/assets/venue/s5.webp',
-  },
+// Copy lives in the dictionary; the photos are language-independent, so they
+// stay here and are paired by position.
+const PHOTOS = [
+  '/assets/venue/s2.webp', '/assets/venue/s5.webp', '/assets/venue/s4.webp',
+  '/assets/venue/s3.webp', '/assets/venue/s1.webp', '/assets/venue/s5.webp',
 ];
 
-export default function ImprezyAccordion() {
+export default function ImprezyAccordion({ t }) {
   const [open, setOpen] = useState(0);
+  const OCCASIONS = t.okazje.map((o, i) => ({ ...o, photo: PHOTOS[i] }));
 
   return (
     <div className={s.wrap}>

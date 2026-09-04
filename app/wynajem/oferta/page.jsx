@@ -1,10 +1,13 @@
 import OfertaBody from '@/components/OfertaBody';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 
-export const metadata = {
-  title: 'Oferta wynajmu sal',
-  description: 'Wynajem sal na gale, konferencje i imprezy firmowe we Wrocławiu — pojemności, specyfikacja techniczna i ceny.',
-};
+export async function generateMetadata() {
+  const t = getDict(await getLocale());
+  return { title: t.oferta.metaTitle, description: t.oferta.metaDesc };
+}
 
-export default function OfertaPage() {
-  return <OfertaBody />;
+export default async function OfertaPage() {
+  const locale = await getLocale();
+  return <OfertaBody t={getDict(locale)} locale={locale} />;
 }

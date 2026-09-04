@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Wordmark from './Wordmark';
 import ThemeToggle from './ThemeToggle';
 import LangSwitch from './LangSwitch';
 import s from './Header.module.css';
@@ -80,7 +81,7 @@ export default function Header({ locale = 'pl', t }) {
       </nav>
 
       <Link href="/" className={s.logo} aria-label={t.home}>
-        <img src="/assets/logo-zr.webp" alt="Zaklęte Rewiry" className={s.logoImg} />
+        <Wordmark className={s.logoImg} />
       </Link>
 
       <nav className={s.navRight}>

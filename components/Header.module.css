@@ -66,8 +66,10 @@
 
 .logoImg {
   height: 46px;
+  /* wordmark jest szeroki (550×96), więc szerokość wynika z proporcji */
   width: auto;
   display: block;
+  color: var(--zr-gold);
   transition:
     height    320ms var(--ease-out),
     filter    300ms ease-out,

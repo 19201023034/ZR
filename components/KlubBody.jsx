@@ -17,35 +17,31 @@ export default function KlubBody({ t, locale = 'pl' }) {
   const ROOM_NAMES = Object.keys(ROOMS);
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section className={'section ' + s.hero}>
-        <div className={s.heroLabel + ' mono section-label enter-fade d1'}>{tk.label}</div>
-        <h1 className={'display ' + s.heroTitle + ' enter-mask d2'}>
-          {tk.h1a}<br />{tk.h1b}
-        </h1>
-        <p className={s.heroSub + ' enter d4'}>{tk.sub}</p>
-        <div className={s.heroCtas + ' enter d5'}>
-          <Link href="/repertuar" className="btn btn-gold">{tk.ctaProgramme}</Link>
-          <Link href="/wynajem" className="btn btn-outline">{tk.ctaHire}</Link>
-        </div>
-      </section>
-
-      {/* ─── VENUE PHOTO — full-bleed band between the wordmark and the numbers ─── */}
-      <Reveal variant="fade" className={s.photoBand}>
-        <div className={s.photoFrame}>
+      {/* ─── HERO — the wordmark sits on the building it belongs to ─── */}
+      <section className={s.hero}>
+        <div className={s.heroMedia}>
           <img
             src="/assets/venue/klub.webp"
             alt={tk.photoAlt}
-            className={s.photoImg}
-            data-parallax="0.06"
+            className={s.heroImg}
+            data-parallax="0.05"
           />
-          <div className={s.photoScrim} aria-hidden="true" />
-          <figcaption className={s.photoCaption}>
-            <span className={'mono ' + s.photoCaptionMain}>{tk.photoCaption}</span>
-            <span className={'mono ' + s.photoCaptionSub}>{tk.photoCaptionSub}</span>
-          </figcaption>
+          <div className={s.heroScrim} aria-hidden="true" />
         </div>
-      </Reveal>
+
+        <div className={s.heroInner}>
+          <div className={s.heroLabel + ' mono section-label enter-fade d1'}>{tk.label}</div>
+          <h1 className={'display ' + s.heroTitle + ' enter-mask d2'}>
+            {tk.h1a}<br />{tk.h1b}
+          </h1>
+          <p className={s.heroSub + ' enter d4'}>{tk.sub}</p>
+          <div className={s.heroCtas + ' enter d5'}>
+            <Link href="/repertuar" className="btn btn-gold">{tk.ctaProgramme}</Link>
+            <Link href="/wynajem" className="btn btn-outline">{tk.ctaHire}</Link>
+          </div>
+          <span className={s.heroAddress + ' mono enter-fade d5'}>{tk.photoCaption}</span>
+        </div>
+      </section>
 
       {/* ─── STATS ─── */}
       <RevealGroup as="section" variant="up" step={110} className={s.statsBar}>

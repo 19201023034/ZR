@@ -1,0 +1,21 @@
+.wrap {
+  display: flex;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.active, .inactive {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 9px 14px;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 150ms, color 150ms;
+}
+
+.active { background: var(--zr-gold); color: #0C0A08; }
+.inactive { background: transparent; color: var(--zr-muted); }
+.inactive:hover { color: var(--zr-text); }

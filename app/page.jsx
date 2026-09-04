@@ -10,6 +10,8 @@ import SplitText from '@/components/SplitText';
 import { ARTISTS_ARCHIVE, ROOMS, VENUE_ADDRESS, isTodayEvent, getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
 import { getEvents, getUpcoming, getHeroEvent } from '@/lib/store';
 import { SITE_ORIGIN } from '@/lib/site';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 import s from './page.module.css';
 
 /* schema.org MusicVenue — feeds Google's local/knowledge panel.
@@ -35,19 +37,26 @@ const VENUE_JSONLD = {
   geo: { '@type': 'GeoCoordinates', latitude: 51.0876, longitude: 17.0553 },
 };
 
-export const metadata = {
-  title: 'Zaklęte Rewiry — Klub koncertowy i wynajem sal, Wrocław',
-};
+export async function generateMetadata() {
+  const locale = await getLocale();
+  return {
+    title: locale === 'en'
+      ? 'Zaklęte Rewiry — concert venue and rooms for hire, Wrocław'
+      : 'Zaklęte Rewiry — Klub koncertowy i wynajem sal, Wrocław',
+  };
+}
 
 // events are edited from /panel at runtime, so never prerender this
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [all, upcoming, hero] = await Promise.all([
+  const [all, upcoming, hero, locale] = await Promise.all([
     getEvents(),
     getUpcoming(),
     getHeroEvent(),
+    getLocale(),
   ]);
+  const t = getDict(locale);
   const todayEvent = all.find(isTodayEvent);
 
   return (
@@ -61,15 +70,16 @@ export default async function HomePage() {
       {todayEvent && (
         <div className={s.todayBar}>
           <div>
-            <span className={s.todayLabel}>Dziś w Rewirach</span>
-            <span className={s.todayMeta}>{todayEvent.artist} · {todayEvent.doors} wejście · {todayEvent.start} start</span>
+            <span className={s.todayLabel}>{t.home.todayLabel}</span>
+            <span className={s.todayMeta}>{todayEvent.artist} · {todayEvent.doors} {t.home.doorsShort} · {todayEvent.start} {t.home.startShort}</span>
           </div>
           <div className={s.todayRight}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700, color: getStatusColor(todayEvent.status) }}>
-              {getStatusLabel(todayEvent)}{todayEvent.priceFrom ? ` · od ${todayEvent.priceFrom} zł` : ''}
+              {getStatusLabel(todayEvent, locale)}{todayEvent.priceFrom ? ` · ${t.ticket.from} ${todayEvent.priceFrom} ${t.ticket.currency}` : ''}
             </span>
             <TicketButton
               event={todayEvent}
+              t={t.ticket}
               style={{ background: 'var(--zr-bg)', color: 'var(--zr-gold)', padding: '12px 22px', fontSize: 14 }}
             />
           </div>
@@ -77,7 +87,7 @@ export default async function HomePage() {
       )}
 
       {/* ─── TICKER ─── */}
-      <Ticker events={upcoming} />
+      <Ticker events={upcoming} locale={locale} label={t.home.upcoming} />
 
       {/* ─── HERO ─── */}
       {hero && (
@@ -88,7 +98,7 @@ export default async function HomePage() {
             <div className={s.heroBadge + ' enter-fade d1'}>
               <span className={'status-dot status-dot-ok'} />
               <span className="mono" style={{ fontSize: 12, color: 'var(--zr-ok)', letterSpacing: '0.1em' }}>
-                {hero.featured ? 'POLECAMY' : 'NAJBLIŻSZY KONCERT'} · {formatDate(hero.date)}
+                {hero.featured ? t.home.featured : t.home.nextConcert} · {formatDate(hero.date, locale)}
               </span>
             </div>
 
@@ -105,10 +115,10 @@ export default async function HomePage() {
 
             <div className={s.heroData + ' enter d4'}>
               {[
-                { label: 'SALA', value: hero.venue },
-                { label: 'WEJŚCIE', value: hero.doors },
-                { label: 'START', value: hero.start },
-                { label: 'BILETY', value: hero.priceFrom ? `od ${hero.priceFrom} zł` : getStatusLabel(hero), color: getStatusColor(hero.status) },
+                { label: t.common.hall.toUpperCase(), value: hero.venue },
+                { label: t.common.doors.toUpperCase(), value: hero.doors },
+                { label: t.common.start.toUpperCase(), value: hero.start },
+                { label: t.common.tickets.toUpperCase(), value: hero.priceFrom ? `${t.ticket.from} ${hero.priceFrom} ${t.ticket.currency}` : getStatusLabel(hero, locale), color: getStatusColor(hero.status) },
               ].map(({ label, value, color }) => (
                 <div key={label} className={s.heroDataItem}>
                   <span className={s.heroDataLabel + ' mono'}>{label}</span>
@@ -120,12 +130,13 @@ export default async function HomePage() {
             <div className={s.heroCtas + ' enter d5'}>
               <TicketButton
                 event={hero}
+                t={t.ticket}
                 magnetic="0.22"
-                label={hero.priceFrom ? `Kup bilet · od ${hero.priceFrom} zł` : 'Kup bilet'}
+                label={hero.priceFrom ? `${t.ticket.buy} · ${t.ticket.from} ${hero.priceFrom} ${t.ticket.currency}` : t.ticket.buy}
                 style={{ padding: '18px 34px', fontSize: 18 }}
               />
               <Link href="/repertuar" className="btn btn-outline">
-                Cały repertuar
+                {t.home.allRepertoire}
               </Link>
             </div>
           </div>
@@ -140,12 +151,12 @@ export default async function HomePage() {
               <>
                 <div className={s.heroPosterBadge}>
                   <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold)', border: '1px solid rgba(252,204,0,0.5)', padding: '4px 8px', borderRadius: 3 }}>
-                    PLAKAT
+                    {t.home.posterAlt}
                   </span>
                 </div>
                 <div className={s.heroPosterOverlay}>
                   <span className="mono" style={{ fontSize: 10, color: 'var(--zr-gold-dim)', letterSpacing: '0.14em' }}>
-                    WROCŁAW · KRAKOWSKA 100
+                    {t.home.posterCity}
                   </span>
                   <span className="display" style={{ fontSize: 22, color: 'var(--zr-text)' }}>{hero.artist}</span>
                 </div>
@@ -156,34 +167,29 @@ export default async function HomePage() {
       )}
 
       {/* ─── EVENTS GRID ─── */}
-      <EventsGrid events={upcoming} />
+      <EventsGrid events={upcoming} t={t} locale={locale} />
 
       {/* ─── O KLUBIE + ATMOSFERA ─── */}
       <section className={'section ' + s.about}>
         <div className={s.aboutGrid}>
           <Reveal variant="left" className={s.aboutText}>
-            <span className="section-label">O miejscu</span>
-            <h2 className={s.aboutHeading + ' display'}>Wielofunkcyjna scena na mapie Wrocławia od ponad dekady</h2>
-            <p className={s.aboutLead}>
-              Koncerty, gale, imprezy firmowe i wydarzenia specjalne — trzy sale, profesjonalne
-              zaplecze techniczne i własna gastronomia przy ul. Krakowskiej 100. Miejsce spotkań
-              ludzi, kultur i idei.
-            </p>
-            <Link href="/klub" className="btn btn-outline">Poznaj klub</Link>
+            <span className="section-label">{t.home.aboutLabel}</span>
+            <h2 className={s.aboutHeading + ' display'}>{t.home.aboutHeading}</h2>
+            <p className={s.aboutLead}>{t.home.aboutLead}</p>
+            <Link href="/klub" className="btn btn-outline">{t.home.aboutCta}</Link>
           </Reveal>
 
           <RevealGroup variant="up" step={90} className={s.atmoGrid}>
-            {[
-              ['/assets/venue/s1.webp', 'Sala Duża', 'scena i rig świetlny'],
-              ['/assets/venue/s3.webp', 'Koncerty', 'pełne światło i dźwięk'],
-              ['/assets/venue/s5.webp', 'Bankiety i gale', 'układ przy stołach'],
-            ].map(([photo, label, hint], i) => (
+            {['/assets/venue/s1.webp', '/assets/venue/s3.webp', '/assets/venue/s5.webp'].map((photo, i) => {
+              const [label, hint] = t.home.atmo[i];
+              return (
               <div key={label} className={s.atmoTile + (i === 0 ? ' ' + s.atmoTileWide : '')}>
                 <img src={photo} alt={`${label} — Zaklęte Rewiry`} className={s.atmoImg} />
                 <span className={s.atmoLabel + ' mono'}>{label}</span>
                 <span className={s.atmoHint + ' mono'}>{hint}</span>
               </div>
-            ))}
+              );
+            })}
           </RevealGroup>
         </div>
       </section>
@@ -192,22 +198,17 @@ export default async function HomePage() {
       <section className={'section ' + s.numbers}>
         <span className="glow-below glow-below-dim" aria-hidden="true" />
         <Reveal as="p" variant="up" className={s.numbersTagline + ' display'}>
-          Klub koncertowy i trzy sale przy Krakowskiej 100
+          {t.home.numbersTagline}
         </Reveal>
         <RevealGroup variant="up" step={110} className={s.numbersStats}>
-          {[
-            { value: '85+', label: 'KONCERTÓW ROCZNIE' },
-            { value: '3',   label: 'SALE DO WYNAJĘCIA' },
-            { value: '1000', label: 'MIEJSC W SALI DUŻEJ' },
-            { value: '550', label: 'M² SALA DUŻA' },
-          ].map((stat, i) => (
-            <div key={stat.label} className={s.stat}>
+          {t.home.stats.map(([value, label], i) => (
+            <div key={label} className={s.stat}>
               <Counter
-                value={stat.value}
+                value={value}
                 className={s.statValue + ' mono'}
                 style={{ color: i === 0 ? 'var(--zr-gold)' : 'var(--zr-text)' }}
               />
-              <span className={s.statLabel + ' mono'}>{stat.label}</span>
+              <span className={s.statLabel + ' mono'}>{label}</span>
             </div>
           ))}
         </RevealGroup>
@@ -216,19 +217,16 @@ export default async function HomePage() {
       {/* ─── RENTAL BLOCK ─── */}
       <section className={'section ' + s.rental} style={{ background: 'var(--zr-surface-alt)' }}>
         <Reveal variant="left" className={s.rentalLeft}>
-          <span className="section-label">Wynajem sal · dla firm i agencji</span>
-          <h2 className={s.rentalHeading + ' display'}>Gale, konferencje i imprezy firmowe</h2>
+          <span className="section-label">{t.home.rentalLabel}</span>
+          <h2 className={s.rentalHeading + ' display'}>{t.home.rentalHeading}</h2>
           <div className="section-separator" />
-          <p className={s.rentalText}>
-            Trzy sale od 90 do 550 m² z pełnym zapleczem technicznym. Nagłośnienie d&b, oświetlenie sceniczne,
-            projekcja. Obsługa cateringowa, bar, koordynator obiektu.
-          </p>
+          <p className={s.rentalText}>{t.home.rentalText}</p>
           <div className={s.rentalCtas}>
             <Link href="/wynajem" className="btn btn-rental">
-              Zapytaj o termin
+              {t.common.askDate}
             </Link>
             <Link href="/wynajem/oferta" className="btn btn-outline-gold">
-              Pobierz ofertę PDF →
+              {t.home.rentalPdf}
             </Link>
           </div>
         </Reveal>
@@ -238,8 +236,8 @@ export default async function HomePage() {
             <div key={name} className={s.rentalRoom + (i === 0 ? ' ' + s.rentalRoomFeatured : '')} data-spotlight="">
                 <h3 className={s.rentalRoomName + ' display'}>{name}</h3>
               <div className="mono" style={{ fontSize: 12, lineHeight: 1.9, color: i === 0 ? 'var(--zr-gold-dim)' : 'var(--zr-muted)' }}>
-                {room.area} m² · do {room.capacities.koncert} os.<br />
-                od {room.priceFrom.toLocaleString('pl-PL')} zł / doba
+                {room.area} m² · {t.home.upTo} {room.capacities.koncert} {t.common.people}<br />
+                {t.ticket.from} {room.priceFrom.toLocaleString(locale === 'en' ? 'en-GB' : 'pl-PL')} {t.home.perDay}
               </div>
             </div>
           ))}
@@ -249,8 +247,8 @@ export default async function HomePage() {
       {/* ─── DOWÓD SPOŁECZNY B2B ─── */}
       <section className={'section ' + s.proof} style={{ background: 'var(--zr-surface-alt)' }}>
         <div className={s.proofHead}>
-          <span className="section-label">Zaufali nam</span>
-          <span className={s.proofNote + ' mono'}>Logotypy klientów w przygotowaniu</span>
+          <span className="section-label">{t.home.proofLabel}</span>
+          <span className={s.proofNote + ' mono'}>{t.home.proofNote}</span>
         </div>
         <RevealGroup variant="up" step={70} className={s.logoRow}>
           {['LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO'].map((l, i) => (
@@ -259,14 +257,11 @@ export default async function HomePage() {
         </RevealGroup>
         <Reveal variant="up" className={s.caseRow}>
           <div className={s.caseText}>
-            <h3 className={s.caseHeading + ' display'}>Zrealizowaliśmy setki wydarzeń</h3>
-            <p className={s.caseLead}>
-              Od kameralnych spotkań firmowych po gale na tysiąc osób. Miejsce na realizację
-              z liczbami — zdjęcia i referencje do uzupełnienia.
-            </p>
+            <h3 className={s.caseHeading + ' display'}>{t.home.caseHeading}</h3>
+            <p className={s.caseLead}>{t.home.caseLead}</p>
           </div>
           <div className={s.caseStats}>
-            {[['500+', 'wydarzeń firmowych'], ['1000', 'gości na największych galach'], ['24 h', 'odpowiedź na zapytanie']].map(([v, l]) => (
+            {t.home.caseStats.map(([v, l]) => (
               <div key={l} className={s.caseStat}>
                 <span className={'display ' + s.caseStatVal}>{v}</span>
                 <span className={s.caseStatLabel + ' mono'}>{l}</span>
@@ -279,8 +274,8 @@ export default async function HomePage() {
       {/* ─── ARCHIVE ─── */}
       <section className={'section ' + s.archive}>
         <Reveal className={s.archiveHeader}>
-          <span className="section-label">Grali u nas</span>
-          <Link href="/archiwum" className={s.archiveLink + ' mono'}>Archiwum · 87 koncertów →</Link>
+          <span className="section-label">{t.home.archiveLabel}</span>
+          <Link href="/archiwum" className={s.archiveLink + ' mono'}>{t.home.archiveLink}</Link>
         </Reveal>
         <RevealGroup variant="up" step={40} className={s.artists}>
           {ARTISTS_ARCHIVE.map(name => (
@@ -292,10 +287,10 @@ export default async function HomePage() {
       {/* ─── NEWSLETTER ─── */}
       <section className={'section ' + s.newsletter}>
         <Reveal variant="mask" className={s.newsletterInfo}>
-          <h2 className={s.newsletterTitle + ' display'}>Terminarz na maila</h2>
-          <p className={s.newsletterSub}>Raz w miesiącu: lista koncertów i przedsprzedaże. Bez pop-upów.</p>
+          <h2 className={s.newsletterTitle + ' display'}>{t.home.newsletterTitle}</h2>
+          <p className={s.newsletterSub}>{t.home.newsletterSub}</p>
         </Reveal>
-        <NewsletterForm />
+        <NewsletterForm t={t.newsletter} />
       </section>
     </>
   );

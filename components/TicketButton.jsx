@@ -9,6 +9,7 @@ import s from './TicketButton.module.css';
  */
 export default function TicketButton({
   event,
+  t,
   className = 'btn btn-gold',
   style,
   label,
@@ -18,8 +19,8 @@ export default function TicketButton({
 
   if (sold) {
     return (
-      <button type="button" disabled className={s.unavailable} style={style} title="Brak biletów">
-        Wyprzedane
+      <button type="button" disabled className={s.unavailable} style={style} title={t.noTickets}>
+        {t.soldOut}
       </button>
     );
   }
@@ -31,9 +32,9 @@ export default function TicketButton({
         disabled
         className={s.unavailable}
         style={style}
-        title="Sprzedaż jeszcze nie ruszyła"
+        title={t.notYet}
       >
-        Bilety wkrótce
+        {t.soon}
       </button>
     );
   }
@@ -47,9 +48,9 @@ export default function TicketButton({
       style={style}
       data-magnetic={magnetic}
     >
-      {label ?? 'Kup bilet'}
+      {label ?? t.buy}
       <span className={s.ext} aria-hidden="true">↗</span>
-      <span className={s.srOnly}>(otwiera Stage24 w nowej karcie)</span>
+      <span className={s.srOnly}>{t.newTab}</span>
     </a>
   );
 }

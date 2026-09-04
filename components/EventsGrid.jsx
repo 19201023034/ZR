@@ -6,13 +6,14 @@ import EventCard from './EventCard';
 import Reveal, { RevealGroup } from './Reveal';
 import s from './EventsGrid.module.css';
 
-export default function EventsGrid({ events }) {
-  const [genre, setGenre] = useState('Wszystkie');
+export default function EventsGrid({ events, t, locale = 'pl' }) {
+  const [genre, setGenre] = useState(t.common.all);
 
   // only offer filters that would actually return something
   const used = [...new Set(events.map(e => e.genre))].filter(Boolean).sort();
 
-  const filtered = genre === 'Wszystkie'
+  const ALL = t.common.all;
+  const filtered = genre === ALL
     ? events
     : events.filter(e => e.genre === genre);
 
@@ -20,14 +21,14 @@ export default function EventsGrid({ events }) {
   return (
     <section className={'section ' + s.section}>
       <Reveal variant="mask" className={s.header}>
-        <h2 className={s.heading + ' display'}>Nadchodzące wydarzenia</h2>
+        <h2 className={s.heading + ' display'}>{t.home.upcoming}</h2>
         <Link href="/repertuar" className={s.allLink}>
-          Cały kalendarz · {events.length} dat →
+          {t.home.calendarLink} · {events.length} {t.home.dates} →
         </Link>
       </Reveal>
 
       <RevealGroup variant="up" step={45} className={s.filters}>
-        {['Wszystkie', ...used].map(g => (
+        {[t.common.all, ...used].map(g => (
           <button
             key={g}
             className={s.filter + (genre === g ? ' ' + s.filterActive : '')}
@@ -39,14 +40,14 @@ export default function EventsGrid({ events }) {
       </RevealGroup>
 
       {filtered.length === 0 ? (
-        <p className={s.empty}>Brak wydarzeń w tej kategorii.</p>
+        <p className={s.empty}>{t.common.noEvents}</p>
       ) : (
         <RevealGroup variant="up" step={90} className={s.grid} key={genre}>
-          {filtered.map(e => <EventCard key={e.id} event={e} />)}
+          {filtered.map(e => <EventCard key={e.id} event={e} t={t} locale={locale} />)}
           <Link href="/repertuar" className={s.calendarTile}>
-            <span className="section-label">KALENDARZ</span>
-            <h3 className={s.calendarTitle + ' display'}>Cały repertuar · {events.length} dat</h3>
-            <span className={s.calendarCta + ' mono'}>ZOBACZ WSZYSTKIE →</span>
+            <span className="section-label">{t.home.calendarTile}</span>
+            <h3 className={s.calendarTitle + ' display'}>{t.home.calendarTileTitle} · {events.length} {t.home.dates}</h3>
+            <span className={s.calendarCta + ' mono'}>{t.home.seeAll}</span>
           </Link>
         </RevealGroup>
       )}

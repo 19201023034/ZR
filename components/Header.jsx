@@ -4,22 +4,26 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import LangSwitch from './LangSwitch';
 import s from './Header.module.css';
 
-const NAV = [
-  { href: '/repertuar', label: 'Repertuar' },
-  { href: '/bilety', label: 'Bilety' },
-  { href: '/klub', label: 'Klub' },
-  { href: '/wynajem', label: 'Wynajem sal' },
-  { href: '/imprezy-okolicznosciowe', label: 'Imprezy' },
-  { href: '/kontakt', label: 'Kontakt' },
-];
+function buildNav(t) {
+  return [
+    { href: '/repertuar', label: t.repertuar },
+    { href: '/bilety', label: t.bilety },
+    { href: '/klub', label: t.klub },
+    { href: '/wynajem', label: t.wynajem },
+    { href: '/imprezy-okolicznosciowe', label: t.imprezy },
+    { href: '/kontakt', label: t.kontakt },
+  ];
+}
 
 function isActive(pathname, href) {
   return href === '/wynajem' ? pathname.startsWith('/wynajem') : pathname === href;
 }
 
-export default function Header() {
+export default function Header({ locale = 'pl', t }) {
+  const NAV = buildNav(t);
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -55,7 +59,7 @@ export default function Header() {
       <button
         type="button"
         className={s.burger + (open ? ' ' + s.burgerOpen : '')}
-        aria-label={open ? 'Zamknij menu' : 'Otwórz menu'}
+        aria-label={open ? t.closeMenu : t.openMenu}
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen(o => !o)}
@@ -75,7 +79,7 @@ export default function Header() {
         ))}
       </nav>
 
-      <Link href="/" className={s.logo} aria-label="Zaklęte Rewiry — strona główna">
+      <Link href="/" className={s.logo} aria-label={t.home}>
         <img src="/assets/logo-zr.webp" alt="Zaklęte Rewiry" className={s.logoImg} />
       </Link>
 
@@ -94,13 +98,10 @@ export default function Header() {
 
         <ThemeToggle />
 
-        <div className={s.langSwitch}>
-          <button className={s.langActive}>PL</button>
-          <button className={s.langInactive}>EN</button>
-        </div>
+        <div className={s.langSwitch}><LangSwitch locale={locale} /></div>
 
         <Link href="/bilety" className={'btn btn-gold ' + s.cta} style={{ padding: '10px 20px', fontSize: 13 }}>
-          Kup bilet
+          {t.buy}
         </Link>
       </nav>
       </header>
@@ -115,7 +116,7 @@ export default function Header() {
       <nav
         id="mobile-nav"
         className={s.drawer + (open ? ' ' + s.drawerOpen : '')}
-        aria-label="Menu główne"
+        aria-label={t.mainMenu}
       >
         <div className={s.drawerLinks}>
           {NAV.map(({ href, label }) => (
@@ -131,13 +132,10 @@ export default function Header() {
 
         <div className={s.drawerFoot}>
           <Link href="/bilety" className="btn btn-gold" style={{ width: '100%', justifyContent: 'center' }}>
-            Kup bilet
+            {t.buy}
           </Link>
           <div className={s.drawerBottom}>
-            <div className={s.drawerLang}>
-              <button className={s.langActive}>PL</button>
-              <button className={s.langInactive}>EN</button>
-            </div>
+            <LangSwitch locale={locale} />
             <ThemeToggle />
           </div>
         </div>

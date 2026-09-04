@@ -117,12 +117,9 @@
 .navLink.active::after { transform: scaleX(1); }
 
 /* ─── Language switch ─── */
-.langSwitch {
-  display: flex;
-  border: 1px solid var(--zr-line-hi);
-  border-radius: 4px;
-  overflow: hidden;
-}
+/* plain wrapper — LangSwitch draws its own frame; this only exists so the
+   desktop switch can be hidden on narrow screens (the drawer has its own) */
+.langSwitch { display: flex; }
 
 .langActive,
 .langInactive {

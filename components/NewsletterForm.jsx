@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import s from './NewsletterForm.module.css';
 
-export default function NewsletterForm() {
+export default function NewsletterForm({ t }) {
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [state, setState] = useState({ status: 'idle', message: null });
@@ -27,18 +27,15 @@ export default function NewsletterForm() {
       const json = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        setState({ status: 'error', message: json.error ?? 'Nie udało się zapisać. Spróbuj ponownie.' });
+        setState({ status: 'error', message: json.error ?? t.errGeneric });
         return;
       }
 
-      setState({
-        status: 'ok',
-        message: 'Sprawdź skrzynkę — wysłaliśmy link potwierdzający zapis.',
-      });
+      setState({ status: 'ok', message: t.ok });
       setEmail('');
       setConsent(false);
     } catch {
-      setState({ status: 'error', message: 'Brak połączenia. Spróbuj za chwilę.' });
+      setState({ status: 'error', message: t.errOffline });
     }
   }
 
@@ -50,10 +47,10 @@ export default function NewsletterForm() {
           name="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          placeholder="twoj@email.pl"
+          placeholder={t.placeholder}
           required
           disabled={busy || done}
-          aria-label="Adres e-mail"
+          aria-label={t.emailLabel}
           className={s.input}
         />
         <button
@@ -61,7 +58,7 @@ export default function NewsletterForm() {
           className="btn btn-outline-gold"
           disabled={busy || done || !email || !consent}
         >
-          {busy ? 'Zapisuję…' : done ? 'Zapisano' : 'Zapisuję się'}
+          {busy ? t.sending : done ? t.done : t.submit}
         </button>
       </div>
 
@@ -73,8 +70,8 @@ export default function NewsletterForm() {
           className={s.check}
         />
         <span>
-          Zgadzam się na otrzymywanie newslettera. Mogę się wypisać w każdej chwili.{' '}
-          <Link href="/polityka-prywatnosci" className={s.link}>Polityka prywatności.</Link>
+          {t.consent}{' '}
+          <Link href="/polityka-prywatnosci" className={s.link}>{t.privacy}</Link>
         </span>
       </label>
 

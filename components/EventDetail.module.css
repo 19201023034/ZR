@@ -45,7 +45,7 @@
 /* first item of every row starts flush, no divider */
 .fact:nth-child(3n + 1) { border-left: none; padding-left: 0; }
 
-.factLabel { font-size: 9.5px; color: var(--zr-faint); letter-spacing: 0.16em; }
+.factLabel { font-size: 9.5px; color: var(--zr-faint); letter-spacing: 0.16em; text-transform: uppercase; }
 .factValue { font-size: 14px; color: var(--zr-text); font-weight: 500; }
 
 .ctaRow { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 8px; }

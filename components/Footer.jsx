@@ -1,40 +1,31 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import LangSwitch from './LangSwitch';
 import s from './Footer.module.css';
 
-const cols = [
-  {
-    heading: 'DOJAZD',
-    items: [
-      'Tram 3, 5 — przystanek Krakowska',
-      'Bus 114, 243 — przystanek Krakowska',
-      'Parking 80 miejsc (ul. boczna)',
-      'Stojaki rowerowe przy wejściu',
-    ],
-  },
-  {
-    heading: 'KONTAKT',
-    items: [
-      'bilety@zakletyrewiry.pl',
-      'booking@zakletyrewiry.pl',
-      'wynajem@zakletyrewiry.pl',
-      'ksiegowosc@zakletyrewiry.pl',
-    ],
-  },
-  {
-    heading: 'SERWIS',
-    items: [
-      { label: 'Wynajem sal', href: '/wynajem' },
-      { label: 'Imprezy okolicznościowe', href: '/imprezy-okolicznosciowe' },
-      { label: 'Regulamin klubu', href: '/regulamin' },
-      { label: 'Zwroty biletów', href: '/zwroty' },
-      { label: 'Dostępność obiektu', href: '/dostepnosc' },
-      { label: 'Praca i wolontariat', href: '/praca' },
-    ],
-  },
+const MAILS = [
+  'bilety@zakletyrewiry.pl',
+  'booking@zakletyrewiry.pl',
+  'wynajem@zakletyrewiry.pl',
+  'ksiegowosc@zakletyrewiry.pl',
 ];
 
-export default function Footer() {
+const SERVICE = [
+  { key: 'wynajem', href: '/wynajem' },
+  { key: 'imprezy', href: '/imprezy-okolicznosciowe' },
+  { key: 'regulamin', href: '/regulamin' },
+  { key: 'zwroty', href: '/zwroty' },
+  { key: 'dostepnosc', href: '/dostepnosc' },
+  { key: 'praca', href: '/praca' },
+];
+
+export default function Footer({ locale = 'pl', t }) {
+  const cols = [
+    { heading: t.directions, items: t.dir },
+    { heading: t.contact, items: MAILS },
+    { heading: t.service, items: SERVICE.map(l => ({ href: l.href, label: t.links[l.key] })) },
+  ];
+
   return (
     <footer className={s.footer}>
       <div className={s.grid}>
@@ -62,11 +53,8 @@ export default function Footer() {
       </div>
 
       <div className={s.bottom}>
-        <span className={s.copy}>© {new Date().getFullYear()} CKR Zaklęte Rewiry. Wszelkie prawa zastrzeżone.</span>
-        <div className={s.langSwitch}>
-          <button className={s.langActive}>PL</button>
-          <button className={s.langInactive}>EN</button>
-        </div>
+        <span className={s.copy}>© {new Date().getFullYear()} CKR Zaklęte Rewiry. {t.rights}</span>
+        <LangSwitch locale={locale} />
       </div>
     </footer>
   );

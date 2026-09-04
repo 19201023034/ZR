@@ -46,7 +46,7 @@ export default async function RootLayout({ children }) {
         <MotionRoot />
         <Header locale={locale} t={t.nav} />
         <main>{children}</main>
-        <Footer />
+        <Footer locale={locale} t={t.footer} />
         <CookieBanner />
       </body>
     </html>

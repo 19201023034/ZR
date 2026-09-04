@@ -2,21 +2,28 @@ import { notFound } from 'next/navigation';
 
 import EventDetail from '@/components/EventDetail';
 import { getEventBySlug, getUpcoming } from '@/lib/store';
-import { formatDate, warsawIso, VENUE_ADDRESS } from '@/lib/events';
+import { formatDate, warsawIso, VENUE_ADDRESS, translateRoom } from '@/lib/events';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 import { SITE_ORIGIN as SITE } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const event = await getEventBySlug(slug);
-  if (!event) return { title: 'Nie znaleziono wydarzenia' };
+  const [event, locale] = await Promise.all([getEventBySlug(slug), getLocale()]);
+  const en = locale === 'en';
+  if (!event) return { title: en ? 'Event not found' : 'Nie znaleziono wydarzenia' };
 
-  const title = `${event.artist} — ${formatDate(event.date)}`;
+  const when = formatDate(event.date, locale);
+  const title = `${event.artist} — ${when}`;
   const description = event.description
     ? event.description.slice(0, 155)
-    : `${event.artist} w Zaklętych Rewirach, ${formatDate(event.date)}, ${event.venue}. `
-      + `Wrocław, ul. Krakowska 100.`;
+    : en
+      ? `${event.artist} live at Zaklęte Rewiry, ${when}, ${translateRoom(event.venue, 'en')}. `
+        + `Wrocław, ul. Krakowska 100.`
+      : `${event.artist} w Zaklętych Rewirach, ${when}, ${event.venue}. `
+        + `Wrocław, ul. Krakowska 100.`;
 
   return {
     title,
@@ -88,7 +95,7 @@ function buildJsonLd(event) {
 
 export default async function EventPage({ params }) {
   const { slug } = await params;
-  const event = await getEventBySlug(slug);
+  const [event, locale] = await Promise.all([getEventBySlug(slug), getLocale()]);
   if (!event) notFound();
 
   const upcoming = await getUpcoming();
@@ -104,7 +111,7 @@ export default async function EventPage({ params }) {
         // only ever contains fields we can actually vouch for
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <EventDetail event={event} others={others} />
+      <EventDetail event={event} others={others} t={getDict(locale)} locale={locale} />
     </>
   );
 }

@@ -3,24 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import TicketButton from './TicketButton';
-import { getStatusColor, getStatusLabel, formatDate } from '@/lib/events';
+import { getStatusColor, getStatusLabel, formatDate, formatMonth, translateGenre, translateRoom } from '@/lib/events';
+import { pluralEvents } from '@/lib/i18n';
 import Reveal, { RevealGroup } from './Reveal';
 import s from './RepertuarBody.module.css';
 
-function monthLabel(ym) {
-  const [y, m] = ym.split('-');
-  const names = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec',
-                  'Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
-  return `${names[parseInt(m) - 1]} ${y}`;
-}
-
-export default function RepertuarBody({ events = [] }) {
-  const [genre, setGenre] = useState('Wszystkie');
+// 'ALL' is a sentinel, not a label — the visible text comes from the dictionary
+// while the genre values stay the canonical Polish strings from the store.
+export default function RepertuarBody({ events = [], t, locale = 'pl' }) {
+  const [genre, setGenre] = useState('ALL');
 
   const MONTHS = [...new Set(events.map(e => e.date.slice(0, 7)))].sort();
   const used = [...new Set(events.map(e => e.genre))].filter(Boolean).sort();
 
-  const filtered = genre === 'Wszystkie'
+  const filtered = genre === 'ALL'
     ? events
     : events.filter(e => e.genre === genre);
 
@@ -36,22 +32,22 @@ export default function RepertuarBody({ events = [] }) {
       <section className={'section ' + s.intro}>
         <div className={s.introRow}>
           <div className="enter-mask d1">
-            <span className="section-label">Klub koncertowy</span>
-            <h1 className={'display ' + s.heading}>Repertuar</h1>
+            <span className="section-label">{t.repertuar.label}</span>
+            <h1 className={'display ' + s.heading}>{t.repertuar.title}</h1>
           </div>
           <div className={s.filters + ' enter d3'}>
-            {['Wszystkie', ...used].map(g => (
+            {['ALL', ...used].map(g => (
               <button
                 key={g}
                 className={s.filter + (genre === g ? ' ' + s.filterActive : '')}
                 onClick={() => setGenre(g)}
-              >{g}</button>
+              >{g === 'ALL' ? t.common.all : translateGenre(g, locale)}</button>
             ))}
           </div>
         </div>
         <div className={s.meta + ' mono enter-fade d4'}>
-          {filtered.length} {filtered.length === 1 ? 'wydarzenie' : 'wydarzeń'}
-          {genre !== 'Wszystkie' ? ` · ${genre}` : ''}
+          {filtered.length} {pluralEvents(filtered.length, t)}
+          {genre !== 'ALL' ? ` · ${translateGenre(genre, locale)}` : ''}
         </div>
       </section>
 
@@ -59,16 +55,16 @@ export default function RepertuarBody({ events = [] }) {
       {Object.keys(grouped).length === 0 ? (
         <section className="section">
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--zr-muted)' }}>
-            Brak wydarzeń w tej kategorii.
+            {t.common.noEvents}
           </p>
         </section>
       ) : (
         Object.entries(grouped).map(([ym, events]) => (
           <section key={ym} className={s.monthSection}>
-            <Reveal variant="fade" className={s.monthLabel + ' mono'}>{monthLabel(ym)}</Reveal>
+            <Reveal variant="fade" className={s.monthLabel + ' mono'}>{formatMonth(ym, locale)}</Reveal>
             <RevealGroup variant="left" step={70} className={s.eventList} key={genre}>
               {events.map(event => (
-                <EventRow key={event.id} event={event} />
+                <EventRow key={event.id} event={event} t={t} locale={locale} />
               ))}
             </RevealGroup>
           </section>
@@ -78,7 +74,7 @@ export default function RepertuarBody({ events = [] }) {
   );
 }
 
-function EventRow({ event }) {
+function EventRow({ event, t, locale }) {
   const sold = event.status === 'wyprzedane';
   const statusColor = getStatusColor(event.status);
 
@@ -86,15 +82,15 @@ function EventRow({ event }) {
     <div className={s.row + (sold ? ' ' + s.rowSold : '')}>
       {/* Date */}
       <div className={s.dateCol}>
-        <span className={s.dateDay + ' mono'}>{formatDate(event.date).split(' ')[0]}</span>
-        <span className={s.dateNum + ' mono'}>{formatDate(event.date).split(' ')[1]}</span>
+        <span className={s.dateDay + ' mono'}>{formatDate(event.date, locale).split(' ')[0]}</span>
+        <span className={s.dateNum + ' mono'}>{formatDate(event.date, locale).split(' ')[1]}</span>
       </div>
 
       {/* Times */}
       <div className={s.timeCol + ' mono'}>
-        <span className={s.timeLabel}>wejście</span>
+        <span className={s.timeLabel}>{t.repertuar.doors}</span>
         <span className={s.timeVal}>{event.doors}</span>
-        <span className={s.timeLabel}>start</span>
+        <span className={s.timeLabel}>{t.repertuar.start}</span>
         <span className={s.timeVal}>{event.start}</span>
       </div>
 
@@ -109,9 +105,9 @@ function EventRow({ event }) {
           <Link href={`/wydarzenie/${event.slug}`} className={s.artistLink}>{event.artist}</Link>
         </h3>
         <div className={s.eventMeta}>
-          <span className={s.genre + ' mono'}>{event.genre}</span>
+          <span className={s.genre + ' mono'}>{translateGenre(event.genre, locale)}</span>
           {event.support && <span className={s.support}>+ {event.support}</span>}
-          <span className={s.venue}>{event.venue}</span>
+          <span className={s.venue}>{translateRoom(event.venue, locale)}</span>
           {event.ageMin && <span className={s.age + ' mono'}>{event.ageMin}+</span>}
         </div>
       </div>
@@ -125,15 +121,15 @@ function EventRow({ event }) {
             event.status === 'wyprzedane' ? 'sold' : 'pre'
           )} />
           <span className={'mono ' + s.statusText} style={{ color: statusColor }}>
-            {getStatusLabel(event)}
+            {getStatusLabel(event, locale)}
           </span>
         </div>
 
         <span className={s.price + ' mono'}>
-          {sold ? '—' : event.priceFrom ? `od ${event.priceFrom} zł` : '—'}
+          {sold ? '—' : event.priceFrom ? `${t.ticket.from} ${event.priceFrom} ${t.ticket.currency}` : '—'}
         </span>
 
-        <TicketButton event={event} style={{ padding: '11px 22px', fontSize: 14 }} />
+        <TicketButton event={event} t={t.ticket} style={{ padding: '11px 22px', fontSize: 14 }} />
       </div>
     </div>
   );

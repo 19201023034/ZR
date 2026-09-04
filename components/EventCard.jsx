@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import TicketButton from './TicketButton';
-import { getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom } from '@/lib/events';
+import { getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom, countdownLabel } from '@/lib/events';
 import s from './EventCard.module.css';
 
 export default function EventCard({ event, t, locale = 'pl' }) {
   const sold = event.status === 'wyprzedane';
   const statusColor = getStatusColor(event.status);
   const statusLabel = getStatusLabel(event, locale);
+  const countdown = sold ? null : countdownLabel(event.daysUntil, locale);
 
   return (
     <article
@@ -22,7 +23,14 @@ export default function EventCard({ event, t, locale = 'pl' }) {
       {/* Body */}
       <div className={s.body}>
         <div className={s.topRow}>
-          <span className={s.date}>{formatDate(event.date, locale)} · {event.doors} / {event.start}</span>
+          <span className={s.dateGroup}>
+            <span className={s.date}>{formatDate(event.date, locale)}</span>
+            {countdown && (
+              <span className={s.countdown + (event.daysUntil <= 7 ? ' ' + s.countdownSoon : '')}>
+                {countdown}
+              </span>
+            )}
+          </span>
           <span className={s.status} style={{ color: statusColor }}>
             <span className={'status-dot status-dot-' + (
               event.status === 'dostepne' ? 'ok' :
@@ -39,6 +47,7 @@ export default function EventCard({ event, t, locale = 'pl' }) {
 
         <div className={s.meta}>
           <span>{translateGenre(event.genre, locale)}</span>
+          {event.doors && <span>{event.doors}</span>}
           {event.support && <span className={s.support}>+ {event.support}</span>}
           <span>{translateRoom(event.venue, locale)}</span>
         </div>

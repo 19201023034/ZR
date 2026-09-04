@@ -24,7 +24,7 @@
 }
 .item:hover .head { padding-left: 10px; }
 
-.num { font-size: 12px; color: var(--zr-gold-dim); letter-spacing: 0.1em; }
+.num { font-size: 13px; color: var(--zr-gold-dim); letter-spacing: 0.1em; }
 .itemOpen .num { color: var(--zr-gold); }
 
 .title {

@@ -86,7 +86,7 @@
 
 .date {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--zr-muted);
 }
 
@@ -95,7 +95,7 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -154,3 +154,25 @@
 
 .artistLink { color: inherit; transition: color 200ms var(--ease-out); }
 .artistLink:hover { color: var(--zr-gold); }
+
+/* ─── Odliczanie ─── */
+.dateGroup { display: inline-flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+
+/* Do siedmiu dni robi się złote — na tym progu „zaraz" zaczyna być argumentem. */
+.countdown {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--zr-muted);
+  border: 1px solid var(--zr-line);
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+.countdownSoon {
+  color: var(--zr-gold);
+  border-color: rgba(252, 204, 0, 0.4);
+}
+
+:root[data-theme='light'] .countdownSoon { border-color: rgba(133, 98, 0, 0.35); }

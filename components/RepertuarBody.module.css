@@ -42,7 +42,7 @@
 .filterActive { background: rgba(252,204,0,0.12); color: var(--zr-gold); border-color: var(--zr-gold); font-weight: 700; }
 
 .meta {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--zr-faint);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -55,7 +55,7 @@
 
 .monthLabel {
   padding: 20px 80px 10px;
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-gold-dim);
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -71,7 +71,8 @@
 .row {
   position: relative;
   display: grid;
-  grid-template-columns: 80px 90px 150px 1fr auto;
+  /* kiedy · plakat · kto · zakup — w tej kolejności ludzie to czytają */
+  grid-template-columns: 96px 150px 1fr auto;
   gap: 28px;
   align-items: center;
   padding: 20px 80px;
@@ -110,20 +111,10 @@
 .rowSold { opacity: 0.6; }
 
 /* Date */
-.dateCol { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-.dateDay { font-size: 10px; color: var(--zr-muted); letter-spacing: 0.12em; text-transform: uppercase; }
-.dateNum { font-size: 16px; color: var(--zr-text); font-weight: 500; letter-spacing: 0.04em; }
+.dateCol { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.dateDay { font-size: 11.5px; color: var(--zr-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+.dateNum { font-size: 19px; color: var(--zr-text); font-weight: 500; letter-spacing: 0.02em; line-height: 1.15; }
 
-/* Times */
-.timeCol {
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 8px;
-  row-gap: 2px;
-  align-items: center;
-}
-.timeLabel { font-size: 9px; color: var(--zr-faint); letter-spacing: 0.1em; text-transform: uppercase; }
-.timeVal { font-size: 13px; color: var(--zr-muted); font-weight: 500; }
 
 /* Main */
 .mainCol { display: flex; flex-direction: column; gap: 6px; }
@@ -143,7 +134,7 @@
 }
 
 .genre {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-gold-dim);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -160,7 +151,7 @@
 }
 
 .age {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-faint);
   border: 1px solid var(--zr-line);
   border-radius: 3px;
@@ -183,7 +174,7 @@
 }
 
 .statusText {
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -258,3 +249,21 @@
 @media (max-width: 768px) {
   .thumb { display: none; }
 }
+
+
+/* ─── Odliczanie ─── */
+/* Do siedmiu dni robi się złote — na tym progu „zaraz" zaczyna być argumentem. */
+.countdown {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--zr-muted);
+  text-transform: lowercase;
+}
+
+.countdownSoon {
+  color: var(--zr-gold);
+  font-weight: 500;
+}
+
+/* Godzina wejścia zeszła z osobnej kolumny do metadanych pod nazwą */
+.time { font-size: 12px; color: var(--zr-muted); letter-spacing: 0.04em; }

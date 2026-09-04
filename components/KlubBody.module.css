@@ -83,7 +83,7 @@
 }
 
 .heroAddress {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #FCCC00;
@@ -143,7 +143,7 @@
 }
 
 .statLabel {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--zr-muted);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -281,7 +281,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--zr-gold-dim);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -329,7 +329,7 @@
 }
 
 .timelineLabel {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-muted);
   letter-spacing: 0.14em;
   text-transform: uppercase;

@@ -86,7 +86,7 @@
 .navLink {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -126,7 +126,7 @@
 .langActive,
 .langInactive {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   padding: 9px 14px;
   border: none;
   cursor: pointer;

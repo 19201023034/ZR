@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import TicketButton from './TicketButton';
-import { getStatusColor, getStatusLabel, formatDate, formatMonth, translateGenre, translateRoom } from '@/lib/events';
+import { getStatusColor, getStatusLabel, formatDate, formatMonth, translateGenre, translateRoom, countdownLabel } from '@/lib/events';
 import { pluralEvents } from '@/lib/i18n';
 import Reveal, { RevealGroup } from './Reveal';
 import s from './RepertuarBody.module.css';
@@ -77,21 +77,19 @@ export default function RepertuarBody({ events = [], t, locale = 'pl' }) {
 function EventRow({ event, t, locale }) {
   const sold = event.status === 'wyprzedane';
   const statusColor = getStatusColor(event.status);
+  const countdown = sold ? null : countdownLabel(event.daysUntil, locale);
 
   return (
     <div className={s.row + (sold ? ' ' + s.rowSold : '')}>
-      {/* Date */}
+      {/* Kiedy — dzień tygodnia, data, ile zostało */}
       <div className={s.dateCol}>
         <span className={s.dateDay + ' mono'}>{formatDate(event.date, locale).split(' ')[0]}</span>
         <span className={s.dateNum + ' mono'}>{formatDate(event.date, locale).split(' ')[1]}</span>
-      </div>
-
-      {/* Times */}
-      <div className={s.timeCol + ' mono'}>
-        <span className={s.timeLabel}>{t.repertuar.doors}</span>
-        <span className={s.timeVal}>{event.doors}</span>
-        <span className={s.timeLabel}>{t.repertuar.start}</span>
-        <span className={s.timeVal}>{event.start}</span>
+        {countdown && (
+          <span className={s.countdown + (event.daysUntil <= 7 ? ' ' + s.countdownSoon : '') + ' mono'}>
+            {countdown}
+          </span>
+        )}
       </div>
 
       {/* Thumbnail */}
@@ -99,7 +97,7 @@ function EventRow({ event, t, locale }) {
         {event.poster && <img src={event.poster} alt="" className={s.thumbImg} />}
       </Link>
 
-      {/* Main info */}
+      {/* Kto — najgłośniejszy element wiersza */}
       <div className={s.mainCol}>
         <h3 className={s.artist + ' display'}>
           <Link href={`/wydarzenie/${event.slug}`} className={s.artistLink}>{event.artist}</Link>
@@ -108,6 +106,8 @@ function EventRow({ event, t, locale }) {
           <span className={s.genre + ' mono'}>{translateGenre(event.genre, locale)}</span>
           {event.support && <span className={s.support}>+ {event.support}</span>}
           <span className={s.venue}>{translateRoom(event.venue, locale)}</span>
+          {/* godziny schodzą tu z osobnej kolumny — liczą się dopiero po decyzji */}
+          {event.doors && <span className={s.time + ' mono'}>{t.repertuar.doors} {event.doors}</span>}
           {event.ageMin && <span className={s.age + ' mono'}>{event.ageMin}+</span>}
         </div>
       </div>

@@ -10,12 +10,12 @@
 
 .heroLeft { display: flex; flex-direction: column; gap: 16px; }
 
-.crumbs { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
+.crumbs { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
 .crumb { color: var(--zr-gold-dim); transition: color 160ms; }
 .crumb:hover { color: var(--zr-gold); }
 
 .statusRow { display: flex; align-items: center; gap: 8px; }
-.statusText { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.statusText { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
 
 .title {
   font-size: clamp(42px, 6.5vw, 92px);
@@ -45,11 +45,11 @@
 /* first item of every row starts flush, no divider */
 .fact:nth-child(3n + 1) { border-left: none; padding-left: 0; }
 
-.factLabel { font-size: 9.5px; color: var(--zr-faint); letter-spacing: 0.16em; text-transform: uppercase; }
+.factLabel { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.16em; text-transform: uppercase; }
 .factValue { font-size: 14px; color: var(--zr-text); font-weight: 500; }
 
 .ctaRow { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
-.ctaNote { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
+.ctaNote { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.12em; text-transform: uppercase; }
 
 .poster {
   position: relative;
@@ -65,7 +65,7 @@
 .posterImg { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
 
 .posterEmpty {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-gold-dim);
   border: 1px solid rgba(252, 204, 0, 0.4);
   border-radius: 3px;
@@ -97,7 +97,7 @@
 }
 .practicalRow:last-child { border-bottom: none; }
 
-.practicalTerm { font-size: 10px; color: var(--zr-gold-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+.practicalTerm { font-size: 11.5px; color: var(--zr-gold-dim); letter-spacing: 0.14em; text-transform: uppercase; }
 .practicalDesc { font-family: var(--font-body); font-size: 14px; color: var(--zr-body); line-height: 1.6; }
 
 /* ─── Others ─── */
@@ -110,7 +110,7 @@
   flex-wrap: wrap;
 }
 .othersTitle { font-size: 30px; color: var(--zr-text); line-height: 1; }
-.othersLink { font-size: 11.5px; color: var(--zr-gold-dim); letter-spacing: 0.08em; }
+.othersLink { font-size: 12.5px; color: var(--zr-gold-dim); letter-spacing: 0.08em; }
 .othersLink:hover { color: var(--zr-gold); }
 
 .othersGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -127,10 +127,10 @@
 }
 .otherCard:hover { border-color: var(--zr-gold-dim); transform: translateY(-3px); }
 
-.otherDate { font-size: 10px; color: var(--zr-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+.otherDate { font-size: 11.5px; color: var(--zr-muted); letter-spacing: 0.12em; text-transform: uppercase; }
 .otherArtist { font-size: 22px; color: var(--zr-text); line-height: 1.05; }
 .otherCard:hover .otherArtist { color: var(--zr-gold); }
-.otherMeta { font-size: 10px; color: var(--zr-faint); letter-spacing: 0.06em; }
+.otherMeta { font-size: 11.5px; color: var(--zr-faint); letter-spacing: 0.06em; }
 
 @media (min-width: 720px) {
   .facts { grid-template-columns: repeat(6, auto); justify-content: start; column-gap: 0; }

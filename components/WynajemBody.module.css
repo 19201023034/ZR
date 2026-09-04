@@ -39,7 +39,7 @@
 .tabActive .tabName { color: var(--zr-gold); }
 
 .tabMeta {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-faint);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -74,7 +74,7 @@
 .stat { display: flex; flex-direction: column; gap: 6px; }
 
 .statLabel {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-muted);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -195,7 +195,7 @@
 }
 
 .compareCol {
-  font-size: 9.5px;
+  font-size: 11px;
   color: var(--zr-muted);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -221,7 +221,7 @@
 
 .compareRoomTitle { font-size: 18px; letter-spacing: 0.02em; }
 
-.comparePrice { font-size: 11px; }
+.comparePrice { font-size: 12px; }
 
 .compareCell {
   font-size: 14px;
@@ -265,7 +265,7 @@
   transform: translateX(-50%);
   background: var(--zr-gold-dim);
   color: #0C0A08;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -284,7 +284,7 @@
 .packageItems { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 
 .packageItem {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--zr-muted);
   letter-spacing: 0.04em;
 }
@@ -292,7 +292,7 @@
 .packageItem::before { content: '— '; color: var(--zr-gold-dim); }
 
 .conditions {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--zr-faint);
   line-height: 1.8;
   letter-spacing: 0.04em;
@@ -320,7 +320,7 @@
 .fieldRow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .label {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-muted);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -377,13 +377,13 @@
 
 .rodoText {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--zr-muted);
   line-height: 1.6;
 }
 
 .sla {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-faint);
   letter-spacing: 0.12em;
   text-align: center;
@@ -587,7 +587,7 @@
 }
 
 .techBlockLabel {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-muted);
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -603,8 +603,8 @@
 }
 .techRow:last-child { border-bottom: none; }
 
-.techLabel { font-size: 10px; color: var(--zr-muted); letter-spacing: 0.12em; flex-shrink: 0; }
-.techValue { font-size: 12px; color: var(--zr-body); text-align: right; }
+.techLabel { font-size: 11.5px; color: var(--zr-muted); letter-spacing: 0.12em; flex-shrink: 0; }
+.techValue { font-size: 13px; color: var(--zr-body); text-align: right; }
 
 @media (max-width: 768px) {
   .planCanvas { height: 360px; }
@@ -633,7 +633,7 @@
   margin-bottom: 24px;
 }
 .galleryTitle { font-size: 30px; color: var(--zr-text); line-height: 1; margin-top: 6px; }
-.galleryNote { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.1em; text-transform: uppercase; }
+.galleryNote { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.1em; text-transform: uppercase; }
 
 .galleryGrid {
   display: grid;
@@ -660,7 +660,7 @@
 .galleryImg { width: 100%; height: 100%; object-fit: cover; }
 
 .galleryPlaceholder {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--zr-faint);
   letter-spacing: 0.16em;
   border: 1px solid var(--zr-line-hi);
@@ -673,3 +673,9 @@
   .galleryTileWide { grid-column: span 2; aspect-ratio: 16 / 9; }
   .galleryHead { flex-direction: column; align-items: flex-start; }
 }
+
+
+/* Zdania czyta się szybciej pismem proporcjonalnym — monospace
+   zostaje tam, gdzie niesie liczby i etykiety. */
+.galleryNote { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }
+.conditions { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }

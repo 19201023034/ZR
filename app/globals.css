@@ -10,6 +10,7 @@
 
   /* Gold — two registers */
   --zr-gold:        #FCCC00;
+  --zr-gold-text:   #FCCC00;   /* drobny druk — w ciemnym motywie to samo złoto */
   --zr-gold-hi:     #FFD824;
   --zr-gold-dim:    #C09C18;
 
@@ -17,7 +18,7 @@
   --zr-text:        #F5F1E8;
   --zr-body:        #D8D2C4;
   --zr-muted:       #9A9484;
-  --zr-faint:       #6E6858;
+  --zr-faint:       #888172;   /* 3.56:1 → 5.11:1 — było poniżej AA */
 
   /* Lines */
   --zr-line:        #2C2618;
@@ -48,7 +49,8 @@
   --zr-raised:      #EFEADF;
   --zr-surface-alt: #F0EBDF;
 
-  --zr-gold:        #B0850A;
+  --zr-gold:        #B0850A;   /* wypełnienia i duży krój — AA dla dużego tekstu */
+  --zr-gold-text:   #856200;   /* drobny druk — 5.02:1, bo #B0850A dawało 3.03:1 */
   --zr-gold-hi:     #8F6C05;
   --zr-gold-dim:    #806413;
 
@@ -137,7 +139,7 @@ body::before {
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -160,6 +162,8 @@ body::before {
 
 .mono {
   font-family: var(--font-mono);
+  /* cyfry o równej szerokości — daty i ceny ustawiają się w kolumnach */
+  font-variant-numeric: tabular-nums;
 }
 
 /* ─── Button system ──────────────────────────────────── */

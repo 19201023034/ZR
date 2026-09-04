@@ -18,7 +18,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 14px;
-  color: var(--zr-gold);
+  color: var(--zr-gold-text);
   border-bottom: 1px solid rgba(252, 204, 0, 0.4);
   white-space: nowrap;
   transition: border-color 150ms;
@@ -87,8 +87,8 @@
 }
 
 .calendarCta {
-  font-size: 12px;
-  color: var(--zr-gold);
+  font-size: 13px;
+  color: var(--zr-gold-text);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-top: auto;

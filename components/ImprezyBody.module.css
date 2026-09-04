@@ -42,7 +42,7 @@
   border-bottom: 1px solid var(--zr-line);
 }
 .check {
-  color: var(--zr-gold);
+  color: var(--zr-gold-text);
   font-size: 13px;
   font-weight: 700;
   line-height: 1.6;

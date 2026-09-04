@@ -38,7 +38,7 @@
   color: var(--zr-muted);
   transition: color 200ms var(--ease-out);
 }
-.tabHint { font-size: 9.5px; color: var(--zr-faint); letter-spacing: 0.08em; text-transform: uppercase; }
+.tabHint { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.08em; text-transform: uppercase; }
 
 .tab:hover .tabLabel { color: var(--zr-text); }
 
@@ -64,3 +64,8 @@
 @media print {
   .bar { display: none !important; }
 }
+
+
+/* Zdania czyta się szybciej pismem proporcjonalnym — monospace
+   zostaje tam, gdzie niesie liczby i etykiety. */
+.tabHint { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }

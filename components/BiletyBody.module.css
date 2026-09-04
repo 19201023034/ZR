@@ -22,7 +22,7 @@
 }
 
 .groupTitle { font-size: 24px; color: var(--zr-text); line-height: 1; }
-.groupCount { font-size: 11px; color: var(--zr-faint); letter-spacing: 0.12em; }
+.groupCount { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.12em; }
 
 .rows { display: flex; flex-direction: column; }
 
@@ -37,14 +37,14 @@
 }
 .row:hover { background: rgba(255, 255, 255, 0.02); }
 
-.dateCol { font-size: 12px; color: var(--zr-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.dateCol { font-size: 13px; color: var(--zr-muted); letter-spacing: 0.06em; text-transform: uppercase; }
 
 .mainCol { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .artist { font-size: 26px; color: var(--zr-text); line-height: 1.05; }
-.meta { font-size: 10.5px; color: var(--zr-faint); letter-spacing: 0.06em; }
+.meta { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.06em; }
 
 .statusCol { display: flex; align-items: center; gap: 7px; }
-.statusText { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+.statusText { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; }
 
 .priceCol { font-size: 14px; color: var(--zr-text); text-align: right; }
 
@@ -101,3 +101,9 @@
 
 .artistLink { color: inherit; transition: color 200ms var(--ease-out); }
 .artistLink:hover { color: var(--zr-gold); }
+
+
+/* Zdania czyta się szybciej pismem proporcjonalnym — monospace
+   zostaje tam, gdzie niesie liczby i etykiety. */
+.empty { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }
+.helpText { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }

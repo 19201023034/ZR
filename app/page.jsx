@@ -4,7 +4,6 @@ import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
 import HeroCarousel from '@/components/HeroCarousel';
 import ServicesAccordion from '@/components/ServicesAccordion';
-import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import { HELP_ICONS } from '@/components/EventIcons';
@@ -158,26 +157,6 @@ export default async function HomePage() {
               </Link>
             );
           })}
-        </RevealGroup>
-      </section>
-
-      {/* ─── NUMBERS ─── */}
-      <section className={'section ' + s.numbers}>
-        <span className="glow-below glow-below-dim" aria-hidden="true" />
-        <Reveal as="p" variant="up" className={s.numbersTagline + ' display'}>
-          {t.home.numbersTagline}
-        </Reveal>
-        <RevealGroup variant="up" step={110} className={s.numbersStats}>
-          {t.home.stats.map(([value, label], i) => (
-            <div key={label} className={s.stat}>
-              <Counter
-                value={value}
-                className={s.statValue + ' mono'}
-                style={{ color: i === 0 ? 'var(--zr-gold)' : 'var(--zr-text)' }}
-              />
-              <span className={s.statLabel + ' mono'}>{label}</span>
-            </div>
-          ))}
         </RevealGroup>
       </section>
 

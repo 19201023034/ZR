@@ -3,18 +3,15 @@
 import Link from 'next/link';
 import Reveal, { RevealGroup } from './Reveal';
 import Counter from './Counter';
-import { ROOMS, translateRoom } from '@/lib/events';
 import s from './KlubBody.module.css';
 
-// Icons and years carry no language; the copy comes from the dictionary and the
-// hall figures are read from ROOMS so this page can't drift from /wynajem.
+// Ikony i lata nie niosą języka — treść bierze się ze słownika.
 const STAT_VALUES = ['10+', '1000', '3', '100+'];
 const WHAT_ICONS = ['♪', '◈', '◉', '✦'];
 const YEARS = ['2013', '2016', '2019', '2023'];
 
 export default function KlubBody({ t, locale = 'pl' }) {
   const tk = t.klub;
-  const ROOM_NAMES = Object.keys(ROOMS);
   return (
     <>
       {/* ─── HERO — the wordmark sits on the building it belongs to ─── */}
@@ -78,39 +75,6 @@ export default function KlubBody({ t, locale = 'pl' }) {
               <span className={s.whatIcon}>{WHAT_ICONS[i]}</span>
               <h3 className={'display ' + s.whatTitle}>{item.title}</h3>
               <p className={s.whatDesc}>{item.desc}</p>
-            </div>
-          ))}
-        </RevealGroup>
-      </section>
-
-      {/* ─── ROOMS QUICK ─── */}
-      <section className={'section ' + s.roomsSection}>
-        <Reveal className={s.roomsHeader}>
-          <div>
-            <span className="section-label">{tk.roomsLabel}</span>
-            <h2 className={'display ' + s.sectionHeading}>{tk.roomsHeading}</h2>
-          </div>
-          <Link href="/wynajem" className="btn btn-outline-gold">
-            {tk.roomsLink}
-          </Link>
-        </Reveal>
-        <RevealGroup variant="up" step={110} className={s.roomsGrid}>
-          {ROOM_NAMES.map((name, i) => (
-            <div key={name} className={s.roomCard}>
-              <div className={'led-grid ' + s.roomLed}>
-                {ROOMS[name].photos?.[0] && (
-                  <img src={ROOMS[name].photos[0]} alt={translateRoom(name, locale)} className={s.roomImg} />
-                )}
-              </div>
-              <div className={s.roomInfo}>
-                <h3 className={'display ' + s.roomName}>{translateRoom(name, locale)}</h3>
-                <div className={s.roomMeta + ' mono'}>
-                  <span>{ROOMS[name].area} m²</span>
-                  <span className={s.roomMetaDot}>·</span>
-                  <span>{tk.upTo} {ROOMS[name].capacities.koncert} {tk.people}</span>
-                </div>
-                <p className={s.roomDesc}>{tk.roomDesc[i]}</p>
-              </div>
             </div>
           ))}
         </RevealGroup>

@@ -7,7 +7,7 @@
   --zr-surface:     #151109;
   --zr-raised:      #201A10;
   --zr-surface-alt: #100D0A;
-  --zr-band:        #17120B;   /* pas sekcji — ~11 pkt jaśniej niż tło */
+  --zr-band:        #1E1710;   /* pas sekcji — wyraźnie jaśniej niż tło */
 
   /* Gold — two registers */
   --zr-gold:        #FCCC00;
@@ -49,7 +49,7 @@
   --zr-surface:     #FFFFFF;
   --zr-raised:      #EFEADF;
   --zr-surface-alt: #F0EBDF;
-  --zr-band:        #EDE7D8;   /* pas sekcji — nieco ciemniej niż tło */
+  --zr-band:        #E9E1CE;   /* pas sekcji — wyraźnie ciemniej niż tło */
 
   --zr-gold:        #B0850A;   /* wypełnienia i duży krój — AA dla dużego tekstu */
   --zr-gold-text:   #856200;   /* drobny druk — 5.02:1, bo #B0850A dawało 3.03:1 */

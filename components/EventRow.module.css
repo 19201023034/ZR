@@ -1,11 +1,20 @@
 .row {
   display: grid;
-  grid-template-columns: 168px 1fr auto;
-  gap: 26px;
+  /* plakat · nazwa(rośnie) · termin · sala · odliczanie · zakup */
+  grid-template-columns: 210px minmax(0, 1fr) 158px 150px 128px 236px;
+  gap: 28px;
   align-items: center;
-  padding: 20px 0;
+  padding: 22px 20px;
+  margin: 0 -20px;
+  border-radius: 8px;
   border-top: 1px solid var(--zr-line);
+  transition: background 200ms var(--ease-out);
 }
+
+/* Cały rząd reaguje na najechanie — jeden obiekt, nie zbiór elementów */
+.row:hover { background: var(--zr-band); }
+.row:hover .artistLink { color: var(--zr-gold); }
+.row:hover .thumbImg { transform: scale(1.05); }
 
 .sold { opacity: 0.58; }
 
@@ -17,48 +26,68 @@
   background: var(--zr-surface-alt);
 }
 
-.thumbImg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumbImg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 420ms var(--ease-out); }
 
+/* ─── Kto ─── */
 .main { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 
 .artist {
   font-family: var(--font-display);
-  font-size: clamp(21px, 2.4vw, 29px);
+  font-size: clamp(22px, 2.4vw, 30px);
   line-height: 1.05;
   color: var(--zr-text);
   margin: 0;
 }
 
-.artistLink { color: inherit; text-decoration: none; }
+.artistLink { color: inherit; text-decoration: none; transition: color 180ms var(--ease-out); }
 .artistLink:hover { color: var(--zr-gold); }
 
 .support { font-family: var(--font-body); font-size: 14px; color: var(--zr-muted); margin: 0; }
 
-.meta {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  flex-wrap: wrap;
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--zr-body);
-  margin: 3px 0 0;
+.genre {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--zr-gold-text);
+  margin-top: 1px;
 }
 
-.metaIcon { width: 16px; height: 16px; flex: none; color: var(--zr-gold); }
-.meta strong { color: var(--zr-text); font-weight: 600; }
-.metaMuted { color: var(--zr-muted); }
+/* ─── Kiedy ─── */
+.when { display: flex; flex-direction: column; gap: 4px; white-space: nowrap; }
+
+.date { font-size: 16px; color: var(--zr-text); font-weight: 500; letter-spacing: 0.02em; }
+.dayName { color: var(--zr-muted); }
+
+.time {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--zr-muted);
+}
+.timeIcon { width: 13px; height: 13px; opacity: 0.8; }
+
+/* ─── Gdzie ─── */
+.where { display: flex; flex-direction: column; gap: 4px; white-space: nowrap; min-width: 0; }
+
+.venue { font-family: var(--font-body); font-size: 15px; color: var(--zr-body); overflow: hidden; text-overflow: ellipsis; }
+.age { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.06em; }
+
+/* ─── Ile zostało ─── */
+.countdownCol { display: flex; justify-content: center; }
 
 .countdown {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   color: var(--zr-gold-text);
-  border: 1px solid var(--zr-line);
-  border-radius: 3px;
-  padding: 2px 8px;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 999px;
+  padding: 6px 15px;
+  white-space: nowrap;
 }
 
+/* ─── Zakup ─── */
 .side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 
 .status { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -80,13 +109,23 @@
 
 .details:hover { border-color: var(--zr-text); }
 
-@media (max-width: 900px) {
-  .row { grid-template-columns: 120px 1fr; gap: 18px; }
+/* ─── Responsywność ─── */
+/* Poniżej ~1100px kolumny „gdzie" i „ile zostało" chowają się (info jest też
+   na stronie wydarzenia); zostaje plakat · nazwa · termin · zakup. */
+@media (max-width: 1100px) {
+  .row { grid-template-columns: 180px minmax(160px, 1fr) auto auto; gap: 22px; }
+  .where, .countdownCol { display: none; }
+}
+
+@media (max-width: 760px) {
+  .row { grid-template-columns: 130px 1fr; gap: 14px 16px; padding: 18px 14px; margin: 0 -14px; }
+  .when { grid-column: 2; flex-direction: row; gap: 12px; align-items: baseline; }
   .side { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
   .details { display: none; }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 460px) {
   .row { grid-template-columns: 1fr; }
-  .thumb { max-width: 220px; }
+  .thumb { max-width: 240px; }
+  .when { grid-column: 1; }
 }

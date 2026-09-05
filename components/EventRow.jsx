@@ -5,13 +5,14 @@ import { getStatusColor, getStatusLabel, formatDate, countdownLabel, translateGe
 import s from './EventRow.module.css';
 
 /**
- * Pojedynczy wiersz wydarzenia — jedno źródło dla strony głównej, repertuaru
- * i biletów. Trzy listy tego samego muszą wyglądać tak samo; wspólny komponent
- * to gwarantuje lepiej niż trzy kopie układu, które i tak się rozjechały.
+ * Wiersz wydarzenia w układzie tabelarycznym — informacja rozłożona na całą
+ * szerokość (nazwa · termin · sala · odliczanie · zakup), żeby nie zostawała
+ * pusta przestrzeń między treścią a akcjami.
  */
 export default function EventRow({ event, t, locale = 'pl', showGenre = false }) {
   const sold = event.status === 'wyprzedane';
-  const countdown = sold ? null : countdownLabel(event.daysUntil, locale);
+  const countdown = sold ? null : countdownLabel(event.daysUntil, locale, 400);
+  const [dayName, dayDate] = formatDate(event.date, locale).split(' ');
 
   return (
     <article className={s.row + (sold ? ' ' + s.sold : '')}>
@@ -19,25 +20,39 @@ export default function EventRow({ event, t, locale = 'pl', showGenre = false })
         {event.poster && <img src={event.poster} alt="" className={s.thumbImg} />}
       </Link>
 
+      {/* Kto */}
       <div className={s.main}>
         <h3 className={s.artist}>
           <Link href={`/wydarzenie/${event.slug}`} className={s.artistLink}>{event.artist}</Link>
         </h3>
         {event.support && <p className={s.support}>+ {event.support}</p>}
-        <p className={s.meta}>
-          <IconClock className={s.metaIcon} />
-          <span>
-            <strong>{formatDate(event.date, locale)}{event.start ? ` · ${event.start}` : ''}</strong>
-            <span className={s.metaMuted}>
-              {' · '}{translateRoom(event.venue, locale)}
-              {showGenre ? ` · ${translateGenre(event.genre, locale)}` : ''}
-              {event.ageMin ? ` · ${event.ageMin}+` : ''}
-            </span>
-          </span>
-          {countdown && <span className={s.countdown}>{countdown}</span>}
-        </p>
+        {showGenre && <span className={s.genre + ' mono'}>{translateGenre(event.genre, locale)}</span>}
       </div>
 
+      {/* Kiedy */}
+      <div className={s.when}>
+        <span className={s.date + ' mono'}>
+          <span className={s.dayName}>{dayName}</span> {dayDate}
+        </span>
+        {event.start && (
+          <span className={s.time + ' mono'}>
+            <IconClock className={s.timeIcon} />{event.start}
+          </span>
+        )}
+      </div>
+
+      {/* Gdzie */}
+      <div className={s.where}>
+        <span className={s.venue}>{translateRoom(event.venue, locale)}</span>
+        {event.ageMin && <span className={s.age + ' mono'}>{event.ageMin}+</span>}
+      </div>
+
+      {/* Ile zostało */}
+      <div className={s.countdownCol}>
+        {countdown && <span className={s.countdown}>{countdown}</span>}
+      </div>
+
+      {/* Zakup */}
       <div className={s.side}>
         <span className={s.status + ' mono'} style={{ color: getStatusColor(event.status) }}>
           {getStatusLabel(event, locale)}

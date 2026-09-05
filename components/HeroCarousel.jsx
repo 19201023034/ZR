@@ -42,7 +42,9 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
   if (!n) return null;
 
   const ev = events[i];
-  const countdown = countdownLabel(ev.daysUntil, locale, 60);
+  // horyzont 400 dni: każde wydarzenie w hero ma plakietkę, więc blok opisu
+  // ma zawsze tę samą wysokość i tytuł nie skacze przy zmianie slajdu
+  const countdown = countdownLabel(ev.daysUntil, locale, 400);
 
   return (
     <section

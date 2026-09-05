@@ -593,8 +593,9 @@
 .helpChip {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
+  justify-content: center;   /* ikona + tekst wyśrodkowane w kafelku */
+  gap: 13px;
+  padding: 18px 20px;
   border: 1px solid var(--zr-line);
   border-radius: 999px;
   font-family: var(--font-body);
@@ -617,8 +618,9 @@
   color: var(--zr-gold);
 }
 
-.helpGlyph { width: 22px; height: 22px; }
+.helpGlyph { width: 28px; height: 28px; }
 
 @media (max-width: 720px) {
-  .helpChip { padding: 14px 16px; font-size: 14px; }
+  .helpChip { padding: 16px 16px; font-size: 14px; }
+  .helpGlyph { width: 26px; height: 26px; }
 }

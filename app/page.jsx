@@ -101,7 +101,7 @@ export default async function HomePage() {
       <EventsGrid events={upcoming} t={t} locale={locale} />
 
       {/* ─── SALE ─── */}
-      <section className={'section ' + s.rooms}>
+      <section className={'section section-band ' + s.rooms}>
         <Reveal variant="mask" className={s.blockHead}>
           <span className="section-label">{t.home.rentalLabel}</span>
           <h2 className={'display ' + s.blockHeading}>{t.home.roomsHeading}</h2>
@@ -148,7 +148,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── W CZYM MOŻEMY POMÓC ─── */}
-      <section className={'section ' + s.help}>
+      <section className={'section section-band ' + s.help}>
         <Reveal variant="mask">
           <h2 className={'display ' + s.blockHeading}>{t.home.helpHeading}</h2>
         </Reveal>
@@ -188,7 +188,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── DOWÓD SPOŁECZNY B2B ─── */}
-      <section className={'section ' + s.proof} style={{ background: 'var(--zr-surface-alt)' }}>
+      <section className={'section section-band ' + s.proof}>
         <div className={s.proofHead}>
           <span className="section-label">{t.home.proofLabel}</span>
           <span className={s.proofNote + ' mono'}>{t.home.proofNote}</span>

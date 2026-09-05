@@ -129,8 +129,12 @@ export default async function HomePage() {
         </RevealGroup>
       </section>
 
-      {/* ─── TRZY KARTY ─── */}
+      {/* ─── USŁUGI ─── */}
       <section className={'section ' + s.cards}>
+        <Reveal variant="mask" className={s.blockHead}>
+          <span className="section-label">{t.home.servicesLabel}</span>
+          <h2 className={'display ' + s.blockHeading}>{t.home.servicesHeading}</h2>
+        </Reveal>
         <RevealGroup variant="up" step={90} className={s.cardGrid}>
           {t.home.cards.map(card => (
             <article key={card.href} className={s.card}>

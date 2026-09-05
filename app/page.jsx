@@ -3,6 +3,7 @@ import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
 import HeroCarousel from '@/components/HeroCarousel';
+import ServicesAccordion from '@/components/ServicesAccordion';
 import Counter from '@/components/Counter';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
@@ -130,25 +131,14 @@ export default async function HomePage() {
       </section>
 
       {/* ─── USŁUGI ─── */}
-      <section className={'section ' + s.cards}>
+      <section className={'section ' + s.services}>
         <Reveal variant="mask" className={s.blockHead}>
           <span className="section-label">{t.home.servicesLabel}</span>
           <h2 className={'display ' + s.blockHeading}>{t.home.servicesHeading}</h2>
         </Reveal>
-        <RevealGroup variant="up" step={90} className={s.cardGrid}>
-          {t.home.cards.map(card => (
-            <article key={card.href} className={s.card}>
-              <div className={s.cardPhoto + ' led-grid'}>
-                <img src={card.photo} alt="" className={s.cardImg} />
-              </div>
-              <div className={s.cardBody}>
-                <h3 className={'display ' + s.cardTitle}>{card.title}</h3>
-                <p className={s.cardText}>{card.text}</p>
-                <Link href={card.href} className={s.blockBtn}>{card.cta}</Link>
-              </div>
-            </article>
-          ))}
-        </RevealGroup>
+        <Reveal variant="up">
+          <ServicesAccordion cards={t.home.cards} />
+        </Reveal>
       </section>
 
       {/* ─── W CZYM MOŻEMY POMÓC ─── */}

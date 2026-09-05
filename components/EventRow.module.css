@@ -110,22 +110,22 @@
 .details:hover { border-color: var(--zr-text); }
 
 /* ─── Responsywność ─── */
-/* Poniżej ~1100px kolumny „gdzie" i „ile zostało" chowają się (info jest też
-   na stronie wydarzenia); zostaje plakat · nazwa · termin · zakup. */
-@media (max-width: 1100px) {
-  .row { grid-template-columns: 180px minmax(160px, 1fr) auto auto; gap: 22px; }
+/* Pełna tabela (6 kolumn) tylko od 1400 px w górę — poniżej nazwa dostawała
+   za mało miejsca i zawijała na słupek. Na laptopach zostaje plakat · nazwa ·
+   termin · zakup; sala i odliczanie są też na stronie wydarzenia. */
+@media (max-width: 1400px) {
+  .row { grid-template-columns: 200px minmax(0, 1fr) 168px 240px; gap: 24px; }
   .where, .countdownCol { display: none; }
 }
 
-@media (max-width: 760px) {
-  .row { grid-template-columns: 130px 1fr; gap: 14px 16px; padding: 18px 14px; margin: 0 -14px; }
-  .when { grid-column: 2; flex-direction: row; gap: 12px; align-items: baseline; }
+@media (max-width: 900px) {
+  .row { grid-template-columns: 150px minmax(0, 1fr) auto; gap: 18px; }
+  .when { justify-self: end; text-align: right; }
   .side { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
   .details { display: none; }
 }
 
-@media (max-width: 460px) {
-  .row { grid-template-columns: 1fr; }
-  .thumb { max-width: 240px; }
-  .when { grid-column: 1; }
+@media (max-width: 620px) {
+  .row { grid-template-columns: 120px minmax(0, 1fr); gap: 12px 14px; padding: 18px 14px; margin: 0 -14px; }
+  .when { grid-column: 2; justify-self: start; text-align: left; flex-direction: row; gap: 12px; align-items: baseline; }
 }

@@ -18,8 +18,8 @@
   /* Text */
   --zr-text:        #F5F1E8;
   --zr-body:        #D8D2C4;
-  --zr-muted:       #9A9484;
-  --zr-faint:       #888172;   /* 3.56:1 → 5.11:1 — było poniżej AA */
+  --zr-muted:       #B2AB99;   /* jaśniej — szary zlewał się z czernią */
+  --zr-faint:       #978F7D;   /* jaśniej dla lepszej czytelności */
 
   /* Lines */
   --zr-line:        #2C2618;

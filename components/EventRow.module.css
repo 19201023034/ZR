@@ -1,7 +1,7 @@
 .row {
   display: grid;
-  /* plakat · nazwa(rośnie) · termin · sala · odliczanie · zakup */
-  grid-template-columns: 210px minmax(0, 1fr) 158px 150px 128px 236px;
+  /* plakat · treść(rośnie) · akcje — trzy kolumny, bez sztywnych kolumn danych */
+  grid-template-columns: 210px minmax(0, 1fr) 264px;
   gap: 28px;
   align-items: center;
   padding: 22px 20px;
@@ -11,7 +11,7 @@
   transition: background 200ms var(--ease-out);
 }
 
-/* Cały rząd reaguje na najechanie — jeden obiekt, nie zbiór elementów */
+/* Cały rząd reaguje na najechanie */
 .row:hover { background: var(--zr-band); }
 .row:hover .artistLink { color: var(--zr-gold); }
 .row:hover .thumbImg { transform: scale(1.05); }
@@ -28,8 +28,8 @@
 
 .thumbImg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 420ms var(--ease-out); }
 
-/* ─── Kto ─── */
-.main { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+/* ─── Treść ─── */
+.main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 
 .artist {
   font-family: var(--font-display);
@@ -44,62 +44,57 @@
 
 .support { font-family: var(--font-body); font-size: 14px; color: var(--zr-muted); margin: 0; }
 
-.genre {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--zr-gold-text);
-  margin-top: 1px;
-}
-
-/* ─── Kiedy ─── */
-.when { display: flex; flex-direction: column; gap: 4px; white-space: nowrap; }
-
-.date { font-size: 16px; color: var(--zr-text); font-weight: 500; letter-spacing: 0.02em; }
-.dayName { color: var(--zr-muted); }
-
-.time {
-  display: inline-flex;
+/* Cała metryka w jednej elastycznej linii — zawija się, nie nachodzi */
+.meta {
+  display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 13px;
-  color: var(--zr-muted);
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--zr-body);
 }
-.timeIcon { width: 13px; height: 13px; opacity: 0.8; }
 
-/* ─── Gdzie ─── */
-.where { display: flex; flex-direction: column; gap: 4px; white-space: nowrap; min-width: 0; }
+.date { font-size: 15px; color: var(--zr-text); font-weight: 500; letter-spacing: 0.02em; }
 
-.venue { font-family: var(--font-body); font-size: 15px; color: var(--zr-body); overflow: hidden; text-overflow: ellipsis; }
+.time { display: inline-flex; align-items: center; gap: 5px; color: var(--zr-muted); }
+.timeIcon { width: 14px; height: 14px; opacity: 0.8; color: var(--zr-gold); }
+
+.dot { color: var(--zr-faint); }
+.venue { color: var(--zr-body); }
+.genre { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--zr-gold-text); }
 .age { font-size: 12px; color: var(--zr-faint); letter-spacing: 0.06em; }
 
-/* ─── Ile zostało ─── */
-.countdownCol { display: flex; justify-content: center; }
-
 .countdown {
-  font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--zr-gold-text);
   border: 1px solid var(--zr-line-hi);
   border-radius: 999px;
-  padding: 6px 15px;
+  padding: 3px 12px;
   white-space: nowrap;
 }
 
-/* ─── Zakup ─── */
-.side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+/* ─── Akcje ─── */
+.side { display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
 
-.status { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+.status { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; text-align: right; }
 
-.actions { display: flex; align-items: center; gap: 10px; }
+.actions { display: flex; align-items: stretch; gap: 10px; }
 
+/* Oba przyciski równej szerokości → lewe i prawe krawędzie wyrównane
+   między wszystkimi wierszami */
 .details {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   color: var(--zr-text);
-  padding: 12px 20px;
+  padding: 12px 14px;
   border: 1px solid var(--zr-line-hi);
   border-radius: 3px;
   text-decoration: none;
@@ -110,22 +105,15 @@
 .details:hover { border-color: var(--zr-text); }
 
 /* ─── Responsywność ─── */
-/* Pełna tabela (6 kolumn) tylko od 1400 px w górę — poniżej nazwa dostawała
-   za mało miejsca i zawijała na słupek. Na laptopach zostaje plakat · nazwa ·
-   termin · zakup; sala i odliczanie są też na stronie wydarzenia. */
-@media (max-width: 1400px) {
-  .row { grid-template-columns: 200px minmax(0, 1fr) 168px 240px; gap: 24px; }
-  .where, .countdownCol { display: none; }
-}
-
-@media (max-width: 900px) {
-  .row { grid-template-columns: 150px minmax(0, 1fr) auto; gap: 18px; }
-  .when { justify-self: end; text-align: right; }
+@media (max-width: 860px) {
+  .row { grid-template-columns: 150px minmax(0, 1fr); gap: 16px 18px; }
   .side { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+  .status { text-align: left; }
+  .actions { flex: none; }
   .details { display: none; }
 }
 
-@media (max-width: 620px) {
-  .row { grid-template-columns: 120px minmax(0, 1fr); gap: 12px 14px; padding: 18px 14px; margin: 0 -14px; }
-  .when { grid-column: 2; justify-self: start; text-align: left; flex-direction: row; gap: 12px; align-items: baseline; }
+@media (max-width: 520px) {
+  .row { grid-template-columns: 1fr; padding: 18px 14px; margin: 0 -14px; }
+  .thumb { max-width: 240px; }
 }

@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import TicketButton from './TicketButton';
-import { IconClock } from './EventIcons';
-import { getStatusColor, getStatusLabel, formatDate, countdownLabel, translateGenre, translateRoom } from '@/lib/events';
+import EventRow from './EventRow';
+import { translateGenre } from '@/lib/events';
 import Reveal, { RevealGroup } from './Reveal';
 import s from './EventsGrid.module.css';
 
@@ -58,42 +57,9 @@ export default function EventsGrid({ events, t, locale = 'pl' }) {
           <p className={s.empty}>{t.common.noEvents}</p>
         ) : (
           <RevealGroup variant="up" step={55} className={s.rows} key={genre}>
-            {filtered.map(e => {
-              const sold = e.status === 'wyprzedane';
-              const countdown = sold ? null : countdownLabel(e.daysUntil, locale);
-              return (
-                <article key={e.id} className={s.row + (sold ? ' ' + s.rowSold : '')}>
-                  <Link href={`/wydarzenie/${e.slug}`} className={s.thumb + ' led-grid'} tabIndex={-1} aria-hidden="true">
-                    {e.poster && <img src={e.poster} alt="" className={s.thumbImg} />}
-                  </Link>
-
-                  <div className={s.main}>
-                    <h3 className={s.artist}>
-                      <Link href={`/wydarzenie/${e.slug}`} className={s.artistLink}>{e.artist}</Link>
-                    </h3>
-                    {e.support && <p className={s.support}>+ {e.support}</p>}
-                    <p className={s.meta}>
-                      <IconClock className={s.metaIcon} />
-                      <span>
-                        <strong>{formatDate(e.date, locale)}{e.start ? ` · ${e.start}` : ''}</strong>
-                        <span className={s.metaMuted}> · {translateRoom(e.venue, locale)}</span>
-                      </span>
-                      {countdown && <span className={s.countdown}>{countdown}</span>}
-                    </p>
-                  </div>
-
-                  <div className={s.side}>
-                    <span className={s.status + ' mono'} style={{ color: getStatusColor(e.status) }}>
-                      {getStatusLabel(e, locale)}
-                    </span>
-                    <div className={s.actions}>
-                      <Link href={`/wydarzenie/${e.slug}`} className={s.details}>{t.common.details}</Link>
-                      <TicketButton event={e} t={t.ticket} style={{ padding: '12px 22px', fontSize: 14 }} />
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+            {filtered.map(e => (
+              <EventRow key={e.id} event={e} t={t} locale={locale} showGenre />
+            ))}
           </RevealGroup>
         )}
       </section>

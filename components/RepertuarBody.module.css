@@ -32,14 +32,14 @@
   font-weight: 500;
   padding: 9px 20px;
   border-radius: 999px;
-  border: 1px solid var(--zr-line);
+  border: 1px solid var(--zr-line-hi);
   background: transparent;
-  color: var(--zr-muted);
+  color: var(--zr-body);
   cursor: pointer;
   transition: all 150ms;
 }
-.filter:hover { color: var(--zr-text); border-color: var(--zr-line-hi); }
-.filterActive { background: rgba(252,204,0,0.12); color: var(--zr-gold); border-color: var(--zr-gold); font-weight: 700; }
+.filter:hover { color: var(--zr-text); border-color: var(--zr-text); }
+.filterActive { background: var(--zr-gold); color: var(--zr-bg); border-color: var(--zr-gold); font-weight: 600; }
 
 .meta {
   font-size: 12px;

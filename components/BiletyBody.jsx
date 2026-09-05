@@ -103,7 +103,10 @@ function Row({ event, t, locale }) {
         {event.priceFrom ? `${t.ticket.from} ${event.priceFrom} ${t.ticket.currency}` : '—'}
       </div>
 
-      <TicketButton event={event} t={t.ticket} style={{ padding: '11px 20px', fontSize: 14 }} />
+      <div className={s.actions}>
+        <Link href={`/wydarzenie/${event.slug}`} className={s.details}>{t.common.details}</Link>
+        <TicketButton event={event} t={t.ticket} style={{ padding: '11px 20px', fontSize: 14 }} />
+      </div>
     </div>
   );
 }

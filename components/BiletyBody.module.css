@@ -28,7 +28,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 120px 1fr 150px 100px auto;
+  grid-template-columns: 120px 1fr 150px 90px auto;
   gap: 24px;
   align-items: center;
   padding: 18px 80px;
@@ -107,3 +107,26 @@
    zostaje tam, gdzie niesie liczby i etykiety. */
 .empty { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }
 .helpText { font-family: var(--font-body); letter-spacing: 0; text-transform: none; }
+
+
+/* Para przycisków — spójna z wierszem wydarzenia na głównej */
+.actions { display: flex; align-items: center; gap: 10px; }
+
+.details {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--zr-text);
+  padding: 11px 18px;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 180ms var(--ease-out);
+}
+
+.details:hover { border-color: var(--zr-text); }
+
+@media (max-width: 720px) {
+  .details { display: none; }
+}

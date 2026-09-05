@@ -3,7 +3,6 @@ import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
 import HeroCarousel from '@/components/HeroCarousel';
-import ServicesAccordion from '@/components/ServicesAccordion';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import { HELP_ICONS } from '@/components/EventIcons';
@@ -100,8 +99,21 @@ export default async function HomePage() {
       {/* ─── EVENTS GRID ─── */}
       <EventsGrid events={upcoming} t={t} locale={locale} />
 
+      {/* ─── ARCHIVE ─── */}
+      <section className={'section section-band ' + s.archive}>
+        <Reveal className={s.archiveHeader}>
+          <span className="section-label">{t.home.archiveLabel}</span>
+          <Link href="/archiwum" className={s.archiveLink + ' mono'}>{t.home.archiveLink}</Link>
+        </Reveal>
+        <RevealGroup variant="up" step={40} className={s.artists}>
+          {ARTISTS_ARCHIVE.map(name => (
+            <span key={name} className={s.artistName + ' display'}>{name}</span>
+          ))}
+        </RevealGroup>
+      </section>
+
       {/* ─── SALE ─── */}
-      <section className={'section section-band ' + s.rooms}>
+      <section className={'section ' + s.rooms}>
         <Reveal variant="mask" className={s.blockHead}>
           <span className="section-label">{t.home.rentalLabel}</span>
           <h2 className={'display ' + s.blockHeading}>{t.home.roomsHeading}</h2>
@@ -130,38 +142,28 @@ export default async function HomePage() {
       </section>
 
       {/* ─── USŁUGI ─── */}
-      <section className={'section ' + s.services}>
+      <section className={'section section-band ' + s.services}>
         <Reveal variant="mask" className={s.blockHead}>
           <span className="section-label">{t.home.servicesLabel}</span>
           <h2 className={'display ' + s.blockHeading}>{t.home.servicesHeading}</h2>
         </Reveal>
-        <Reveal variant="up">
-          <ServicesAccordion cards={t.home.cards} />
-        </Reveal>
-      </section>
-
-      {/* ─── W CZYM MOŻEMY POMÓC ─── */}
-      <section className={'section section-band ' + s.help}>
-        <Reveal variant="mask">
-          <h2 className={'display ' + s.blockHeading}>{t.home.helpHeading}</h2>
-        </Reveal>
-        <RevealGroup variant="up" step={40} className={s.helpGrid}>
-          {t.home.help.map(([label, href], i) => {
-            const Icon = HELP_ICONS[i];
-            return (
-              <Link key={href + label} href={href} className={s.helpChip}>
-                <span className={s.helpIcon} aria-hidden="true">
-                  {Icon && <Icon className={s.helpGlyph} />}
-                </span>
-                {label}
-              </Link>
-            );
-          })}
+        <RevealGroup variant="up" step={80} className={s.serviceGrid}>
+          {t.home.serviceGroups.map(group => (
+            <div key={group.href} className={s.serviceGroup}>
+              <h3 className={'display ' + s.serviceTitle}>{group.title}</h3>
+              <ul className={s.serviceList}>
+                {group.items.map(item => (
+                  <li key={item} className={s.serviceItem}>{item}</li>
+                ))}
+              </ul>
+              <Link href={group.href} className={s.serviceCta}>{group.cta} →</Link>
+            </div>
+          ))}
         </RevealGroup>
       </section>
 
       {/* ─── DOWÓD SPOŁECZNY B2B ─── */}
-      <section className={'section section-band ' + s.proof}>
+      <section className={'section ' + s.proof}>
         <div className={s.proofHead}>
           <span className="section-label">{t.home.proofLabel}</span>
           <span className={s.proofNote + ' mono'}>{t.home.proofNote}</span>
@@ -187,16 +189,23 @@ export default async function HomePage() {
         </Reveal>
       </section>
 
-      {/* ─── ARCHIVE ─── */}
-      <section className={'section ' + s.archive}>
-        <Reveal className={s.archiveHeader}>
-          <span className="section-label">{t.home.archiveLabel}</span>
-          <Link href="/archiwum" className={s.archiveLink + ' mono'}>{t.home.archiveLink}</Link>
+      {/* ─── W CZYM MOŻEMY POMÓC ─── */}
+      <section className={'section section-band ' + s.help}>
+        <Reveal variant="mask">
+          <h2 className={'display ' + s.blockHeading}>{t.home.helpHeading}</h2>
         </Reveal>
-        <RevealGroup variant="up" step={40} className={s.artists}>
-          {ARTISTS_ARCHIVE.map(name => (
-            <span key={name} className={s.artistName + ' display'}>{name}</span>
-          ))}
+        <RevealGroup variant="up" step={40} className={s.helpGrid}>
+          {t.home.help.map(([label, href], i) => {
+            const Icon = HELP_ICONS[i];
+            return (
+              <Link key={href + label} href={href} className={s.helpChip}>
+                <span className={s.helpIcon} aria-hidden="true">
+                  {Icon && <Icon className={s.helpGlyph} />}
+                </span>
+                {label}
+              </Link>
+            );
+          })}
         </RevealGroup>
       </section>
 

@@ -12,7 +12,6 @@ import s from './Header.module.css';
 function buildNav(t) {
   return [
     { href: '/repertuar', label: t.repertuar },
-    { href: '/bilety', label: t.bilety },
     { href: '/klub', label: t.klub },
     { href: '/wynajem', label: t.wynajem },
     { href: '/imprezy-okolicznosciowe', label: t.imprezy },

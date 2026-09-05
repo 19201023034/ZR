@@ -97,7 +97,11 @@ export default function KlubBody({ t, locale = 'pl' }) {
         <RevealGroup variant="up" step={110} className={s.roomsGrid}>
           {ROOM_NAMES.map((name, i) => (
             <div key={name} className={s.roomCard}>
-              <div className={'led-grid ' + s.roomLed} />
+              <div className={'led-grid ' + s.roomLed}>
+                {ROOMS[name].photos?.[0] && (
+                  <img src={ROOMS[name].photos[0]} alt={translateRoom(name, locale)} className={s.roomImg} />
+                )}
+              </div>
               <div className={s.roomInfo}>
                 <h3 className={'display ' + s.roomName}>{translateRoom(name, locale)}</h3>
                 <div className={s.roomMeta + ' mono'}>

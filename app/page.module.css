@@ -717,48 +717,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 68px;
-  height: 68px;
+  width: 78px;
+  height: 78px;
   color: var(--zr-gold);
   margin-bottom: 4px;
 }
 
 .serviceGlyph {
-  width: 56px;
-  height: 56px;
+  width: 66px;
+  height: 66px;
   filter: drop-shadow(0 3px 10px rgba(252, 204, 0, 0.22));
 }
 
 .serviceGroup:hover .serviceGlyph { color: var(--zr-gold-hi); }
 
-/* ─── Koncerty: equalizer ─── */
-/* słupki pulsują z różnymi fazami, jak poziom dźwięku na koncercie */
-.eqBar { transform-origin: center bottom; }
-.eqBar1 { animation: eq 0.9s ease-in-out infinite; }
-.eqBar2 { animation: eq 0.9s ease-in-out infinite -0.45s; }
-.eqBar3 { animation: eq 0.9s ease-in-out infinite -0.2s; }
-.eqBar4 { animation: eq 0.9s ease-in-out infinite -0.65s; }
 
-@keyframes eq {
-  0%, 100% { transform: scaleY(0.4); }
-  50%      { transform: scaleY(1); }
-}
-
-/* ─── Firmowe: smuga reflektora ─── */
-.spotBeam { transform-origin: 22px 9px; animation: spot 3.4s ease-in-out infinite; }
-@keyframes spot {
-  0%, 100% { transform: rotate(-9deg); opacity: 0.1; }
-  50%      { transform: rotate(9deg);  opacity: 0.24; }
-}
-
-/* ─── Prywatne: błysk iskry ─── */
-.sparkle { transform-origin: 22px 8px; animation: spark 2.4s ease-in-out infinite; }
-@keyframes spark {
-  0%, 70%, 100% { opacity: 0.25; transform: scale(0.8); }
-  20%           { opacity: 1;    transform: scale(1.15); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .eqBar, .spotBeam, .sparkle { animation: none; }
-  .eqBar { transform: scaleY(0.8); }
-}

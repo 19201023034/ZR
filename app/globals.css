@@ -767,3 +767,24 @@ select:focus-visible {
 /* the dark map filter only makes sense on the dark theme */
 :root[data-theme="light"] .mapIframe,
 :root[data-theme="light"] [class*="mapIframe"] { filter: none !important; }
+
+
+/* ─── Animacje ikon grup usług (klasy globalne — SVG w EventIcons ich używa) ─── */
+.eqBar { transform-origin: center bottom; }
+.eqBar1 { animation: zr-eq 0.9s ease-in-out infinite; }
+.eqBar2 { animation: zr-eq 0.9s ease-in-out infinite -0.45s; }
+.eqBar3 { animation: zr-eq 0.9s ease-in-out infinite -0.2s; }
+.eqBar4 { animation: zr-eq 0.9s ease-in-out infinite -0.65s; }
+@keyframes zr-eq { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+
+.spotBeam { transform-origin: 22px 9px; animation: zr-spot 3.4s ease-in-out infinite; }
+@keyframes zr-spot {
+  0%, 100% { transform: rotate(-9deg); opacity: 0.1; }
+  50%      { transform: rotate(9deg);  opacity: 0.24; }
+}
+
+.sparkle { transform-origin: 22px 8px; animation: zr-spark 2.4s ease-in-out infinite; }
+@keyframes zr-spark {
+  0%, 70%, 100% { opacity: 0.25; transform: scale(0.8); }
+  20%           { opacity: 1;    transform: scale(1.15); }
+}

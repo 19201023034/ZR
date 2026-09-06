@@ -1,0 +1,74 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0C0A08;
+  /* kurtyna gaśnie i unosi się lekko przy wyjściu */
+  transition: opacity 560ms var(--ease-out), transform 600ms var(--ease-out), visibility 560ms;
+}
+
+.leaving { opacity: 0; transform: scale(1.04); visibility: hidden; }
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 2;
+}
+
+.mark {
+  height: clamp(46px, 8vw, 82px);
+  width: auto;
+  color: #FCCC00;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  animation: introMark 620ms var(--ease-out) 80ms forwards;
+  filter: drop-shadow(0 0 26px rgba(252, 204, 0, 0.28));
+}
+
+/* złota linia rozjeżdża się pod znakiem — jak zapalający się pasek świateł */
+.line {
+  width: min(280px, 60vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FCCC00, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: introLine 700ms var(--ease-out) 360ms forwards;
+}
+
+/* poświata pod spodem — „światło sceny" narasta i przygasa */
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 70vw;
+  height: 46vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(252, 204, 0, 0.16), transparent 68%);
+  filter: blur(30px);
+  opacity: 0;
+  animation: introGlow 1400ms var(--ease-out) 120ms forwards;
+  z-index: 1;
+}
+
+@keyframes introMark {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes introLine {
+  to { transform: scaleX(1); }
+}
+
+@keyframes introGlow {
+  40% { opacity: 1; }
+  100% { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay { display: none; }
+}

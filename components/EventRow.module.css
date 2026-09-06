@@ -106,7 +106,7 @@
 
 /* ─── Responsywność ─── */
 @media (max-width: 860px) {
-  .row { grid-template-columns: 150px minmax(0, 1fr); gap: 16px 18px; }
+  .row { grid-template-columns: 150px minmax(0, 1fr); gap: 16px 18px; padding: 18px 0; margin: 0; }
   .side { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
   .status { text-align: left; }
   .actions { flex: none; }
@@ -114,6 +114,6 @@
 }
 
 @media (max-width: 520px) {
-  .row { grid-template-columns: 1fr; padding: 18px 14px; margin: 0 -14px; }
+  .row { grid-template-columns: 1fr; padding: 18px 0; margin: 0; }
   .thumb { max-width: 240px; }
 }

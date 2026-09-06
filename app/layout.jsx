@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import MotionRoot from '@/components/MotionRoot';
+import Intro from '@/components/Intro';
 import { SHOULD_INDEX } from '@/lib/site';
 import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body>
+        <Intro />
         <MotionRoot />
         <Header locale={locale} t={t.nav} />
         <main>{children}</main>

@@ -55,6 +55,14 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
       onBlurCapture={() => setPaused(false)}
       aria-roledescription="carousel"
     >
+      {/* Ambientne światło sceny — rozmyte plamy złota wolno dryfują w tle,
+          dając głębię bez odbierania uwagi plakatom. */}
+      <div className={s.ambient} aria-hidden="true">
+        <span className={s.blob + ' ' + s.blob1} />
+        <span className={s.blob + ' ' + s.blob2} />
+        <span className={s.blob + ' ' + s.blob3} />
+      </div>
+
       <div className={s.stage}>
         {n > 1 && (
           <button type="button" className={s.arrow + ' ' + s.arrowPrev}

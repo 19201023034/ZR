@@ -1,4 +1,6 @@
 .hero {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,9 +10,70 @@
   background: var(--zr-bg);
 }
 
+/* ─── Ambientne światło sceny ─── */
+.ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+  opacity: 0.5;
+}
+
+/* trzy plamy o różnym kolorze, rozmiarze i torze — wolny dryf, różne fazy */
+.blob1 {
+  width: 46vw; height: 46vw; max-width: 620px; max-height: 620px;
+  left: -8%; top: -20%;
+  background: radial-gradient(circle, rgba(252, 204, 0, 0.16), transparent 66%);
+  animation: heroDrift1 26s ease-in-out infinite alternate;
+}
+
+.blob2 {
+  width: 40vw; height: 40vw; max-width: 540px; max-height: 540px;
+  right: -6%; bottom: -24%;
+  background: radial-gradient(circle, rgba(192, 156, 24, 0.14), transparent 66%);
+  animation: heroDrift2 32s ease-in-out infinite alternate;
+}
+
+.blob3 {
+  width: 30vw; height: 30vw; max-width: 380px; max-height: 380px;
+  left: 42%; top: 30%;
+  background: radial-gradient(circle, rgba(252, 204, 0, 0.09), transparent 68%);
+  animation: heroDrift3 38s ease-in-out infinite alternate;
+}
+
+@keyframes heroDrift1 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(14%, 18%); }
+}
+@keyframes heroDrift2 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-16%, -12%); }
+}
+@keyframes heroDrift3 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(10%, -14%) scale(1.15); }
+}
+
+/* nieruchome przy ograniczonym ruchu */
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}
+
+/* na jasnym motywie plamy są subtelniejsze, żeby nie brudziły kremowego tła */
+:root[data-theme='light'] .blob { opacity: 0.35; }
+
 /* ─── Plakaty ─── */
 .stage {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1180px;
   display: flex;
@@ -89,6 +152,8 @@
 
 /* ─── Opis ─── */
 .info {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;

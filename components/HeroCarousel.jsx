@@ -67,7 +67,9 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
         {n > 1 && (
           <button type="button" className={s.arrow + ' ' + s.arrowPrev}
                   onClick={() => go(-1)} aria-label={t.home.heroPrev}>
-            <span aria-hidden="true">‹</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={s.chev}>
+              <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         )}
 
@@ -92,7 +94,9 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
         {n > 1 && (
           <button type="button" className={s.arrow + ' ' + s.arrowNext}
                   onClick={() => go(1)} aria-label={t.home.heroNext}>
-            <span aria-hidden="true">›</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={s.chev}>
+              <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         )}
       </div>

@@ -15,6 +15,8 @@ import { useEffect } from 'react';
  */
 export default function MotionRoot() {
   useEffect(() => {
+    // asekuracja: zwolnij scroll, gdyby coś zostawiło go zablokowany
+    if (document.body.style.overflow === 'hidden') document.body.style.overflow = '';
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fine = window.matchMedia('(pointer: fine)').matches;
 

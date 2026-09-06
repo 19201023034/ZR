@@ -209,6 +209,18 @@ export default async function HomePage() {
         </RevealGroup>
       </section>
 
+      {/* ─── CTA DOMYKAJĄCE ─── */}
+      <section className={'section ' + s.finalCta}>
+        <Reveal variant="scale" className={s.finalInner}>
+          <h2 className={'display ' + s.finalHeading}>{t.home.finalHeading}</h2>
+          <p className={s.finalSub}>{t.home.finalSub}</p>
+          <div className={s.finalActions}>
+            <Link href="/kontakt" className="btn btn-gold">{t.home.finalWrite}</Link>
+            <Link href="/repertuar" className="btn btn-outline">{t.home.finalProgramme}</Link>
+          </div>
+        </Reveal>
+      </section>
+
     </>
   );
 }

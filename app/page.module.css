@@ -680,3 +680,32 @@
 }
 
 .serviceCta:hover { border-bottom-color: currentColor; }
+
+/* ─── CTA domykające ─── */
+.finalCta { border-bottom: 0; }
+
+.finalInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 44px 32px;
+  border: 1px solid var(--zr-line-hi);
+  border-radius: 8px;
+  background: var(--zr-surface-alt);
+}
+
+.finalHeading { font-size: clamp(28px, 4vw, 46px); color: var(--zr-text); }
+
+.finalSub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--zr-body);
+  max-width: 540px;
+}
+
+.finalActions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }

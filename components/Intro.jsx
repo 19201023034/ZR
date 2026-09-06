@@ -22,15 +22,11 @@ export default function Intro() {
 
     try { sessionStorage.setItem('zr-intro', '1'); } catch {}
     setPhase('playing');
-    document.body.style.overflow = 'hidden';
 
     const leave = setTimeout(() => setPhase('leaving'), 1250);
-    const done = setTimeout(() => {
-      setPhase('done');
-      document.body.style.overflow = '';
-    }, 1850);
+    const done = setTimeout(() => setPhase('done'), 1850);
 
-    return () => { clearTimeout(leave); clearTimeout(done); document.body.style.overflow = ''; };
+    return () => { clearTimeout(leave); clearTimeout(done); };
   }, []);
 
   if (phase === 'idle' || phase === 'done') return null;

@@ -16,6 +16,14 @@ function useInView(threshold = 0.15, rootMargin = '0px 0px -60px 0px') {
       return;
     }
 
+    // Cokolwiek jest już w polu widzenia przy wejściu (choćby skrawek wystający
+    // spod hero) pokazujemy od razu — treść w pierwszej klatce nie może czekać
+    // na scroll, bo wygląda jak puste miejsce.
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      setVisible(true);
+      return;
+    }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import EventsGrid from '@/components/EventsGrid';
 import TicketButton from '@/components/TicketButton';
 import HeroCarousel from '@/components/HeroCarousel';
+import ArtistMarquee from '@/components/ArtistMarquee';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import { HELP_ICONS } from '@/components/EventIcons';
@@ -105,11 +106,7 @@ export default async function HomePage() {
           <span className="section-label">{t.home.archiveLabel}</span>
           <Link href="/archiwum" className={s.archiveLink + ' mono'}>{t.home.archiveLink}</Link>
         </Reveal>
-        <RevealGroup variant="up" step={40} className={s.artists}>
-          {ARTISTS_ARCHIVE.map(name => (
-            <span key={name} className={s.artistName + ' display'}>{name}</span>
-          ))}
-        </RevealGroup>
+        <ArtistMarquee artists={ARTISTS_ARCHIVE} />
       </section>
 
       {/* ─── SALE ─── */}

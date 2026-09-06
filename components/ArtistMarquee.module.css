@@ -12,7 +12,6 @@
   animation: artistScroll 34s linear infinite;
 }
 
-.track:hover { animation-play-state: paused; }
 
 .item { display: inline-flex; align-items: center; }
 

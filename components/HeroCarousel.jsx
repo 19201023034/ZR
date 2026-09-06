@@ -25,8 +25,9 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
   const [paused, setPaused] = useState(false);
   useEffect(() => {
     if (n < 2 || paused) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    timer.current = setInterval(() => go(1), 7000);
+    // auto-przewijanie zostaje też przy „ogranicz ruch" — zmiana slajdu co
+    // kilka sekund to nie gwałtowny ruch; pauzuje pod kursorem i przy fokusie
+    timer.current = setInterval(() => go(1), 6000);
     return () => clearInterval(timer.current);
   }, [n, paused, go]);
 

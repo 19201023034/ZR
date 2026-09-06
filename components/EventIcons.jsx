@@ -126,3 +126,41 @@ export const HELP_ICONS = [
     </svg>
   ),
 ];
+
+/** Ikony grup usług — z tematycznymi, żywymi animacjami (CSS w page.module.css). */
+export const SERVICE_ICONS = [
+  // Koncerty — equalizer: słupki pulsują jak poziom dźwięku na koncercie
+  props => (
+    <svg viewBox="0 0 44 44" aria-hidden="true" {...props}>
+      <g className="eqBars" fill="currentColor">
+        <rect className="eqBar eqBar1" x="7"  y="14" width="5" height="16" rx="2.5" />
+        <rect className="eqBar eqBar2" x="16" y="14" width="5" height="16" rx="2.5" />
+        <rect className="eqBar eqBar3" x="25" y="14" width="5" height="16" rx="2.5" />
+        <rect className="eqBar eqBar4" x="34" y="14" width="5" height="16" rx="2.5" />
+      </g>
+    </svg>
+  ),
+  // Wydarzenia firmowe — scena z reflektorem, którego smuga omiata
+  props => (
+    <svg viewBox="0 0 44 44" aria-hidden="true" {...props}>
+      <path className="spotBeam" d="M22 9L11 30h22z" fill="currentColor" opacity="0.16" />
+      <circle cx="22" cy="9" r="3" fill="currentColor" />
+      <path d="M8 34h28" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+      <rect x="17" y="26" width="10" height="8" rx="1.5" fill="none" stroke="currentColor" strokeWidth="2.2" />
+    </svg>
+  ),
+  // Imprezy prywatne — kieliszki na toast, nad nimi błyska iskra
+  props => (
+    <svg viewBox="0 0 44 44" aria-hidden="true" {...props}>
+      <g fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 12l4.5 9.5c1.3 2.8-.5 6-3.6 6.7-3.1.7-6.1-1.3-6.4-4.4L7.5 14Z" />
+        <path d="M30 12l-4.5 9.5c-1.3 2.8.5 6 3.6 6.7 3.1.7 6.1-1.3 6.4-4.4L36.5 14Z" />
+        <path d="M11.5 28.5L13 37M32.5 28.5L31 37M9 37.5h9M26 37.5h9" />
+        <path d="M12 12.5l6.5 1.6M32 12.5l-6.5 1.6" />
+      </g>
+      <g className="sparkle" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M22 6v5M19.5 8.5h5" />
+      </g>
+    </svg>
+  ),
+];

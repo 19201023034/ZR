@@ -6,7 +6,7 @@ import HeroCarousel from '@/components/HeroCarousel';
 import ArtistMarquee from '@/components/ArtistMarquee';
 import Reveal, { RevealGroup } from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
-import { HELP_ICONS } from '@/components/EventIcons';
+import { HELP_ICONS, SERVICE_ICONS } from '@/components/EventIcons';
 import { ARTISTS_ARCHIVE, ROOMS, VENUE_ADDRESS, isTodayEvent, getStatusColor, getStatusLabel, formatDate, translateGenre, translateRoom } from '@/lib/events';
 import { getEvents, getUpcoming, getHeroEvent } from '@/lib/store';
 import { SITE_ORIGIN } from '@/lib/site';
@@ -145,8 +145,13 @@ export default async function HomePage() {
           <h2 className={'display ' + s.blockHeading}>{t.home.servicesHeading}</h2>
         </Reveal>
         <RevealGroup variant="up" step={80} className={s.serviceGrid}>
-          {t.home.serviceGroups.map(group => (
+          {t.home.serviceGroups.map((group, gi) => {
+            const Icon = SERVICE_ICONS[gi];
+            return (
             <div key={group.href} className={s.serviceGroup}>
+              <span className={s.serviceIcon} aria-hidden="true">
+                {Icon && <Icon className={s.serviceGlyph} />}
+              </span>
               <h3 className={'display ' + s.serviceTitle}>{group.title}</h3>
               <ul className={s.serviceList}>
                 {group.items.map(item => (
@@ -155,7 +160,8 @@ export default async function HomePage() {
               </ul>
               <Link href={group.href} className={s.serviceCta}>{group.cta} →</Link>
             </div>
-          ))}
+            );
+          })}
         </RevealGroup>
       </section>
 

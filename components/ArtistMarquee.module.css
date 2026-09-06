@@ -37,6 +37,5 @@
   to   { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .track { animation: none; flex-wrap: wrap; gap: 10px 0; }
-}
+/* Pasek jedzie także przy „ogranicz ruch" — to płynne, jednostajne
+   przewijanie w bok, nie migotanie ani skoki. */

@@ -22,53 +22,54 @@
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(70px);
   will-change: transform;
-  opacity: 0.5;
+  opacity: 0.85;
 }
 
 /* trzy plamy o różnym kolorze, rozmiarze i torze — wolny dryf, różne fazy */
 .blob1 {
   width: 46vw; height: 46vw; max-width: 620px; max-height: 620px;
   left: -8%; top: -20%;
-  background: radial-gradient(circle, rgba(252, 204, 0, 0.16), transparent 66%);
-  animation: heroDrift1 26s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(252, 204, 0, 0.30), transparent 64%);
+  animation: heroDrift1 16s ease-in-out infinite alternate;
 }
 
 .blob2 {
   width: 40vw; height: 40vw; max-width: 540px; max-height: 540px;
   right: -6%; bottom: -24%;
-  background: radial-gradient(circle, rgba(192, 156, 24, 0.14), transparent 66%);
-  animation: heroDrift2 32s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(255, 176, 32, 0.24), transparent 64%);
+  animation: heroDrift2 19s ease-in-out infinite alternate;
 }
 
 .blob3 {
   width: 30vw; height: 30vw; max-width: 380px; max-height: 380px;
   left: 42%; top: 30%;
-  background: radial-gradient(circle, rgba(252, 204, 0, 0.09), transparent 68%);
-  animation: heroDrift3 38s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(252, 204, 0, 0.18), transparent 66%);
+  animation: heroDrift3 22s ease-in-out infinite alternate;
 }
 
 @keyframes heroDrift1 {
   from { transform: translate(0, 0); }
-  to   { transform: translate(14%, 18%); }
+  to   { transform: translate(26%, 30%); }
 }
 @keyframes heroDrift2 {
   from { transform: translate(0, 0); }
-  to   { transform: translate(-16%, -12%); }
+  to   { transform: translate(-28%, -22%); }
 }
 @keyframes heroDrift3 {
   from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(10%, -14%) scale(1.15); }
+  to   { transform: translate(20%, -26%) scale(1.25); }
 }
 
-/* nieruchome przy ograniczonym ruchu */
-@media (prefers-reduced-motion: reduce) {
-  .blob { animation: none; }
-}
+/* Ambient zostaje włączony także przy „ogranicz ruch" — to wolny, łagodny
+   dryf światła, nie gwałtowny ruch, który tamto ustawienie ma eliminować. */
 
-/* na jasnym motywie plamy są subtelniejsze, żeby nie brudziły kremowego tła */
-:root[data-theme='light'] .blob { opacity: 0.35; }
+/* na jasnym motywie plamy dostają cieplejszy, wciąż widoczny odcień */
+:root[data-theme='light'] .blob { opacity: 0.6; mix-blend-mode: multiply; }
+:root[data-theme='light'] .blob1 { background: radial-gradient(circle, rgba(176, 133, 10, 0.28), transparent 64%); }
+:root[data-theme='light'] .blob2 { background: radial-gradient(circle, rgba(192, 120, 0, 0.22), transparent 64%); }
+:root[data-theme='light'] .blob3 { background: radial-gradient(circle, rgba(176, 133, 10, 0.16), transparent 66%); }
 
 /* ─── Plakaty ─── */
 .stage {
@@ -181,7 +182,15 @@
   align-items: center;
   gap: 12px;
   width: 100%;
+  /* stała rezerwa wysokości — badge, tytuł (2 linie), support, data;
+     zmiana slajdu nie zmienia wysokości hero */
+  min-height: 248px;
+  justify-content: center;
   animation: heroTextIn 480ms var(--ease-out) both;
+}
+
+@media (max-width: 720px) {
+  .infoText { min-height: 220px; }
 }
 
 /* Tekst wjeżdża od dołu i się wyłania — remount przez key odpala to przy
@@ -209,10 +218,16 @@
 
 .title {
   font-size: clamp(34px, 5.2vw, 62px);
-  line-height: 1;
+  line-height: 1.02;
   color: var(--zr-text);
   margin: 0;
   text-wrap: balance;
+  /* rezerwa na dwie linie — krótsza nazwa nie skraca hero, dłuższa go nie
+     rozpycha, więc wysokość nie skacze przy zmianie slajdu */
+  min-height: 2.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .titleLink { color: inherit; text-decoration: none; }
@@ -223,6 +238,12 @@
   font-size: 16px;
   color: var(--zr-muted);
   margin: -4px 0 0;
+  /* jedna linia — długa lista gości nie rozpycha hero; pełna jest na
+     stronie wydarzenia */
+  max-width: min(90%, 600px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .when {
@@ -274,10 +295,6 @@
 .dot:hover { background: var(--zr-muted); }
 .dotOn { background: var(--zr-gold); transform: scale(1.25); }
 .dot:focus-visible { outline: 2px solid var(--zr-gold); outline-offset: 3px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .slide { transition: none; }
-}
 
 /* Na wąskim ekranie sąsiedzi tylko zabierają miejsce plakatowi. */
 @media (max-width: 720px) {

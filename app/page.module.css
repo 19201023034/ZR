@@ -255,13 +255,13 @@
 }
 
 /* ─── Archive ─── */
-.archive { }
+.archive { padding-top: 34px; padding-bottom: 34px; }
 
 .archiveHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .archiveLink {
@@ -596,6 +596,8 @@
   justify-content: center;   /* ikona + tekst wyśrodkowane w kafelku */
   gap: 13px;
   padding: 18px 20px;
+  white-space: nowrap;
+  min-width: 0;
   border: 1px solid var(--zr-line);
   border-radius: 999px;
   font-family: var(--font-body);
@@ -709,3 +711,54 @@
 }
 
 .finalActions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+
+/* ─── Ikony grup usług ─── */
+.serviceIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  color: var(--zr-gold);
+  margin-bottom: 4px;
+}
+
+.serviceGlyph {
+  width: 56px;
+  height: 56px;
+  filter: drop-shadow(0 3px 10px rgba(252, 204, 0, 0.22));
+}
+
+.serviceGroup:hover .serviceGlyph { color: var(--zr-gold-hi); }
+
+/* ─── Koncerty: equalizer ─── */
+/* słupki pulsują z różnymi fazami, jak poziom dźwięku na koncercie */
+.eqBar { transform-origin: center bottom; }
+.eqBar1 { animation: eq 0.9s ease-in-out infinite; }
+.eqBar2 { animation: eq 0.9s ease-in-out infinite -0.45s; }
+.eqBar3 { animation: eq 0.9s ease-in-out infinite -0.2s; }
+.eqBar4 { animation: eq 0.9s ease-in-out infinite -0.65s; }
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
+}
+
+/* ─── Firmowe: smuga reflektora ─── */
+.spotBeam { transform-origin: 22px 9px; animation: spot 3.4s ease-in-out infinite; }
+@keyframes spot {
+  0%, 100% { transform: rotate(-9deg); opacity: 0.1; }
+  50%      { transform: rotate(9deg);  opacity: 0.24; }
+}
+
+/* ─── Prywatne: błysk iskry ─── */
+.sparkle { transform-origin: 22px 8px; animation: spark 2.4s ease-in-out infinite; }
+@keyframes spark {
+  0%, 70%, 100% { opacity: 0.25; transform: scale(0.8); }
+  20%           { opacity: 1;    transform: scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqBar, .spotBeam, .sparkle { animation: none; }
+  .eqBar { transform: scaleY(0.8); }
+}

@@ -10,6 +10,11 @@ export default function CookieBanner({ t }) {
     try {
       if (!localStorage.getItem('zr-cookies')) setVisible(true);
     } catch {}
+    // Wycofanie/zmiana zgody musi być tak łatwe jak jej udzielenie (RODO) —
+    // link „Ustawienia cookies" w stopce ponownie otwiera baner.
+    const reopen = () => setVisible(true);
+    window.addEventListener('zr:cookies-open', reopen);
+    return () => window.removeEventListener('zr:cookies-open', reopen);
   }, []);
 
   function accept() {
@@ -30,7 +35,7 @@ export default function CookieBanner({ t }) {
         <p className={s.title}>{t.title}</p>
         <p className={s.text}>
           {t.text}{' '}
-          <a href="/polityka-prywatnosci" className={s.link}>{t.settings}</a>
+          <a href="/polityka-prywatnosci" className={s.link}>{t.more}</a>
         </p>
       </div>
       <div className={s.actions}>

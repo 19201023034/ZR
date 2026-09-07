@@ -97,10 +97,12 @@ export default async function Page() {
 
       <h2>6. Cookies</h2>
       <p>
-        Używamy plików cookies niezbędnych do działania serwisu — bez nich strona nie
-        zadziała poprawnie i nie wymagają zgody. Cookies analityczne i marketingowe
-        stosujemy wyłącznie po wyrażeniu przez Ciebie zgody w banerze. Swój wybór
-        możesz zmienić w każdej chwili, czyszcząc dane witryny w przeglądarce.
+        Używamy plików cookies niezbędnych do działania serwisu — zapamiętują one
+        m.in. wybrany język i motyw. Bez nich strona nie zadziała poprawnie i nie
+        wymagają zgody. Cookies analityczne i marketingowe stosujemy wyłącznie po
+        wyrażeniu przez Ciebie zgody w banerze. Swój wybór możesz zmienić lub wycofać
+        w każdej chwili — linkiem „Ustawienia cookies" w stopce strony albo czyszcząc
+        dane witryny w przeglądarce.
       </p>
       <p>
         Podanie danych jest dobrowolne, ale bez nich nie odpowiemy na zapytanie.

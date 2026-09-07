@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import LangSwitch from './LangSwitch';
+import CookieSettingsButton from './CookieSettingsButton';
 import s from './Footer.module.css';
 
 const MAILS = [
@@ -56,7 +57,10 @@ export default function Footer({ locale = 'pl', t }) {
 
       <div className={s.bottom}>
         <span className={s.copy}>© {new Date().getFullYear()} CKR Zaklęte Rewiry. {t.rights}</span>
-        <LangSwitch locale={locale} />
+        <div className={s.bottomRight}>
+          <CookieSettingsButton label={t.cookieSettings} />
+          <LangSwitch locale={locale} />
+        </div>
       </div>
     </footer>
   );

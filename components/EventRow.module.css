@@ -16,14 +16,18 @@
   transition: background 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 }
 
-/* Mocny akcent od razu: złoty pasek przy lewej krawędzi (inset, bez przeskoku) */
-.row:hover {
-  background: var(--zr-band);
-  box-shadow: inset 4px 0 0 var(--zr-gold);
+/* Mocny akcent od razu: złoty pasek przy lewej krawędzi (inset, bez przeskoku).
+   Tylko przy prawdziwym kursorze — na dotyku hover przyklejał się po tapnięciu
+   i podświetlenie nachodziło na treść. */
+@media (hover: hover) {
+  .row:hover {
+    background: var(--zr-band);
+    box-shadow: inset 4px 0 0 var(--zr-gold);
+  }
+  .row:hover .artistLink { color: var(--zr-gold); }
+  .row:hover .thumbImg { transform: scale(1.05); }
+  .row:hover .details { border-color: var(--zr-text); }
 }
-.row:hover .artistLink { color: var(--zr-gold); }
-.row:hover .thumbImg { transform: scale(1.05); }
-.row:hover .details { border-color: var(--zr-text); }
 
 .sold { opacity: 0.58; }
 
@@ -50,7 +54,7 @@
 }
 
 .artistLink { color: inherit; text-decoration: none; transition: color 180ms var(--ease-out); }
-.artistLink:hover { color: var(--zr-gold); }
+@media (hover: hover) { .artistLink:hover { color: var(--zr-gold); } }
 
 .support {
   font-family: var(--font-body);
@@ -136,7 +140,7 @@
   transition: border-color 180ms var(--ease-out);
 }
 
-.details:hover { border-color: var(--zr-text); }
+@media (hover: hover) { .details:hover { border-color: var(--zr-text); } }
 
 /* ─── Responsywność ─── */
 /* Poniżej progu tabeli: plakat po lewej, wszystko inne w jednej kolumnie —

@@ -92,6 +92,8 @@ body {
   font-size: 16px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  /* mobile: bez szarego prostokąta podświetlenia dotknięcia nad linkami */
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {

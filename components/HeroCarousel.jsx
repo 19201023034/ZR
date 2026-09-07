@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import TicketButton from './TicketButton';
+import SocialLinks from './SocialLinks';
 import { IconClock } from './EventIcons';
 import { formatDate, countdownLabel, translateRoom } from '@/lib/events';
 import s from './HeroCarousel.module.css';
@@ -149,6 +150,11 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Bądźmy w kontakcie — złoty pasek na całą szerokość, jak „Stay Connected" u MSG */}
+      <div className={s.social}>
+        <SocialLinks label={t.home.stayConnected} tone="gold" />
       </div>
     </section>
   );

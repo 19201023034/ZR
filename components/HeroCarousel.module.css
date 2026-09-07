@@ -76,14 +76,14 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1180px;
+  max-width: 1500px;
   display: flex;
   justify-content: center;
 }
 
 .rail {
   position: relative;
-  width: min(600px, 100%);
+  width: min(880px, 66vw);
   aspect-ratio: 16 / 9;
 }
 
@@ -97,9 +97,21 @@
 /* Sąsiedzi wystają za krawędź kadru i są przygaszeni — mówią „jest tego
    więcej", nie odbierając uwagi środkowemu plakatowi. */
 .active { transform: none; opacity: 1; z-index: 2; }
-.prev   { transform: translateX(-72%) scale(.86); opacity: .38; z-index: 1; }
-.next   { transform: translateX(72%)  scale(.86); opacity: .38; z-index: 1; }
+.prev   { transform: translateX(-63%) scale(.9); opacity: .5; z-index: 1; }
+.next   { transform: translateX(63%)  scale(.9); opacity: .5; z-index: 1; }
 .hidden { transform: scale(.8); opacity: 0; pointer-events: none; z-index: 0; }
+
+/* Sąsiedzi lekko przygaszeni cieniem, żeby środek wychodził na pierwszy plan
+   — jak warstwowa karuzela MSG. Środkowy plakat zostaje czysty. */
+.prev .poster, .next .poster { filter: brightness(.72); }
+.prev::after, .next::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, .22));
+  pointer-events: none;
+}
+.prev::after { background: linear-gradient(to left, transparent, rgba(0, 0, 0, .22)); }
 
 .posterLink { display: block; width: 100%; height: 100%; }
 
@@ -109,6 +121,13 @@
   object-fit: cover;
   display: block;
   border: 1px solid var(--zr-line);
+}
+
+/* Środkowy plakat lekko uniesiony i podświetlony — czytelna hierarchia jak
+   na hero MSG, gdzie aktywny kadr dominuje nad sąsiadami. */
+.active .poster {
+  border-color: var(--zr-line-hi);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .6), 0 0 0 1px rgba(252, 204, 0, .08);
 }
 
 .posterEmpty {
@@ -296,6 +315,18 @@
 .dotOn { background: var(--zr-gold); transform: scale(1.25); }
 .dot:focus-visible { outline: 2px solid var(--zr-gold); outline-offset: 3px; }
 
+/* ─── Bądźmy w kontakcie — złoty pasek na całą szerokość ─── */
+.social {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  /* pełny bleed: negatywne marginesy zjadają padding hero (28px 20px 34px),
+     więc pasek sięga krawędzi i samego dołu sekcji */
+  margin: 26px -20px -34px;
+  padding: 18px 20px;
+  background: var(--zr-gold);
+}
+
 /* Na wąskim ekranie sąsiedzi tylko zabierają miejsce plakatowi. */
 @media (max-width: 720px) {
   .hero { padding: 28px 16px 40px; gap: 20px; }
@@ -304,4 +335,6 @@
   .arrowPrev { left: -4px; }
   .arrowNext { right: -4px; }
   .secondary { padding: 13px 22px; }
+  /* pasek dopasowany do mobilnego paddingu hero (16px / 40px) */
+  .social { margin: 22px -16px -40px; }
 }

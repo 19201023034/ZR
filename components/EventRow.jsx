@@ -5,11 +5,11 @@ import { getStatusColor, getStatusLabel, formatDate, countdownLabel, translateGe
 import s from './EventRow.module.css';
 
 /**
- * Wiersz wydarzenia: plakat · treść · akcje.
+ * Wiersz wydarzenia w układzie tabelarycznym: plakat · nazwa · termin · sala · akcje.
  *
- * Cała informacja (termin, sala, odliczanie) leży w jednej elastycznej linii
- * pod nazwą — dzięki temu wypełnia dostępną szerokość i nigdy nie nachodzi
- * na sąsiednią kolumnę, co psuło sztywny układ tabelaryczny.
+ * Każda informacja ma własną kolumnę o stałej pozycji, więc kolumny wyrównują
+ * się między wierszami (siatka o tym samym szablonie) — terminy czyta się
+ * w pionie, a wolne miejsce działa jak światło kolumn, nie jak dziura.
  */
 export default function EventRow({ event, t, locale = 'pl', showGenre = false }) {
   const sold = event.status === 'wyprzedane';
@@ -21,25 +21,41 @@ export default function EventRow({ event, t, locale = 'pl', showGenre = false })
         {event.poster && <img src={event.poster} alt="" className={s.thumbImg} />}
       </Link>
 
-      <div className={s.main}>
+      {/* Nazwa + goście + rodzaj (lewa kolumna) */}
+      <div className={s.name}>
         <h3 className={s.artist}>
           <Link href={`/wydarzenie/${event.slug}`} className={s.artistLink}>{event.artist}</Link>
         </h3>
         {event.support && <p className={s.support}>+ {event.support}</p>}
-
-        <div className={s.meta}>
-          <span className={s.date + ' mono'}>{formatDate(event.date, locale)}</span>
-          {event.start && (
-            <span className={s.time + ' mono'}><IconClock className={s.timeIcon} />{event.start}</span>
-          )}
-          <span className={s.dot} aria-hidden="true">·</span>
-          <span className={s.venue}>{translateRoom(event.venue, locale)}</span>
+        <div className={s.tags}>
           {showGenre && <span className={s.genre + ' mono'}>{translateGenre(event.genre, locale)}</span>}
           {event.ageMin && <span className={s.age + ' mono'}>{event.ageMin}+</span>}
-          {countdown && <span className={s.countdown + ' mono'}>{countdown}</span>}
         </div>
       </div>
 
+      {/* Za ile — osobna kolumna przed datą */}
+      <div className={s.countCol}>
+        {countdown && <span className={s.countdown + ' mono'}>{countdown}</span>}
+      </div>
+
+      {/* Data */}
+      <div className={s.when}>
+        <span className={s.date + ' mono'}>{formatDate(event.date, locale)}</span>
+      </div>
+
+      {/* Godzina — osobna kolumna */}
+      <div className={s.timeCol}>
+        {event.start && (
+          <span className={s.time + ' mono'}><IconClock className={s.timeIcon} />{event.start}</span>
+        )}
+      </div>
+
+      {/* Sala */}
+      <div className={s.where}>
+        <span className={s.venue}>{translateRoom(event.venue, locale)}</span>
+      </div>
+
+      {/* Status + akcje */}
       <div className={s.side}>
         <span className={s.status + ' mono'} style={{ color: getStatusColor(event.status) }}>
           {getStatusLabel(event, locale)}

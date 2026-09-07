@@ -105,6 +105,19 @@ export default function KlubBody({ t, locale = 'pl' }) {
         </div>
       </section>
 
+      {/* ─── ZAUFALI NAM ─── */}
+      <section className={'section ' + s.trustedSection}>
+        <div className={s.trustedHead}>
+          <span className="section-label">{t.home.proofLabel}</span>
+          <span className={s.trustedNote + ' mono'}>{t.home.proofNote}</span>
+        </div>
+        <RevealGroup variant="up" step={70} className={s.logoRow}>
+          {['LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO'].map((l, i) => (
+            <div key={i} className={s.logoSlot + ' mono'}>{l}</div>
+          ))}
+        </RevealGroup>
+      </section>
+
       {/* ─── CTA ─── */}
       <section className={s.ctaSection}>
         <div className="section">

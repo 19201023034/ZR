@@ -167,15 +167,6 @@ export default async function HomePage() {
 
       {/* ─── DOWÓD SPOŁECZNY B2B ─── */}
       <section className={'section ' + s.proof}>
-        <div className={s.proofHead}>
-          <span className="section-label">{t.home.proofLabel}</span>
-          <span className={s.proofNote + ' mono'}>{t.home.proofNote}</span>
-        </div>
-        <RevealGroup variant="up" step={70} className={s.logoRow}>
-          {['LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO', 'LOGO'].map((l, i) => (
-            <div key={i} className={s.logoSlot + ' mono'}>{l}</div>
-          ))}
-        </RevealGroup>
         <Reveal variant="up" className={s.caseRow}>
           <div className={s.caseText}>
             <h3 className={s.caseHeading + ' display'}>{t.home.caseHeading}</h3>

@@ -440,3 +440,40 @@
   .ctaActions a { flex: 1; text-align: center; }
 }
 
+
+/* ─── Zaufali nam ─── */
+.trustedSection { padding-top: 40px; }
+.trustedHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.trustedNote {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--zr-faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.logoRow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+.logoSlot {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--zr-line);
+  border-radius: 6px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--zr-faint);
+  background: var(--zr-surface);
+}
+@media (max-width: 900px) { .logoRow { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .logoRow { grid-template-columns: repeat(2, 1fr); } }

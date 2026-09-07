@@ -289,7 +289,12 @@
 
 /* Na wąskim ekranie zostaje hamburger, znak i sam blok biletowy. */
 @media (max-width: 860px) {
-  .header { grid-template-columns: auto 1fr auto; padding-left: 16px; }
+  /* minmax(0,1fr): kolumna znaku MUSI móc zejść poniżej naturalnej szerokości
+     SVG — inaczej znak (~172px) rozpychał pasek ponad szerokość ekranu i strona
+     dawała się przewinąć w prawo (skakanie przy scrollu). */
+  .header { grid-template-columns: auto minmax(0, 1fr) auto; padding-left: 16px; }
   .nav { display: none; }
   .tools { display: none; }
+  .logo { min-width: 0; justify-content: flex-start; }
+  .logoImg { max-width: 100%; }
 }

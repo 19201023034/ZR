@@ -409,8 +409,6 @@
   grid-template-columns: 1fr auto;
   gap: 48px;
   align-items: center;
-  border-top: 1px solid var(--zr-line);
-  padding-top: 36px;
 }
 .caseHeading { font-size: clamp(24px, 2.4vw, 34px); color: var(--zr-text); line-height: 1.05; margin-bottom: 10px; }
 .caseLead { font-family: var(--font-body); font-size: 14.5px; color: var(--zr-body); line-height: 1.7; max-width: 520px; }

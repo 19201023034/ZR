@@ -83,6 +83,9 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  /* nic nie ucieka w prawo — clip nie tworzy kontenera przewijania, więc
+     sticky header dalej działa (w przeciwieństwie do overflow: hidden) */
+  overflow-x: clip;
 }
 
 body {

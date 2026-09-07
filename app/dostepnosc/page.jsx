@@ -50,7 +50,7 @@ export default async function Page() {
           <p>
             If you need help getting in, finding your place or during the event itself,
             let us know in advance through the <Link href="/kontakt">contact form</Link>{' '}
-            or by phone on 71 300 10 00. The earlier we know, the better we can prepare.
+            or by phone on 575 261 519. The earlier we know, the better we can prepare.
           </p>
 
           <h2>What we do not have yet</h2>
@@ -85,7 +85,7 @@ export default async function Page() {
           <p>
             Jeśli potrzebujesz pomocy przy wejściu, dotarciu na miejsce lub w trakcie
             wydarzenia — zgłoś to z wyprzedzeniem przez <Link href="/kontakt">formularz kontaktowy</Link>{' '}
-            lub telefonicznie pod numerem 71 300 10 00. Im wcześniej wiemy, tym lepiej
+            lub telefonicznie pod numerem 575 261 519. Im wcześniej wiemy, tym lepiej
             możemy się przygotować.
           </p>
 

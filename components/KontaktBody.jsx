@@ -7,10 +7,10 @@ import s from './KontaktBody.module.css';
 // Addresses and styling stay here; every string comes from the dictionary and is
 // paired to a department by position.
 const EMAILS = [
-  'bilety@zakletyrewiry.pl',
-  'booking@zakletyrewiry.pl',
-  'wynajem@zakletyrewiry.pl',
-  'prasa@zakletyrewiry.pl',
+  'kontakt@zakleterewiry.pl',
+  'kontakt@zakleterewiry.pl',
+  'biuro@zakleterewiry.pl',
+  'biuro@zakleterewiry.pl',
 ];
 const DIR_STYLES = [
   { color: 'var(--zr-gold)', bg: 'rgba(252,204,0,0.15)' },
@@ -38,7 +38,7 @@ export default function KontaktBody({ t }) {
         </div>
         <div className={s.heroRight + ' enter d3'}>
           <span className="section-label">{tk.switchboard}</span>
-          <a href="tel:+48713001000" className={s.phone + ' display'}>71 300 10 00</a>
+          <a href="tel:+48575261519" className={s.phone + ' display'}>575 261 519</a>
           <span className="mono" style={{ fontSize: 11.5, color: 'var(--zr-muted)', lineHeight: 1.9 }}>
             {tk.hours.map((h, i) => <span key={h}>{h}{i < tk.hours.length - 1 && <br />}</span>)}
           </span>
@@ -60,7 +60,7 @@ export default function KontaktBody({ t }) {
             <div className={s.mapCardAddr + ' mono'}>
               CKR ZAKLĘTE REWIRY<br />
               ul. Krakowska 100<br />
-              50-001 Wrocław
+              50-427 Wrocław
             </div>
           </div>
           <a
@@ -114,9 +114,10 @@ export default function KontaktBody({ t }) {
             <div className={s.invoiceData}>
               <span className="section-label" style={{ marginBottom: 10, display: 'block' }}>{tk.invoiceLabel}</span>
               <p className={'mono ' + s.invoiceText}>
-                CKR Zaklęte Rewiry sp. z o.o.<br />
-                ul. Krakowska 100, 50-001 Wrocław<br />
-                NIP: 000-000-00-00 · REGON: 000000000
+                Ryszard Chorążyczewski Centrum Kulturalno-Rozrywkowe<br />
+                ul. Krakowska 100, 50-427 Wrocław<br />
+                NIP: 894-118-07-48<br />
+                Faktury: fakturyrewiry@gmail.com
               </p>
             </div>
           </div>
@@ -169,6 +170,11 @@ export default function KontaktBody({ t }) {
                 <input type="checkbox" className={s.rodoCheck} checked={form.rodo} onChange={e => setForm(f => ({ ...f, rodo: e.target.checked }))} />
                 <span className={s.rodoText}>{tk.rodo}</span>
               </label>
+              <p className={s.rodoDocs + ' mono'}>
+                <a href="/polityka-prywatnosci">{t.footer.links.prywatnosc}</a>
+                {' · '}
+                <a href="/obowiazek-informacyjny">{t.footer.links.obowiazek}</a>
+              </p>
 
               <button type="submit" className="btn btn-gold" style={{ width: '100%', justifyContent: 'center' }} disabled={!form.rodo}>
                 {tk.submit}

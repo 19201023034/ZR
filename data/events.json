@@ -19,7 +19,7 @@
       "ticketUrl": "https://stage24.pl/wydarzenia/ppw-ewenement-zaklete-rewiry-8518",
       "description": "Hardcore wrestling wraca do Wrocławia — najlepsi polscy wrestlerzy w ekstremalnych starciach na galę PpW: Chaos Na Rewirach.",
       "ageMin": 16,
-      "featured": true,
+      "featured": false,
       "posterPortrait": "/assets/events/chaos-na-rewirach-pion.webp"
     },
     {
@@ -36,7 +36,7 @@
       "priceDay": null,
       "pool": null,
       "sold": 0,
-      "status": "przedsprzedaz",
+      "status": "dostepne",
       "poster": "/assets/events/skolim.webp",
       "ticketUrl": null,
       "description": "Koncert międzypokoleniowy dla dzieci i dorosłych. Największe przeboje Skolima na żywo w Zaklętych Rewirach.",
@@ -57,7 +57,7 @@
       "priceDay": null,
       "pool": null,
       "sold": 0,
-      "status": "przedsprzedaz",
+      "status": "dostepne",
       "poster": "/assets/events/wszechmuzyczna.webp",
       "ticketUrl": null,
       "description": "Orkiestra Wszechmuzyczna pod batutą Dominika Tomasza Kozłowskiego. Muzyka filmowa na żywo — Piraci z Karaibów, Mozart, Gladiator.",
@@ -83,7 +83,7 @@
       "ticketUrl": null,
       "description": "Legenda kalifornijskiego hip-hopu po raz pierwszy w Zaklętych Rewirach. Big Classics: Dilated Peoples & Guests.",
       "ageMin": null,
-      "featured": false
+      "featured": true
     },
     {
       "id": "evt-biohazard",

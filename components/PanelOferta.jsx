@@ -97,7 +97,7 @@ export default function PanelOferta() {
               <div className={s.sheetSub + ' mono'}>Oferta wynajmu · {offerNo}</div>
             </div>
             <div className={s.sheetAddr + ' mono'}>
-              ul. Krakowska 100<br />50-427 Wrocław<br />tel. 71 300 10 00
+              ul. Krakowska 100<br />50-427 Wrocław<br />tel. 575 261 519
             </div>
           </div>
 

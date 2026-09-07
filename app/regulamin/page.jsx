@@ -90,7 +90,7 @@ export default async function Page() {
       <h2>9. Kontakt</h2>
       <p>
         Pytania dotyczące regulaminu: <Link href="/kontakt">formularz kontaktowy</Link>{' '}
-        lub telefon 71 300 10 00.
+        lub telefon 575 261 519.
       </p>
     </DocPage>
   );

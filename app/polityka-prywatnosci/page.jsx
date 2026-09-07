@@ -25,13 +25,14 @@ export default async function Page() {
     >
       <h2>1. Administrator danych</h2>
       <p>
-        Administratorem Twoich danych osobowych jest Centrum Kulturalno-Rozrywkowe
-        Zaklęte Rewiry, ul. Krakowska 100, 50-427 Wrocław,
-        NIP <TODO>[UZUPEŁNIĆ]</TODO>, REGON <TODO>[UZUPEŁNIĆ]</TODO>.
+        Administratorem Twoich danych osobowych jest Ryszard Chorążyczewski
+        Centrum Kulturalno-Rozrywkowe, ul. Krakowska 100, 50-427 Wrocław,
+        NIP 8941180748.
       </p>
       <p>
-        Kontakt w sprawach danych osobowych: <TODO>[adres e-mail]</TODO>,
-        telefon 71 300 10 00.
+        Kontakt w sprawach danych osobowych:{' '}
+        <a href="mailto:kontakt@zakleterewiry.pl">kontakt@zakleterewiry.pl</a>,
+        telefon 575 261 519.
       </p>
 
       <h2>2. Jakie dane zbieramy i po co</h2>

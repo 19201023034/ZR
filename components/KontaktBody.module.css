@@ -270,6 +270,9 @@
 .rodo { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
 .rodoCheck { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--zr-gold); }
 .rodoText { font-family: var(--font-body); font-size: 13px; color: var(--zr-muted); line-height: 1.6; }
+.rodoDocs { font-size: 11.5px; letter-spacing: 0.04em; margin: 2px 0 0 26px; }
+.rodoDocs a { color: var(--zr-gold-text); }
+.rodoDocs a:hover { color: var(--zr-gold); }
 
 .formFooter {
   display: flex;

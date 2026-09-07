@@ -107,7 +107,7 @@ export default function OfertaBody({ t, locale = 'pl' }) {
           <div>
             <h2 className={'display ' + s.contactHeading}>{to.contactHeading}</h2>
             <p className={s.contactText}>
-              CKR Zaklęte Rewiry · ul. Krakowska 100, 50-427 Wrocław · tel. 71 300 10 00
+              CKR Zaklęte Rewiry · ul. Krakowska 100, 50-427 Wrocław · tel. 575 261 519
             </p>
           </div>
           <Link href="/kontakt" className="btn btn-rental">{to.send}</Link>

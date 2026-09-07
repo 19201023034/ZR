@@ -5,10 +5,9 @@ import CookieSettingsButton from './CookieSettingsButton';
 import s from './Footer.module.css';
 
 const MAILS = [
-  'bilety@zakletyrewiry.pl',
-  'booking@zakletyrewiry.pl',
-  'wynajem@zakletyrewiry.pl',
-  'ksiegowosc@zakletyrewiry.pl',
+  'kontakt@zakleterewiry.pl',
+  'biuro@zakleterewiry.pl',
+  'fakturyrewiry@gmail.com',
 ];
 
 const SERVICE = [
@@ -20,6 +19,9 @@ const SERVICE = [
   { key: 'zwroty', href: '/zwroty' },
   { key: 'dostepnosc', href: '/dostepnosc' },
   { key: 'praca', href: '/praca' },
+  { key: 'prywatnosc', href: '/polityka-prywatnosci' },
+  { key: 'cookies', href: '/polityka-cookies' },
+  { key: 'obowiazek', href: '/obowiazek-informacyjny' },
 ];
 
 export default function Footer({ locale = 'pl', t }) {

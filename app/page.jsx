@@ -25,7 +25,7 @@ const VENUE_JSONLD = {
   url: SITE_ORIGIN,
   description:
     'Klub koncertowy i wynajem trzech sal na gale, konferencje i imprezy firmowe przy ul. Krakowskiej 100 we Wrocławiu.',
-  telephone: '+48713001000',
+  telephone: '+48575261519',
   maximumAttendeeCapacity: 1000,
   address: {
     '@type': 'PostalAddress',

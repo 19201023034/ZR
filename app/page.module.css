@@ -730,3 +730,127 @@
 .serviceGroup:hover .serviceGlyph { color: var(--zr-gold-hi); }
 
 
+
+/* ─── Jedna sala, trzy wieczory ─── */
+/* Kafle idą na pełną szerokość, bez bocznego paddingu sekcji — zdjęcia mają
+   dotykać krawędzi ekranu, bo to one niosą całą argumentację. */
+.trio {
+  border-bottom: 1px solid var(--zr-line);
+  background: var(--zr-bg);
+}
+
+.trioHead {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 60px 80px 30px;
+}
+
+.trioHeading { font-size: clamp(26px, 3.4vw, 40px); color: var(--zr-text); }
+
+.trioLead {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  color: var(--zr-muted);
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+.trioGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--zr-line);
+}
+
+.trioTile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  text-decoration: none;
+  background: var(--zr-surface-alt);
+  isolation: isolate;
+}
+
+.trioImg {
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+
+.trioTile:hover .trioImg { transform: scale(1.07); }
+
+.trioScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 4, 0.94) 6%,
+    rgba(8, 6, 4, 0.6) 42%,
+    rgba(8, 6, 4, 0.12) 100%
+  );
+  transition: background 300ms var(--ease-out);
+}
+
+.trioTile:hover .trioScrim {
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 4, 0.96) 6%,
+    rgba(8, 6, 4, 0.66) 46%,
+    rgba(8, 6, 4, 0.18) 100%
+  );
+}
+
+.trioBody {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 28px 28px 30px;
+}
+
+.trioKicker {
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--zr-gold);
+}
+
+.trioTitle {
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.06;
+  color: #F5F1E8;
+}
+
+.trioText {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(245, 241, 232, 0.8);
+  max-width: 34ch;
+}
+
+.trioCta {
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: var(--zr-gold);
+  margin-top: 6px;
+  transition: gap 200ms var(--ease-out);
+}
+
+.trioTile:hover .trioCta { color: var(--zr-gold-hi); }
+
+@media (max-width: 1024px) {
+  .trioHead { padding: 48px 40px 26px; }
+  .trioBody { padding: 22px 22px 24px; }
+}
+
+@media (max-width: 760px) {
+  .trioHead { padding: 40px 20px 22px; }
+  .trioGrid { grid-template-columns: 1fr; }
+  .trioTile { aspect-ratio: 16 / 11; }
+  .trioText { max-width: 46ch; }
+}

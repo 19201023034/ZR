@@ -97,6 +97,39 @@ export default async function HomePage() {
       {/* ─── HERO — karuzela plakatów ─── */}
       <HeroCarousel events={heroSet} t={t} locale={locale} />
 
+      {/* ─── JEDNA SALA, TRZY WIECZORY ─── */}
+      {/* Obie gałęzie działalności w jednym spojrzeniu: ta sama przestrzeń raz
+          jako koncert, raz jako gala, raz jako konferencja. Zdjęcia idą zaraz
+          pod hero, żeby klient eventowy nie musiał przewijać przez repertuar. */}
+      <section className={s.trio}>
+        <Reveal variant="mask" className={s.trioHead}>
+          <span className="section-label">{t.home.trioLabel}</span>
+          <h2 className={'display ' + s.trioHeading}>{t.home.trioHeading}</h2>
+          <p className={s.trioLead}>{t.home.trioLead}</p>
+        </Reveal>
+
+        <RevealGroup variant="up" step={110} className={s.trioGrid}>
+          {t.home.trio.map((tile) => (
+            <Link key={tile.title} href={tile.href} className={s.trioTile}>
+              <Image
+                src={tile.photo}
+                alt={tile.title}
+                fill
+                sizes="(max-width: 760px) 100vw, 33vw"
+                className={s.trioImg}
+              />
+              <span className={s.trioScrim} aria-hidden="true" />
+              <span className={s.trioBody}>
+                <span className={s.trioKicker + ' mono'}>{tile.kicker}</span>
+                <span className={'display ' + s.trioTitle}>{tile.title}</span>
+                <span className={s.trioText}>{tile.text}</span>
+                <span className={s.trioCta + ' mono'}>{tile.cta} →</span>
+              </span>
+            </Link>
+          ))}
+        </RevealGroup>
+      </section>
+
       {/* ─── EVENTS GRID ─── */}
       <EventsGrid events={upcoming} t={t} locale={locale} />
 

@@ -57,6 +57,10 @@ export default function HeroCarousel({ events = [], t, locale = 'pl' }) {
       onBlurCapture={() => setPaused(false)}
       aria-roledescription="carousel"
     >
+      {/* Zdjęcie z koncertu jako tło — mocno przygaszone i wygaszone gradientem
+          do krawędzi, żeby dawało kontekst miejsca, a nie odbierało uwagi plakatom. */}
+      <div className={s.photoBg} aria-hidden="true" />
+
       {/* Ambientne światło sceny — rozmyte plamy złota wolno dryfują w tle,
           dając głębię bez odbierania uwagi plakatom. */}
       <div className={s.ambient} aria-hidden="true">

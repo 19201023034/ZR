@@ -6,12 +6,14 @@
   background: var(--zr-header-bg);
   border-top: 2px solid var(--zr-gold);
   border-bottom: 1px solid var(--zr-line);
-  /* Bez prawego dopełnienia: blok biletowy ma dociskać do krawędzi paska. */
-  padding: 0 0 0 40px;
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  gap: 40px;
-  align-items: center;
+  /* Bez dopełnienia po bokach: blok biletowy dociska do prawej krawędzi.
+     Gałęzie rozchodzą się na boki (space-between), a znak jest wypozycjonowany
+     absolutnie na 50% — dzięki temu stoi dokładnie na osi belki niezależnie od
+     tego, ile linków ma każda strona (kolumny grida by się nie wyrównały). */
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
   backdrop-filter: blur(8px);
   transition: height 320ms var(--ease-out), background 320ms ease-out,
               box-shadow 320ms ease-out, border-color 320ms ease-out;
@@ -29,7 +31,32 @@
 .scrolled .logoImg { height: 38px; }
 .scrolled .wordmark { font-size: 16px; }
 
-.nav {
+/* Lewa strona — odsunięta od krawędzi własnym dopełnieniem, żeby belka mogła
+   mieć padding 0 i znak stał realnie na środku. */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding-left: 28px;
+}
+
+/* Lewa gałąź (klub) */
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  white-space: nowrap;
+}
+
+/* Prawa gałąź (wynajem i eventy) + narzędzia + blok biletowy przy krawędzi */
+.right {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 22px;
+}
+
+.navRight {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -39,6 +66,12 @@
 .tools { display: flex; align-items: center; gap: 14px; }
 
 .logo {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -252,7 +285,7 @@
 }
 
 /* the drawer is mobile-only; never let it linger on wider screens */
-@media (min-width: 861px) {
+@media (min-width: 1181px) {
   .drawer, .backdrop, .burger { display: none !important; }
 }
 
@@ -282,19 +315,30 @@
 .ctaIcon { width: 19px; height: 19px; flex: none; }
 
 @media (max-width: 1100px) {
-  .header { padding-left: 24px; gap: 22px; }
-  .nav { gap: 20px; }
+  .left { padding-left: 18px; gap: 18px; }
+  .navLeft { gap: 20px; }
+  .navRight { gap: 20px; }
+  .right { gap: 16px; }
   .cta { padding: 0 22px; font-size: 14px; }
 }
 
 /* Na wąskim ekranie zostaje hamburger, znak i sam blok biletowy. */
-@media (max-width: 860px) {
-  /* minmax(0,1fr): kolumna znaku MUSI móc zejść poniżej naturalnej szerokości
-     SVG — inaczej znak (~172px) rozpychał pasek ponad szerokość ekranu i strona
-     dawała się przewinąć w prawo (skakanie przy scrollu). */
-  .header { grid-template-columns: auto minmax(0, 1fr) auto; padding-left: 16px; }
-  .nav { display: none; }
+/* Rozdzielone menu (klub | znak | eventy) potrzebuje realnej szerokości —
+   poniżej 1180px chowamy obie gałęzie do szuflady, inaczej linki wchodziłyby
+   na znak stojący na środku belki. */
+@media (max-width: 1180px) {
+  .header { padding-left: 0; }
+  .left { padding-left: 16px; }
+  .navLeft, .navRight { display: none; }
   .tools { display: none; }
-  .logo { min-width: 0; justify-content: flex-start; }
+  /* Znak wraca do normalnego przepływu: wycentrowany absolutnie wchodziłby na
+     blok biletowy, a tu musi móc się zwężać (max-width), żeby nie rozpychać
+     paska ponad szerokość ekranu. */
+  .logo {
+    position: static;
+    transform: none;
+    min-width: 0;
+    justify-content: flex-start;
+  }
   .logoImg { max-width: 100%; }
 }

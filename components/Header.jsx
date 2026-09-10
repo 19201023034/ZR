@@ -9,10 +9,18 @@ import ThemeToggle from './ThemeToggle';
 import LangSwitch from './LangSwitch';
 import s from './Header.module.css';
 
-function buildNav(t) {
+/* Nawigacja rozdzielona na dwie gałęzie działalności: po lewej klub, po prawej
+   wynajem i eventy. Znak stoi między nimi i działa jak oś podziału — sama belka
+   mówi, że to dwie oferty pod jednym adresem. */
+function buildNavLeft(t) {
   return [
     { href: '/repertuar', label: t.repertuar },
     { href: '/klub', label: t.klub },
+  ];
+}
+
+function buildNavRight(t) {
+  return [
     { href: '/wynajem', label: t.wynajem },
     { href: '/imprezy-okolicznosciowe', label: t.imprezy },
     { href: '/kontakt', label: t.kontakt },
@@ -24,7 +32,9 @@ function isActive(pathname, href) {
 }
 
 export default function Header({ locale = 'pl', t }) {
-  const NAV = buildNav(t);
+  const NAV_LEFT = buildNavLeft(t);
+  const NAV_RIGHT = buildNavRight(t);
+  const NAV = [...NAV_LEFT, ...NAV_RIGHT];
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -56,47 +66,65 @@ export default function Header({ locale = 'pl', t }) {
   return (
     <>
       <header className={s.header + (scrolled ? ' ' + s.scrolled : '')}>
-      {/* hamburger — mobile only */}
-      <button
-        type="button"
-        className={s.burger + (open ? ' ' + s.burgerOpen : '')}
-        aria-label={open ? t.closeMenu : t.openMenu}
-        aria-expanded={open}
-        aria-controls="mobile-nav"
-        onClick={() => setOpen(o => !o)}
-      >
-        <span /><span /><span />
-      </button>
+      {/* Lewa strona: narzędzia przy samej krawędzi (przeciwwaga dla bloku
+          biletowego po prawej), a za nimi gałąź klubowa. */}
+      <div className={s.left}>
+        {/* hamburger — mobile only */}
+        <button
+          type="button"
+          className={s.burger + (open ? ' ' + s.burgerOpen : '')}
+          aria-label={open ? t.closeMenu : t.openMenu}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen(o => !o)}
+        >
+          <span /><span /><span />
+        </button>
 
-      {/* Znak przy lewej krawędzi, nie na środku — cała nawigacja czyta się
-          wtedy jednym ruchem oka od lewej do prawej. */}
+        <div className={s.tools}>
+          <ThemeToggle />
+          <div className={s.langSwitch}><LangSwitch locale={locale} /></div>
+        </div>
+
+        <nav className={s.navLeft}>
+          {NAV_LEFT.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={s.navLink + (isActive(pathname, href) ? ' ' + s.active : '')}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      {/* Znak na środku belki — oś, wokół której rozchodzą się obie gałęzie. */}
       <Link href="/" className={s.logo} aria-label={t.home}>
         <Wordmark className={s.logoImg} />
       </Link>
 
-      <nav className={s.nav}>
-        {NAV.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className={s.navLink + (isActive(pathname, href) ? ' ' + s.active : '')}
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
+      {/* Prawa gałąź — wynajem i eventy, a przy krawędzi blok biletowy */}
+      <div className={s.right}>
+        <nav className={s.navRight}>
+          {NAV_RIGHT.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={s.navLink + (isActive(pathname, href) ? ' ' + s.active : '')}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
 
-      <div className={s.tools}>
-        <ThemeToggle />
-        <div className={s.langSwitch}><LangSwitch locale={locale} /></div>
+        {/* Blok biletowy dociśnięty do krawędzi paska — jak przycisk kalendarza
+            u MSG: pełna wysokość, własne tło, nie da się go przeoczyć. */}
+        <Link href="/bilety" className={s.cta}>
+          <IconCalendar className={s.ctaIcon} />
+          <span>{t.buy}</span>
+        </Link>
       </div>
-
-      {/* Blok biletowy dociśnięty do krawędzi paska — jak przycisk kalendarza
-          u MSG: pełna wysokość, własne tło, nie da się go przeoczyć. */}
-      <Link href="/bilety" className={s.cta}>
-        <IconCalendar className={s.ctaIcon} />
-        <span>{t.buy}</span>
-      </Link>
       </header>
 
       {/* ─── Mobile drawer — kept OUTSIDE <header>, whose backdrop-filter would
